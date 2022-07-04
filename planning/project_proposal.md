@@ -4,7 +4,7 @@ Pod Members:
 
   - Gabriel Bremo
   - Miles Baffour
-  - Lacie Coington
+  - Lacie Covington
 
 ## Problem Statement
 
