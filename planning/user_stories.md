@@ -43,6 +43,8 @@ John:
 - As a buddy, I would like to create a profile with my work industry and job title so I can be matched with people that share a similar work environment as mine.
 - As a buddy, I would like to be able to edit my profile information.
 - As a buddy, I would like to see a brief description of the person I am matched with in order to know the background of who I am paired with.
+- As a buddy, I would like to be able to exit the virtual room whenever I want.
+- As a buddy, I would like to be able to decide whether I want to enter in a room with the person I got matched with or keep looking for people.
 - As a buddy, I would like to have access to the list of people I have been matched with so far.
 - As a buddy, I would like to include a link to my linkedIn or portfolio in my profile, and see other professionals’ I have worked with as well.
 - As a buddy, I would like to be able to text in the meeting through a room chat in order to type in extra information or in case my microphone is malfunctioning.
