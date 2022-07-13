@@ -51,4 +51,4 @@ John:
 
 ## Wireframe (Bonus)
 
-[W4 Wireframe](https://www.figma.com/file/fjaYK672fJzf0g5Dy7JjFo/Workday-Pod-4---Capstone-Project-Wireframe?node-id=0%3A1)
+[W4 Wireframe](https://www.figma.com/file/JWCtGfSEXeKUfZA6XfL1hx/Capstone-Project-Wireframe?node-id=0%3A1)
