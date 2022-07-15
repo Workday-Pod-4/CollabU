@@ -60,6 +60,18 @@ List all the pages and screens in the app. Include wireframes for at least 3 of 
   - Registration Page
   - Profile Page
   - Room Page
+  
+#### Landing Page:
+![Landing Page](landing-page.png)
+
+#### Login and Registration Page:
+![Login and Registration Page](login-register-page.png)
+
+#### Profile Page:
+![Profile Page](profile-page.png)
+
+#### Room Page:
+![Room Page](room-page.png)
 
 ## Data Model
 
