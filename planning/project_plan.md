@@ -58,6 +58,7 @@ John is a 35 year old music artist from Los Angeles, California. As a musician, 
   - Registration Page
   - Profile Page
   - Room Page
+  - [Complete Wireframe](https://www.figma.com/file/JWCtGfSEXeKUfZA6XfL1hx/Capstone-Project-Wireframe?node-id=0%3A1)
   
 #### Landing Page:
 ![Landing Page](landing-page.png)
