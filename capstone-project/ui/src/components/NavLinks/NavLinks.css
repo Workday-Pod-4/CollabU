@@ -1,0 +1,22 @@
+.nav-links {
+    width: 100%;
+    max-width: 100vw;
+    height: var(--navbar-height);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--side-padding);
+}
+
+.content .links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    list-style-type: none;
+    margin-left: auto;
+    flex: 1 1;
+    max-width: 650px;
+    grid-gap: 50px;
+    gap: 50px;
+}
