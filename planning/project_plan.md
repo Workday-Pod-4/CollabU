@@ -53,8 +53,6 @@ John is a 35 year old music artist from Los Angeles, California. As a musician, 
 
 ## Pages/Screens
 
-List all the pages and screens in the app. Include wireframes for at least 3 of them.
-
   - Landing Page
   - Login Page
   - Registration Page
