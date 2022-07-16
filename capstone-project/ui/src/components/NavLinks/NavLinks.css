@@ -19,4 +19,17 @@
     max-width: 650px;
     grid-gap: 50px;
     gap: 50px;
+
+
+}
+
+.content .links li{
+    border: 8px solid transparent;
+    border-radius: 20px;
+    background: black;
+    color:white;
+
+    background: black;
+    color:white;
+
 }
