@@ -11,7 +11,6 @@ export default function NavLinks() {
           Login
           {/* </Link> */}
         </li>
-
         <li>
           {/* <Link to="/register"> */}
           Register

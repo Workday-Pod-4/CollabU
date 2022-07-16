@@ -9,9 +9,9 @@ export default function Navbar({}) {
       <nav className="Navbar">
         <div className="content">
           <div className="logo">
-            {/* <Link to="/"> */}
+            <Link to="/">
             <img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/qp8rxi2jae4uinry2dv7" height ="80" width ="80" alt="logo"></img>
-            {/* </Link> */}
+            </Link>
           </div>
           <NavLinks />
         </div>
