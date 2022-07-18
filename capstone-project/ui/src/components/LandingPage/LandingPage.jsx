@@ -6,7 +6,7 @@ import Hero from "../Hero/Hero";
 export default function LandingPage({}) {
   return (
     <div className="landing-page">
-      <div className="hero">
+      <div className="hero-banner">
         <Hero/>
       </div>
     </div>
