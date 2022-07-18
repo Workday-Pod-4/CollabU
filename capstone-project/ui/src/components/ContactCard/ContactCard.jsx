@@ -24,11 +24,6 @@ export default function ContactCard({}) {
             <span className = "label">Socials:</span>
             <span></span>    
             </li>
-
-
-
-
-
         </ul>
     </div>    
     )}

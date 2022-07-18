@@ -6,8 +6,8 @@ import ContactForm from "../ContactForm/ContactForm";
 export default function ContactUs({}) {
   return (
     <div className="contact-us">
+            <h1>Contact Us</h1>
       <div className="content">
-        <h1>Contact Us</h1>
         <div className="contactus-card">
         <ContactCard/>
         </div>
@@ -15,7 +15,7 @@ export default function ContactUs({}) {
         <div className="contactus-form">
         <ContactForm/>
         </div>
-      </div>
+        </div>
     </div>
   );
 }
