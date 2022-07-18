@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
 import Hero from "../Hero/Hero";
-import AboutUs from "../AboutUs/AboutUs";
+import AboutUs from "../About/About";
 
 export default function LandingPage({}) {
   return (
@@ -10,8 +10,8 @@ export default function LandingPage({}) {
       <div className="hero-banner">
         <Hero />
       </div>
-      <div className="about-us-section">
-        <AboutUs />
+      <div className="about-section">
+        <About/>
       </div>
     </div>
   );

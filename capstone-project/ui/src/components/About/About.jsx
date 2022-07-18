@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import "./AboutUs.css";
+import "./About.css";
 
-export default function AboutUs({}) {
+export default function About({}) {
   return (
-    <div className="about-us">
+    <div className="about">
       <div className="content">
+        <h1>About</h1>
 
-        
       </div>
     </div>
   );
