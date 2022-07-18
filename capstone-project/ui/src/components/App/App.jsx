@@ -3,8 +3,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "../Navbar/Navbar";
 import LandingPage from "../LandingPage/LandingPage";
+import { AuthContextProvider, useAuthContext } from "../../contexts/auth";
 
-export default function App() {
+export default function AppContainer(){
+return(
+<AuthContextProvider>
+<App/>
+</AuthContextProvider>
+
+)
+}
+
+function App() {
+const {user} = useAuthContext
   return (
     <div className="App">
       <React.Fragment>
