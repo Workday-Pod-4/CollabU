@@ -1,7 +1,9 @@
 import * as React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Navbar from "../Navbar/Navbar";
+
+import Navbar from "../Navbar/Navbar"
+import LoginPage from "../LoginPage/LoginPage"
 
 export default function App() {
   return (
@@ -12,7 +14,7 @@ export default function App() {
           <Navbar />
             <main>
               <Routes>
-
+                <Route path="/login" element={<LoginPage />} />
 
 
 
