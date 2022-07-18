@@ -1,0 +1,25 @@
+.contact-card{
+    padding: 28px 36px;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+}
+
+
+.info{
+    margin: 50px;
+    border: 1px solid;
+    border-width: 100px;
+    border-radius: 25px;
+    color: lightgrey;
+    list-style-type: none;
+    background-color: lightgrey;
+}
+
+.label{
+color: black;
+}
