@@ -2,6 +2,7 @@ import * as React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "../Navbar/Navbar";
+import LandingPage from "../LandingPage/LandingPage";
 
 export default function App() {
   return (

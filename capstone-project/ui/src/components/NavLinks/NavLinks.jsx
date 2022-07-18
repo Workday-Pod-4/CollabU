@@ -7,9 +7,9 @@ export default function NavLinks() {
     <div className="nav-links">
       <ul className="links">
         <li>
-          {/* <Link to="/login"> */}
+          <Link to="/login">
           Login
-          {/* </Link> */}
+          </Link>
         </li>
         <li>
           {/* <Link to="/register"> */}
