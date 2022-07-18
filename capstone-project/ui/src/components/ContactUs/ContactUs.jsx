@@ -6,16 +6,15 @@ import ContactForm from "../ContactForm/ContactForm";
 export default function ContactUs({}) {
   return (
     <div className="contact-us">
-            <h1>Contact Us</h1>
+      <h1>Contact Us</h1>
       <div className="content">
-        <div className="contactus-card">
-        <ContactCard/>
-        </div>
-
         <div className="contactus-form">
-        <ContactForm/>
+          <ContactForm />
         </div>
+        <div className="contactus-card">
+          <ContactCard />
         </div>
+      </div>
     </div>
   );
 }
