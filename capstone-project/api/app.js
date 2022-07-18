@@ -10,9 +10,8 @@ const { NotFoundError } = require("./utils/errors")
 
 const app = express();
 
-
-//checks if a token exists for every request,
-//attach decoded user to res.locals if exists
+// checks if a token exists for every request,
+// attach decoded user to res.locals if exists
 app.use(security.extractUserFromJwt)
 
 // enable cross-origin resource sharing for all origins for all requests
@@ -23,6 +22,10 @@ app.use(morgan("tiny"))
 app.use(express.json())
 
 app.use("/auth", authRoutes)
+
+app.get("/",(req, res, next) => {
+    res.status(200).json({"ping": "pong"})
+})
 
 // Handle 404 errors
 app.use((req, res, next) => {
@@ -37,10 +40,6 @@ app.use((err, req, res, next) => {
     return res.status(status).json({
         error: { message, status },
     })
-})
-
-app.get("/",(req, res, next) => {
-    res.status(200).json({"ping": "pong"})
 })
   
 module.exports = app;

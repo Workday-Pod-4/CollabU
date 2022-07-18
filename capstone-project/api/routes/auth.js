@@ -62,7 +62,8 @@ router.put("/update-email", security.requireAuthenticatedUser, async function (r
 router.put("/update-password", security.requireAuthenticatedUser, async function (req, res, next) {
     try {
         const user = await User.updatePassword(req.body)
-        return res.status(201).json({ user })
+        const token = createUserJwt(user)
+        return res.status(201).json({ token, user })
     } catch (err) {
         next(err)
     }

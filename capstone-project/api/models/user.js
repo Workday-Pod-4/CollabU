@@ -110,14 +110,13 @@ class User {
         )
 
         // return user
-        const user = User.makePublicUser(result.rows[0])
-
-        return user
+        return User.makePublicUser(result.rows[0])
     }
 
     static async update(credentials) {
         // required fields are username, email and password, throw error if any are missing
         const requiredFields = ["username", "email", "password"]
+
         requiredFields.forEach(field => {
             if (!credentials.hasOwnProperty(field)) {
                 throw new BadRequestError(`Missing ${field} in request body.`)
@@ -129,6 +128,7 @@ class User {
 
         // creates new temp object from user
         const tempUser = Object.assign({}, user);
+
         
         /*
             if there is no field in credentials, then set the field to null
@@ -179,9 +179,7 @@ class User {
                 )
 
                 // return user
-                const user = User.makePublicUser(result.rows[0])
-
-                return user
+                return User.makePublicUser(result.rows[0])
             }
         }
 
@@ -222,9 +220,7 @@ class User {
                 )
 
                 //return user
-                const user = User.makePublicUser(result.rows[0])
-
-                return user
+                return User.makePublicUser(result.rows[0])
             }
         }
 
@@ -273,9 +269,7 @@ class User {
                 )
 
                 //return user
-                const user = User.makePublicUser(result.rows[0])
-
-                return user
+                return User.makePublicUser(result.rows[0])
             }
         }
 
