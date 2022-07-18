@@ -1,5 +1,5 @@
 import * as React from "react"
-import RegistrationForm from "components/RegistrationForm/RegistrationForm"
+import RegistrationForm from "./RegistrationForm"
 import { Link } from "react-router-dom"
 import "./RegistrationPage.css"
 
