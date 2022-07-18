@@ -10,13 +10,10 @@ export default function App() {
       <React.Fragment>
         {
           <BrowserRouter>
-          <Navbar/>
+            <Navbar />
             <main>
               <Routes>
-              <Route path = "/" element = {<LandingPage/>} />
-
-
-
+                <Route path="/" element={<LandingPage />} />
               </Routes>
             </main>
           </BrowserRouter>

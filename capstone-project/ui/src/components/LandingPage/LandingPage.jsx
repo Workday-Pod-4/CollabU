@@ -6,8 +6,8 @@ import Hero from "../Hero/Hero";
 export default function LandingPage({}) {
   return (
     <div className="landing-page">
-      <div className="intro">
-        <h1>Welcome!</h1>
+      <div className="hero">
+        <Hero/>
       </div>
     </div>
   );
