@@ -1,0 +1,26 @@
+.Navbar {
+    width: 100%;
+    max-width: 100vw;
+    background: #616262;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 80px;
+}
+
+
+.Navbar .content .logo {
+    width: 200px;
+    margin-right: 50px;
+    border-radius: 20px;
+}
+
+.Navbar .content {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
