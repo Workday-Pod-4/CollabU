@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
 
         const fetchUser = async () => {
 
-          const { data, error } = await apiClient.getUserFromToken()
+          const { data, error } = await apiClient.fetchUserFromToken()
 
           if (error) {
             setError(error)
