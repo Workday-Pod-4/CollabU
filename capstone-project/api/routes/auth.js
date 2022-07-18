@@ -82,5 +82,4 @@ router.delete("/delete-account", security.requireAuthenticatedUser, async functi
     }
 })
 
-
 module.exports = router
