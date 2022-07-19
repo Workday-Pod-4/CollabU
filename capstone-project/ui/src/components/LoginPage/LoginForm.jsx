@@ -9,7 +9,7 @@ export default function LoginForm() {
   const { user, setUser } = useAuthContext()
   
   const [isProcessing, setIsProcessing] = React.useState(false)
-  const [errors, setErrors] = React.useState("")
+  const [error, setError] = React.useState("")
 
   const [form, setForm] = React.useState({ email: "", password: "" })
 
@@ -29,17 +29,17 @@ export default function LoginForm() {
     setIsProcessing(true)
 
     if(form.email == "" || form.password == ""){
-      setErrors((e) => ({ ...e, email: "Missing input value." }))
+      setError("Missing input value.")
       return
     }
     else if(form.email.indexOf("@") < 0){
-      setErrors((e) => ({ ...e, email: "Invalid email" }))
+      setError("Invalid Email")
       return
     }
 
     const { data, error } = await apiClient.loginUser({ email: form.email, password: form.password })
     if (error) {
-      setErrors((e) => ({ ...e, form: error }))
+      setError(error)
     }
     if (data?.user) {
       setUser(data.user)
@@ -55,11 +55,11 @@ export default function LoginForm() {
         <div className="input-field">
             <label>Email</label>
             <input className="form-input" type="email" name="email" placeholder="user@gmail.com" defaultValue={form.email} onChange={handleOnChange}></input>
-            {(errors?.email !== null && form.email !== "") ? <span className="error">Please enter a valid email.</span> : null}
         </div>
         <div className="input-field">
             <label>Password</label>
             <input className="form-input" name="password" placeholder="password" defaultValue={form.password} onChange={handleOnChange}></input>
+            {error ? <span className="error">{error}</span> : null}
         </div>
         <button className="btn" onClick={loginUser}>Login</button>
       </div>

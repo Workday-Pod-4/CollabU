@@ -42,7 +42,7 @@ export default function RegistrationForm(props) {
     }
 
     const { data, error } = await apiClient.signupUser({ email: form.email, username: form.username, password: form.password, first_name: form.firstName, last_name: form.lastName})
-    if(error) setError("Error trying to registrate")
+    if(error) setError(error)
     
     if(data?.user) {
       apiClient.setToken(data.token)
@@ -58,11 +58,10 @@ export default function RegistrationForm(props) {
         <div className="input-field">
             <label>Email</label>
             <input className="form-input" type="email" name="email" placeholder="Enter a valid email" onChange={handleOnChange} defaultValue={form.email}></input>
-            {error != "" ?  <span className="error">{error}</span>: null}
         </div>
         <div className="input-field">
             <label>Username</label>
-            <input className="form-input" type="text" name="username" placeholder="your_username" onChange={handleOnChange} defaultValue={form.username}></input>
+            <input className="form-input" type="text" name="username" placeholder="Enter a username" onChange={handleOnChange} defaultValue={form.username}></input>
         </div>
         <div className="split-input-field">
             <div className="input-field">
@@ -79,8 +78,7 @@ export default function RegistrationForm(props) {
         <div className="input-field">
             <label>Confirm Password</label>
             <input className="form-input" name="passwordConfirm" placeholder="Confirm your password" onChange={handleOnChange} defaultValue={form.passwordConfirm}></input>
-            {error == "Passwords don't match" ?  <span className="error">Passwords don't match</span>: null}
-            {error == "Missing input value" ?  <span className="error">You're missing an input value</span>: null}
+            {error?  <span className="error">{error}</span>: null}
         </div>
         <button className="btn" onClick={signupUser}>Create Account</button>
       </div>

@@ -43,9 +43,9 @@ input{
 }
 
 .contact-form .content .form-wrapper{
-    margin: 50px;
+    margin: auto;
     border: 1px solid;
-    border-width: 100px;
+    padding: 10px 10px;
     border-radius: 25px;
     color: lightgrey;
     background-color: lightgrey;
