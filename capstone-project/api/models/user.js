@@ -26,7 +26,7 @@ class User {
     }
 
     static async login(credentials) {
-
+        console.log("cred:",credentials)
         // required fields are email and password, throw error if either are missing
         const requiredFields = ["email", "password"]
 
