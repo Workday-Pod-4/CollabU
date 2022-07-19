@@ -41,7 +41,7 @@ export default function RegistrationForm(props) {
         return
     }
 
-    const { data, error } = await apiClient.signupUser({ email: form.email, username: form.username, password: form.password, firstName: form.firstName, lastName: form.lastName})
+    const { data, error } = await apiClient.signupUser({ email: form.email, username: form.username, password: form.password, first_name: form.firstName, last_name: form.lastName})
     if(error) setError("Error trying to registrate")
     
     if(data?.user) {
