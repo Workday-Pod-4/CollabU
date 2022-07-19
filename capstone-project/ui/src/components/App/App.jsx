@@ -6,7 +6,7 @@ import LandingPage from "../LandingPage/LandingPage";
 import { AuthContextProvider, useAuthContext } from "../../contexts/auth";
 import LoginPage from "../LoginPage/LoginPage";
 import RegistrationPage from "../RegistrationPage/RegistrationPage"
-
+import ProfilePage from "../ProfilePage/ProfilePage";
 export default function AppContainer(){
 return(
 <AuthContextProvider>
