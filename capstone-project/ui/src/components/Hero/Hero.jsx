@@ -1,16 +1,17 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import heroimg from "../../assets/heroimg.jpg"
 import "./Hero.css";
 export default function Hero({}) {
   return (
     <div className="hero">
       <div className="content">
         <div className="hero-img">
-          <img src="" alt="placeholder" ></img>
+          <img src={heroimg} alt="placeholder" ></img>
         </div>
         <div className="intro">
-          <h1>Welcome!</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta magni quis numquam minima culpa incidunt, quas, vitae voluptatum dolorem fuga inventore porro fugit at corporis, ad autem. Quas dolor totam beatae voluptatibus iusto libero ullam, ea maiores, aliquid veritatis, assumenda non doloribus vel iure molestiae.</p>
+          <h1>Boost your Productivity and Success through new Connections</h1>
+          <p>Easy to use, dynamic, and adapted to your needs, [Our Website] makes achieving your goals and making new connections a fast and enjoyable process.</p>
         </div>
       </div>
     </div>

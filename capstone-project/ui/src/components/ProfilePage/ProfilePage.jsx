@@ -4,14 +4,18 @@ import "./ProfilePage.css";
 import apiClient from "../../services/apiClient";
 import { useAuthContext } from "../../contexts/auth";
 
+
 export default function ProfilePage() {
   const { user } = useAuthContext();
+
 
   React.useEffect(() => {
     console.log("userInfo:", user);
     console.log("user-social:", user.social_media_link_1);
   }, [user]);
 
+export default function ProfilePage(){
+const [userInfo, setUserInfo] = React.useState({})
   return (
     <div className="profile-page">
       <h1>Profile</h1>
@@ -91,3 +95,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+
