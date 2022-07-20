@@ -47,7 +47,7 @@ export default function RegistrationForm(props) {
     if(data?.user) {
       apiClient.setToken(data.token)
       setUser(data.user)
-      navigate("/")
+      navigate("/profile")
     }
 
     setIsProcessing(false)

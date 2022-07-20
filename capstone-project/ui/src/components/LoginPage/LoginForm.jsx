@@ -45,7 +45,7 @@ export default function LoginForm() {
       setUser(data.user)
       apiClient.setToken(data.token)
       setIsProcessing(false)
-      navigate("/")
+      navigate("/profile")
     }
   }
 
