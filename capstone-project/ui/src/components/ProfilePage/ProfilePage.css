@@ -37,7 +37,7 @@ padding:10px 10px;
 background-color: rgb(148, 148, 148);
 }
 
-a:visited { 
+.social-media-links a:visited { 
     text-decoration: none; 
     color:black;
 }

@@ -20,7 +20,7 @@ export default function ProfilePage() {
           <h1>left-section</h1>
           <div className="profile-pic">
             <img
-              src="https://media-exp2.licdn.com/dms/image/C4E03AQFqaBVPXc-kAA/profile-displayphoto-shrink_400_400/0/1620668813979?e=1663804800&v=beta&t=i9q0C053X7y8IQ6lPK7dJmeY4u_Of7-tPLusCWfbWNo"
+              src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
               height="150px"
               width="150px"
             />
