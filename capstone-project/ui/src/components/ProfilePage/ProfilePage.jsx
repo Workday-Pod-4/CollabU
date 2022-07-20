@@ -13,9 +13,6 @@ export default function ProfilePage() {
     console.log("userInfo:", user);
     console.log("user-social:", user.social_media_link_1);
   }, [user]);
-
-export default function ProfilePage(){
-const [userInfo, setUserInfo] = React.useState({})
   return (
     <div className="profile-page">
       <h1>Profile</h1>
