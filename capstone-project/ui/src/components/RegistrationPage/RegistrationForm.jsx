@@ -73,11 +73,11 @@ export default function RegistrationForm(props) {
         </div>
         <div className="input-field">
             <label>Password</label>
-            <input className="form-input" name="password" placeholder="Enter a secure password" onChange={handleOnChange} defaultValue={form.password}></input>
+            <input className="form-input" type="password" name="password" placeholder="Enter a secure password" onChange={handleOnChange} defaultValue={form.password}></input>
         </div>
         <div className="input-field">
             <label>Confirm Password</label>
-            <input className="form-input" name="passwordConfirm" placeholder="Confirm your password" onChange={handleOnChange} defaultValue={form.passwordConfirm}></input>
+            <input className="form-input" type="password" name="passwordConfirm" placeholder="Confirm your password" onChange={handleOnChange} defaultValue={form.passwordConfirm}></input>
             {error?  <span className="error">{error}</span>: null}
         </div>
         <button className="btn" onClick={signupUser}>Create Account</button>

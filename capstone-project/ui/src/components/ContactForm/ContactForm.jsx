@@ -13,11 +13,19 @@ export default function ContactForm() {
   return (
     <div className = "contact-form">
         <div className = "content">
-        <div className = "form-wrapper">
-        <input name="firstName" className="split-form-input" type="text" placeholder="First name" onChange={handleOnChange} value={form.firstName} />
-        <input name="lastName" className="split-form-input" type="text" placeholder="Last name" onChange={handleOnChange} value={form.lastName}/>
-        <input name="message" className="message-form-input" type="text" placeholder="Leave your message here..." onChange={handleOnChange} value={form.message} />
-        </div>
+          <div className = "form-wrapper">
+            <div className="split-input-field">
+              <div className="input-field">
+                <input className="form-input" type="text" name="firstName" placeholder="First Name" onChange={handleOnChange} defaultValue={form.firstName}></input>
+              </div>
+              <div className="input-field">
+                <input className="form-input" type="text" name="lastName" placeholder="Last Name" onChange={handleOnChange} defaultValue={form.lastName}></input>
+              </div>
+            </div>
+            <div className="message-input">
+              <input name="message" className="form-input" type="text" placeholder="Leave your message here..." onChange={handleOnChange} value={form.message} />
+            </div>
+          </div>
         </div>
     </div>
   );

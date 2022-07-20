@@ -1,37 +1,9 @@
 .contact-us .content {
-    max-width: 800px;
     width: 100%;
-    margin: 0 auto;
+    margin: 0px 0px 0px 0px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 350px;
+    min-height: 350px;
 }
-
-
-
-.contact-us .content .contactus-card {
-    flex: 1;
-    padding: 0 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    height: 350px;
-}
-
-
-
-
-
-.contact-us .content .contactus-form {
-    flex: 1;
-    padding: 0 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 350px;
-}
-

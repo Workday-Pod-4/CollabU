@@ -58,7 +58,7 @@ export default function LoginForm() {
         </div>
         <div className="input-field">
             <label>Password</label>
-            <input className="form-input" name="password" placeholder="password" defaultValue={form.password} onChange={handleOnChange}></input>
+            <input className="form-input" type="password" name="password" placeholder="password" defaultValue={form.password} onChange={handleOnChange}></input>
             {error ? <span className="error">{error}</span> : null}
         </div>
         <button className="btn" onClick={loginUser}>Login</button>
