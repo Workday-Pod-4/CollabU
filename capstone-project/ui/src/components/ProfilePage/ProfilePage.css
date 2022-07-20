@@ -1,0 +1,24 @@
+.sections {
+display:flex;
+}
+
+.profile-page .left-section{
+    display:flex;
+    flex-direction: column;
+    width:33%;
+    flex:-2;
+    height:800px;
+    }
+.profile-page .middle-section{
+display:flex;
+flex-direction: column;
+width:33%;
+    
+}
+
+
+.profile-page .right-section{
+display:flex;
+flex-direction: column;
+width:34%;
+}
