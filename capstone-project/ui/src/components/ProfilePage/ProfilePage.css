@@ -54,7 +54,6 @@ background-color: rgb(148, 148, 148);
 .profile-page .middle-section{
 display:flex;
 flex-direction: column;
-width:36%;
 }
 
 
