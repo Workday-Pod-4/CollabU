@@ -44,7 +44,10 @@ a:visited {
 .profile-page .middle-section{
 display:flex;
 flex-direction: column;
+justify-content: center;
+align-items: center;
 width:33%;
+height: 800px;
 }
 
 
