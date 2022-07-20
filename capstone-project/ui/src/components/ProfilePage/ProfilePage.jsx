@@ -9,6 +9,7 @@ export default function ProfilePage() {
 
   React.useEffect(() => {
     console.log("userInfo:", user);
+    console.log("user-social:", user.social_media_link_1)
   }, [user]);
 
   return (
@@ -18,11 +19,44 @@ export default function ProfilePage() {
         <div className="left-section">
           <h1>left-section</h1>
           <div className="profile-pic">
-            <p>Profile img</p>
+           <img src = "https://media-exp2.licdn.com/dms/image/C4E03AQFqaBVPXc-kAA/profile-displayphoto-shrink_400_400/0/1620668813979?e=1663804800&v=beta&t=i9q0C053X7y8IQ6lPK7dJmeY4u_Of7-tPLusCWfbWNo" height ="150px" width="150px"/>
+            {/* <form action="/action_page.php">
+              <input type="file" id="myFile" name="filename" />
+              <input type="submit" />
+            </form> */}
           </div>
-          <div className = "profile-name">
-            <h2>{user.first_name}  {user.last_name}</h2>
+          <div className="profile-name">
+            <h2>
+              {user.first_name} {user.last_name}
+            </h2>
           </div>
+          <div className = "location">
+            <b>  | {user.timezone}</b>
+          </div>
+          <div className = "social-media-links">
+            <ul>
+            <li className ="link-1">
+            {user.email}
+            </li>
+            <li className="link-2">
+            {/* <a href = {`${user.social_media_link_2}`}/> */}
+            <a href ={user.social_media_link_1}><span>Visit page</span></a>
+            </li>
+            <li className = "link-3">
+            <a href ={user.social_media_link_1}><span>Visit page</span></a>
+            </li>
+            </ul>
+          </div>
+        <div className = "settings">
+        <button className = "settings-btn">
+            Settings
+        </button>
+          </div>
+
+        <div className = "report-issue">
+           <b>report issue</b>
+        </div>
+
         </div>
 
         <div className="middle-section">
