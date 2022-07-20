@@ -18,14 +18,23 @@ display:flex;
     height:800px;
 }
 
+.social-media-links{
+display:flex;
+justify-content: center;
 
 
+}
 
 .profile-page .left-section .social-media-links ul{
 display:flex;
-justify-content: space-between;
 flex-direction: column;
 height: 150px;
+width:80%;
+padding-inline-start: 0px;
+justify-content: space-between
+
+
+
 }
 
 .profile-page .left-section .social-media-links li{
@@ -69,7 +78,7 @@ justify-content: center;
     background-color: rgb(0, 0, 0);
     color:white;
     border-radius: 3px;
-    border-style: solid;
+    border: 1px black;
     }
 
 

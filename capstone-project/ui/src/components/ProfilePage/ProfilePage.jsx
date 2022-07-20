@@ -24,10 +24,12 @@ export default function ProfilePage() {
               height="150px"
               width="150px"
             />
-            {/* <form action="/action_page.php">
-              <input type="file" id="myFile" name="filename" />
-              <input type="submit" />
-            </form> */}
+            {/* <img
+              src={user.image}
+              height="150px"
+              width="150px"
+            /> */}
+
           </div>
           <div className="profile-name">
             <h2>
