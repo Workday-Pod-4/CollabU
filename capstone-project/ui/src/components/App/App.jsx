@@ -30,8 +30,7 @@ const {user} = useAuthContext()
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<LoginPage/>} />
                 <Route path="/register" element={<RegistrationPage/>} />
-               <Route path ='/profile' element = {<ProfilePage/>}/>
-                <Route path="/room" element = {<ChatRoom />} />
+                <Route path ='/profile' element = {<ProfilePage/>}/>
               </Routes>
             </main>
           </BrowserRouter>
