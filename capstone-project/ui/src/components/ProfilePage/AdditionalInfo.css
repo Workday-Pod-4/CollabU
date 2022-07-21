@@ -1,0 +1,64 @@
+.additional-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    padding-bottom: 10px;
+    color: black;
+    background: lightgray;
+    border: 1px;
+    border-radius: 25px;
+}
+
+.additional-form .input-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 8px 0;
+    flex: 1 1;
+}
+
+.additional-form .input-field label {
+    margin-bottom: 5px;
+    color: black;
+}
+
+.additional-form .input-field input {
+    height: 50px;
+    width: 50%;
+    padding: 0 15px;
+    font-size: 16px;
+    border: 1px solid black;
+    background: transparent;
+    color: black;
+}
+
+.additional-form .input-field select {
+    width: 50%;
+    height: 50px;
+    padding: 0 15px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    background: transparent;
+    color: #000;
+    border-radius: 25px;
+}
+
+.additional-form .btn {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.additional-form .btn {
+    height: 40px;
+    color: white;
+    background: black;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
