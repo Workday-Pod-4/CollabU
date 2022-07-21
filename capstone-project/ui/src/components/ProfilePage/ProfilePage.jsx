@@ -11,6 +11,7 @@ export default function ProfilePage() {
     console.log("userInfo:", user);
     console.log("user-social:", user.social_media_link_1);
   }, [user]);
+  
   return (
     <div className="profile-page">
       <h1>Information</h1>
