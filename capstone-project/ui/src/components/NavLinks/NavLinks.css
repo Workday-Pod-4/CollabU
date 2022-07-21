@@ -37,12 +37,3 @@
     text-decoration: none;
 }
 
-.logout-button{
-    border: 0px solid transparent;
-    border-radius: 10px;
-    background: #4846BD;
-    font-weight: 700;
-    padding: 2px 8px;
-    color:white;
-    text-decoration: none;
-}

@@ -11,12 +11,12 @@ export default function NavLinks() {
     <div className="nav-links">
       <ul className="links">
         <li>
-          { user?.email ? <Link to="/"><button className="logout-button" onClick={logoutUser}>Logout</button></Link> : <Link to="/login">
+          { user?.email ?<li className="logout-button" onClick={logoutUser}> <Link to="/">Logout</Link></li> : <Link to="/login">
           Login
           </Link>}
         </li>
           { user?.email ?
-          <li className = "btn"><Link to="/profile"> Find a buddy</Link></li>
+          <li className = "btn" id= "open-modal"><Link to="/profile"> Find a buddy</Link></li>
           :
           <li className="btn"><Link to="/register">Register</Link></li>
           }
