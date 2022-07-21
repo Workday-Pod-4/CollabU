@@ -16,7 +16,7 @@ export default function NavLinks() {
           </Link>}
         </li>
           { user?.email ?
-          null
+          <li className = "btn"><Link to="/profile"> Find a buddy</Link></li>
           :
           <li className="btn"><Link to="/register">Register</Link></li>
           }
