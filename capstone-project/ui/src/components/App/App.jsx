@@ -7,6 +7,7 @@ import { AuthContextProvider, useAuthContext } from "../../contexts/auth";
 import LoginPage from "../LoginPage/LoginPage";
 import RegistrationPage from "../RegistrationPage/RegistrationPage"
 import ProfilePage from "../ProfilePage/ProfilePage";
+import ChatRoom from "../ChatRoom/ChatRoom";
 export default function AppContainer(){
 return(
 <AuthContextProvider>
@@ -30,6 +31,7 @@ const {user} = useAuthContext()
                 <Route path="/login" element={<LoginPage/>} />
                 <Route path="/register" element={<RegistrationPage/>} />
                <Route path ='/profile' element = {<ProfilePage/>}/>
+                <Route path="/room" element = {<ChatRoom />} />
               </Routes>
             </main>
           </BrowserRouter>
