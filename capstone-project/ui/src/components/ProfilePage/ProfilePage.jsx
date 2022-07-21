@@ -5,19 +5,19 @@ import apiClient from "../../services/apiClient";
 import { useAuthContext } from "../../contexts/auth";
 import UpdateForm from "./UpdateForm";
 
-
 export default function ProfilePage() {
   const { user } = useAuthContext();
   const {isUpdating} = useAuthContext();
 
-
   React.useEffect(() => {
     console.log("userInfo:", user);
     console.log("user-social:", user.social_media_link_1);
+
   }, [user, isUpdating]);
+
   return (
     <div className="profile-page">
-      <h1>Profile</h1>
+      <h1>Information</h1>
       <div className="sections">
         <div className="left-section">
           <h1>left-section</h1>
@@ -32,7 +32,6 @@ export default function ProfilePage() {
               height="150px"
               width="150px"
             /> */}
-
           </div>
           <div className="profile-name">
             <h2>
@@ -77,11 +76,12 @@ export default function ProfilePage() {
                 <b>{user.company}</b>
               </div>
 
-              <div className="school-card">
+
+            <div className="school-card">
               <b>{user.major} student</b>
-                <b>at</b>
-                <b>{user.college}</b>
-              </div>
+              <b>at</b>
+              <b>{user.college}</b>
+
             </div>
           }
         </div>
@@ -89,7 +89,11 @@ export default function ProfilePage() {
         <div className="right-section">
           <h1>right-section</h1>
           <div className="match-history">
-            <p>right</p>
+            <ul>
+              <li><img src = "" alt = "img" width = "70px" height= "70px"/><span>Person 1</span></li>
+              <li><img src = "" alt = "img" width = "70px" height= "70px"/><span>Person 2</span></li>
+              <li><img src = "" alt = "img" width = "70px" height= "70px"/><span>Person 3</span></li>
+            </ul>
           </div>
         </div>
       </div>
