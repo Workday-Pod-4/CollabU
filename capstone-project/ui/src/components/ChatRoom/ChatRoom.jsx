@@ -8,22 +8,28 @@ export default function ChatRoom() {
 
     let chatOpen = false;
 
+    var cName="chat-container closed";
+    var bName="chat button closed";
+
+    React.useEffect(() => {
+        /*if(chatOpen == false){
+            cName="chat-container closed";
+            bName="chat button closed";
+        }
+        else{
+            cName="chat-container open";
+            bName="chat button open";
+        }*/
+        console.log("Actual classname of chat-container", cName)
+      }, [chatOpen, handleToggle])
+
     function handleToggle(){
         chatOpen = !chatOpen;
+        console.log("Is Chat open?",chatOpen);
     }
-
-    let cName="";
-    let bName="";
-
-    if(chatOpen == false){
-    cName="chat-container closed";
-    bName="chat button closed";
-    }
-    else{
-    cName="chat-container open";
-    bName="toggle-button open"
-    }
-
+    
+    
+    
     return (
     <div className = "chat-room">
         <div className="content">
@@ -47,7 +53,7 @@ export default function ChatRoom() {
                     <button className="video">Video</button>
                 </div>
                 <div className={cName}>
-                    <button className="chat" onClick={handleToggle}>Chat</button>
+                    <button className={bName} onClick={handleToggle}>Chat</button>
                 </div>
             </div>
         </div>
