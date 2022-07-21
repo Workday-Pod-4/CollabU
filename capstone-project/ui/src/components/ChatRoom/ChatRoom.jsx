@@ -5,6 +5,25 @@ import "./ChatRoom.css";
 
 
 export default function ChatRoom() {
+
+    let chatOpen = false;
+
+    function handleToggle(){
+        chatOpen = !chatOpen;
+    }
+
+    let cName="";
+    let bName="";
+
+    if(chatOpen == false){
+    cName="chat-container closed";
+    bName="chat button closed";
+    }
+    else{
+    cName="chat-container open";
+    bName="toggle-button open"
+    }
+
     return (
     <div className = "chat-room">
         <div className="content">
@@ -27,8 +46,8 @@ export default function ChatRoom() {
                     <button className="mute">Mute</button>
                     <button className="video">Video</button>
                 </div>
-                <div className="chat-container">
-                    <button className="chat">Chat</button>
+                <div className={cName}>
+                    <button className="chat" onClick={handleToggle}>Chat</button>
                 </div>
             </div>
         </div>
