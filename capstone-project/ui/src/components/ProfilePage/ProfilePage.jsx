@@ -4,8 +4,10 @@ import "./ProfilePage.css";
 import apiClient from "../../services/apiClient";
 import { useAuthContext } from "../../contexts/auth";
 
+
 export default function ProfilePage() {
   const { user } = useAuthContext();
+
 
   React.useEffect(() => {
     console.log("userInfo:", user);
@@ -13,7 +15,7 @@ export default function ProfilePage() {
   }, [user]);
   return (
     <div className="profile-page">
-      <h1>Information</h1>
+      <h1>Profile</h1>
       <div className="sections">
         <div className="left-section">
           <h1>left-section</h1>
@@ -28,6 +30,7 @@ export default function ProfilePage() {
               height="150px"
               width="150px"
             /> */}
+
           </div>
           <div className="profile-name">
             <h2>
@@ -72,7 +75,7 @@ export default function ProfilePage() {
             </div>
 
             <div className="school-card">
-              <b>{user.major} student</b>
+            <b>{user.major} student</b>
               <b>at</b>
               <b>{user.college}</b>
             </div>
@@ -82,14 +85,11 @@ export default function ProfilePage() {
         <div className="right-section">
           <h1>right-section</h1>
           <div className="match-history">
-            <ul>
-              <li><img src = "" alt = "img" width = "70px" height= "70px"/><span>Person 1</span></li>
-              <li><img src = "" alt = "img" width = "70px" height= "70px"/><span>Person 2</span></li>
-              <li><img src = "" alt = "img" width = "70px" height= "70px"/><span>Person 3</span></li>
-            </ul>
+            <p>right</p>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
