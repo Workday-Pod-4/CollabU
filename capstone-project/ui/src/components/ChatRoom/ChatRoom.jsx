@@ -11,10 +11,12 @@ export default function ChatRoom() {
     var cName="chat-container closed";
     var bName="chat button closed";
 
+
     function handleToggle(){
         chatOpen = !chatOpen;
         console.log("Is Chat open?",chatOpen);
     }
+
 
     React.useEffect(() => {
         /*if(chatOpen == false){
@@ -27,6 +29,7 @@ export default function ChatRoom() {
         }*/
         console.log("Actual classname of chat-container", cName)
       }, [chatOpen, handleToggle])
+
     
     return (
     <div className = "chat-room">

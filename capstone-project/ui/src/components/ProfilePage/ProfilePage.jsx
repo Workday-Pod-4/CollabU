@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import "./ProfilePage.css";
 import apiClient from "../../services/apiClient";
 import { useAuthContext } from "../../contexts/auth";
+import UpdateForm from "./UpdateForm";
 
 export default function ProfilePage() {
   const { user } = useAuthContext();
+  const {isUpdating} = useAuthContext();
 
   React.useEffect(() => {
     console.log("userInfo:", user);
     console.log("user-social:", user.social_media_link_1);
-  }, [user]);
-  
+
+  }, [user, isUpdating]);
+
   return (
     <div className="profile-page">
       <h1>Information</h1>
@@ -65,19 +68,22 @@ export default function ProfilePage() {
 
         <div className="middle-section">
           <h1> middle-section</h1>
-          <div className="info-cards">
-            <div className="work-card">
-              <b>{user.job_title}</b>
-              <b>at</b>
-              <b>{user.company}</b>
-            </div>
+          { isUpdating ? <UpdateForm /> 
+          : <div className="info-cards">
+              <div className="work-card">
+                <b>{user.job_title}</b>
+                <b>at</b>
+                <b>{user.company}</b>
+              </div>
+
 
             <div className="school-card">
               <b>{user.major} student</b>
               <b>at</b>
               <b>{user.college}</b>
+
             </div>
-          </div>
+          }
         </div>
 
         <div className="right-section">
