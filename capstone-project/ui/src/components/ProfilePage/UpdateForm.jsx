@@ -69,8 +69,8 @@ export default function UpdateForm() {
                 <div className="input-field">
                     <label>Timezone</label>
                     <select className="form-input" name="timezone" placeholder="Timezone" onChange={handleOnChange} defaultValue={form.timezone}>
-                        <option value={"ET"}>ET</option>
-                        <option value={"PT"}>PT</option>
+                        <option value={"EST"}>EST</option>
+                        <option value={"PST"}>PST</option>
                         <option value={"UCT"}>UCT</option>
                     </select>
                 </div>
