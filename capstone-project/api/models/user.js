@@ -117,7 +117,7 @@ class User {
 
     static async update(credentials) {
         // required fields are username, email and password, throw error if any are missing
-        const requiredFields = ["username", "email", "password"]
+        const requiredFields = ["username", "email"]
 
         requiredFields.forEach(field => {
             if (!credentials.hasOwnProperty(field)) {
@@ -155,10 +155,9 @@ class User {
         */
         if (user) {
 
-            const isValid = await bcrypt.compare(credentials.password, user.password)
 
             // update database with given info
-            if (isValid) {
+            
                 const result = await db.query(`
                     UPDATE users 
                     SET username = $2,
@@ -184,7 +183,7 @@ class User {
 
                 // return user
                 return User.makePublicUser(result.rows[0])
-            }
+            
         }
 
         throw new UnauthorizedError("Invalid email/password")

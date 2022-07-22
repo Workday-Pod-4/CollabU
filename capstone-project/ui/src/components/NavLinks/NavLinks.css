@@ -37,3 +37,13 @@
     text-decoration: none;
 }
 
+
+.logout-button{
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: none;
+    font-weight: 700;
+    padding: 2px 8px;
+    color:white;
+    text-decoration: none;
+}

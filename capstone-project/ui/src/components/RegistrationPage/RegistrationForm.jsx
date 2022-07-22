@@ -5,7 +5,7 @@ import { useAuthContext } from "../../contexts/auth"
 
 export default function RegistrationForm(props) {
 
-  const { user, setUser } = useAuthContext()
+  const { user, setUser, setFirstTime } = useAuthContext()
   const navigate = useNavigate()
 
   const [isProcessing, setIsProcessing] = React.useState(false)
@@ -47,6 +47,7 @@ export default function RegistrationForm(props) {
     if(data?.user) {
       apiClient.setToken(data.token)
       setUser(data.user)
+      setFirstTime(true);
       navigate("/profile")
     }
 
