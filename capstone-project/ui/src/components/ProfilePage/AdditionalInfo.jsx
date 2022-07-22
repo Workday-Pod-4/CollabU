@@ -10,7 +10,7 @@ export default function AdditionalInfo() {
   const [isProcessing, setIsProcessing] = React.useState(false)
   const [error, setError] = React.useState("")
 
-  const [form, setForm] = React.useState({ "college" : "", "major" : "", "workTitle": "", "industry": "", "yearsOfExperience" : "", "socialMediaLink1": "", "socialMediaLink2": "", "socialMediaLink3": ""})
+  const [form, setForm] = React.useState({ "college" : "", "major" : "", "job_title": "", "industry": "", "yearsOfExperience" : "", "socialMediaLink1": "", "socialMediaLink2": "", "socialMediaLink3": ""})
 
   function handleOnChange(evt){
     setForm((f) => ({...f, [evt.target.name]: evt.target.value}))
@@ -21,15 +21,17 @@ export default function AdditionalInfo() {
 
      setIsProcessing(true);
 
-    /*const { data, error } = await apiClient.updateUserInfo({  
+    const { data, error } = await apiClient.updateUserInfo({
+        username: user.username,
+        email: user.email,  
         college: form.college, 
         major: form.major, 
-        workTitle: form.workTitle, 
+        job_title: form.workTitle, 
         industry: form.industry,
         yearsOfExperience: form.yearsOfExperience,
-        socialMediaLink1: form.socialMediaLink1,
-        socialMediaLink2: form.socialMediaLink2,
-        socialMediaLink3: form.socialMediaLink3
+        social_media_link_1: form.socialMediaLink1,
+        social_media_link_2: form.socialMediaLink2,
+        social_media_link_3: form.socialMediaLink3
      })
     if(error) {
         setError("Error trying to update your information")
@@ -40,7 +42,7 @@ export default function AdditionalInfo() {
       setUser(data.user)
       setFirstTime(false)
       console.log("Hello!! You made it")
-    }*/
+    }
 
     setFirstTime(false)
     
@@ -59,33 +61,33 @@ export default function AdditionalInfo() {
                     <div className="input-field">
                         <label>College</label>
                         <select className="form-input" name="college" placeholder="College" onChange={handleOnChange} defaultValue={form.college}>
-                            <option value={"college1"}>College 1</option>
-                            <option value={"college2"}>College 2</option>
-                            <option value={"college3"}>College 3</option>
+                            <option value={"College 1"}>College 1</option>
+                            <option value={"College 2"}>College 2</option>
+                            <option value={"College 3"}>College 3</option>
                         </select>
                     </div>
                     <div className="input-field">
                         <label>Major</label>
                         <select className="form-input" name="major" placeholder="Major" onChange={handleOnChange} defaultValue={form.major}>
-                            <option value={"major1"}>Major 1</option>
-                            <option value={"major2"}>Major 2</option>
-                            <option value={"major3"}>Major 3</option>
+                            <option value={"Major 1"}>Major 1</option>
+                            <option value={"Major 2"}>Major 2</option>
+                            <option value={"Major 3"}>Major 3</option>
                         </select>
                     </div>
                     <div className="input-field">
                         <label>Work Title</label>
                         <select className="form-input" name="workTitle" placeholder="Work Title" onChange={handleOnChange} defaultValue={form.workTitle}>
-                            <option value={"worktitle1"}>Work Title 1</option>
-                            <option value={"worktitle2"}>Work Title 2</option>
-                            <option value={"worktitle3"}>Work Title 3</option>
+                            <option value={"Work Title 1"}>Work Title 1</option>
+                            <option value={"Work Title 2"}>Work Title 2</option>
+                            <option value={"Work Title 3"}>Work Title 3</option>
                         </select>
                     </div>
                     <div className="input-field">
                         <label>Industry</label>
                         <select className="form-input" name="industry" placeholder="Industry" onChange={handleOnChange} defaultValue={form.industry}>
-                            <option value={"industry1"}>Industry 1</option>
-                            <option value={"industry2"}>Industry 2</option>
-                            <option value={"industry3"}>Industry 3</option>
+                            <option value={"Industry 1"}>Industry 1</option>
+                            <option value={"Industry 2"}>Industry 2</option>
+                            <option value={"Industry 3"}>Industry 3</option>
                         </select>
                     </div>
                     <div className="input-field">
