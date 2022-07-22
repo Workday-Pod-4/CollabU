@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import "./ProfilePage.css";
 import apiClient from "../../services/apiClient";
 import { useAuthContext } from "../../contexts/auth";
+
+
 import UpdateForm from "./UpdateForm";
+import AdditionalInfo from "./AdditionalInfo"
 
 export default function ProfilePage() {
-  const { user } = useAuthContext();
-  const {isUpdating} = useAuthContext();
+  const { user , firstTime, isUpdating} = useAuthContext();
 
   React.useEffect(() => {
     console.log("userInfo:", user);
@@ -17,6 +19,7 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
+      { firstTime ? <AdditionalInfo /> : null}
       <h1>Information</h1>
       <div className="sections">
         <div className="left-section">
@@ -68,8 +71,9 @@ export default function ProfilePage() {
 
         <div className="middle-section">
           <h1> middle-section</h1>
-          { isUpdating ? <UpdateForm /> 
-          : <div className="info-cards">
+          { isUpdating ? <UpdateForm />
+          :
+          <div className="info-cards">
               <div className="work-card">
                 <b>{user.job_title}</b>
                 <b>at</b>
@@ -77,11 +81,11 @@ export default function ProfilePage() {
               </div>
 
 
-            <div className="school-card">
-              <b>{user.major} student</b>
-              <b>at</b>
-              <b>{user.college}</b>
-
+              <div className="school-card">
+                <b>{user.major} student</b>
+                <b>at</b>
+                <b>{user.college}</b>
+              </div>
             </div>
           }
         </div>
