@@ -40,7 +40,18 @@ button{
     }
 
 .header{
-    width: 80%; font-size: 18px; text-align: center; padding: 5px;
+    width: 50%; font-size: 18px; text-align: center; padding: 5px;
+    position:fixed;
+    top:5%;
+}
+
+.sub-header{
+    position: fixed;
+    color: #fff;
+    font-size: 45px;
+   top:20%;
+   right:45%;
+   font-weight: 600;
 }
 
 
@@ -52,8 +63,9 @@ h1{
     display:flex;
     justify-content: center;
     padding: 130px 50px;
-    background-color: #4846BD;
-
+    background-color: #bdbdbd;
+    position: fixed;
+    border-radius: 5px;
 }
 
 .form-wrapper .preference-study-form{
@@ -74,6 +86,14 @@ justify-content: space-between;
 
 
 .form-wrapper .preference-study-form ul li input{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 25px;
+    padding:10px 10px;
+
+}
+.form-wrapper .preference-study-form ul li select{
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -107,3 +127,19 @@ justify-content: space-between;
         border-radius: 25px;
         padding:10px 10px;
     }
+
+.close-modal{
+  position: absolute;
+  right: 15%;
+  top: 32px;
+  border-radius: 10px;
+  width:32px;
+  height: 32px;
+
+}
+
+#back-btn{
+
+position:fixed;
+top:70%
+}
