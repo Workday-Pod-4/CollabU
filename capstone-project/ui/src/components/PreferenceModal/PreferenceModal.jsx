@@ -29,7 +29,23 @@ return(
 
 
 )
+  //if user selects studying in preference modal it will display study preference form
+  const [isStudying, setIsStudying] = React.useState(false);
+  const [isWorking, setIsWorking] = React.useState(false)
   const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
+
+  //if user clicks study, set isStudying = true and isWorking = false
+  function handleToggleStudy() {
+    setIsWorking(false)
+    setIsStudying(true);
+  }
+  //if user clicks work, set isWorking = true and isStudying = false
+  function handleToggleWork(){
+  setIsStudying(false)
+  setIsWorking(true)
+  }
+
+  console.log("isStudying:", isStudying);
   return (
     <div>
       {prefModal ? (
