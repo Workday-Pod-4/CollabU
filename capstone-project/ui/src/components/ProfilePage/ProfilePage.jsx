@@ -20,10 +20,8 @@ export default function ProfilePage() {
   return (
     <div className="profile-page">
       { firstTime ? <AdditionalInfo /> : null}
-      <h1>Information</h1>
       <div className="sections">
         <div className="left-section">
-          <h1>left-section</h1>
           <div className="profile-pic">
             <img
               src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
@@ -93,12 +91,11 @@ export default function ProfilePage() {
           </div>
 
           <div className="report-issue">
-            <b>report issue</b>
+            <b>Report issue</b>
           </div>
         </div>
 
         <div className="middle-section">
-          <h1> middle-section</h1>
           { isUpdating ? <UpdateForm />
           :
           <div className="info-cards">
@@ -112,10 +109,11 @@ export default function ProfilePage() {
                 </div>
                 
               <div className="company-row">
+                <p>at</p>
                 {user?.company ?
-                <b>at {user.company}</b>
+                <b>{user.company}</b>
                 :
-                null
+                <b>Add Your Company!</b>
                 }
                 
               </div>
@@ -125,13 +123,13 @@ export default function ProfilePage() {
               { (user?.major || user?.college) ? 
               <div className="school-card">
                 <b>{user.major} student</b>
-                <b>at</b>
+                <p>at</p>
                 <b>{user.college}</b>
               </div>
               :
               null  
               }
-              <div className="update-container">
+              <div className="update-btn-container">
                 <button className="update-btn" onClick={() => (setIsUpdating(true))}>Update</button>
               </div>
           </div>
@@ -139,7 +137,6 @@ export default function ProfilePage() {
         </div>
 
         <div className="right-section">
-          <h1>right-section</h1>
           <div className="match-history">
             <ul>
               <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>Person 1</span></li>
