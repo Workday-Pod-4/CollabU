@@ -18,6 +18,7 @@ return(
 }
 
 function App() {
+
 const {user} = useAuthContext()
   return (
     <div className="App">
