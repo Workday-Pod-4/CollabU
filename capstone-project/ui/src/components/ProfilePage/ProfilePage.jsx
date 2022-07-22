@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./ProfilePage.css";
 import apiClient from "../../services/apiClient";
 import { useAuthContext } from "../../contexts/auth";
-import PreferenceModal from "../PreferenceModal/PreferenceModal";
 
 
 import UpdateForm from "./UpdateForm";
@@ -14,17 +13,13 @@ export default function ProfilePage() {
   console.log(firstTime)
   React.useEffect(() => {
     console.log("userInfo:", user);
-
     console.log("user-social:", user.social_media_link_1);
 
   }, [user, isUpdating]);
 
   return (
     <div className="profile-page">
-                <PreferenceModal/>
-      <h1>Information</h1>
       { firstTime ? <AdditionalInfo /> : null}
-
       <div className="sections">
         <div className="left-section">
           <div className="profile-pic">
