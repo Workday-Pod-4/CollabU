@@ -66,6 +66,7 @@ h1{
     background-color: #bdbdbd;
     position: fixed;
     border-radius: 5px;
+    
 }
 
 .form-wrapper .preference-study-form{
@@ -78,7 +79,7 @@ justify-content: space-between;
     display:flex;
     flex-direction: column;
     height: 150px;
-    width:80%;
+    width:200px;
     padding-inline-start: 0px;
     justify-content: space-between;
     list-style: none;
@@ -107,39 +108,63 @@ justify-content: space-between;
     flex-direction: column;
     justify-content: space-between;
     list-style: none;
+    height: 180px;
 }
     
-    .form-wrapper .preference-work-form ul {
-        display:flex;
-        flex-direction: column;
-        height: 150px;
-        width:80%;
-        padding-inline-start: 0px;
-        justify-content: space-between;
-        list-style: none;
-    }
+.form-wrapper .preference-work-form ul {
+    display:flex;
+    flex-direction: column;
+    height: 150px;
+    width:200px;
+    padding-inline-start: 0px;
+    justify-content: space-between;
+    list-style: none;
+}
     
     
-    .form-wrapper .preference-work-form ul li input{
-        display:flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border-radius: 25px;
-        padding:10px 10px;
-    }
-
 .close-modal{
-  position: absolute;
+  position: fixed;
   right: 15%;
   top: 32px;
-  border-radius: 10px;
-  width:32px;
-  height: 32px;
+font-size: 30px;
+list-style: none;
 
 }
 
 #back-btn{
-
 position:fixed;
-top:70%
+top:70%;
 }
+
+.find{
+
+position: fixed;
+top:85%
+}
+
+select{
+    width: 200px;
+    height: 50px;
+    padding: 0 15px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    background: transparent;
+    color: #000;
+    border-radius: 25px;
+}
+
+
+label{
+
+font-size: 20px;
+
+
+}
+
+.preference-btns{
+display:flex;
+justify-content: space-between;
+width: 300px;
+
+}
+
