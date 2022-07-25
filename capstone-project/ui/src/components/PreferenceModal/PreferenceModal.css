@@ -1,0 +1,167 @@
+*{
+box-sizing: border-box;
+}
+
+
+
+/* extra comment */
+
+.preference-modal-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba( 0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
+}
+
+.modal{
+display:flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+background-color: #fff;
+height:90%;
+width:70%;
+border-radius:5px ;
+}
+
+button{
+    background-color: #4846BD;
+    border:0;
+    border-radius: 5px;
+    color:#fff;
+    padding: 10px 25px;
+    }
+
+.header{
+    width: 50%; font-size: 18px; text-align: center; padding: 5px;
+    position:fixed;
+    top:5%;
+}
+
+.sub-header{
+    position: fixed;
+    color: #fff;
+    font-size: 45px;
+   top:20%;
+   right:45%;
+   font-weight: 600;
+}
+
+
+
+.form-wrapper{
+    display:flex;
+    justify-content: center;
+    padding: 130px 50px;
+    background-color: #bdbdbd;
+    position: fixed;
+    border-radius: 5px;
+    
+}
+
+.form-wrapper .preference-study-form{
+display:flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+.form-wrapper .preference-study-form ul {
+    display:flex;
+    flex-direction: column;
+    height: 150px;
+    width:200px;
+    padding-inline-start: 0px;
+    justify-content: space-between;
+    list-style: none;
+    }
+
+
+.form-wrapper .preference-study-form ul li input{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 25px;
+    padding:10px 10px;
+
+}
+.form-wrapper .preference-study-form ul li select{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 25px;
+    padding:10px 10px;
+
+}
+
+.form-wrapper .preference-work-form{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style: none;
+    height: 180px;
+}
+    
+.form-wrapper .preference-work-form ul {
+    display:flex;
+    flex-direction: column;
+    height: 150px;
+    width:200px;
+    padding-inline-start: 0px;
+    justify-content: space-between;
+    list-style: none;
+}
+    
+    
+.close-modal{
+  position: fixed;
+  right: 15%;
+  top: 32px;
+font-size: 30px;
+list-style: none;
+
+}
+
+#back-btn{
+position:fixed;
+top:70%;
+}
+
+.find{
+
+position: fixed;
+top:85%
+}
+
+select{
+    width: 200px;
+    height: 50px;
+    padding: 0 15px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    background: transparent;
+    color: #000;
+    border-radius: 25px;
+}
+
+
+label{
+
+font-size: 20px;
+
+
+}
+
+.preference-btns{
+display:flex;
+justify-content: space-between;
+width: 300px;
+
+}
+
