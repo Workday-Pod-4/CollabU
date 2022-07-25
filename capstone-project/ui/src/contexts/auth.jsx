@@ -12,6 +12,7 @@ export const AuthContextProvider = ({ children }) => {
     const [error, setError] = useState("")
     const [isUpdating, setIsUpdating] = useState(false)
     const [firstTime, setFirstTime] = useState(false)
+    const [chatOpen, setChatOpen] = useState(false)
     
     React.useEffect(() => {
 
@@ -62,7 +63,9 @@ export const AuthContextProvider = ({ children }) => {
         isUpdating,
         setIsUpdating,
         firstTime,
-        setFirstTime
+        setFirstTime,
+        chatOpen, 
+        setChatOpen
     }
 
     return (
