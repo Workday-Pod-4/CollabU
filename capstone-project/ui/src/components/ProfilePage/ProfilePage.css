@@ -69,7 +69,8 @@
     .profile-page .left-section .social-media-links li{
     display:flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-content: center;
     border-radius: 20px;
     height: 25%;
     width: 100%;
