@@ -20,8 +20,6 @@ export default function PreferenceModal() {
   setIsStudying(false)
   setIsWorking(true)
   }
-
-  console.log("isStudying:", isStudying);
   return (
     <div>
       {prefModal ? (
