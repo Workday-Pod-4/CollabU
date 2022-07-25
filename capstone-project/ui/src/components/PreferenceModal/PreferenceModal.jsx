@@ -37,7 +37,7 @@ export default function PreferenceModal() {
             <li className="close-modal" onClick={togglePrefModal}> 
             x
             </li>
-            <div className="form-wrapper">
+            <div className="preference-form-wrapper">
               {isStudying?<div className="preference-study-form">
               <div className ="sub-header"> Study </div>
                 <ul>

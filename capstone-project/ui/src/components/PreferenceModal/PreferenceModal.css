@@ -55,27 +55,27 @@
     }
     
     
-    h1{
+    .header h1{
         background-color: gray;
         color:white;
     }
-    .form-wrapper{
+    
+    .preference-form-wrapper{
         display:flex;
         justify-content: center;
         padding: 130px 50px;
         background-color: #bdbdbd;
         position: fixed;
-        border-radius: 5px;
-        
+        border-radius: 5px
     }
     
-    .form-wrapper .preference-study-form{
+    .preference-form-wrapper .preference-study-form{
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     }
     
-    .form-wrapper .preference-study-form ul {
+    .preference-form-wrapper .preference-study-form ul {
         display:flex;
         flex-direction: column;
         height: 150px;
@@ -86,7 +86,7 @@
         }
     
     
-    .form-wrapper .preference-study-form ul li input{
+    .preference-form-wrapper .preference-study-form ul li input{
         display:flex;
         flex-direction: column;
         justify-content: space-between;
@@ -94,7 +94,7 @@
         padding:10px 10px;
     
     }
-    .form-wrapper .preference-study-form ul li select{
+    .preference-form-wrapper .preference-study-form ul li select{
         display:flex;
         flex-direction: column;
         justify-content: space-between;
@@ -103,7 +103,7 @@
     
     }
     
-    .form-wrapper .preference-work-form{
+    .preference-form-wrapper .preference-work-form{
         display:flex;
         flex-direction: column;
         justify-content: space-between;
@@ -111,7 +111,7 @@
         height: 180px;
     }
         
-    .form-wrapper .preference-work-form ul {
+    .preference-form-wrapper .preference-work-form ul {
         display:flex;
         flex-direction: column;
         height: 150px;
