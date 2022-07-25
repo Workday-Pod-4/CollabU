@@ -43,6 +43,14 @@ export default function ChatRoom() {
                 </div>
                 <div className={cName}>
                     <button className={bName} onClick={() => (setChatOpen(!chatOpen))}>Chat</button>
+                    <div className="chat-logs">
+                        <div className="input-field">
+                            <input name="chat" className="chat-input" placeholder="Type something..."></input>
+                        </div>
+                        <div className="messages">
+                            <span>Test</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             :
