@@ -9,7 +9,6 @@ export default function NavLinks() {
   const {prefModal, setPrefModal, togglePrefModal} = useAuthContext() 
   console.log("prefModal:",prefModal)
 
-// extra comment
   return (
     <div className="nav-links">
       <ul className="links">

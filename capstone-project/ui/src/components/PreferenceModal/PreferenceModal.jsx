@@ -4,7 +4,6 @@ import { useAuthContext } from "../../contexts/auth";
 import "./PreferenceModal.css";
 
 
-// extra comment 
 export default function PreferenceModal() {
   //if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
