@@ -20,7 +20,6 @@ export default function ChatRoom() {
         cName="chat-container open";
         bName="chat open";
     }
-    console.log("Actual classname of chat-container", cName)
     
     return (
     <div className = "chat-room">
