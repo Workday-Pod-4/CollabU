@@ -53,7 +53,7 @@ height: 400px;
 
 }
 
-.password-reset-form li{
+.password-reset-form ul li{
 list-style: none;
 display:flex;
 height:100px;
@@ -62,7 +62,7 @@ width:560px;
 
 }
 
-ul{
+.password-reset-form ul{
     display: flex;
     flex-direction: column;
     width:630px;
@@ -71,20 +71,20 @@ ul{
     
 
 }
-span{
+.password-reset-form ul li span{
     display: flex;
     flex-direction: column;
     width:250px;
     height:100px;
 }
 
-label {
+.password-reset-form ul li span label {
     margin-bottom: 5px;
     color: black;
     width: auto;
 }
 
-input{
+.password-reset-form ul li span input{
     height: 50px;
     width: auto;
     padding: 0 15px;
