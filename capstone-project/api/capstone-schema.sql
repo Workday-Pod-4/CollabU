@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
     job_title TEXT,
     company TEXT,
     industry TEXT,
+    years_of_experience INT,
     college TEXT,
     major TEXT,
     profile_image_url   TEXT,

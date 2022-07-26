@@ -18,6 +18,7 @@ class User {
             job_title: user.job_title,
             company: user.company,
             industry: user.industry,
+            years_of_experience: user.years_of_experience,
             college: user.college,
             major: user.major,
             profile_image_url: user.profile_image_url,
@@ -28,7 +29,7 @@ class User {
     }
 
     static async login(credentials) {
-        console.log("cred:",credentials)
+
         // required fields are email and password, throw error if either are missing
         const requiredFields = ["email", "password"]
 
@@ -149,15 +150,12 @@ class User {
 
 
         /* 
-           if user is found, compare the password with the submitted password
-           if they match, update database with given info and return user
+           if user is found, update database with given info and return user
            else, throw an error
         */
         if (user) {
 
-
             // update database with given info
-            
                 const result = await db.query(`
                     UPDATE users 
                     SET username = $2,
@@ -174,11 +172,12 @@ class User {
                         social_media_link_2 = $13,
                         social_media_link_3 = $14,
                         profile_image_url = $15,
-                        location = $16
+                        location = $16,
+                        years_of_experience = $17
                     WHERE id = $1
-                    RETURNING id, email, password, username, first_name, last_name, location, timezone, job_title, company, industry, college, major, profile_image_url, social_media_link_1, social_media_link_2, social_media_link_3;
+                    RETURNING id, email, password, username, first_name, last_name, location, timezone, job_title, company, industry, years_of_experience, college, major, profile_image_url, social_media_link_1, social_media_link_2, social_media_link_3;
                 `,
-                [user.id, tempUser.username, tempUser.email.toLowerCase(), tempUser.first_name, tempUser.last_name, tempUser.timezone, tempUser.job_title, tempUser.company, tempUser.industry, tempUser.college, tempUser.major, tempUser.social_media_link_1, tempUser.social_media_link_2, tempUser.social_media_link_3, tempUser.profile_image_url, tempUser.location]
+                [user.id, tempUser.username, tempUser.email.toLowerCase(), tempUser.first_name, tempUser.last_name, tempUser.timezone, tempUser.job_title, tempUser.company, tempUser.industry, tempUser.college, tempUser.major, tempUser.social_media_link_1, tempUser.social_media_link_2, tempUser.social_media_link_3, tempUser.profile_image_url, tempUser.location, tempUser.years_of_experience]
                 )
 
                 // return user
