@@ -13,7 +13,13 @@ export const AuthContextProvider = ({ children }) => {
     const [isUpdating, setIsUpdating] = useState(false)
     const [firstTime, setFirstTime] = useState(false)
     const [chatOpen, setChatOpen] = useState(false)
+    const[prefModal,setPrefModal] = React.useState(false);
+
     
+    //function for toggling pref modal, should be set to true if user clicks find a buddy and false if user presses close button on modal
+    function togglePrefModal(){
+      setPrefModal(!prefModal)
+    }
     React.useEffect(() => {
 
         const fetchUser = async () => {
@@ -52,7 +58,7 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const authValue = { user, 
-        setUser ,
+        setUser,
         error,
         setError,
         initialized,
@@ -65,7 +71,10 @@ export const AuthContextProvider = ({ children }) => {
         firstTime,
         setFirstTime,
         chatOpen, 
-        setChatOpen
+        setChatOpen,
+        prefModal,
+        setPrefModal,
+        togglePrefModal
     }
 
     return (
