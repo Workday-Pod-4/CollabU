@@ -25,7 +25,6 @@ export default function PreferenceModal() {
       {prefModal ? (
         <div
           className="preference-modal-container"
-          id="preference-modal-container"
         >
           <div className="modal">
             <div className="header">

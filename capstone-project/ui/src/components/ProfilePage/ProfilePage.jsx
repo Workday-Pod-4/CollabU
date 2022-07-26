@@ -4,12 +4,14 @@ import "./ProfilePage.css";
 import apiClient from "../../services/apiClient";
 import { useAuthContext } from "../../contexts/auth";
 import PreferenceModal from "../PreferenceModal/PreferenceModal";
-
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo"
-
+import SettingsModal from "../SettingsModal/SettingsModal";
 export default function ProfilePage() {
   const { user , firstTime, isUpdating, setIsUpdating} = useAuthContext();
+  const [settingsModal,setSettingsModal] = React.useState(false);
+
+  console.log("settin",settingsModal)
   console.log(firstTime)
   React.useEffect(() => {
     console.log("userInfo:", user);
@@ -20,6 +22,7 @@ export default function ProfilePage() {
   return (
     <div className="profile-page">
       { firstTime ? <AdditionalInfo /> : null}
+      <SettingsModal/>
       <PreferenceModal/>
       <h1>Information</h1>
       <div className="sections">
