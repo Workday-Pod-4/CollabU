@@ -2,7 +2,17 @@
     box-sizing: border-box;
 }
     
+.settings-header{
+        width: 40%; height: 9%; font-size: 18px; text-align: center; padding: 0px;
+        position:fixed;
+        top:6%;
+
+}
     
+.settings-header h1{
+    background-color: grey;
+    color:white;
+}
 .settings-modal-container{
     display: flex;
     flex-direction: column;
@@ -17,7 +27,7 @@
     opacity: 1;
 }
 
-.modal{
+.settings-modal{
     display:flex;
     justify-content: center;
     align-items: center;
@@ -43,7 +53,7 @@ height: 400px;
 
 }
 
-li {
+.password-reset-form li{
 list-style: none;
 display:flex;
 height:100px;
@@ -103,4 +113,18 @@ input{
     position:fixed;
     left:46%;
     top:70%;
+}
+
+.close-settings-modal{
+    position: fixed;
+    right: 0%;
+    top: 32px;
+    font-size: 30px;
+    list-style: none;
+    display:flex;
+    height:100px;
+    justify-content: center;
+    width:560px;
+
+  
 }

@@ -9,9 +9,8 @@ import AdditionalInfo from "./AdditionalInfo"
 import SettingsModal from "../SettingsModal/SettingsModal";
 export default function ProfilePage() {
   const { user , firstTime, isUpdating, setIsUpdating} = useAuthContext();
-  const [settingsModal,setSettingsModal] = React.useState(false);
+  const {settingsModal, toggleSettingsModal} = useAuthContext();
 
-  console.log("settin",settingsModal)
   console.log(firstTime)
   React.useEffect(() => {
     console.log("userInfo:", user);
@@ -22,7 +21,7 @@ export default function ProfilePage() {
   return (
     <div className="profile-page">
       { firstTime ? <AdditionalInfo /> : null}
-      <SettingsModal/>
+      {settingsModal?<SettingsModal/>: null}
       <PreferenceModal/>
       <h1>Information</h1>
       <div className="sections">
@@ -92,7 +91,7 @@ export default function ProfilePage() {
             </ul>
           </div>
           <div className="settings">
-            <button className="settings-btn">Settings</button>
+            <button className="settings-btn" onClick = {toggleSettingsModal}>Settings</button>
           </div>
 
           <div className="report-issue">

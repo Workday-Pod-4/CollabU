@@ -13,7 +13,12 @@ export const AuthContextProvider = ({ children }) => {
     const [isUpdating, setIsUpdating] = useState(false)
     const [firstTime, setFirstTime] = useState(false)
     const[prefModal,setPrefModal] = React.useState(false);
-    
+    const [settingsModal, setSettingsModal] = React.useState(false)
+
+    //function for toggling settings modal, should be set to true if user clicks settings and false if user presses close button on modal
+    function toggleSettingsModal(){
+    setSettingsModal(!settingsModal)
+    }
     //function for toggling pref modal, should be set to true if user clicks find a buddy and false if user presses close button on modal
     function togglePrefModal(){
       setPrefModal(!prefModal)
@@ -70,7 +75,10 @@ export const AuthContextProvider = ({ children }) => {
       setPrefModal,
       togglePrefModal,
       firstTime,
-      setFirstTime
+      setFirstTime,
+      settingsModal,
+      setSettingsModal,
+      toggleSettingsModal
     }
 
     return (

@@ -1,7 +1,10 @@
 import * as React from "react";
 import "./SettingsModal.css";
+import { useAuthContext } from "../../contexts/auth";
+
 
 export default function SettingsModal() {
+    const {toggleSettingsModal,settingsModal} = useAuthContext();
     // function handleOnChange(evt){
 
 
@@ -13,10 +16,13 @@ export default function SettingsModal() {
 
   return (
     <div className="settings-modal-container">
-      <div className="modal">
-        <div className="header">
+      <div className="settings-modal">
+        <div className="settings-header">
           <h1>Settings</h1>
         </div>
+        <li className="close-settings-modal" onClick={toggleSettingsModal} > 
+            x
+        </li>
         <div className="settings-form-wrapper">
           <div className="password-reset-form">
             <ul>
