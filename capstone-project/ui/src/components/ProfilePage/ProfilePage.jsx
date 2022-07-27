@@ -17,8 +17,6 @@ export default function ProfilePage() {
   const [isWorking, setIsWorking] = React.useState(false)
   const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
 
-  console.log(isLoading)
-
   //if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
       user.activity = 'studying'
