@@ -68,11 +68,9 @@ export default function ProfilePage() {
     // });
 
     socket.on('redirectToRoom', (roomURL) => {
-      console.log(roomURL)
       setIsLoading(false);
       // redirect to new URL
       window.location = roomURL;
-      console.log(isLoading)
     });
 
     client.current = socket;
