@@ -9,16 +9,16 @@ import RegistrationPage from "../RegistrationPage/RegistrationPage"
 import ProfilePage from "../ProfilePage/ProfilePage";
 import ChatRoom from "../ChatRoom/ChatRoom";
 export default function AppContainer(){
-return(
+return (
 <AuthContextProvider>
-<App/>
+  <App/>
 </AuthContextProvider>
-
-)
-}
+)}
 
 function App() {
+
 const {user} = useAuthContext()
+
   return (
     <div className="App">
       <React.Fragment>

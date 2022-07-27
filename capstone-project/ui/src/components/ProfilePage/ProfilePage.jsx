@@ -19,6 +19,8 @@ export default function ProfilePage() {
   //if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
       user.activity = 'studying'
+      user.industry = undefined
+      user.workType = undefined
       setIsWorking(false)
       setIsStudying(true);
   }
@@ -26,6 +28,8 @@ export default function ProfilePage() {
   //if user clicks work, set isWorking = true and isStudying = false
   function handleToggleWork() {
     user.activity = 'working'
+    user.topic = undefined
+    user.subject = undefined
     setIsStudying(false)
     setIsWorking(true)
   }
@@ -57,6 +61,7 @@ export default function ProfilePage() {
     // });
 
     socket.on('redirectToRoom', (roomURL) => {
+      console.log(roomURL)
         // redirect to new URL
         window.location = roomURL;
     });

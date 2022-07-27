@@ -15,9 +15,8 @@ const io = socket(server, {
 })
 
 let queue = []
-let rooms = {};
-let names = {};
-let userSocketsInQueue = {};
+let rooms = {}
+let userSockets = {}
 
 io.on("connection", (socket) => {
 
@@ -31,12 +30,12 @@ io.on("connection", (socket) => {
         activity: data.user.activity,
         topic: data.user.topic,
         subject: data.user.subject,
-        workIndustry: data.user.workIndustry,
+        industry: data.user.industry,
         workType: data.user.workType,
+        socket_id: socket.id
       }
 
-      names[socket.id] = user;
-      userSocketsInQueue[socket.id] = socket;
+      userSockets[socket.id] = socket;
 
       /* 
         Checks if queue is empty, if empty, pushes user's socket to the queue
@@ -45,43 +44,65 @@ io.on("connection", (socket) => {
       */
       if (queue.length == 0) {
         
-        queue.push(socket);
+        queue.push(user);
   
       } else {
 
-        let user = names[socket.id]
-        console.log(names)
-        
-        // console.log("User", user)
+        let count = 0
+        let peer = {}
+        let foundMatch = false;
 
-        // let room = ''
+        while (count < 2) {
 
-        // if (user.activity == 'studying') {
-        //   room = `${user.activity}/${user.topic}/${user.subject}`
-        // } else if (user.activity == 'working') {
-        //   room = `${user.activity}/${user.workIndustry}/${user.workType}`
-        // }
+          for (person = 0; person < queue.length; person++) {
 
+            if (user.subject === queue[person].subject || user.workType === queue[person].workType) {
+              peer = queue[person]
+              foundMatch = true
+              break;
+            } else if (user.topic === queue[person].topic && user.industry === queue[person].industry && count === 1) {
+              peer = queue[person]
+              foundMatch = true
+              break;
+            } else if (user.activity === queue[person].activity && count === 1) {
+              peer = queue[person]
+              foundMatch = true
+              break;
+            } else {
+              console.log("We can't find a match")
+            }
+          }
 
-      // // somebody is in queue, pair them!
-      // let peer = queue.pop();
+          if (foundMatch) break;
+          count++
+        }
 
-      // // join them both
-      // peer.join(room);
-      // socket.join(room);
+        if (Object.keys(peer).length !== 0) {
 
-      // // register rooms to their names
-      // rooms[peer.id] = room;
-      // rooms[socket.id] = room;
+          let room = crypto.randomBytes(20).toString('hex');
 
-      // // redirect the pair to room component
+          let peerSocket = userSockets[peer.socket_id]
 
-      // peer.emit('redirectToRoom', `http://localhost:3000/room/${room}`);
-      // socket.emit('redirectToRoom', `http://localhost:3000/room/${room}`);
+          console.log("User", user)
+          console.log("Peer", peer)
+
+          // join them both
+          peerSocket.join(room)
+          socket.join(room);
+
+          // register rooms to their socket ids
+          rooms[peer.socket_id] = room;
+          rooms[socket.id] = room;
+
+          // redirect the pair to room component
+          peerSocket.emit('redirectToRoom', `http://localhost:3000/room/${room}`);
+          socket.emit('redirectToRoom', `http://localhost:3000/room/${room}`);
+        }
     }
     });
   
     socket.on('disconnect', () => {
       socket.removeAllListeners();
    });
+
   });
