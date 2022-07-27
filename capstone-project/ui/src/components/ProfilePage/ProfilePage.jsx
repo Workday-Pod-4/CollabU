@@ -5,16 +5,19 @@ import { useAuthContext } from "../../contexts/auth";
 import { io } from "socket.io-client"
 
 import UpdateForm from "./UpdateForm";
-import AdditionalInfo from "./AdditionalInfo"
+import AdditionalInfo from "./AdditionalInfo";
+import Loading from "../Loading/Loading";
 
 export default function ProfilePage() {
 
-  const { user , firstTime, isUpdating, setIsUpdating} = useAuthContext();
+  const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading} = useAuthContext();
 
   //if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false)
   const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
+
+  console.log(isLoading)
 
   //if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
@@ -52,6 +55,12 @@ export default function ProfilePage() {
 
   const client = React.useRef();
 
+  function handleOnSubmit (event) {
+    event.preventDefault()
+    setIsLoading(true);
+    client.current.emit('submit', {user});
+  }
+
   React.useEffect(() => {
 
     const socket = io("http://localhost:3001")
@@ -62,15 +71,17 @@ export default function ProfilePage() {
 
     socket.on('redirectToRoom', (roomURL) => {
       console.log(roomURL)
-        // redirect to new URL
-        window.location = roomURL;
+      setIsLoading(false);
+      // redirect to new URL
+      window.location = roomURL;
+      console.log(isLoading)
     });
 
     client.current = socket;
 
     socket.on('disconnect', () => {
         socket.removeAllListeners();
-     });
+    });
 
     return () => socket.disconnect();
 
@@ -191,7 +202,7 @@ export default function ProfilePage() {
         </div>
       </div>
       <div>
-      {prefModal ? (
+      {prefModal  && (isLoading == false) ? (
         <div
           className="preference-modal-container"
           id="preference-modal-container"
@@ -266,10 +277,10 @@ export default function ProfilePage() {
             </div>)}
             </div>
             {isStudying || isWorking?<button id="back-btn" onClick={() => { setIsStudying(false); setIsWorking(false)}}> Back</button>: null}
-            <button className="find" onClick={() => client.current.emit('submit', {user})}> Find a buddy</button>
+            <button className="find" onClick={handleOnSubmit}>Find a buddy</button>
           </div>
         </div>
-      ) : null}
+      ) : (isLoading ? <Loading /> : null)}
     </div>
     </div>
   );

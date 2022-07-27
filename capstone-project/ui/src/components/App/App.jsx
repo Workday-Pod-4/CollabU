@@ -8,6 +8,7 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegistrationPage from "../RegistrationPage/RegistrationPage"
 import ProfilePage from "../ProfilePage/ProfilePage";
 import ChatRoom from "../ChatRoom/ChatRoom";
+
 export default function AppContainer(){
 return (
 <AuthContextProvider>

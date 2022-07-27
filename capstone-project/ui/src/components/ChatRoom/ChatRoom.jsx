@@ -27,7 +27,6 @@ export default function ChatRoom() {
             cName="chat-container open";
             bName="chat button open";
         }*/
-        console.log("Actual classname of chat-container", cName)
       }, [chatOpen, handleToggle])
 
     
