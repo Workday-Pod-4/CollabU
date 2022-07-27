@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
         let peer = {}
         let foundMatch = false;
 
-        while (count < 2) {
+        while (count < 50) {
 
           for (person = 0; person < queue.length; person++) {
 
@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
               peer = queue[person]
               foundMatch = true
               break;
-            } else if (user.topic === queue[person].topic && user.industry === queue[person].industry && count === 1) {
+            } else if (user.topic === queue[person].topic && user.industry === queue[person].industry && count === 49) {
               peer = queue[person]
               foundMatch = true
               break;
