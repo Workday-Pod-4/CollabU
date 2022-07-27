@@ -80,7 +80,9 @@ export const AuthContextProvider = ({ children }) => {
       setFirstTime,
       settingsModal,
       setSettingsModal,
-      toggleSettingsModal
+      toggleSettingsModal,
+      chatOpen,
+      setChatOpen
     }
 
     return (
