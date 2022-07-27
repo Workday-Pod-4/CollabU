@@ -17,7 +17,7 @@
         opacity: 1;
     }
     
-    .modal{
+    .preference-modal{
     display:flex;
     justify-content: center;
     align-items: center;
@@ -36,7 +36,7 @@
         padding: 10px 25px;
         }
     
-    .header{
+    .preference-header{
         width: 50%; font-size: 18px; text-align: center; padding: 5px;
         position:fixed;
         top:5%;
@@ -52,7 +52,7 @@
     }
     
     
-    .header h1{
+    .preference-header h1{
         background-color: gray;
         color:white;
     }
@@ -134,12 +134,12 @@
     }
     
     .find{
-    
+
     position: fixed;
     top:85%
     }
     
-    select{
+    select.form-input{
         width: 200px;
         height: 50px;
         padding: 0 15px;
@@ -151,8 +151,7 @@
     }
     
     
-    label{
-    
+    .sub-header label{
     font-size: 20px;
     
     

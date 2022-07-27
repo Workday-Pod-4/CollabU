@@ -26,8 +26,8 @@ export default function PreferenceModal() {
         <div
           className="preference-modal-container"
         >
-          <div className="modal">
-            <div className="header">
+          <div className="preference-modal">
+            <div className="preference-header">
               <h1>Are you studying or working?</h1>
             </div>
             <li className="close-modal" onClick={togglePrefModal}> 
