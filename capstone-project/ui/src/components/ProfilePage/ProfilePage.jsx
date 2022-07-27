@@ -11,6 +11,10 @@ export default function ProfilePage() {
   const { user , firstTime, isUpdating, setIsUpdating} = useAuthContext();
   const {settingsModal, toggleSettingsModal} = useAuthContext();
 
+
+
+
+  
   React.useEffect(() => {
 
 
