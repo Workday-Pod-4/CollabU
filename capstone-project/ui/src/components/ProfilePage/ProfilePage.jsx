@@ -39,7 +39,7 @@ export default function ProfilePage() {
   }
 
   function handleOnChangeIndustry (event) {
-    user.workIndustry = event.target.value
+    user.industry = event.target.value
   }
 
   function handleOnChangeWork (event) {
