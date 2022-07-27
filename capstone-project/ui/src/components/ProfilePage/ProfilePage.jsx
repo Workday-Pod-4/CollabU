@@ -10,13 +10,7 @@ import SettingsModal from "../SettingsModal/SettingsModal";
 export default function ProfilePage() {
   const { user , firstTime, isUpdating, setIsUpdating} = useAuthContext();
   const {settingsModal, toggleSettingsModal} = useAuthContext();
-
-
-
-
-  
   React.useEffect(() => {
-
 
   }, [user, isUpdating]);
 
