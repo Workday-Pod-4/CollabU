@@ -4,22 +4,20 @@ import "./ProfilePage.css";
 import apiClient from "../../services/apiClient";
 import { useAuthContext } from "../../contexts/auth";
 import PreferenceModal from "../PreferenceModal/PreferenceModal";
-
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo"
-
+import SettingsModal from "../SettingsModal/SettingsModal";
 export default function ProfilePage() {
   const { user , firstTime, isUpdating, setIsUpdating} = useAuthContext();
-  console.log(firstTime)
+  const {settingsModal, toggleSettingsModal} = useAuthContext();
   React.useEffect(() => {
-    console.log("userInfo:", user);
-    console.log("user-social:", user.social_media_link_1);
 
   }, [user, isUpdating]);
 
   return (
     <div className="profile-page">
       { firstTime ? <AdditionalInfo /> : null}
+      {settingsModal?<SettingsModal/>: null}
       <PreferenceModal/>
       <h1>Information</h1>
       <div className="sections">
@@ -89,7 +87,7 @@ export default function ProfilePage() {
             </ul>
           </div>
           <div className="settings">
-            <button className="settings-btn">Settings</button>
+            <button className="settings-btn" onClick = {toggleSettingsModal}>Settings</button>
           </div>
 
           <div className="report-issue">

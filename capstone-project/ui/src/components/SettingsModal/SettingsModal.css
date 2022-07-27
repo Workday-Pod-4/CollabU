@@ -1,0 +1,134 @@
+*{
+    box-sizing: border-box;
+}
+    
+.settings-header{
+        width: 40%; height: 9%; font-size: 18px; text-align: center; padding: 0px;
+        position:fixed;
+        top:6%;
+
+}
+    
+.settings-header h1{
+    background-color: grey;
+    color:white;
+}
+.settings-modal-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba( 0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
+}
+
+.settings-modal{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    height:90%;
+    width:60%;
+    border-radius:5px ;
+    }
+    
+.settings-form-wrapper{
+        display:flex;
+        height: 65%;
+        width: 35%;
+        justify-content: center;
+        background-color: #bdbdbd;
+        position: fixed;
+        border-radius: 5px;
+}
+
+.password-reset-form{
+height: 400px;
+
+}
+
+.password-reset-form ul li{
+list-style: none;
+display:flex;
+height:125px;
+justify-content: center;
+width:560px;
+
+}
+
+.password-reset-form ul{
+    display: flex;
+    flex-direction: column;
+    width:630px;
+    height:350px;
+    justify-content: space-between;
+    
+
+}
+.password-reset-form ul li span{
+    display: flex;
+    flex-direction: column;
+    width:250px;
+    height:150px;
+}
+
+.password-reset-form ul li span label {
+    margin-bottom: 5px;
+    color: black;
+    width: auto;
+}
+
+.password-reset-form ul li span input{
+    height: 40px;
+    width: auto;
+    padding: 0 15px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 25px;
+    background: transparent;
+    color: black;
+    text-align: center;
+}
+
+.settings-update-btn{
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    color: white;
+    background: black;
+    font-size: 20px;
+
+    cursor: pointer;
+    margin-top: 15px;
+
+    border-radius: 20px;
+    position:fixed;
+    left:46%;
+    top:70%;
+}
+
+.close-settings-modal{
+    position: fixed;
+    right: 0%;
+    top: 32px;
+    font-size: 30px;
+    list-style: none;
+    display:flex;
+    height:100px;
+    justify-content: center;
+    width:560px;
+
+  
+}
+
+.error {
+    color: #fe3210;
+}
