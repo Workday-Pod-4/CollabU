@@ -33,7 +33,7 @@
     border-radius: 10px;
     background: #4846BD;
     font-weight: 700;
-    padding: 0.3vh 1.5vw;
+    padding: 0.3vh;
     color:white;
     text-decoration: none;
 }
@@ -44,7 +44,7 @@
     border-radius: 10px;
     background: none;
     font-weight: 700;
-    padding: 0.3vh 1.5vw;
+    padding: 0.3vh;
     color:white;
     text-decoration: none;
 }
