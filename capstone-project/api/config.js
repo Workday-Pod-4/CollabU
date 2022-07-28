@@ -9,7 +9,7 @@ const SECRET_KEY = process.env.SECRET_KEY || 'pod4bestpod'
 
 function getDatabaseURL () {
     const dbUser = process.env.DATABASE_USER || 'postgres'
-    const dbPass = process.env.DATABASE_PASS ? encodeURI(process.env.DATABASE_PASS) : 'Dazbabowind1'
+    const dbPass = process.env.DATABASE_PASS ? encodeURI(process.env.DATABASE_PASS) : 'postgres'
     const dbHost = process.env.DATABASE_HOST || 'localhost'
     const dbPort = process.env.DATABASE_PORT || '5432'
     const dbName = process.env.DATABASE_NAME || 'capstone'
@@ -18,8 +18,8 @@ function getDatabaseURL () {
 }
 
 console.log("App Config".red)
-console.log("PORT:".blue, PORT)
-console.log("Database URI:".blue, getDatabaseURL())
+console.log("PORT: ".blue, PORT)
+console.log("Database URI: ".blue, getDatabaseURL())
 console.log("---")
 
 
