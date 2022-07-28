@@ -1,30 +1,31 @@
+
 .registration-page, .registration-page .card {
     display: flex;
-    align-items: center;
 }
+
 .registration-page {
-    min-height: calc(100vh - 100px);
-    height: 100%;
-    max-height: calc(100vh - 100px);
-    width: 100%;
-    max-width: 100vw;
+    height: 100vh;
+    width: 100vw;
+    padding-top: 3vh;
     background: #D9F7FF;
     justify-content: center;
+    align-items: center;
 }
 
 .registration-page .card {
-    min-height: 600px;
-    width: 520px;
-    padding: 24px 36px 0;
+    width: 28%;
+    height: 90%;
+    padding: 1vh 1.3vw 0;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px #86999E;
 }
 
 .registration-page .card h2 {
-    font-size: 42px;
-    margin-bottom: 4px;
+    font-size: 5vh;
     font-weight: 600;
     color: black;
 }
@@ -34,7 +35,7 @@
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    padding-bottom: 10px;
+    padding-bottom: 2vh;
     color: black;
 }
 
@@ -43,19 +44,20 @@
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    margin: 8px 0;
+    margin: 0.9vh 0;
     flex: 1 1;
 }
 
 .registration-page .card .registration-form .input-field label {
-    margin-bottom: 5px;
+    margin-bottom: 1vh;
     color: black;
+    font-size: 1.9vh;
 }
 
 .registration-page .card .registration-form .input-field input {
-    height: 50px;
-    padding: 0 15px;
-    font-size: 16px;
+    height: 6vh;
+    padding: 0 .5vw;
+    font-size: 1.8vh;
     border: 1px solid black;
     width: 100%;
     background: transparent;
@@ -66,8 +68,8 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    grid-gap: 20px;
-    gap: 20px;
+    grid-gap: 2vw;
+    gap: 2vw;
 }
 
 .registration-page .card .footer, .registration-page .card .registration-form .btn {
@@ -78,19 +80,20 @@
 }
 
 .registration-page .card .registration-form .btn {
-    height: 70px;
+    height: 7.5vh;
     color: white;
     background: #4846BD;
-    font-size: 20px;
+    font-size: 1vw;
     border: none;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 3vh;
 }
 
 .registration-page .card .footer {
     border-top: 1px solid black;
-    margin-top: auto;
-    height: 50px;
+    margin: 1vh;
+    height: 14%;
+    font-size: 1.8vh;
     color: black;
 }
 
