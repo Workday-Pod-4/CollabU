@@ -163,4 +163,14 @@
     font-size: 2.5vh;
 }
 
+video {
+    width: 100%;
+    height: 100%;
+    border: 1px;
+    border-radius: 20px;
+}
 
+.participant-video {
+    display: flex;
+    flex-direction: row;
+}

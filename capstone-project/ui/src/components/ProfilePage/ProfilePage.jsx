@@ -1,24 +1,94 @@
 import * as React from "react";
 import { useAuthContext } from "../../contexts/auth";
-import PreferenceModal from "../PreferenceModal/PreferenceModal";
+import { io } from "socket.io-client";
+import Loading from "../Loading/Loading"
 import UpdateForm from "./UpdateForm";
-import AdditionalInfo from "./AdditionalInfo"
+import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";
 import "./ProfilePage.css";
+import "./PreferenceModal.css";
 
 export default function ProfilePage() {
-  
-  const { user , firstTime, isUpdating, setIsUpdating} = useAuthContext();
-  const {settingsModal, toggleSettingsModal} = useAuthContext();
+
+  const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
+  const { settingsModal, toggleSettingsModal } = useAuthContext();
+
+  // if user selects studying in preference modal it will display study preference form
+  const [isStudying, setIsStudying] = React.useState(false);
+  const [isWorking, setIsWorking] = React.useState(false)
+  const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
+
+  // if user clicks study, set isStudying = true and isWorking = false
+    function handleToggleStudy() {
+      user.activity = 'studying'
+      user.industry = undefined
+      user.workType = undefined
+      setIsWorking(false)
+      setIsStudying(true);
+  }
+
+  //if user clicks work, set isWorking = true and isStudying = false
+  function handleToggleWork() {
+    user.activity = 'working'
+    user.topic = undefined
+    user.subject = undefined
+    setIsStudying(false)
+    setIsWorking(true)
+  }
+
+  // set topic property based on user input
+  function handleOnChangeTopic (event) {
+    user.topic = event.target.value
+  }
+
+  // set subject property based on user input
+  function handleOnChangeSubject (event) {
+    user.subject = event.target.value
+  }
+
+  // set industry property based on user input
+  function handleOnChangeIndustry (event) {
+    user.industry = event.target.value
+  }
+
+  // set workType property based on user input
+  function handleOnChangeWork (event) {
+    user.workType = event.target.value
+  }
+
+  const client = React.useRef();
+
+  // sends user info back to server for matching
+  function handleOnSubmit (event) {
+    event.preventDefault()
+    setIsLoading(true);
+    client.current.emit('submit', {user});
+  }
+
   React.useEffect(() => {
 
-  }, [user, isUpdating]);
+    const socket = io("http://localhost:3001")
+
+    socket.on('redirectToRoom', (roomURL) => {
+        setIsLoading(false);
+        // redirect to new URL
+        window.location = roomURL;
+    });
+
+    client.current = socket;
+
+    socket.on('disconnect', () => {
+        socket.removeAllListeners();
+     });
+
+    return () => socket.disconnect();
+
+  }, []);
 
   return (
     <div className="profile-page">
       { firstTime ? <AdditionalInfo /> : null}
-      {settingsModal?<SettingsModal/>: null}
-      <PreferenceModal/>
+      {settingsModal? <SettingsModal/>: null}
       <h1>Information</h1>
       <div className="sections">
         <div className="left-section">
@@ -28,11 +98,6 @@ export default function ProfilePage() {
               height="150px"
               width="150px"
             />
-            {/* <img
-              src={user.image}
-              height="150px"
-              width="150px"
-            /> */}
           </div>
           <div className="profile-name">
             <h2>
@@ -55,7 +120,6 @@ export default function ProfilePage() {
             <ul>
             {user?.social_media_link_1 ?
                 <li className="link-1">
-                  {/* <a href = {`${user.social_media_link_2}`}/> */}
                   <a href={user.social_media_link_1}>
                     <span>{user.social_media_link_1}</span>
                   </a>
@@ -65,7 +129,6 @@ export default function ProfilePage() {
               }
               {user?.social_media_link_2 ?
                 <li className="link-2">
-                  {/* <a href = {`${user.social_media_link_2}`}/> */}
                   <a href={user.social_media_link_2}>
                     <span>{user.social_media_link_2}</span>
                   </a>
@@ -76,7 +139,6 @@ export default function ProfilePage() {
               
               {user?.social_media_link_3 ?
                 <li className="link-3">
-                  {/* <a href = {`${user.social_media_link_2}`}/> */}
                   <a href={user.social_media_link_3}>
                     <span>{user.social_media_link_3}</span>
                   </a>
@@ -146,6 +208,87 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
+      {/* Preference Modal */}
+      <div>
+      {prefModal && (isLoading == false) ? (
+        <div
+          className="preference-modal-container"
+        >
+          <div className="preference-modal">
+            <div className="preference-header">
+              <h1>Are you studying or working?</h1>
+            </div>
+            <li className="close-modal" onClick={togglePrefModal}> 
+            x
+            </li>
+            <div className="preference-form-wrapper">
+              {isStudying?<div className="preference-study-form">
+              <div className ="sub-header"> Study </div>
+                <ul>
+                <li>
+                    <span>
+                    <label> What are you studying? </label>
+                    <select className="form-input" name="topic" placeholder="Select topic" onChange={handleOnChangeTopic}>
+                        <option value={""} selected>Select Topic of Study</option>
+                        <option value={"Mathematics"}>Mathematics</option>
+                        <option value={"Computer Science"}>Electrical Engineering</option>
+                        <option value={"Biology"}>Biology</option>
+                        <option value={"Chemistry"}>Chemistry</option>
+                    </select>
+                    </span>
+                  </li>
+                <li>
+                  <span>
+                    <label>Subject/Course</label>
+                    <br></br>
+                    <select className="form-input" name="subject" placeholder="Select Subject" onChange={handleOnChangeSubject}>
+                        <option value={""} selected>Select a Subject</option>
+                        <option value={"Intro to programmings"}>Intro to programming</option>
+                        <option value={"Calculus 1"}>Calculus 1</option>
+                        <option value={"Intro to Biology"}>Intro to biology</option>
+                        <option value={"Organic Chemistry"}>Organic chemistry</option>
+                    </select>
+                    </span>
+                  </li>
+                </ul>
+              </div>:(isWorking ? <div className="preference-work-form">
+                <div className ="sub-header"> Work </div>
+                <ul>
+                <li>
+                  <span>
+                    <label>Industry</label>
+                    <br></br>
+                    <select className="form-input" name="industry" placeholder="Select industry" onChange={handleOnChangeIndustry}>
+                        <option value={""} selected>Select an Industry</option>
+                        <option value={"Technology"}>Technology</option>
+                        <option value={"Medicine"}>Medicine</option>
+                        <option value={"Consulting"}>Consulting</option>
+                    </select>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                    <label>What are you working on?</label>
+                    <select className="form-input" name="type-of-work" placeholder="Select type of work" onChange={handleOnChangeWork}>
+                        <option value={""} selected>Type of Work</option>
+                        <option value={"Software-Developement"}>Software Development</option>
+                        <option value={"Electrical-Engineering"}>Electrical Engineering</option>
+                        <option value={"Consulting"}>Financial Consulting</option>
+                    </select>
+                    </span>
+                  </li>
+                </ul>
+              </div>:<div className="preference-btns">
+         <button className="study-btn" onClick={handleToggleStudy}> Studying</button> 
+         <button className="work-btn" onClick = {handleToggleWork}> Working</button>
+            </div>)}
+            </div>
+            {isStudying || isWorking?<button id="back-btn" onClick={() => { setIsStudying(false); setIsWorking(false)}}> Back</button>: null}
+            <button className="find" onClick={handleOnSubmit}> Find a buddy</button>
+          </div>
+        </div>
+      ) : (isLoading ? <Loading /> : null)}
+    </div>
     </div>
   );
 }
