@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import NavLinks from "../NavLinks/NavLinks";
 import "./Navbar.css";
 
-export default function Navbar({}) {
+export default function Navbar() {
+  
   return (
     <div>
       <nav className="Navbar">

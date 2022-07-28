@@ -1,13 +1,13 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import "./ProfilePage.css";
-import apiClient from "../../services/apiClient";
 import { useAuthContext } from "../../contexts/auth";
 import PreferenceModal from "../PreferenceModal/PreferenceModal";
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo"
 import SettingsModal from "../SettingsModal/SettingsModal";
+import "./ProfilePage.css";
+
 export default function ProfilePage() {
+  
   const { user , firstTime, isUpdating, setIsUpdating} = useAuthContext();
   const {settingsModal, toggleSettingsModal} = useAuthContext();
   React.useEffect(() => {

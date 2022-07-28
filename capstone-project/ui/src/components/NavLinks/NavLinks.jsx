@@ -5,6 +5,7 @@ import "./NavLinks.css";
 
 
 export default function NavLinks() {
+  
   const {user, logoutUser} = useAuthContext() 
   const {prefModal, setPrefModal, togglePrefModal} = useAuthContext() 
 

@@ -10,20 +10,15 @@ export default function UpdateForm() {
   const [isProcessing, setIsProcessing] = React.useState(false)
   const [error, setError] = React.useState("")
 
+  const [form, setForm] = React.useState({ "firstName" : `${user.first_name}`, "lastName" : `${user.last_name}`, "username": `${user.username}`, "location" : `${user.location}`, "timezone": `${user.timezone}`, "college" : `${user.college}`, "major" : `${user.major}`, "workTitle": `${user.job_title}`, "company": `${user.company}`})
 
-  const [form, setForm] = React.useState({ "firstName" : `${user.first_name}`, "lastName" : `${user.last_name}`, "username": `${user.username}`, "location" : `${user.location}`, "timezone": `${user.timezone}`, "college" : `${user.college}`, "major" : `${user.major}`, "workTitle": `${user.job_title}`, "company": `${user.company}`, "industry": `${user.industry}`})
-
-  
-
-  function handleOnChange(evt){
+  function handleOnChange(evt) {
     setForm((f) => ({...f, [evt.target.name]: evt.target.value}))
   }
 
-  async function updateUser(evt){
+  async function updateUser(evt) {
      evt.preventDefault()
-
      setIsProcessing(true);
-     console.log(user);
 
     const { data, error } = await apiClient.updateUserInfo({ 
         email: user.email,
@@ -35,8 +30,7 @@ export default function UpdateForm() {
         college: form.college, 
         major: form.major, 
         job_title: form.workTitle, 
-        company: form.company, 
-        industry: form.industry })
+        company: form.company })
     if(error) setError("Error trying to update your information")
     
     if(data?.user) {
@@ -101,14 +95,6 @@ export default function UpdateForm() {
                 <div className="input-field">
                     <label>Company</label>
                     <input className="form-input" type="text" name="company" placeholder="Company" onChange={handleOnChange} defaultValue={form.company}></input>
-                </div>
-                <div className="input-field">
-                    <label>Industry</label>
-                    <select className="form-input" name="industry" placeholder="Industry" onChange={handleOnChange} defaultValue={form.industry}>
-                        <option value={"Industry 1"}>Industry 1</option>
-                        <option value={"Industry 2"}>Industry 2</option>
-                        <option value={"Industry 3"}>Industry 3</option>
-                    </select>
                 </div>
                 <button className="btn" onClick={updateUser}>Update</button>
             </div>
