@@ -11,8 +11,10 @@
 
 
 .Navbar .content .logo {
-    width: 30%;
+    width: 20%;
+    height: 10%;
 }
+
 
 .Navbar .content {
     max-width: 100%;

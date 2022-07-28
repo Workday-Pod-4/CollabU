@@ -12,8 +12,8 @@ export default function Navbar({}) {
             <Link to="/">
               <svg
                 id="logo-39"
-                width="50"
-                height="40"
+                width="7vw"
+                height="5vh"
                 viewBox="0 0 50 40"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
