@@ -18,8 +18,8 @@ function getDatabaseURL () {
 }
 
 console.log("App Config".red)
-console.log("PORT:".blue, PORT)
-console.log("Database URI:".blue, getDatabaseURL())
+console.log("PORT: ".blue, PORT)
+console.log("Database URI: ".blue, getDatabaseURL())
 console.log("---")
 
 
