@@ -2,22 +2,20 @@
     width: 100%;
     max-width: 100vw;
     background: #D9F7FF;
-    height: 80px;
+    height: 10vh;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 80px;
+    padding: 0 10vw;
 }
 
 
 .Navbar .content .logo {
-    width: 200px;
-    margin-right: 50px;
-    border-radius: 20px;
+    width: 30%;
 }
 
 .Navbar .content {
-    max-width: 800px;
+    max-width: 100%;
     width: 100%;
     margin: 0 auto;
     display: flex;
