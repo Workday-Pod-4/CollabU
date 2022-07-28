@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+
 import "./ContactForm.css";
 
 export default function ContactForm() {
@@ -14,6 +15,9 @@ export default function ContactForm() {
     <div className = "contact-form">
         <div className = "content">
           <div className = "form-wrapper">
+              <div className="email-input" >
+                  <input className="form-input" type="text" name="email" placeholder="Email" onChange={handleOnChange} defaultValue={form.firstName}></input>
+              </div>
             <div className="split-input-field">
               <div className="input-field">
                 <input className="form-input" type="text" name="firstName" placeholder="First Name" onChange={handleOnChange} defaultValue={form.firstName}></input>

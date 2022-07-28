@@ -20,7 +20,6 @@
     width: 100%;
     grid-gap: 20px;
     gap: 20px;
-    
 }
 .contact-form .content .form-wrapper .split-input-field .input-field .form-input{
     border: 1px solid black;
@@ -28,12 +27,27 @@
     font-size: 18px;
 }
 
+.email-input{
+    padding:6px;
+}
+.contact-form .content .form-wrapper .email-input .form-input {
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 18px;
+    width:405px;
+    height:25px;
+
+}
+/* .contact-form .content .form-wrapper .email-input .form-input .input{
+width:300px;
+} */
 .contact-form .content .form-wrapper .message-input{
-    padding: 20px 20px;
+    padding: 2px 20px;
     display: flex;
     flex-direction: row;
     grid-gap: 20px;
     gap: 20px;
+    text-align: justify;
 }
 
 .contact-form .content .form-wrapper .message-input .form-input{
@@ -41,4 +55,8 @@
     height: 200px;
     border: 1px solid black;
     border-radius: 5px;
+
 }
+
+
+
