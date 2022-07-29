@@ -89,7 +89,6 @@ export default function ProfilePage() {
     <div className="profile-page">
       { firstTime ? <AdditionalInfo /> : null}
       {settingsModal? <SettingsModal/>: null}
-      <h1>Information</h1>
       <div className="sections">
         <div className="left-section">
           <div className="profile-pic">

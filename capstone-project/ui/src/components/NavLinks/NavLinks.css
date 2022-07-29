@@ -54,3 +54,18 @@
     color:white;
     text-decoration: none;
 }
+
+@media only screen and (max-width: 800px){
+    .content .links {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        list-style-type: none;
+        margin-left: auto;
+        margin-right: 1vw;
+        grid-gap: 20vw;
+        gap: 10vw;
+    }
+    
+}
