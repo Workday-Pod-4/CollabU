@@ -8,7 +8,7 @@ export default function Hero() {
     <div className="hero">
       <div className="content">
         <div className="hero-img">
-          <img src={heroimg} alt="placeholder" ></img>
+          <img src="" alt="placeholder" height = "800" width="800"></img>
         </div>
         <div className="intro">
           <h1>Boost your Productivity and Success through new Connections</h1>
