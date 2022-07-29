@@ -1,6 +1,8 @@
 import * as React from "react";
+
 import { Link } from "react-router-dom";
 import { useForm, ValidationError } from '@formspree/react';
+
 import "./ContactForm.css";
 
 export default function ContactForm() {

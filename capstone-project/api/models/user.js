@@ -12,23 +12,23 @@ class User {
             username: user.username,
             first_name: user.first_name,
             last_name: user.last_name,
-            created_at: user.created_at,
             location: user.location,
             timezone: user.timezone,
             job_title: user.job_title,
             company: user.company,
-            industry: user.industry,
+            years_of_experience: user.years_of_experience,
             college: user.college,
             major: user.major,
             profile_image_url: user.profile_image_url,
             social_media_link_1: user.social_media_link_1,
             social_media_link_2: user.social_media_link_2,
-            social_media_link_3: user.social_media_link_3
+            social_media_link_3: user.social_media_link_3,
+            created_at: user.created_at,
+            updated_at: user.updated_at
         }
     }
 
     static async login(credentials) {
-        console.log("cred:",credentials)
         // required fields are email and password, throw error if either are missing
         const requiredFields = ["email", "password"]
 
@@ -130,7 +130,6 @@ class User {
 
         // creates new temp object from user
         const tempUser = Object.assign({}, user);
-
         
         /*
             if there is no field in credentials, then set the field to null
@@ -147,17 +146,13 @@ class User {
             }
           }
 
-
         /* 
-           if user is found, compare the password with the submitted password
-           if they match, update database with given info and return user
+           if user is found, update database with given info and return user
            else, throw an error
         */
         if (user) {
 
-
             // update database with given info
-            
                 const result = await db.query(`
                     UPDATE users 
                     SET username = $2,
@@ -167,7 +162,7 @@ class User {
                         timezone = $6,
                         job_title = $7,
                         company = $8,
-                        industry = $9,
+                        years_of_experience = $9,
                         college = $10,
                         major = $11,
                         social_media_link_1 = $12,
@@ -176,9 +171,9 @@ class User {
                         profile_image_url = $15,
                         location = $16
                     WHERE id = $1
-                    RETURNING id, email, password, username, first_name, last_name, location, timezone, job_title, company, industry, college, major, profile_image_url, social_media_link_1, social_media_link_2, social_media_link_3;
+                    RETURNING id, email, password, username, first_name, last_name, location, timezone, job_title, company, years_of_experience, college, major, profile_image_url, social_media_link_1, social_media_link_2, social_media_link_3;
                 `,
-                [user.id, tempUser.username, tempUser.email.toLowerCase(), tempUser.first_name, tempUser.last_name, tempUser.timezone, tempUser.job_title, tempUser.company, tempUser.industry, tempUser.college, tempUser.major, tempUser.social_media_link_1, tempUser.social_media_link_2, tempUser.social_media_link_3, tempUser.profile_image_url, tempUser.location]
+                [user.id, tempUser.username, tempUser.email.toLowerCase(), tempUser.first_name, tempUser.last_name, tempUser.timezone, tempUser.job_title, tempUser.company, tempUser.years_of_experience, tempUser.college, tempUser.major, tempUser.social_media_link_1, tempUser.social_media_link_2, tempUser.social_media_link_3, tempUser.profile_image_url, tempUser.location]
                 )
 
                 // return user
@@ -186,7 +181,7 @@ class User {
             
         }
 
-        throw new UnauthorizedError("Invalid email/password")
+        throw new UnauthorizedError("You're not authorized to update this user")
     }
 
     static async updateEmail(credentials) {
@@ -227,7 +222,7 @@ class User {
             }
         }
 
-        throw new UnauthorizedError("Invalid email/password")
+        throw new UnauthorizedError("You're not authorized to update this user")
     }
 
     static async updatePassword(credentials) {
@@ -276,7 +271,7 @@ class User {
             }
         }
 
-        throw new UnauthorizedError("Invalid email/password")
+        throw new UnauthorizedError("You're not authorized to update this user")
     }
 
 
@@ -315,7 +310,7 @@ class User {
             }
         }
 
-        throw new UnauthorizedError("Invalid email/password")
+        throw new UnauthorizedError("You're not authorized to delete this user")
     }
 
     // gets user by email

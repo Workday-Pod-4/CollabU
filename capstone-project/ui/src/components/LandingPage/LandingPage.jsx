@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import "./LandingPage.css";
 import Hero from "../Hero/Hero";
 import About from "../About/About";
 import ContactUs from "../ContactUs/ContactUs";
 import Footer from "../Footer/Footer";
-export default function LandingPage({}) {
+
+export default function LandingPage() {
+  
   return (
     <div className="landing-page">
       <div className="hero-banner">

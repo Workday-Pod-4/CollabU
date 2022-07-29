@@ -5,6 +5,7 @@ import "./NavLinks.css";
 
 
 export default function NavLinks() {
+  
   const {user, logoutUser} = useAuthContext() 
   const {prefModal, setPrefModal, togglePrefModal} = useAuthContext() 
 
@@ -19,7 +20,7 @@ export default function NavLinks() {
           { user?.email ?
           <li onClick={togglePrefModal} className = "btn" id= "open-modal"><Link to="/profile"> Find a buddy</Link></li>
           :
-          <li className="btn"><Link to="/register">Register button</Link></li>
+          <li className="btn"><Link to="/register">Register</Link></li>
           }
       </ul>
     </div>

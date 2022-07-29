@@ -9,14 +9,15 @@ CREATE TABLE IF NOT EXISTS users (
     timezone TEXT,
     job_title TEXT,
     company TEXT,
-    industry TEXT,
+    years_of_experience TEXT,
     college TEXT,
     major TEXT,
     profile_image_url   TEXT,
     social_media_link_1 TEXT,
     social_media_link_2 TEXT,
     social_media_link_3 TEXT,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS previously_matched (

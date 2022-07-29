@@ -1,5 +1,5 @@
 import * as React from "react"
-import { createContext, useState, useContext } from "react"
+import { createContext, useState, useEffect, useContext } from "react"
 import apiClient from "../services/apiClient"
 
 const AuthContext = createContext(null)
@@ -13,19 +13,25 @@ export const AuthContextProvider = ({ children }) => {
     const [isUpdating, setIsUpdating] = useState(false)
     const [firstTime, setFirstTime] = useState(false)
     const [chatOpen, setChatOpen] = useState(false)
-    const[prefModal,setPrefModal] = React.useState(false);
-    const [settingsModal, setSettingsModal] = React.useState(false)
+    const [prefModal, setPrefModal] = useState(false);
+    const [settingsModal, setSettingsModal] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
-    //function for toggling settings modal, should be set to true if user clicks settings and false if user presses close button on modal
-    function toggleSettingsModal(){
+    // function for toggling settings modal, 
+    // should be set to true if user clicks settings  
+    // and false if user presses close button on modal
+    function toggleSettingsModal() {
     setSettingsModal(!settingsModal)
     }
 
-    //function for toggling pref modal, should be set to true if user clicks find a buddy and false if user presses close button on modal
-    function togglePrefModal(){
+    // function for toggling pref modal, 
+    // should be set to true if user clicks find a buddy 
+    // and false if user presses close button on modal
+    function togglePrefModal() {
       setPrefModal(!prefModal)
     }
-    React.useEffect(() => {
+
+    useEffect(() => {
 
         const fetchUser = async () => {
 
@@ -80,7 +86,11 @@ export const AuthContextProvider = ({ children }) => {
       setFirstTime,
       settingsModal,
       setSettingsModal,
-      toggleSettingsModal
+      toggleSettingsModal,
+      chatOpen,
+      setChatOpen,
+      isLoading,
+      setIsLoading
     }
 
     return (

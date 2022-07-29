@@ -3,5 +3,11 @@
 }
 
 .landing-page {
-    background: #caddfe;
+
+    background: #D9F7FF;
+}
+
+.landing-page .hero-banner{
+    height:50vh;
+
 }

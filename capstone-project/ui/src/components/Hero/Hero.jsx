@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import heroimg from "../../assets/heroimg.jpg"
 import "./Hero.css";
-export default function Hero({}) {
+
+export default function Hero() {
+  
   return (
     <div className="hero">
       <div className="content">

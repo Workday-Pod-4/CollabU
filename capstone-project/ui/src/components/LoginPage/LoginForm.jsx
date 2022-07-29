@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useAuthContext } from "../../contexts/auth"
 
 export default function LoginForm() {
+
   const navigate = useNavigate()
 
   const { user, setUser } = useAuthContext()
@@ -19,11 +20,12 @@ export default function LoginForm() {
     }
   }, [user, navigate])
 
-  function handleOnChange(evt){
+  function handleOnChange(evt) {
     setForm((f) => ({...f, [evt.target.name]: evt.target.value}))
   }
 
-  async function loginUser(evt){
+  async function loginUser(evt) {
+
     evt.preventDefault()
 
     setIsProcessing(true)
@@ -38,6 +40,7 @@ export default function LoginForm() {
     }
 
     const { data, error } = await apiClient.loginUser({ email: form.email, password: form.password })
+
     if (error) {
       setError(error)
     }
@@ -48,7 +51,6 @@ export default function LoginForm() {
       navigate("/profile")
     }
   }
-
 
     return (
       <div className="login-form">
