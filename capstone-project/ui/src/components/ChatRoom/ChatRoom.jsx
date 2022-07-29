@@ -77,25 +77,36 @@ export default function ChatRoom() {
 
 export function Room(props) {
 
+    const [muteAudio, setMuteAudio] = React.useState(true);
+
+    function toggleMuteAudio () {
+        setMuteAudio(!muteAudio)
+      }
+
+      
+
     return (
         <div className="user-views">
             {props.showRoom && props.localParticipant !== null ?
             <div>
                 <div className="participant-video">
-                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant}/>: null}
-                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} />
+                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} muteAudio={muteAudio}/>: null}
+                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} muteAudio={muteAudio}/>
                 </div>
                     <div className="bottom-row">
                         <div className="button-container">
-                            <button className="mute">Mute</button>
+                            <button className="mute" onClick={toggleMuteAudio}>Mute</button>
                             <button className="video">Video</button>
                         </div>
                         <div className="">
-                            <button className="" onClick={() => (setChatOpen(!chatOpen))}>Chat</button>
+                            <button className="">Chat</button>
                         </div>
                     </div> 
             </div>
-            : <button onClick={props.handleOnClick}> Enter Room </button>}  
+            : <div className="enter-room"><button onClick={props.handleOnClick}> Enter Room </button>
+              <p>Please make sure no other application is using your camera or microphone</p>
+              <p>When ready, press the Enter Room button to meet your match</p>
+            </div>}  
         </div>
     )
 }
@@ -113,6 +124,7 @@ const trackpubsToTracks = trackMap => Array.from(trackMap.values())
 .filter(track => track !== null);
 
 React.useEffect(() => {
+
     const trackSubscribed = track => {
     if (track.kind === 'video') {
         setVideoTracks(videoTracks => [...videoTracks, track]);
@@ -168,6 +180,6 @@ return (
             <div className="user-video">
                 <video ref={videoRef} autoPlay={true} />
             </div>
-            <audio ref={audioRef} autoPlay={true} muted={true} />
+            <audio ref={audioRef} autoPlay={true} muted={props.muteAudio} />
         </div>
 )}

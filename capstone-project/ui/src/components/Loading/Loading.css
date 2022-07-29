@@ -13,11 +13,17 @@
     border: 1px;
     border-radius: 30px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .container .content h1{
-    font-size: 5vh;
-    font-weight: 100;
+    font-size: 6vh;
+    font-weight: 500;
+}
+
+.container .content p{
+    margin: 0;
+    font-size: 16px;
 }
