@@ -273,6 +273,30 @@
             height: 100%;
         }
 
+        .profile-page .middle-section .info-cards .work-card{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 3vh;
+            height: 30%;
+            width: 70%;
+            border: 1px;
+            border-radius: 25px;
+            background-color: rgb(168, 167, 167);
+        }
+
+        .profile-page .middle-section .info-cards .school-card{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 3vh;
+            height: 30%;
+            width: 70%;
+            border: 1px;
+            border-radius: 25px;
+            background-color: rgb(168, 167, 167);
+        }
+
         .update-btn-container {
             height: 10%;
             width: 60%;

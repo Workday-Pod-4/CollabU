@@ -215,11 +215,16 @@ export default function ProfilePage() {
         >
           <div className="preference-modal">
             <div className="preference-header">
-              <h1>Are you studying or working?</h1>
+              <div className="header">
+                <h1>Are you studying or working?</h1>
+              </div>
+              <div className="close-container">
+                <button className="close-modal" onClick={togglePrefModal}> 
+                  x
+                </button>
+              </div>
             </div>
-            <li className="close-modal" onClick={togglePrefModal}> 
-            x
-            </li>
+            
             <div className="preference-form-wrapper">
               {isStudying?<div className="preference-study-form">
               <div className ="sub-header"> Study </div>
@@ -239,7 +244,6 @@ export default function ProfilePage() {
                 <li>
                   <span>
                     <label>Subject/Course</label>
-                    <br></br>
                     <select className="form-input" name="subject" placeholder="Select Subject" onChange={handleOnChangeSubject}>
                         <option value={""} selected>Select a Subject</option>
                         <option value={"Intro to programmings"}>Intro to programming</option>
@@ -256,7 +260,6 @@ export default function ProfilePage() {
                 <li>
                   <span>
                     <label>Industry</label>
-                    <br></br>
                     <select className="form-input" name="industry" placeholder="Select industry" onChange={handleOnChangeIndustry}>
                         <option value={""} selected>Select an Industry</option>
                         <option value={"Technology"}>Technology</option>

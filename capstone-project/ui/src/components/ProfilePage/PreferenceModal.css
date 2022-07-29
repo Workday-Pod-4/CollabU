@@ -1,5 +1,5 @@
-*{
-    box-sizing: border-box;
+    *{
+        box-sizing: border-box;
     }
     
     
@@ -18,125 +18,253 @@
     }
     
     .preference-modal{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #fff;
-    height:90%;
-    width:70%;
-    border-radius:5px ;
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: #fff;
+        height: 85%;
+        width: 49%;
+        border-radius:5px ;
     }
     
     button{
-        background-color: #4846BD;
+        background-color: black;
         border:0;
         border-radius: 5px;
         color:#fff;
         padding: 10px 25px;
+        cursor: pointer;
         }
     
     .preference-header{
-        width: 50%; font-size: 18px; text-align: center; padding: 5px;
-        position:fixed;
-        top:5%;
+        width: 100%; 
+        height: 15%;
+        display: flex;
+        flex-direction: row;
+        font-size: 2vh; 
+        margin: 2vh 0vw;
+        border: 1px;
+        border-radius: 20px;
     }
-    
-    .sub-header{
-        position: fixed;
-        color: #fff;
-        font-size: 45px;
-       top:20%;
-       right:45%;
-       font-weight: 600;
-    }
-    
-    
-    .preference-header h1{
-        background-color: gray;
-        color:white;
-    }
-    
-    .preference-form-wrapper{
-        display:flex;
+
+    .preference-header .header{
+        background: lightgray;
+        color: black;
+        height: 85%;
+        width: 90%;
+        padding: 2vh 0vw;
+        display: flex;
+        align-items: center;
         justify-content: center;
-        padding: 130px 50px;
-        background-color: #bdbdbd;
-        position: fixed;
+        border: 1px;
+        border-radius: 10px;
+        margin: 0vh .3vw 0vh 4vw;
+        font-size: 2vh;
+    }
+
+    .preference-header .close-container{
+        color: black;
+        height: 60%;
+        width: 6%;
+        border: 1px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1vw;
+    }
+
+    .preference-header .close-container .close-modal {
+        background: transparent;
+        border: 0vh;
+        border-radius: 5px;
+        color: black ;
+        padding: 0vh 0vw;
+        font-size: 4vh;
+        cursor: pointer;
+    }
+
+    .preference-form-wrapper{
+        height: 65%;
+        width: 84%;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        background: gray;
         border-radius: 5px
     }
+
+    .preference-btns{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 1vh;
+        gap: 10vh;
+        width: 100%;
+        height: 100%;
+    }
+
+    .preference-btns .study-btn{
+        height: 20%;
+        width: 60%;
+        background: white;
+        color: black;
+        border: 1px;
+        border-radius: 50px;
+        font-size: 4vh;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .preference-btns .work-btn{
+        height: 20%;
+        width: 60%;
+        background: white;
+        color: black;
+        border: 1px;
+        border-radius: 50px;
+        font-size: 4vh;
+        font-weight: 600;
+        cursor: pointer;
+    }
     
+
     .preference-form-wrapper .preference-study-form{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
+        height: 100%;
+        width: 100%;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sub-header{
+        color: #fff;
+        font-size: 6vh;
+        font-weight: 600;
+        margin: 2vh 0vw;
     }
     
     .preference-form-wrapper .preference-study-form ul {
         display:flex;
         flex-direction: column;
-        height: 150px;
-        width:200px;
+        height: 50%;
+        width:100%;
         padding-inline-start: 0px;
-        justify-content: space-between;
+        align-items: center;
+        grid-gap: 1vh;
+        gap: 2vh;
         list-style: none;
-        }
-    
-    
-    .preference-form-wrapper .preference-study-form ul li input{
-        display:flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border-radius: 25px;
-        padding:10px 10px;
-    
     }
-    .preference-form-wrapper .preference-study-form ul li select{
+
+    .preference-form-wrapper .preference-study-form li {
         display:flex;
         flex-direction: column;
-        justify-content: space-between;
+        height: 70%;
+        width:100%;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+    }
+    
+    .preference-form-wrapper .preference-study-form span {
+        height: 100%;
+        width: 100%;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .preference-form-wrapper .preference-study-form ul li label{
+        color: white;
+        font-size: 2.5vh;
+        font-weight: 500;
+    }
+
+    .preference-form-wrapper .preference-study-form ul li select{
+        height: 55%;
+        width: 60%;
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        color: black;
         border-radius: 25px;
         padding:10px 10px;
-    
+        margin-top: 2vh;
+        font-size: 2vh;
     }
     
     .preference-form-wrapper .preference-work-form{
+        height: 100%;
+        width: 100%;
         display:flex;
         flex-direction: column;
-        justify-content: space-between;
-        list-style: none;
-        height: 180px;
+        align-items: center;
     }
         
     .preference-form-wrapper .preference-work-form ul {
         display:flex;
         flex-direction: column;
-        height: 150px;
-        width:200px;
+        height: 50%;
+        width:100%;
         padding-inline-start: 0px;
-        justify-content: space-between;
+        align-items: center;
+        grid-gap: 1vh;
+        gap: 2vh;
         list-style: none;
     }
-        
-        
-    .close-modal{
-      position: fixed;
-      right: 15%;
-      top: 32px;
-    font-size: 30px;
-    list-style: none;
+
+    .preference-form-wrapper .preference-work-form li {
+        display:flex;
+        flex-direction: column;
+        height: 70%;
+        width:100%;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+    }
     
+    .preference-form-wrapper .preference-work-form span {
+        height: 100%;
+        width: 100%;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .preference-form-wrapper .preference-work-form ul li label{
+        color: white;
+        font-size: 2.5vh;
+        font-weight: 500;
+    }
+
+    .preference-form-wrapper .preference-work-form ul li select{
+        height: 55%;
+        width: 60%;
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        color: black;
+        border-radius: 25px;
+        padding:10px 10px;
+        margin-top: 2vh;
+        font-size: 2vh;
     }
     
     #back-btn{
-    position:fixed;
-    top:70%;
+        position:fixed;
+        top:70%;
     }
     
     .find{
-
-    position: fixed;
-    top:85%
+        position: fixed;
+        top:83%
     }
     
     select.form-input{
@@ -152,14 +280,6 @@
     
     
     .sub-header label{
-    font-size: 20px;
-    
-    
+        font-size: 1vh;
     }
     
-    .preference-btns{
-    display:flex;
-    justify-content: space-between;
-    width: 300px;
-    
-    }
