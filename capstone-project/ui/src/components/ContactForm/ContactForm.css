@@ -59,4 +59,10 @@ width:300px;
 }
 
 
+p.validation-error{
 
+    color:red;
+}
+
+p.thank-you{
+}
