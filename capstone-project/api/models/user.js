@@ -271,7 +271,7 @@ class User {
             }
         }
 
-        throw new UnauthorizedError("You're not authorize to update this user")
+        throw new UnauthorizedError("You're not authorized to update this user")
     }
 
 
