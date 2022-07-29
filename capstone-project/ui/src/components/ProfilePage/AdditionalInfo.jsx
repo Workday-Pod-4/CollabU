@@ -89,10 +89,10 @@ export default function AdditionalInfo() {
                         <label>Social Links</label>
                         <input className="form-input" type="text" name="socialMediaLink1" placeholder="Social Link 1" onChange={handleOnChange} defaultValue={form.socialMediaLink1}></input>
                     </div>
-                    <div className="input-field">
+                    <div className="input-field no-label">
                         <input className="form-input" type="text" name="socialMediaLink2" placeholder="Social Link 2" onChange={handleOnChange} defaultValue={form.socialMediaLink2}></input>
                     </div>
-                    <div className="input-field">
+                    <div className="input-field no-label">
                         <input className="form-input" type="text" name="socialMediaLink3" placeholder="Social Link 3" onChange={handleOnChange} defaultValue={form.socialMediaLink3}></input>
                     </div>
                     <button className="btn" onClick={saveInfo}>Save</button>
