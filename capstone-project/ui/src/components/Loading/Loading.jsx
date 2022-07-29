@@ -5,14 +5,19 @@ import "./Loading.css";
 
 export default function Loading() {
 
-  const { setIsLoading } = useAuthContext();
+  const { setIsLoading, togglePrefModal } = useAuthContext();
+
+  function closeModal(){
+    setIsLoading(false);
+    togglePrefModal();
+  }
 
   return (
     <div className="container">
         <div className="content">
           <div className="header">
             <div className="button-container">
-              <button className="close" onClick={() => {setIsLoading(false)}}> x </button>
+              <button className="close" onClick={closeModal}> x </button>
             </div>
           </div>
           <h1>Finding you a Match...</h1>
