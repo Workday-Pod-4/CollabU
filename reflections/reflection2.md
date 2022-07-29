@@ -1,6 +1,10 @@
 # Reflection #2
 
-Pod Members: **Add Pod Members Names**
+Pod Members:
+
+- Gabriel Bremo
+- Miles Baffour
+- Lacie Covington
 
 ## Reflection Questions
 
