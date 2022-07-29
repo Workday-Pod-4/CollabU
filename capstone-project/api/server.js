@@ -111,7 +111,7 @@ io.on("connection", (socket) => {
           RETURNING id, user_1_id, user_2_id, match_timestamp;
           `,
           [user.user_id, peer.user_id], (err, res) => {
-            console.error( err.stack );
+            console.error(err);
           })
 
           let room = crypto.randomBytes(20).toString('hex');
