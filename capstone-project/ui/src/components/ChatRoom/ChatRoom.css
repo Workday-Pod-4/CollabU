@@ -174,3 +174,8 @@ video {
     display: flex;
     flex-direction: row;
 }
+
+.enter-room p{
+    margin: 2px;
+    font-size: 16px;
+}

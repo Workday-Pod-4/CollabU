@@ -181,7 +181,7 @@ class User {
             
         }
 
-        throw new UnauthorizedError("Error when updating user info")
+        throw new UnauthorizedError("You're not authorized to update this user")
     }
 
     static async updateEmail(credentials) {
@@ -222,7 +222,7 @@ class User {
             }
         }
 
-        throw new UnauthorizedError("Error when updating user email")
+        throw new UnauthorizedError("You're not authorized to update this user")
     }
 
     static async updatePassword(credentials) {
@@ -271,7 +271,7 @@ class User {
             }
         }
 
-        throw new UnauthorizedError("Error when updating user password")
+        throw new UnauthorizedError("You're not authorized to update this user")
     }
 
 
@@ -310,7 +310,7 @@ class User {
             }
         }
 
-        throw new UnauthorizedError("Error when deleting user")
+        throw new UnauthorizedError("You're not authorized to delete this user")
     }
 
     // gets user by email
