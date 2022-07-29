@@ -52,7 +52,6 @@
    align-items: center;
    color: white;
    height: 75%;
-   width: 90%;
    border: 1px;
    border-radius: 20px;
 }
@@ -166,6 +165,7 @@
 video {
     width: 100%;
     height: 100%;
+    object-fit: contain;
     border: 1px;
     border-radius: 20px;
 }
@@ -173,6 +173,8 @@ video {
 .participant-video {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    height: 100%;
 }
 
 .enter-room p{
