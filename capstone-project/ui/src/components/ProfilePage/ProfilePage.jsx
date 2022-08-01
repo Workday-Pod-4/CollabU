@@ -7,7 +7,10 @@ import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
+import "./Loading.css"
 import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
+import axios from "axios"
+
 
 
 export default function ProfilePage() {
