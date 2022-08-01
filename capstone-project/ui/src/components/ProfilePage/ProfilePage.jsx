@@ -1,12 +1,13 @@
-import * as React from "react";
-import { useAuthContext } from "../../contexts/auth";
-import { io } from "socket.io-client";
+import * as React from "react"
+import { useAuthContext } from "../../contexts/auth"
+import { io } from "socket.io-client"
+import axios from "axios"
 import Loading from "../Loading/Loading"
-import UpdateForm from "./UpdateForm";
-import AdditionalInfo from "./AdditionalInfo";
-import SettingsModal from "../SettingsModal/SettingsModal";
-import "./ProfilePage.css";
-import "./PreferenceModal.css";
+import UpdateForm from "./UpdateForm"
+import AdditionalInfo from "./AdditionalInfo"
+import SettingsModal from "../SettingsModal/SettingsModal"
+import "./ProfilePage.css"
+import "./PreferenceModal.css"
 
 export default function ProfilePage() {
 
@@ -17,6 +18,8 @@ export default function ProfilePage() {
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false)
   const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
+
+  const [matches, setMatches] = React.useState([])
 
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
@@ -85,6 +88,18 @@ export default function ProfilePage() {
 
   }, []);
 
+    // Working here
+    React.useEffect(() => {
+      
+      const fetchMatches = async () => {
+        const res = await axios.get(
+          `http://localhost:3001/matches?user_id=${user.id}`);
+          setMatches(res.data)
+          
+      };
+      fetchMatches();
+    }, [user.id]);
+    
   return (
     <div className="profile-page">
       { firstTime ? <AdditionalInfo /> : null}

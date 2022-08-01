@@ -83,7 +83,11 @@ app.get('/matches', async (req, res) => {
     let user_id = req.query.user_id 
 
     const { rows } = await db.query(
-        `SELECT users.id, users.username, users.email, previously_matched.match_timestamp
+        `SELECT 
+            users.id, 
+            users.username, 
+            users.email, 
+            previously_matched.match_timestamp
          FROM users
          JOIN previously_matched ON users.id = previously_matched.user_2_id
          WHERE user_1_id = $1`, [user_id]
