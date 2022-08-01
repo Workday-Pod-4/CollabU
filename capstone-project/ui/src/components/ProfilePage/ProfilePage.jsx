@@ -2,12 +2,13 @@ import * as React from "react"
 import { useAuthContext } from "../../contexts/auth"
 import { io } from "socket.io-client"
 import axios from "axios"
-import Loading from "../Loading/Loading"
 import UpdateForm from "./UpdateForm"
 import AdditionalInfo from "./AdditionalInfo"
 import SettingsModal from "../SettingsModal/SettingsModal"
 import "./ProfilePage.css"
 import "./PreferenceModal.css"
+import "./Loading.css"
+
 
 export default function ProfilePage() {
 
@@ -68,6 +69,13 @@ export default function ProfilePage() {
     client.current.emit('submit', {user});
   }
 
+  function closeModal(){
+    client.current.emit('remove', {user});
+    setIsLoading(false);
+    togglePrefModal();
+    
+  }
+
   React.useEffect(() => {
 
     const socket = io("http://localhost:3001")
@@ -99,7 +107,7 @@ export default function ProfilePage() {
       };
       fetchMatches();
     }, [user.id]);
-    
+
   return (
     <div className="profile-page">
       { firstTime ? <AdditionalInfo /> : null}
@@ -302,7 +310,21 @@ export default function ProfilePage() {
             <button className="find" onClick={handleOnSubmit}> Find a buddy</button>
           </div>
         </div>
-      ) : (isLoading ? <Loading /> : null)}
+      ) : 
+      // Loading Modal
+      (isLoading ? 
+        <div className="container">
+        <div className="content">
+          <div className="header">
+            <div className="button-container">
+              <button className="close" onClick={closeModal}> x </button>
+            </div>
+          </div>
+          <h1>Finding you a Match...</h1>
+          <p> If it's taking a while to find a match, it's possible there's no one online. </p>
+          <p> If that's the case, please try again later. Press the X to exit the queue. </p>
+        </div>
+    </div> : null)}
     </div>
     </div>
   );

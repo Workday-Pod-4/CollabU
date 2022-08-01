@@ -25,6 +25,11 @@ io.on("connection", (socket) => {
     console.log("The number of connected sockets: " + socket.adapter.sids.size);
     console.log('User '+ socket.id + 'is online');
 
+    socket.on('remove', (data) => {
+      const index = queue.findIndex(removedPerson => removedPerson.user_id === data.user.id);
+      queue.splice(index, 1);
+    })
+
     socket.on('submit', (data) => {
 
       let user = {
