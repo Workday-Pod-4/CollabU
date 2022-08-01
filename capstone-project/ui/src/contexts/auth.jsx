@@ -100,7 +100,7 @@ export const AuthContextProvider = ({ children }) => {
       setIsLoading,
       reportModal,
       setReportModal,
-      toggleReportModal
+      toggleReportModal,
       setInRoom,
       inRoom
     }

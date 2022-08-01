@@ -2,7 +2,6 @@
 import * as React from "react";
 import { useAuthContext } from "../../contexts/auth";
 import { io } from "socket.io-client";
-import Loading from "../Loading/Loading"
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";

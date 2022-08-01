@@ -83,7 +83,7 @@ background-color: rgb(168, 167, 167);
 .social-media-links a{ 
     text-decoration: none; 
     color:black;
-    font-size: 1vh;
+    font-size: 2vh;
     font-weight: 400;
 }
 
@@ -237,18 +237,12 @@ font-size: 3vh;
 
 @media only screen and (max-width: 800px){
 
-    .report-issue {
-        font-size: 1.3em;
-        font-weight: 800;
-        list-style: none;
-
     .sections {
         display:flex;
         flex-direction: row;
         flex-wrap: wrap;
         height: 100%;
         width: 100%;
-
     }
     
     .profile-page .left-section{
@@ -279,6 +273,30 @@ font-size: 3vh;
         height: 100%;
     }
 
+    .profile-page .middle-section .info-cards .work-card{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 3vh;
+        height: 30%;
+        width: 70%;
+        border: 1px;
+        border-radius: 25px;
+        background-color: rgb(168, 167, 167);
+    }
+
+    .profile-page .middle-section .info-cards .school-card{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 3vh;
+        height: 30%;
+        width: 70%;
+        border: 1px;
+        border-radius: 25px;
+        background-color: rgb(168, 167, 167);
+    }
+
     .update-btn-container {
         height: 10%;
         width: 60%;
@@ -304,3 +322,4 @@ font-size: 3vh;
     }
 
 }
+
