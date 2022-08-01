@@ -80,17 +80,31 @@ app.get("/", (req, res, next) => {
 
 app.get('/matches', async (req, res) => {
 
-    let user_id = req.query.user_id 
+    let id = req.query.user_id
 
+    // Get the previously matches from database
     const { rows } = await db.query(
-        `SELECT 
-            users.id, 
-            users.username, 
-            users.email, 
+        `SELECT
+            DISTINCT ON (users.id)
+            users.username,
+            users.email,
+            users.first_name, 
+            users.last_name,  
+            users.location,
+            users.timezone,
+            users.job_title,
+            users.company,
+            users.college,
+            users.major,
+            users.profile_image_url,
+            users.social_media_link_1,
+            users.social_media_link_2,
+            users.social_media_link_3,
             previously_matched.match_timestamp
          FROM users
          JOIN previously_matched ON users.id = previously_matched.user_2_id
-         WHERE user_1_id = $1`, [user_id]
+         WHERE user_1_id = $1
+         ORDER BY users.id, previously_matched.match_timestamp`, [id]
         )
 
     res.send(rows)

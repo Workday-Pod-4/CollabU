@@ -96,14 +96,14 @@ export default function ProfilePage() {
 
   }, []);
 
-    // Working here
+    // Get previous matches with users
     React.useEffect(() => {
       
       const fetchMatches = async () => {
         const res = await axios.get(
           `http://localhost:3001/matches?user_id=${user.id}`);
+          console.log("Response", res.data)
           setMatches(res.data)
-          console.log(res.data)
       };
       fetchMatches();
     }, [user.id]);
@@ -232,7 +232,6 @@ export default function ProfilePage() {
         </div>
       </div>
       {/* Preference Modal */}
-      <div>
       {prefModal && (isLoading == false) ? (
         <div
           className="preference-modal-container"
@@ -313,7 +312,7 @@ export default function ProfilePage() {
       ) : 
       // Loading Modal
       (isLoading ? 
-        <div className="container">
+        <div className="loading-container">
         <div className="content">
           <div className="header">
             <div className="button-container">
@@ -325,7 +324,6 @@ export default function ProfilePage() {
           <p> If that's the case, please try again later. Press the X to exit the queue. </p>
         </div>
     </div> : null)}
-    </div>
     </div>
   );
 }

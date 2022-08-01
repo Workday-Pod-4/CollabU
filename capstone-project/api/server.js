@@ -131,21 +131,21 @@ io.on("connection", (socket) => {
             console.error(err);
           })
 
-          // let room = crypto.randomBytes(20).toString('hex');
+          let room = crypto.randomBytes(20).toString('hex');
 
-          // let peerSocket = userSockets[peer.socket_id]
+          let peerSocket = userSockets[peer.socket_id]
 
-          // // join them both
-          // peerSocket.join(room)
-          // socket.join(room);
+          // join them both
+          peerSocket.join(room)
+          socket.join(room);
 
-          // // register rooms to their socket ids
-          // rooms[peer.socket_id] = room;
-          // rooms[socket.id] = room;
+          // register rooms to their socket ids
+          rooms[peer.socket_id] = room;
+          rooms[socket.id] = room;
 
-          // // redirect the pair to room component
-          // peerSocket.emit('redirectToRoom', `/room/${room}`);
-          // socket.emit('redirectToRoom', `/room/${room}`);
+          // redirect the pair to room component
+          peerSocket.emit('redirectToRoom', `/room/${room}`);
+          socket.emit('redirectToRoom', `/room/${room}`);
         }
     }
     });
