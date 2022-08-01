@@ -3,19 +3,21 @@ import { useAuthContext } from "../../contexts/auth";
 import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
+import { useEffect } from "react";
 
 export default function ChatRoom() {
 
-    const { user, chatOpen, setChatOpen} = useAuthContext()
+    const { user, chatOpen, setChatOpen, inRoom, setInRoom} = useAuthContext()
 
     const [room, setRoom] = React.useState(null);
     const [showRoom, setShowRoom] = React.useState(false);
     const [localParticipant, setLocalParticipant] = React.useState(null);
     const [remoteParticipant, setRemoteParticipant] = React.useState(null);
 
+    setInRoom(true);
     var cName="";
     var bName="";
-
+    
     let roomID = 'test'
 
     if (chatOpen == false) {
@@ -34,7 +36,6 @@ export default function ChatRoom() {
 
     // Allows a user to a Twilio Room when they click on the Enter Room button
     const handleOnClick = () => {
-
       async function joinRoom() {
 
       // fetch an Access Token from the join-room route
