@@ -25,6 +25,11 @@ io.on("connection", (socket) => {
     console.log("The number of connected sockets: " + socket.adapter.sids.size);
     console.log('User '+ socket.id + 'is online');
 
+    socket.on('remove', (data) => {
+      const index = queue.findIndex(removedPerson => removedPerson.user_id === data.user.id);
+      queue.splice(index, 1);
+    })
+
     socket.on('submit', (data) => {
 
       let user = {
@@ -114,6 +119,18 @@ io.on("connection", (socket) => {
             console.error(err);
           })
 
+          db.query(`
+          INSERT INTO previously_matched (
+              user_1_id,
+              user_2_id
+          )
+          VALUES ($1, $2)
+          RETURNING id, user_1_id, user_2_id, match_timestamp;
+          `,
+          [peer.user_id, user.user_id], (err, res) => {
+            console.error(err);
+          })
+
           let room = crypto.randomBytes(20).toString('hex');
 
           let peerSocket = userSockets[peer.socket_id]
@@ -127,8 +144,8 @@ io.on("connection", (socket) => {
           rooms[socket.id] = room;
 
           // redirect the pair to room component
-          peerSocket.emit('redirectToRoom', `http://localhost:3000/room/${room}`);
-          socket.emit('redirectToRoom', `http://localhost:3000/room/${room}`);
+          peerSocket.emit('redirectToRoom', `/room/${room}`);
+          socket.emit('redirectToRoom', `/room/${room}`);
         }
     }
     });

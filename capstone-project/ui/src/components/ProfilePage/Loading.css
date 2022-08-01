@@ -1,12 +1,18 @@
-.container{
-    width: 100%;
-    height: 100%;
+.loading-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba( 0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
 }
 
-.container .content{
+.loading-container .content{
     width: 30%;
     height: 40%;
     background: white;
@@ -17,7 +23,7 @@
     align-items: center;
 }
 
-.container .content .header{
+.loading-container .content .header{
     width: 100%;
     height: 15%;
     display: flex;
@@ -26,7 +32,7 @@
     align-items: center;
 }
 
-.container .content .header .button-container{
+.loading-container .content .header .button-container{
     width: 10%;
     height: 100%;
     display: flex;
@@ -37,7 +43,7 @@
     align-items: center;
 }
 
-.container .content .header .button-container .close{
+.loading-container .content .header .button-container .close{
     background: black;
     width: 75%;
     height: 75%;
@@ -53,13 +59,13 @@
     font-weight: 600;
 }
 
-.container .content h1{
+.loading-container .content h1{
     font-size: 6vh;
     font-weight: 500;
     margin-top: 2vh;
 }
 
-.container .content p{
+.loading-container .content p{
     margin: 0;
     font-size: 16px;
 }
