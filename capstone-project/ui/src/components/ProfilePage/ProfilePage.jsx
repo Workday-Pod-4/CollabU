@@ -114,7 +114,11 @@ export default function ProfilePage() {
       fetchMatches();
     }, [user.id]);
 
-
+  //function for capitilizing first letter of strings (names)
+  function CapitalizeName(str){
+    const newStr = str.charAt(0).toUpperCase() + str.slice(1);
+    return newStr
+  }
 console.log("matches:",matches)
   return (
     <div className="profile-page">
@@ -235,7 +239,7 @@ console.log("matches:",matches)
           <ul>
           {matches.map((match)=> {
               return(
-              <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>{match.first_name} {match.last_name}</span></li>
+              <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>{CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span></li>
             )})}
             </ul>
           </div>
