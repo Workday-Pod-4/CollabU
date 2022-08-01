@@ -7,7 +7,7 @@ import "./ReportIssueModal.css";
 export default function ReportIssueModal() {
   const [state, handleSubmit] = useForm("xyyorrjy");
   const [form, setForm] = React.useState({ "message": ""})
-
+  const {toggleReportModal } = useAuthContext();
   function handleOnChange(evt){
     setForm((f) => ({...f, [evt.target.name]: evt.target.value}))
   }
@@ -18,7 +18,7 @@ export default function ReportIssueModal() {
         <div className="report-issue-header">
           <h1>Report Issue</h1>
         </div>
-        <li className="close-report-issue-modal" >
+        <li onClick = {toggleReportModal} className="close-report-issue-modal" >
           x
         </li>
         <div className="report-issue-form-wrapper">

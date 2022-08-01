@@ -17,6 +17,12 @@ export default function ProfilePage() {
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false)
+
+
+  const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
+
+  console.log("t:", reportModal)
+
   const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
 
   // if user clicks study, set isStudying = true and isWorking = false
@@ -88,7 +94,8 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-      <ReportIssueModal/>
+      {reportModal?
+      <ReportIssueModal/>:null}
       { firstTime ? <AdditionalInfo /> : null}
       {settingsModal? <SettingsModal/>: null}
       <h1>Information</h1>
@@ -156,7 +163,7 @@ export default function ProfilePage() {
           </div>
 
           <div className="report-issue">
-            <b>Report issue</b>
+            <li onClick = {toggleReportModal}><b>Report issue</b></li>
           </div>
         </div>
 

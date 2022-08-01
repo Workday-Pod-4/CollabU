@@ -1,7 +1,19 @@
 *{
     box-sizing: border-box;
 }
-    
+
+.close-report-issue-modal{
+    position: fixed;
+    right: 0%;
+    top: 32px;
+    font-size: 30px;
+    list-style: none;
+    display:flex;
+    height:100px;
+    justify-content: center;
+    width:560px;
+
+}
 .report-issue-header{
         width: 40%; height: 9%; font-size: 18px; text-align: center; padding: 0px;
         position:fixed;
