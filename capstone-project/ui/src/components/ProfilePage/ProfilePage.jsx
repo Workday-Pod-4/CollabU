@@ -102,7 +102,6 @@ export default function ProfilePage() {
       const fetchMatches = async () => {
         const res = await axios.get(
           `http://localhost:3001/matches?user_id=${user.id}`);
-          console.log("Response", res.data)
           setMatches(res.data)
       };
       fetchMatches();
