@@ -7,6 +7,8 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegistrationPage from "../RegistrationPage/RegistrationPage"
 import ProfilePage from "../ProfilePage/ProfilePage";
 import ChatRoom from "../ChatRoom/ChatRoom";
+import NotFound from "../NotFound/NotFound";
+import AccessForbidden from "../AccessForbidden/AccessForbidden";
 import "./App.css";
 
 export default function AppContainer() {
@@ -32,8 +34,9 @@ const {user} = useAuthContext()
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegistrationPage />} />
-                <Route path ="/profile" element = {<ProfilePage />}/>
-                <Route path="/room/:id" element={<ChatRoom />} />
+                <Route path ="/profile" element = {user?.email ? <ProfilePage /> : <AccessForbidden />}/>
+                <Route path="/room/:id" element={user?.email ? <ChatRoom /> : <AccessForbidden />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
           </BrowserRouter>

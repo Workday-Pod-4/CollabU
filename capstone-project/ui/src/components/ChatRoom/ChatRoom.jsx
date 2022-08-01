@@ -90,7 +90,7 @@ export function Room(props) {
                 <div className="participant-video">
                 {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} muteAudio={muteAudio}/>: 
                     <div className="user-view">
-                        <h3>Placeholder Name</h3>
+                        <h3> Your Match is Coming! </h3>
                         <div className="user-video"></div>
                 </div>}
                     <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} muteAudio={muteAudio}/>
