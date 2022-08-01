@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";
+import MatchModal from "../MatchModal/MatchModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
 import "./Loading.css"
@@ -17,17 +18,18 @@ export default function ProfilePage() {
 
   const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
   const { settingsModal, toggleSettingsModal } = useAuthContext();
-
+  const {matchModal, setMatchModal} = useAuthContext();
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false)
-
+  const [confirmUsername, setConfirmUsername] = React.useState()
 
   const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
 
   const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
 
   const [matches, setMatches] = React.useState([])
+
 
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
@@ -47,6 +49,11 @@ export default function ProfilePage() {
     setIsWorking(true)
   }
 
+  //if user toggles match modal
+  function toggleMatchModal(e){
+    setConfirmUsername((e.target.innerHTML).split(" ")[0])
+    setMatchModal(!matchModal)
+  }
   // set topic property based on user input
   function handleOnChangeTopic (event) {
     user.topic = event.target.value
@@ -120,6 +127,8 @@ export default function ProfilePage() {
     return newStr
   }
 console.log("matches:",matches)
+
+
   return (
     <div className="profile-page">
       {reportModal?
@@ -237,9 +246,13 @@ console.log("matches:",matches)
         <div className="right-section">
           <div className="match-history">
           <ul>
-          {matches.map((match)=> {
+          {matches.map((match, idx)=> {
+            const userObject = match
               return(
-              <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>{CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span></li>
+              <>
+              <li key = {idx} onClick= {toggleMatchModal}><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span></li>
+              {matchModal? <MatchModal  confirmUsername= {confirmUsername} matches = {matches} userObject = {userObject}/>: null}
+              </>
             )})}
             </ul>
           </div>
