@@ -27,7 +27,7 @@
     font-size: 18px;
 }
 
-.email-input{
+.content .form-wrapper .email-input{
     padding:6px;
 }
 .contact-form .content .form-wrapper .email-input .form-input {
@@ -64,5 +64,3 @@ p.validation-error{
     color:red;
 }
 
-p.thank-you{
-}

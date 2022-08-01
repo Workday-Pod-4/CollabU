@@ -1,13 +1,14 @@
-import * as React from "react"
-import { useAuthContext } from "../../contexts/auth"
-import { io } from "socket.io-client"
-import axios from "axios"
-import UpdateForm from "./UpdateForm"
-import AdditionalInfo from "./AdditionalInfo"
-import SettingsModal from "../SettingsModal/SettingsModal"
-import "./ProfilePage.css"
-import "./PreferenceModal.css"
-import "./Loading.css"
+
+import * as React from "react";
+import { useAuthContext } from "../../contexts/auth";
+import { io } from "socket.io-client";
+import Loading from "../Loading/Loading"
+import UpdateForm from "./UpdateForm";
+import AdditionalInfo from "./AdditionalInfo";
+import SettingsModal from "../SettingsModal/SettingsModal";
+import "./ProfilePage.css";
+import "./PreferenceModal.css";
+import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 
 
 export default function ProfilePage() {
@@ -18,6 +19,10 @@ export default function ProfilePage() {
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false)
+
+
+  const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
+
   const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
 
   const [matches, setMatches] = React.useState([])
@@ -109,11 +114,14 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
+      {reportModal?
+      <ReportIssueModal/>:null}
       { firstTime ? <AdditionalInfo /> : null}
       {settingsModal? <SettingsModal/>: null}
       <div className="sections">
         <div className="left-section">
           <div className="profile-pic">
+            {user.image}
             <img
               src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
               height="150px"
@@ -174,7 +182,7 @@ export default function ProfilePage() {
           </div>
 
           <div className="report-issue">
-            <b>Report issue</b>
+            <li onClick = {toggleReportModal}><b>Report issue</b></li>
           </div>
         </div>
 

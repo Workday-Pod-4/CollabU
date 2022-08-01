@@ -16,8 +16,14 @@ export const AuthContextProvider = ({ children }) => {
     const [prefModal, setPrefModal] = useState(false);
     const [settingsModal, setSettingsModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
+    const [reportModal, setReportModal] = React.useState(false)
     const [inRoom, setInRoom] = useState(false);
 
+    //function for toggling report issue modal
+    function toggleReportModal(){
+      setReportModal(!reportModal)
+  
+    }
     // function for toggling settings modal, 
     // should be set to true if user clicks settings  
     // and false if user presses close button on modal
@@ -92,6 +98,9 @@ export const AuthContextProvider = ({ children }) => {
       setChatOpen,
       isLoading,
       setIsLoading,
+      reportModal,
+      setReportModal,
+      toggleReportModal
       setInRoom,
       inRoom
     }

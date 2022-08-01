@@ -237,12 +237,18 @@ font-size: 3vh;
 
 @media only screen and (max-width: 800px){
 
+    .report-issue {
+        font-size: 1.3em;
+        font-weight: 800;
+        list-style: none;
+
     .sections {
         display:flex;
         flex-direction: row;
         flex-wrap: wrap;
         height: 100%;
         width: 100%;
+
     }
     
     .profile-page .left-section{

@@ -1,0 +1,131 @@
+*{
+    box-sizing: border-box;
+}
+
+.close-report-issue-modal{
+    position: fixed;
+    right: 0%;
+    top: 32px;
+    font-size: 30px;
+    list-style: none;
+    display:flex;
+    height:100px;
+    justify-content: center;
+    width:560px;
+
+}
+.report-issue-header{
+        width: 40%; height: 9%; font-size: 18px; text-align: center; padding: 0px;
+        position:fixed;
+        top:6%;
+
+}
+    
+.report-issue-header h1{
+    background-color: grey;
+    color:white;
+}
+.report-issue-modal-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba( 0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
+}
+
+.report-issue-modal{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    height:90%;
+    width:60%;
+    border-radius:5px ;
+}
+
+.report-issue-form-wrapper{
+        display:flex;
+        height: 65%;
+        width: 35%;
+        justify-content: center;
+        background-color: #bdbdbd;
+        position: fixed;
+        border-radius: 5px;
+}
+
+.report-issue-form{
+width:80%
+}
+.report-issue-form .content{
+display: flex;
+height: 100%;
+width:100%;
+justify-content: space-between;
+}
+
+
+.report-issue-form .content form{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+
+
+
+.report-issue-form .content .email-input{
+    height: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
+
+
+    
+.report-issue-form .content .email-input input{
+    
+    width: 100%;
+    height: 55%;
+    border-radius: 5px;
+        
+    
+}
+.report-issue-form .content .message-input{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    grid-gap: 20px;
+    gap: 20px;
+
+}
+
+.report-issue-form .content .message-input textarea{
+
+    width: 100%;
+    height: 85%;
+    border-radius: 4px;
+
+}
+
+.report-issue-review{
+position:fixed;
+top: 65%;
+width:310px;
+text-align: center;
+display:flex;
+width:28%
+}
