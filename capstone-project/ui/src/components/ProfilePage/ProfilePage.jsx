@@ -1,12 +1,14 @@
-import * as React from "react";
-import { useAuthContext } from "../../contexts/auth";
-import { io } from "socket.io-client";
-import Loading from "../Loading/Loading"
-import UpdateForm from "./UpdateForm";
-import AdditionalInfo from "./AdditionalInfo";
-import SettingsModal from "../SettingsModal/SettingsModal";
-import "./ProfilePage.css";
-import "./PreferenceModal.css";
+import * as React from "react"
+import { useAuthContext } from "../../contexts/auth"
+import { io } from "socket.io-client"
+import axios from "axios"
+import UpdateForm from "./UpdateForm"
+import AdditionalInfo from "./AdditionalInfo"
+import SettingsModal from "../SettingsModal/SettingsModal"
+import "./ProfilePage.css"
+import "./PreferenceModal.css"
+import "./Loading.css"
+
 
 export default function ProfilePage() {
 
@@ -17,6 +19,8 @@ export default function ProfilePage() {
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false)
   const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
+
+  const [matches, setMatches] = React.useState([])
 
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
@@ -65,6 +69,13 @@ export default function ProfilePage() {
     client.current.emit('submit', {user});
   }
 
+  function closeModal(){
+    client.current.emit('remove', {user});
+    setIsLoading(false);
+    togglePrefModal();
+    
+  }
+
   React.useEffect(() => {
 
     const socket = io("http://localhost:3001")
@@ -84,6 +95,17 @@ export default function ProfilePage() {
     return () => socket.disconnect();
 
   }, []);
+
+    // Get previous matches with users
+    React.useEffect(() => {
+      
+      const fetchMatches = async () => {
+        const res = await axios.get(
+          `http://localhost:3001/matches?user_id=${user.id}`);
+          setMatches(res.data)
+      };
+      fetchMatches();
+    }, [user.id]);
 
   return (
     <div className="profile-page">
@@ -208,7 +230,6 @@ export default function ProfilePage() {
         </div>
       </div>
       {/* Preference Modal */}
-      <div>
       {prefModal && (isLoading == false) ? (
         <div
           className="preference-modal-container"
@@ -289,8 +310,21 @@ export default function ProfilePage() {
             <button className="find" onClick={handleOnSubmit}> Find a buddy</button>
           </div>
         </div>
-      ) : (isLoading ? <Loading /> : null)}
-    </div>
+      ) : 
+      // Loading Modal
+      (isLoading ? 
+        <div className="loading-container">
+        <div className="content">
+          <div className="header">
+            <div className="button-container">
+              <button className="close" onClick={closeModal}> x </button>
+            </div>
+          </div>
+          <h1>Finding you a Match...</h1>
+          <p> If it's taking a while to find a match, it's possible there's no one online. </p>
+          <p> If that's the case, please try again later. Press the X to exit the queue. </p>
+        </div>
+    </div> : null)}
     </div>
   );
 }

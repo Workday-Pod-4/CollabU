@@ -1,6 +1,8 @@
 const { PORT } = require("./config")
+const db = require("./db")
 const socket = require("socket.io")
-const crypto = require('crypto');
+const crypto = require('crypto')
+require('colors')
 const app = require("./app")
 
 const server = app.listen(PORT, () => {
@@ -9,7 +11,7 @@ const server = app.listen(PORT, () => {
 
 const io = socket(server, {
     cors:{
-        origin: "http://localhost:3000",
+        origin: "*",
         methods: ["GET", "POST"]
     }
 })
@@ -23,9 +25,15 @@ io.on("connection", (socket) => {
     console.log("The number of connected sockets: " + socket.adapter.sids.size);
     console.log('User '+ socket.id + 'is online');
 
+    socket.on('remove', (data) => {
+      const index = queue.findIndex(removedPerson => removedPerson.user_id === data.user.id);
+      queue.splice(index, 1);
+    })
+
     socket.on('submit', (data) => {
 
       let user = {
+        user_id: data.user.id,
         name: data.user.username,
         activity: data.user.activity,
         topic: data.user.topic,
@@ -57,22 +65,34 @@ io.on("connection", (socket) => {
           for (person = 0; person < queue.length; person++) {
  
             if (user.subject === queue[person].subject || user.workType === queue[person].workType) {
-              peer = queue[person]
+
+              if (user.user_id !== queue[person].user_id) {
+                peer = queue[person]
+              }
+              const index = queue.findIndex(peer => peer.user_id === queue[person].user_id);
+              queue.splice(index, 1);
               foundMatch = true
               break;
 
             } else if (user.topic === queue[person].topic && user.industry === queue[person].industry && count === 49) {
-              peer = queue[person]
+
+              if (user.user_id !== queue[person].user_id) {
+                peer = queue[person]
+              }
+              const index = queue.findIndex(peer => peer.user_id === queue[person].user_id);
+              queue.splice(index, 1);
               foundMatch = true
               break;
 
             } else if (user.activity === queue[person].activity && count === 49) {
-              peer = queue[person]
+
+              if (user.user_id !== queue[person].user_id) {
+                peer = queue[person]
+              }
+              const index = queue.findIndex(peer => peer.user_id === queue[person].user_id);
+              queue.splice(index, 1);
               foundMatch = true
               break;
-              
-            } else {
-              console.log("We can't find a match")
             }
           }
 
@@ -80,7 +100,36 @@ io.on("connection", (socket) => {
           count++
         }
 
+        if (Object.keys(peer).length === 0) {
+            queue.push(user);
+        }
+
         if (Object.keys(peer).length !== 0) {
+
+          // inserts the users into previously_matched table
+          db.query(`
+          INSERT INTO previously_matched (
+              user_1_id,
+              user_2_id
+          )
+          VALUES ($1, $2)
+          RETURNING id, user_1_id, user_2_id, match_timestamp;
+          `,
+          [user.user_id, peer.user_id], (err, res) => {
+            console.error(err);
+          })
+
+          db.query(`
+          INSERT INTO previously_matched (
+              user_1_id,
+              user_2_id
+          )
+          VALUES ($1, $2)
+          RETURNING id, user_1_id, user_2_id, match_timestamp;
+          `,
+          [peer.user_id, user.user_id], (err, res) => {
+            console.error(err);
+          })
 
           let room = crypto.randomBytes(20).toString('hex');
 
@@ -95,8 +144,8 @@ io.on("connection", (socket) => {
           rooms[socket.id] = room;
 
           // redirect the pair to room component
-          peerSocket.emit('redirectToRoom', `http://localhost:3000/room/${room}`);
-          socket.emit('redirectToRoom', `http://localhost:3000/room/${room}`);
+          peerSocket.emit('redirectToRoom', `/room/${room}`);
+          socket.emit('redirectToRoom', `/room/${room}`);
         }
     }
     });

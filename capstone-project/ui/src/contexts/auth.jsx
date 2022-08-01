@@ -16,6 +16,7 @@ export const AuthContextProvider = ({ children }) => {
     const [prefModal, setPrefModal] = useState(false);
     const [settingsModal, setSettingsModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
+    const [inRoom, setInRoom] = useState(false);
 
     // function for toggling settings modal, 
     // should be set to true if user clicks settings  
@@ -90,7 +91,9 @@ export const AuthContextProvider = ({ children }) => {
       chatOpen,
       setChatOpen,
       isLoading,
-      setIsLoading
+      setIsLoading,
+      setInRoom,
+      inRoom
     }
 
     return (
