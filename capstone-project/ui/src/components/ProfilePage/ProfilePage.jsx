@@ -7,6 +7,7 @@ import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
+import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 
 export default function ProfilePage() {
 
@@ -87,12 +88,14 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
+      <ReportIssueModal/>
       { firstTime ? <AdditionalInfo /> : null}
       {settingsModal? <SettingsModal/>: null}
       <h1>Information</h1>
       <div className="sections">
         <div className="left-section">
           <div className="profile-pic">
+            {user.image}
             <img
               src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
               height="150px"
