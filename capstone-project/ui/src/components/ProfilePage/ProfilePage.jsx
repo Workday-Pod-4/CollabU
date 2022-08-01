@@ -23,8 +23,6 @@ export default function ProfilePage() {
 
   const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
 
-  console.log("t:", reportModal)
-
   const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
 
   const [matches, setMatches] = React.useState([])
