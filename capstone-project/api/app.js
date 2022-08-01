@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan")
+const db = require("./db")
 const AccessToken = require("twilio").jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 
@@ -75,6 +76,20 @@ app.use("/auth", authRoutes)
 
 app.get("/", (req, res, next) => {
     res.status(200).json({"ping": "pong"})
+})
+
+app.get('/matches', async (req, res) => {
+
+    let user_id = req.query.user_id 
+
+    const { rows } = await db.query(
+        `SELECT users.id, users.username, users.email, previously_matched.match_timestamp
+         FROM users
+         JOIN previously_matched ON users.id = previously_matched.user_2_id
+         WHERE user_1_id = $1`, [user_id]
+        )
+
+    res.send(rows)
 })
 
 app.post("/join-room", async (req, res) => {
