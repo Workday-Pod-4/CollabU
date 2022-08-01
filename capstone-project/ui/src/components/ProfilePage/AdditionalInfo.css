@@ -55,8 +55,29 @@
     align-items: center;
     width: 100%;
     height: 6.5vh;
-    margin: 8px 0;
+    margin: .5vh 0;
     flex: 1 1;
+}
+
+.additional-form .input-field.no-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 1px;
+    margin: .5vh 0;
+    flex: 1 1;
+}
+
+.additional-form .input-field.no-label input{
+    height: 1000px;
+    width: 50%;
+    padding: 0 .5vw;
+    font-size: 1.5vh;
+    border: 1px solid black;
+    border-radius: 25px;
+    background: lightgray;
+    color: black;
 }
 
 .additional-form .input-field label {
@@ -68,19 +89,21 @@
 .additional-form .input-field input {
     height: 100%;
     width: 50%;
-    padding: 0 15px;
-    font-size: 16px;
+    padding: 0 .5vw;
+    font-size: 1.5vh;
     border: 1px solid black;
     border-radius: 25px;
     background: lightgray;
     color: black;
 }
 
+
+
 .additional-form .input-field select {
     width: 50%;
     height: 100%;
-    padding: 0 15px;
-    font-size: 16px;
+    padding: 0 .5vw;
+    font-size: 1.5vh;
     border: 1px solid #000000;
     background: lightgray;
     color: #000;
@@ -94,14 +117,84 @@
     border: 1px;
     border-radius: 20px;
     background: gray;
-    font-size: 20px;
+    font-size: 2vh;
     border: none;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 2vh;
     font-weight: bold;
 }
 
 .additional-form p {
     font-weight: bold;
+    font-size: 1.5vh;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 800px){
+    .container .form-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background: white;
+        height: 90vh;
+        width: 70vw;
+        border: 1px;
+        border-radius: 20px;
+        padding-top: 2vh;
+    }   
+
+    .additional-form .input-field input {
+        height: 100%;
+        max-height: 6vh;
+        width: 50%;
+        padding: 0 1.6vw;
+        font-size: 2vh;
+        border: 1px solid black;
+        border-radius: 25px;
+        background: lightgray;
+        color: black;
+    }
+
+    .additional-form .input-field.no-label input {
+        height: 90%;
+        width: 50%;
+        padding: 0 1.6vw;
+        font-size: 2vh;
+        border: 1px solid black;
+        border-radius: 25px;
+        background: lightgray;
+        color: black;
+    }
+
+    .additional-form .input-field select {
+        width: 50%;
+        height: 100%;
+        padding: 0 1.6vw;
+        font-size: 2vh;
+        border: 1px solid #000000;
+        background: lightgray;
+        color: #000;
+        border-radius: 25px;
+    }
+
+    .additional-form .btn {
+        height: 10%;
+        width: 70%;
+        color: white;
+        border: 1px;
+        border-radius: 20px;
+        background: gray;
+        font-size: 2.7vh;
+        border: none;
+        cursor: pointer;
+        margin-top: 2vh;
+        font-weight: bold;
+    }
+
+    .additional-form p {
+        font-weight: bold;
+        font-size: 2vh;
+        cursor: pointer;
+    }
 }

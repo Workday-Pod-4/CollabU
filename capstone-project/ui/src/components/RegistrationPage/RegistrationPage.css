@@ -83,7 +83,7 @@
     height: 7.5vh;
     color: white;
     background: #4846BD;
-    font-size: 1vw;
+    font-size: 1.8vh;
     border: none;
     cursor: pointer;
     margin-top: 3vh;
@@ -109,4 +109,15 @@
 
 .registration-page .card .error {
     color: #fe3210;
+}
+
+@media only screen and (max-width: 800px){
+    .registration-page .card {
+        width: 55%;
+        padding: 1vh 1.3vw 0;
+        flex-direction: column;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 10px 10px #86999E;
+    }
 }
