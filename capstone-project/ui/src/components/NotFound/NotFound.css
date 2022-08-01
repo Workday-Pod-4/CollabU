@@ -1,0 +1,24 @@
+#container {
+    margin: 100px;
+    display: align-self;
+    flex-flow: row wrap;  
+    align-items: center;
+}
+  
+#top {
+    font-size: 30px;
+    margin: 5%;
+    color: #4846BD;
+}
+  
+#middle {
+    margin-top: -90px;
+    font-size: 250px;
+    font-weight: bold;
+    color: #4846BD;
+}
+  
+#bottom {
+    font-size: 30px;
+    color: #4846BD;
+}

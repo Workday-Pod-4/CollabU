@@ -17,8 +17,9 @@ export const AuthContextProvider = ({ children }) => {
     const [settingsModal, setSettingsModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
     const [reportModal, setReportModal] = React.useState(false)
+    const [inRoom, setInRoom] = useState(false);
 
-    //fubction for toggling report issue modal
+    //function for toggling report issue modal
     function toggleReportModal(){
       setReportModal(!reportModal)
   
@@ -100,6 +101,8 @@ export const AuthContextProvider = ({ children }) => {
       reportModal,
       setReportModal,
       toggleReportModal
+      setInRoom,
+      inRoom
     }
 
     return (

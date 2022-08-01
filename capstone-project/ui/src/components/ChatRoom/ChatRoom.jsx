@@ -3,19 +3,21 @@ import { useAuthContext } from "../../contexts/auth";
 import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
+import { useEffect } from "react";
 
 export default function ChatRoom() {
 
-    const { user, chatOpen, setChatOpen} = useAuthContext()
+    const { user, chatOpen, setChatOpen, inRoom, setInRoom} = useAuthContext()
 
     const [room, setRoom] = React.useState(null);
     const [showRoom, setShowRoom] = React.useState(false);
     const [localParticipant, setLocalParticipant] = React.useState(null);
     const [remoteParticipant, setRemoteParticipant] = React.useState(null);
 
+    setInRoom(true);
     var cName="";
     var bName="";
-
+    
     let roomID = 'test'
 
     if (chatOpen == false) {
@@ -34,7 +36,6 @@ export default function ChatRoom() {
 
     // Allows a user to a Twilio Room when they click on the Enter Room button
     const handleOnClick = () => {
-
       async function joinRoom() {
 
       // fetch an Access Token from the join-room route
@@ -64,7 +65,6 @@ export default function ChatRoom() {
     setShowRoom(true)
     
     }
-
   
     return (
         <div className = "chat-room">
@@ -74,7 +74,6 @@ export default function ChatRoom() {
     </div>     
     )}
 
-
 export function Room(props) {
 
     const [muteAudio, setMuteAudio] = React.useState(true);
@@ -83,17 +82,22 @@ export function Room(props) {
         setMuteAudio(!muteAudio)
       }
 
-      
-
     return (
-        <div className="user-views">
+        <>
+        <div className="content">
             {props.showRoom && props.localParticipant !== null ?
-            <div>
+            <>
+            <div className="user-views">
                 <div className="participant-video">
-                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} muteAudio={muteAudio}/>: null}
+                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} muteAudio={muteAudio}/>: 
+                    <div className="user-view">
+                        <h3> Your Match is Coming! </h3>
+                        <div className="user-video"></div>
+                </div>}
                     <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} muteAudio={muteAudio}/>
                 </div>
-                    <div className="bottom-row">
+            </div>
+            <div className="bottom-row">
                         <div className="button-container">
                             <button className="mute" onClick={toggleMuteAudio}>Mute</button>
                             <button className="video">Video</button>
@@ -101,15 +105,16 @@ export function Room(props) {
                         <div className="">
                             <button className="">Chat</button>
                         </div>
-                    </div> 
             </div>
-            : <div className="enter-room"><button onClick={props.handleOnClick}> Enter Room </button>
-              <p>Please make sure no other application is using your camera or microphone</p>
-              <p>When ready, press the Enter Room button to meet your match</p>
-            </div>}  
-        </div>
-    )
-}
+            </>
+        : <div className="enter-room"><button onClick={props.handleOnClick}> Enter Room </button>
+        <p>Please make sure no other application is using your camera or microphone</p>
+        <p>When ready, press the Enter Room button to meet your match</p>
+      </div>
+      }
+      </div>
+    </>
+)}
 
 export function Participant(props) {
 
