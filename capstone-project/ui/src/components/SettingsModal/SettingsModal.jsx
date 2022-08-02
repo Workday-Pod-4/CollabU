@@ -24,8 +24,7 @@ export default function SettingsModal() {
     confirmNewEmail: "",
     newEmail: ""
   });
-
-  const navigate = useNavigate();
+  
   const [changingPw, setChangingPw] = React.useState(false);
   const [changingEmail, setChangingEmail] = React.useState(false);
   const [isDeleting, setIsDeleting] = React.useState(false);
@@ -62,7 +61,6 @@ export default function SettingsModal() {
     });
     //closing settings modal if email is successfully changed
     setSettingsModal(!settingsModal);
-    console.log(user.username);
     if (error) {
       setSettingsModal(settingsModal);
       setError(error);
