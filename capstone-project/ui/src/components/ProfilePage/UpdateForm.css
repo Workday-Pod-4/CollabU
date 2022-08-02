@@ -13,7 +13,7 @@
     align-items: center;
     width: 80%;
     height: 100%;
-    padding-bottom: 10px;
+    padding-bottom: 1vh;
     color: black;
     background: lightgray;
     border: 1px;
@@ -31,20 +31,21 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin: 8px 0;
+    margin: 1vh 0;
     flex: 1 1;
 }
 
 .update-form .input-field label {
-    margin-bottom: 5px;
+    margin-bottom: .3vh;
+    font-size: 2vh;
     color: black;
 }
 
 .update-form .input-field input {
-    height: 50px;
+    height: 4.2vh;
     width: 50%;
-    padding: 0 15px;
-    font-size: 16px;
+    padding: 0 .6vw;
+    font-size: 1.45vh;
     border: 1px solid black;
     border-radius: 25px;
     background: transparent;
@@ -56,14 +57,14 @@
 }
 
 .update-form .input-field select {
+    height: 4.2vh;
     width: 50%;
-    height: 50px;
-    padding: 0 15px;
-    font-size: 16px;
-    border: 1px solid #000000;
-    background: transparent;
-    color: #000;
+    padding: 0 .6vw;
+    font-size: 1.45vh;
+    border: 1px solid black;
     border-radius: 25px;
+    background: transparent;
+    color: black;
 }
 
 .update-form .btn {
@@ -82,7 +83,6 @@
     border-radius: 20px;
 }
 
-
 @media only screen and (max-width: 800px){
     
     .update-container {
@@ -100,7 +100,7 @@
         align-items: center;
         width: 80%;
         height: 100%;
-        padding-bottom: 10px;
+        padding-bottom: 1vh;
         color: black;
         background: lightgray;
         border: 1px;
@@ -119,12 +119,12 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-        margin: 1px 0;
+        margin: .5vh 0;
         flex: 1 1;
     }
 
     .update-form .input-field input {
-        height: 6vh;
+        height: 4vh;
         width: 50%;
         padding: 0 1.3vw;
         font-size: 2vh;
@@ -140,7 +140,7 @@
 
     .update-form .input-field select {
         width: 50%;
-        height: 6vh;
+        height: 4vh;
         padding: 0 1.3vw;
         font-size: 2vh;
         border: 1px solid #000000;

@@ -56,8 +56,6 @@ class ApiClient {
     }
 
     async deleteUser(credentials) {
-        this.setToken(null)
-        localStorage.setItem(this.tokenName, "")
         return await this.request({ endpoint: `auth/delete-account`, method: `DELETE`, data: credentials })
     }
 
