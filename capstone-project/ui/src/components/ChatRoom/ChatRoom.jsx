@@ -4,15 +4,18 @@ import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ChatRoom() {
 
-    const { user, chatOpen, setChatOpen, inRoom, setInRoom} = useAuthContext()
+    const { user, chatOpen, setChatOpen, inRoom, setInRoom, setExiting, exiting} = useAuthContext()
 
     const [room, setRoom] = React.useState(null);
     const [showRoom, setShowRoom] = React.useState(false);
     const [localParticipant, setLocalParticipant] = React.useState(null);
     const [remoteParticipant, setRemoteParticipant] = React.useState(null);
+
+    const navigate = useNavigate();
 
     setInRoom(true);
     var cName="";
@@ -27,6 +30,12 @@ export default function ChatRoom() {
     else {
         cName="chat-container open";
         bName="chat open";
+    }
+
+    // disconnects the user from the room
+    function exitRoom(){
+        setInRoom(false);
+        navigate("/profile")
     }
 
     // set the remote participant when they join the room
@@ -60,6 +69,7 @@ export default function ChatRoom() {
       room.participants.forEach(participantConnected);
       setLocalParticipant(room.localParticipant)
     }
+    
 
     joinRoom()
     setShowRoom(true)
@@ -69,6 +79,16 @@ export default function ChatRoom() {
     return (
         <div className = "chat-room">
         <div className="content">
+            {exiting ?
+            <div className="modal-container">
+                <div className="modal-content">
+                    <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
+                    <button className="exit-fr" onClick={exitRoom}>Get me outta here!</button>
+                </div>
+            </div>
+            :
+            null
+            }
             <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant}/>
         </div>
     </div>     
