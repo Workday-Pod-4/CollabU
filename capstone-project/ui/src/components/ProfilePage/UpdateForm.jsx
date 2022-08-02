@@ -32,7 +32,18 @@ export default function UpdateForm() {
   async function updateUser(evt) {
      evt.preventDefault()
      setIsProcessing(true);
-
+    if(form.firstName.length < 1){
+        setError("Cannot leave First Name empty")
+        return;
+    }
+    if(form.lastName.length < 1){
+        setError("Cannot leave Last Name empty")
+        return;
+    }
+    if(form.username.length < 1){
+        setError("Cannot leave Username empty")
+        return;
+    }
     const { data, error } = await apiClient.updateUserInfo({ 
         email: user.email,
         first_name: form.firstName, 
@@ -67,20 +78,20 @@ export default function UpdateForm() {
                         <div className="split-input-field">
                             <div className="input-field">
                                 <label>First Name</label>
-                                <input className="form-input" type="text" name="firstName" placeholder="First Name" onChange={handleOnChange} defaultValue={form?.firstName} required="required"></input>
+                                <input className="form-input" type="text" name="firstName" placeholder="First Name" onChange={handleOnChange} defaultValue={form?.firstName} required="required" minlength="1"></input>
                             </div>
                             <div className="input-field">
                                 <label>Last Name</label>
-                                <input className="form-input" type="text" name="lastName" placeholder="Last Name" onChange={handleOnChange} defaultValue={form.lastName} required="required"></input>
+                                <input className="form-input" type="text" name="lastName" placeholder="Last Name" onChange={handleOnChange} defaultValue={form.lastName} required="required" minlength="1"></input>
                             </div>
                         </div>
                         <div className="input-field">
                             <label>Username</label>
-                            <input className="form-input" type="text" name="username" placeholder="Username" onChange={handleOnChange} defaultValue={form.username} required="required"></input>
+                            <input className="form-input" type="text" name="username" placeholder="Username" onChange={handleOnChange} defaultValue={form.username} required="required" minlength="1"></input>
                         </div>
                         <div className="input-field">
                             <label>Profile Picture</label>
-                            <input className="form-input" type="text" name="profilePic" placeholder="Place the link to an image" onChange={handleOnChange} defaultValue={form.profilePic}></input>
+                            <input className="form-input" type="text" name="profilePic" placeholder="Place the link to an image" onChange={handleOnChange} defaultValue={form.profilePic} minlength="1"></input>
                         </div>
                         <div className="input-field">
                             <label>College</label>
@@ -100,7 +111,7 @@ export default function UpdateForm() {
                         </div>
                         <div className="input-field">
                             <label>Location</label>
-                            <input className="form-input" type="text" name="location" placeholder="Location" onChange={handleOnChange} defaultValue={form.location}></input>
+                            <input className="form-input" type="text" name="location" placeholder="Location" onChange={handleOnChange} defaultValue={form.location} minlength="1"></input>
                         </div>
                     </div>
                     <div className="column">
@@ -122,11 +133,11 @@ export default function UpdateForm() {
                         </div>
                         <div className="input-field">
                             <label>Company</label>
-                            <input className="form-input" type="text" name="company" placeholder="Company" onChange={handleOnChange} defaultValue={form.company}></input>
+                            <input className="form-input" type="text" name="company" placeholder="Company" onChange={handleOnChange} defaultValue={form.company} minlength="1"></input>
                         </div>
                         <div className="input-field">
                             <label>Social Link 1</label>
-                            <input className="form-input" type="text" name="socialMedia1" placeholder="External profile or portfolio" onChange={handleOnChange} defaultValue={form.socialMedia1}></input>
+                            <input className="form-input" type="text" name="socialMedia1" placeholder="External profile or portfolio" onChange={handleOnChange} defaultValue={form.socialMedia1} ></input>
                         </div>
                         <div className="input-field">
                             <label>Social Link 2</label>
@@ -138,6 +149,7 @@ export default function UpdateForm() {
                         </div>
                     </div> 
                 </div>
+                <div className="error">{error? error : null}</div>
                 <button className="btn" onClick={updateUser}>Update</button>
             </div>
         </div>
