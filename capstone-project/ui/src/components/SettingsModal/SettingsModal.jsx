@@ -2,7 +2,7 @@ import * as React from "react";
 import "./SettingsModal.css";
 import { useAuthContext } from "../../contexts/auth";
 import apiClient from "../../services/apiClient";
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 
 export default function SettingsModal() {
   const {
@@ -25,6 +25,7 @@ export default function SettingsModal() {
     newEmail: ""
   });
   
+  const navigate = useNavigate();
   const [changingPw, setChangingPw] = React.useState(false);
   const [changingEmail, setChangingEmail] = React.useState(false);
   const [isDeleting, setIsDeleting] = React.useState(false);
@@ -74,6 +75,7 @@ export default function SettingsModal() {
       password: form.password
     });
     logoutUser();
+    navigate("/");
     //closing settings modal if email is successfully changed
     setSettingsModal(!settingsModal);
     if (error) {
