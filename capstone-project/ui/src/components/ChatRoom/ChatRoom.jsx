@@ -3,7 +3,9 @@ import { useAuthContext } from "../../contexts/auth";
 import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 export default function ChatRoom() {
@@ -27,7 +29,9 @@ export default function ChatRoom() {
     var cName="";
     var bName="";
     
-    let roomID = useParams().id
+
+    let roomID = useParams().id;
+
 
     if (chatOpen == false) {
         cName="chat-container closed";
@@ -56,7 +60,7 @@ export default function ChatRoom() {
       // fetch an Access Token from the join-room route
       const response = await axios({
           method: 'post',
-          url: 'http://localhost:3001/join-room',
+          url: 'https://collabutest.herokuapp.com/join-room',
           data: {
               identity: user.username,
               roomName: roomID
