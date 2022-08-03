@@ -1,0 +1,176 @@
+*{
+    box-sizing: border-box;
+}
+
+.match-modal-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba( 0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
+}
+
+.match-modal{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #bdbdbd;
+    height:95%;
+    width:70%;
+    border-radius:5px ;
+    justify-content:flex-start;
+    }
+
+
+.match-modal-header{
+display:flex;
+flex-direction: row;
+justify-content:flex-end;
+width:100%;
+height:5%;
+margin-right:1vw;
+margin-top:1vh;
+}
+
+.close-match-modal{
+    
+    background: transparent;
+    border: 0vh;
+    border-radius: 5px;
+    color: black ;
+    padding: 0vh 1vw;
+    font-size: 4vh;
+    cursor: pointer;
+}
+
+.content{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    height:90vh;
+    width:70vw;
+    gap:3vh;
+}
+.match-modal-img{
+border-radius: 50%;
+height:30vh;
+width:17vw;
+}
+
+.match-name{
+display:flex;
+color:black;
+width:300px;
+height:7vh;
+flex-direction: row;
+justify-content: center;
+gap:1vw;
+font-weight: 600;
+
+}
+
+.match-first-name{
+font-size: 6vh;
+}
+
+.match-last-name{
+font-size: 6vh;
+}
+
+.match-location-timezone{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 3vh;
+    gap:1vh;
+}
+
+.work-information{
+    display:flex;
+    flex-direction:column ;
+    font-size: 3vh;
+    font-weight: 300;
+    justify-content: center;
+    gap:0vh;
+    height:8vh;
+
+}
+
+.education-information{
+    font-size:3vh;
+    font-weight: 500;
+}
+
+.self-taught{
+    font-size:3vh;
+    font-weight: 500;
+}
+
+.student-major{
+    font-size:7vh;
+    font-weight: 500;
+}
+
+.student-college{
+    font-size:5vh;
+    font-weight: 700;
+}
+
+.independent{
+    font-size:3vh;
+    font-weight: 500;
+}
+
+.job-title{
+    font-size:7vh;
+    font-weight: 500;
+}
+
+.job-company{
+    font-size:5vh;
+    font-weight: 700;
+}
+
+.match-social-media-links{
+display:flex;
+width:100%;
+}
+.match-social-media-links ul{
+display:flex;
+flex-direction: row;
+justify-content: space-evenly;
+width:100%;
+align-items: center;
+margin:0;
+padding:0;
+}
+
+.match-social-media-links ul li{
+display:flex;
+justify-content: center;
+width:18vw;
+height:7vh;
+border-radius: 25px;
+align-items: center;
+list-style: none;
+background-color: grey;
+
+}
+
+.match-social-media-links ul li{
+font-size: 3vh;
+
+}
+
+@media only screen and (max-width: 800px){
+    .match-social-media-links ul li{
+        font-size: 3vw;
+        }
+}
