@@ -184,13 +184,18 @@ class User {
 
     static async updateEmail(credentials) {
         // required fields are username, email and password, throw error if any are missing
-        const requiredFields = ["username", "email", "password"]
+        const requiredFields = ["username", "email", "password", "newEmail", "confirmNewEmail"]
 
         requiredFields.forEach(field => {
             if (!credentials.hasOwnProperty(field)) {
                 throw new BadRequestError(`Missing ${field} in request body.`)
             }
         })
+
+        // throw error with password doesnt match
+        if (credentials.newEmail !== credentials.confirmNewEmail) {
+            throw new BadRequestError(`Email does not match.`)
+        }
 
         // looks up user in database by username
         const user = await User.fetchUserByUsername(credentials.username)
@@ -212,7 +217,7 @@ class User {
                         WHERE username = $1
                     RETURNING id, username, email, password, first_name, last_name;
                 `,
-                [credentials.username, credentials.email.toLowerCase()]
+                [credentials.username, credentials.newEmail.toLowerCase()]
                 )
 
                 //return user
@@ -276,7 +281,6 @@ class User {
     static async delete(credentials) {
         //required fields are email and password, throw error if either are missing
         const requiredFields = ["email", "password"]
-
         requiredFields.forEach(field => {
             if (!credentials.hasOwnProperty(field)) {
                 throw new BadRequestError(`Missing ${field} in request body.`)
@@ -291,10 +295,10 @@ class User {
            if they match, delete user from database
            else, throw an error
         */
+        
         if (user) {
 
             const isValid = await bcrypt.compare(credentials.password, user.password)
-
             // delete user from database
             if (isValid) {
                 const result = await db.query(`
