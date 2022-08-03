@@ -9,7 +9,6 @@ import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
 import "./Loading.css";
-import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 
 export default function ProfilePage() {
 
