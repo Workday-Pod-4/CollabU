@@ -8,10 +8,7 @@ export default function MatchModal({ matches, Match, toggleMatchModal }) {
   // filtering matches array to include only object where username is equal to username in onClick event
   let UserInfo = matches.filter((match) => match.username == Match);
   UserInfo = UserInfo[0];
-  // console.log("matchModal:", matchModal)
-  // console.log("confirmUsername:", Match)
-  console.log("userInfo:", UserInfo);
-  // console.log("matches:", matches)
+
 
   return (
     <div className="match-modal-container">
