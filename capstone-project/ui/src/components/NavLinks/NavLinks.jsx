@@ -7,7 +7,7 @@ import "./NavLinks.css";
 export default function NavLinks() {
   
   const {user, logoutUser} = useAuthContext() 
-  const {prefModal, setPrefModal, togglePrefModal, inRoom, setInRoom} = useAuthContext() 
+  const {togglePrefModal, inRoom, setInRoom, setExiting} = useAuthContext() 
 
   function exitRoom(){
     setInRoom(false);
@@ -20,7 +20,7 @@ export default function NavLinks() {
         <li>
           { user?.email && inRoom==false ? <li className="logout-button" onClick={logoutUser}> <Link to="/">Logout</Link></li> 
           : 
-          user?.email && inRoom ? <li className="btn" onClick={() => {setInRoom(false)}}> <Link to="/profile">Exit Room</Link> </li>
+          user?.email && inRoom ? <li className="btn" onClick={() =>{setExiting(true)}}> <a>Exit Room</a> </li>
           :
           <Link to="/login">
           Login

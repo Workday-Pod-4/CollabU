@@ -56,8 +56,6 @@ class ApiClient {
     }
 
     async deleteUser(credentials) {
-        this.setToken(null)
-        localStorage.setItem(this.tokenName, "")
         return await this.request({ endpoint: `auth/delete-account`, method: `DELETE`, data: credentials })
     }
 
@@ -67,4 +65,4 @@ class ApiClient {
     }
 }
 
-export default new ApiClient("http://localhost:3001")
+export default new ApiClient("https://collabutest.herokuapp.com")

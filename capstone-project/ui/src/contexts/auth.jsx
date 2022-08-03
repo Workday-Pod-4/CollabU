@@ -4,7 +4,6 @@ import apiClient from "../services/apiClient"
 
 const AuthContext = createContext(null)
 
-
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState({})
     const [initialized, setInitialized] = useState(false)
@@ -18,7 +17,11 @@ export const AuthContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [reportModal, setReportModal] = React.useState(false)
     const [inRoom, setInRoom] = useState(false);
+
     const [matchModal, setMatchModal] = useState(false)
+
+
+    const [exiting, setExiting] = useState(false);
 
 
     //function for toggling report issue modal
@@ -106,7 +109,10 @@ export const AuthContextProvider = ({ children }) => {
       setInRoom,
       inRoom, 
       setMatchModal, 
-      matchModal
+      matchModal,
+      exiting,
+      setExiting
+
     }
 
     return (

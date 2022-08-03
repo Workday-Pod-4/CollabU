@@ -4,21 +4,34 @@ import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 
 export default function ChatRoom() {
 
-    const { user, chatOpen, setChatOpen, inRoom, setInRoom} = useAuthContext()
+    const { user, 
+            chatOpen, 
+            setChatOpen, 
+            inRoom, 
+            setInRoom, 
+            setExiting, 
+            exiting } = useAuthContext()
 
     const [room, setRoom] = React.useState(null);
     const [showRoom, setShowRoom] = React.useState(false);
     const [localParticipant, setLocalParticipant] = React.useState(null);
     const [remoteParticipant, setRemoteParticipant] = React.useState(null);
 
+    const navigate = useNavigate();
+
     setInRoom(true);
     var cName="";
     var bName="";
     
-    let roomID = 'test'
+
+    let roomID = useParams().id;
+
 
     if (chatOpen == false) {
         cName="chat-container closed";
@@ -27,6 +40,12 @@ export default function ChatRoom() {
     else {
         cName="chat-container open";
         bName="chat open";
+    }
+
+    // disconnects the user from the room
+    function exitRoom(){
+        setInRoom(false);
+        navigate("/profile")
     }
 
     // set the remote participant when they join the room
@@ -41,7 +60,7 @@ export default function ChatRoom() {
       // fetch an Access Token from the join-room route
       const response = await axios({
           method: 'post',
-          url: 'http://localhost:3001/join-room',
+          url: 'https://collabutest.herokuapp.com/join-room',
           data: {
               identity: user.username,
               roomName: roomID
@@ -60,15 +79,25 @@ export default function ChatRoom() {
       room.participants.forEach(participantConnected);
       setLocalParticipant(room.localParticipant)
     }
+    
 
     joinRoom()
     setShowRoom(true)
-    
     }
   
     return (
         <div className = "chat-room">
         <div className="content">
+            {exiting ?
+            <div className="modal-container">
+                <div className="modal-content">
+                    <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
+                    <button className="exit-fr" onClick={exitRoom}>Get me outta here!</button>
+                </div>
+            </div>
+            :
+            null
+            }
             <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant}/>
         </div>
     </div>     
@@ -76,11 +105,88 @@ export default function ChatRoom() {
 
 export function Room(props) {
 
-    const [muteAudio, setMuteAudio] = React.useState(true);
+    const [playAudio, setPlayAudio] = React.useState(false);
+    const [displayVideo, setDisplayVideo] = React.useState(false);
+
+    const trackSubscribed = (track) => {
+
+        const elements = document.getElementsByClassName('user-video')[0]
+        if (track.kind == 'video') {
+            elements.style.visibility = "visible";
+        } else if (track.kind == 'audio') {
+            elements.appendChild(track.attach());
+        }
+      };
+  
+      const trackUnsubscribed = (track) => {
+
+        const elements = document.getElementsByClassName('user-video')[0]
+        if (track.kind == 'video') {
+            elements.style.visibility = "hidden";
+        } else if (track.kind == 'audio') {
+            track.detach().forEach(element => {
+                element.remove();
+              });
+        }
+      };
+
+    React.useEffect(() => {
+
+        props?.room?.participants.forEach(participant => {
+          participant.on('trackSubscribed', trackSubscribed);
+          participant.on('trackUnsubscribed', trackUnsubscribed);
+          });
+
+    });
+  
+    function toggleDisplayVideo () {
+      if (displayVideo === true) {
+        setDisplayVideo(false)
+      } else if (displayVideo === false) {
+        setDisplayVideo(true)
+      }
+      
+        if (displayVideo === true) {
+            Video.createLocalVideoTrack().then(localVideoTrack => {
+                return props.room.localParticipant.publishTrack(localVideoTrack);
+              }).then(publication => {
+                const elements = document.getElementsByClassName('user-video')[1]
+                elements.appendChild(publication.track.attach());
+              });
+        } else if (displayVideo === false) {
+            props.room.localParticipant.videoTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
+        }
+    }
 
     function toggleMuteAudio () {
-        setMuteAudio(!muteAudio)
+
+      if (playAudio === true) {
+        setPlayAudio(false)
+      } else if (playAudio === false) {
+        setPlayAudio(true)
       }
+
+      if (playAudio === true) {
+          Video.createLocalAudioTrack().then(localAudioTrack => {
+              return props.room.localParticipant.publishTrack(localAudioTrack);
+            }).then(publication => {
+              const elements = document.getElementsByClassName('user-video')[1]
+              elements.appendChild(publication.track.attach());
+            });
+      } else if (playAudio === false) {
+          props.room.localParticipant.audioTracks.forEach(publication => {
+              const attachedElements = publication.track.detach();
+              publication.track.stop();
+              publication.unpublish();
+              attachedElements.forEach(element => element.remove());
+            });
+      }
+    }
 
     return (
         <>
@@ -89,18 +195,18 @@ export function Room(props) {
             <>
             <div className="user-views">
                 <div className="participant-video">
-                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} muteAudio={muteAudio}/>: 
+                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} />: 
                     <div className="user-view">
                         <h3> Your Match is Coming! </h3>
                         <div className="user-video"></div>
                 </div>}
-                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} muteAudio={muteAudio}/>
+                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} />
                 </div>
             </div>
             <div className="bottom-row">
                         <div className="button-container">
                             <button className="mute" onClick={toggleMuteAudio}>Mute</button>
-                            <button className="video">Video</button>
+                            <button className="video" onClick={toggleDisplayVideo}>Video</button>
                         </div>
                         <div className="">
                             <button className="">Chat</button>
@@ -185,6 +291,6 @@ return (
             <div className="user-video">
                 <video ref={videoRef} autoPlay={true} />
             </div>
-            <audio ref={audioRef} autoPlay={true} muted={props.muteAudio} />
+            <audio ref={audioRef} autoPlay={true} />
         </div>
 )}
