@@ -234,6 +234,7 @@ export default function ProfilePage() {
           :
             
         <div className="right-section">
+          <h1>Match History</h1>
           <div className="match-history">
           <ul>
           {matches.map((match, idx)=> {
