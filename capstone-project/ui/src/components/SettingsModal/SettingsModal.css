@@ -13,6 +13,7 @@
     background-color: grey;
     color:white;
 }
+
 .settings-modal-container{
     display: flex;
     flex-direction: column;

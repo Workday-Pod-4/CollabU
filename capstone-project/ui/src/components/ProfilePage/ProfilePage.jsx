@@ -15,6 +15,8 @@ import axios from "axios"
 
 
 export default function ProfilePage() {
+//  state variable that contains previously matched user's info
+  const [match, setMatch]=React.useState()
 
   const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
   const { settingsModal, toggleSettingsModal } = useAuthContext();
@@ -48,12 +50,22 @@ export default function ProfilePage() {
     setIsStudying(false)
     setIsWorking(true)
   }
+ 
+
 
   //if user toggles match modal
   function toggleMatchModal(e){
-    setConfirmUsername((e.target.innerHTML).split(" ")[0])
+    setMatch((e.target.innerHTML).split(" |")[0])
     setMatchModal(!matchModal)
+    console.log("e", e.target.innerHTML)
+    console.log("match:", match)
+    console.log("match:")
+    
+    console.log("works")
   }
+
+
+
   // set topic property based on user input
   function handleOnChangeTopic (event) {
     user.topic = event.target.value
@@ -126,11 +138,11 @@ export default function ProfilePage() {
     const newStr = str.charAt(0).toUpperCase() + str.slice(1);
     return newStr
   }
-console.log("matches:",matches)
 
 
   return (
     <div className="profile-page">
+      {matchModal ? <MatchModal toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
       {reportModal?
       <ReportIssueModal/>:null}
       { firstTime ? <AdditionalInfo /> : null}
@@ -247,11 +259,10 @@ console.log("matches:",matches)
           <div className="match-history">
           <ul>
           {matches.map((match, idx)=> {
-            const userObject = match
               return(
               <>
               <li key = {idx} onClick= {toggleMatchModal}><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span></li>
-              {matchModal? <MatchModal  confirmUsername= {confirmUsername} matches = {matches} userObject = {userObject}/>: null}
+              
               </>
             )})}
             </ul>
