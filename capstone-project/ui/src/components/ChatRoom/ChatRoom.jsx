@@ -125,7 +125,6 @@ export function Room(props) {
         setDisplayVideo(true)
       }
       
-      console.log("Display Video", displayVideo)
 
         if (displayVideo === true) {
             Video.createLocalVideoTrack().then(localVideoTrack => {
@@ -133,7 +132,6 @@ export function Room(props) {
               }).then(publication => {
                 const elements = document.getElementsByClassName('user-video')[1]
                 elements.appendChild(publication.track.attach());
-                console.log('Successfully unmuted your video:', publication);
               });
         } else if (displayVideo === false) {
             props.room.localParticipant.videoTracks.forEach(publication => {
@@ -152,7 +150,6 @@ export function Room(props) {
         setPlayAudio(true)
       }
 
-      console.log("Display Video", displayVideo)
 
       if (displayVideo === true) {
           Video.createLocalVideoTrack().then(localVideoTrack => {
@@ -160,7 +157,6 @@ export function Room(props) {
             }).then(publication => {
               const elements = document.getElementsByClassName('user-video')[1]
               elements.appendChild(publication.track.attach());
-              console.log('Successfully unmuted your video:', publication);
             });
       } else if (displayVideo === false) {
           props.room.localParticipant.videoTracks.forEach(publication => {
