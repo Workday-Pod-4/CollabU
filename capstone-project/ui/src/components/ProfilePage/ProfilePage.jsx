@@ -124,7 +124,7 @@ export default function ProfilePage() {
       
       const fetchMatches = async () => {
         const res = await axios.get(
-          `https://collabutest.herokuapp.com/matches?user_id=${user.id}`);
+          `http://localhost:3001/matches?user_id=${user.id}`);
           setMatches(res.data)
       };
       fetchMatches();
