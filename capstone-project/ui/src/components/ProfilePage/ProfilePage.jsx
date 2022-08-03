@@ -101,7 +101,7 @@ export default function ProfilePage() {
 
   React.useEffect(() => {
 
-    const socket = io("http://localhost:3001/profile")
+    const socket = io("http://localhost:3001")
 
     socket.on('redirectToRoom', (roomURL) => {
         setIsLoading(false);
