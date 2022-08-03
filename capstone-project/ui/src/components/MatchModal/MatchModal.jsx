@@ -21,7 +21,12 @@ export default function MatchModal({ matches, Match, toggleMatchModal }) {
         <div className="content">
           <img
             className="match-modal-img"
-            src="https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg"
+            src={UserInfo?.profile_image_url ? UserInfo.profile_image_url : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"}
+              onError={(event) => {
+                event.target.onError = "";
+                event.target.src= "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
+                return true;
+              }}
             alt="img"
           ></img>
           <div className="match-name">

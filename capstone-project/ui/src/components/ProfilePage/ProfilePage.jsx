@@ -101,7 +101,7 @@ export default function ProfilePage() {
 
   React.useEffect(() => {
 
-    const socket = io("https://collabutest.herokuapp.com")
+    const socket = io("http://localhost:3001/profile")
 
     socket.on('redirectToRoom', (roomURL) => {
         setIsLoading(false);
@@ -173,21 +173,21 @@ export default function ProfilePage() {
             <ul>
             {user?.social_media_link_1 ?
                 <li className="link-1">
-                  <a href={user.social_media_link_1}>
+                  <a href={`https://${user.social_media_link_1}`} target="_blank">
                     <span>{user.social_media_link_1}</span>
                   </a>
                 </li>
               : null }
               {user?.social_media_link_2 ?
                 <li className="link-2">
-                  <a href={user.social_media_link_2}>
+                  <a href={`https://${user.social_media_link_2}`} target="_blank">
                     <span>{user.social_media_link_2}</span>
                   </a>
                 </li>
               : null }
               {user?.social_media_link_3 ?
                 <li className="link-3">
-                  <a href={user.social_media_link_3}>
+                  <a href={`https://${user.social_media_link_3}`} target="_blank">
                     <span>{user.social_media_link_3}</span>
                   </a>
                 </li>
@@ -240,7 +240,18 @@ export default function ProfilePage() {
           {matches.map((match, idx)=> {
               return(
               <>
-              <li key = {idx} onClick= {toggleMatchModal}><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span></li>
+              <li key = {idx} onClick= {toggleMatchModal}>
+              <img src={match?.profile_image_url ? match.profile_image_url : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"}
+              onError={(event) => {
+                event.target.onError = "";
+                event.target.src= "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
+                return true;
+              }} 
+              alt = "img" 
+              width = "70px" 
+              height= "70px"/>
+              <span>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span>
+              </li>
               
               </>
             )})}
