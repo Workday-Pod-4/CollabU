@@ -58,11 +58,6 @@ export default function ProfilePage() {
   function toggleMatchModal(e){
     setMatch((e.target.innerHTML).split(" |")[0])
     setMatchModal(!matchModal)
-    console.log("e", e.target.innerHTML)
-    console.log("match:", match)
-    console.log("match:")
-    
-    console.log("works")
   }
 
 
