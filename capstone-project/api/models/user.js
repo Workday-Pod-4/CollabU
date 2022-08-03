@@ -16,7 +16,6 @@ class User {
             timezone: user.timezone,
             job_title: user.job_title,
             company: user.company,
-            years_of_experience: user.years_of_experience,
             college: user.college,
             major: user.major,
             profile_image_url: user.profile_image_url,
@@ -162,18 +161,17 @@ class User {
                         timezone = $6,
                         job_title = $7,
                         company = $8,
-                        years_of_experience = $9,
-                        college = $10,
-                        major = $11,
-                        social_media_link_1 = $12,
-                        social_media_link_2 = $13,
-                        social_media_link_3 = $14,
-                        profile_image_url = $15,
-                        location = $16
+                        college = $9,
+                        major = $10,
+                        social_media_link_1 = $11,
+                        social_media_link_2 = $12,
+                        social_media_link_3 = $13,
+                        profile_image_url = $14,
+                        location = $15
                     WHERE id = $1
-                    RETURNING id, email, password, username, first_name, last_name, location, timezone, job_title, company, years_of_experience, college, major, profile_image_url, social_media_link_1, social_media_link_2, social_media_link_3;
+                    RETURNING id, email, password, username, first_name, last_name, location, timezone, job_title, company, college, major, profile_image_url, social_media_link_1, social_media_link_2, social_media_link_3;
                 `,
-                [user.id, tempUser.username, tempUser.email.toLowerCase(), tempUser.first_name, tempUser.last_name, tempUser.timezone, tempUser.job_title, tempUser.company, tempUser.years_of_experience, tempUser.college, tempUser.major, tempUser.social_media_link_1, tempUser.social_media_link_2, tempUser.social_media_link_3, tempUser.profile_image_url, tempUser.location]
+                [user.id, tempUser.username, tempUser.email.toLowerCase(), tempUser.first_name, tempUser.last_name, tempUser.timezone, tempUser.job_title, tempUser.company, tempUser.college, tempUser.major, tempUser.social_media_link_1, tempUser.social_media_link_2, tempUser.social_media_link_3, tempUser.profile_image_url, tempUser.location]
                 )
 
                 // return user

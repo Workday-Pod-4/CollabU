@@ -10,7 +10,7 @@ export default function AdditionalInfo() {
   const [isProcessing, setIsProcessing] = React.useState(false)
   const [error, setError] = React.useState("")
 
-  const [form, setForm] = React.useState({ "college" : "", "major" : "", "job_title": "", "yearsOfExperience" : "", "socialMediaLink1": "", "socialMediaLink2": "", "socialMediaLink3": ""})
+  const [form, setForm] = React.useState({ "college" : "", "major" : "", "workTitle": "", "profilePic": "", "socialMediaLink1": "", "socialMediaLink2": "", "socialMediaLink3": ""})
 
   function handleOnChange(evt){
     setForm((f) => ({...f, [evt.target.name]: evt.target.value}))
@@ -26,8 +26,8 @@ export default function AdditionalInfo() {
         email: user.email,  
         college: form.college, 
         major: form.major, 
-        job_title: form.workTitle, 
-        years_of_experience: form.yearsOfExperience,
+        job_title: form.workTitle,
+        profile_image_url: form.profilePic,
         social_media_link_1: form.socialMediaLink1,
         social_media_link_2: form.socialMediaLink2,
         social_media_link_3: form.socialMediaLink3
@@ -78,12 +78,8 @@ export default function AdditionalInfo() {
                         </select>
                     </div>
                     <div className="input-field">
-                        <label>Years of Experience</label>
-                        <select className="form-input" name="yearsOfExperience" placeholder="Years of Experience" onChange={handleOnChange} defaultValue={form.yearsOfExperience}>
-                            <option value={"0-2"}>0 - 2</option>
-                            <option value={"3-9"}>3 - 9</option>
-                            <option value={"10+"}>10+</option>
-                        </select>
+                        <label>Profile Picture</label>
+                        <input className="form-input" type="text" name="profilePic" placeholder="Place the link to an image" onChange={handleOnChange} defaultValue={form.profilePic}></input>
                     </div>
                     <div className="input-field">
                         <label>Social Links</label>

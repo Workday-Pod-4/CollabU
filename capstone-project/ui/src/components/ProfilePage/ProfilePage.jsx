@@ -1,29 +1,36 @@
-
 import * as React from "react";
+import axios from "axios";
 import { useAuthContext } from "../../contexts/auth";
 import { io } from "socket.io-client";
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";
+import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
 import "./Loading.css";
 import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 
-
 export default function ProfilePage() {
 
-  const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
-  const { settingsModal, toggleSettingsModal } = useAuthContext();
+  const { user, 
+          firstTime, 
+          isUpdating, 
+          setIsUpdating, 
+          isLoading, 
+          setIsLoading, 
+          settingsModal, 
+          toggleSettingsModal, 
+          reportModal, 
+          setReportModal, 
+          toggleReportModal,
+          prefModal, 
+          setPrefModal, 
+          togglePrefModal } = useAuthContext();
 
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false);
-
-
-  const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
-
-  const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
 
   const [matches, setMatches] = React.useState([])
 
@@ -74,7 +81,8 @@ export default function ProfilePage() {
     client.current.emit('submit', {user});
   }
 
-  function closeModal(){
+  // closes Find A Match modal and removes users from queue
+  function closeModal() {
     client.current.emit('remove', {user});
     setIsLoading(false);
     togglePrefModal();
@@ -114,10 +122,9 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-      {reportModal?
-      <ReportIssueModal/>:null}
-      { firstTime ? <AdditionalInfo /> : null}
-      {settingsModal? <SettingsModal/>: null}
+      { reportModal ? <ReportIssueModal/> : null }
+      { firstTime ? <AdditionalInfo /> : null }
+      { settingsModal ? <SettingsModal/> : null }
       <div className="sections">
         <div className="left-section">
           <div className="profile-pic">
@@ -140,16 +147,8 @@ export default function ProfilePage() {
             </h2>
           </div>
           <div className="location">
-            { user?.location ? 
-            <b>{user.location}</b>
-            :
-            null
-            }
-            { user?.timezone ?
-              <b> | {user.timezone}</b>
-              :
-              null
-            }     
+            { user?.location ? <b>{user.location}</b> : null }
+            { user?.timezone ? <b> | {user.timezone}</b> : null }     
           </div>
           <div className="social-media-links">
             <ul>
@@ -159,73 +158,52 @@ export default function ProfilePage() {
                     <span>{user.social_media_link_1}</span>
                   </a>
                 </li>
-              :
-                null
-              }
+              : null }
               {user?.social_media_link_2 ?
                 <li className="link-2">
                   <a href={user.social_media_link_2}>
                     <span>{user.social_media_link_2}</span>
                   </a>
                 </li>
-              :
-                null
-              }
-              
+              : null }
               {user?.social_media_link_3 ?
                 <li className="link-3">
                   <a href={user.social_media_link_3}>
                     <span>{user.social_media_link_3}</span>
                   </a>
                 </li>
-              :
-                null
-              }
+              : null }
             </ul>
           </div>
           <div className="settings">
-            <button className="settings-btn" onClick = {toggleSettingsModal}>Settings</button>
+            <button className="settings-btn" onClick={toggleSettingsModal}>Settings</button>
           </div>
-
           <div className="report-issue">
-            <li onClick = {toggleReportModal}><b>Report issue</b></li>
+            <li onClick={toggleReportModal}><b>Report issue</b></li>
           </div>
         </div>
-
         <div className={isUpdating? "middle-section-open" : "middle-section"}>
           { isUpdating ? <UpdateForm />
           :
           <div className="info-cards">
               <div className="work-card">
                 <div className="job-title-row">
-                {user?.job_title ?
-                <b>{user.job_title}</b>
-                  :
-                <b>Insert your Work Title</b>
-                }
+                  {user?.job_title ?
+                  <b>{user.job_title}</b> : <b>Insert your Work Title</b>}
                 </div>
-                
               <div className="company-row">
                 <p>at</p>
                 {user?.company ?
-                <b>{user.company}</b>
-                :
-                <b>Add Your Company!</b>
-                }
-                
+                <b>{user.company}</b> : <b>Add Your Company!</b>}
               </div>
-                
               </div>
-
-              { (user?.major || user?.college) ? 
+              {(user?.major || user?.college) ? 
               <div className="school-card">
                 <b>{user.major} student</b>
                 <p>at</p>
                 <b>{user.college}</b>
               </div>
-              :
-              null  
-              }
+              : null}
               <div className="update-btn-container">
                 <button className="update-btn" onClick={() => (setIsUpdating(true))}>Update</button>
               </div>
@@ -243,6 +221,7 @@ export default function ProfilePage() {
                 <li><img src = "" alt = "profile-pic" width = "70px" height= "70px"/><span>Person 3</span></li>
               </ul>
             </div>
+
           </div>
           }
       </div>
@@ -262,7 +241,6 @@ export default function ProfilePage() {
                 </button>
               </div>
             </div>
-            
             <div className="preference-form-wrapper">
               {isStudying?<div className="preference-study-form">
               <div className ="sub-header"> Study </div>
@@ -345,4 +323,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-

@@ -6,6 +6,7 @@ import "./ChatRoom.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function ChatRoom() {
 
     const { user, chatOpen, setChatOpen, inRoom, setInRoom, setExiting, exiting} = useAuthContext()
@@ -73,7 +74,6 @@ export default function ChatRoom() {
 
     joinRoom()
     setShowRoom(true)
-    
     }
   
     return (
@@ -96,11 +96,78 @@ export default function ChatRoom() {
 
 export function Room(props) {
 
-    const [muteAudio, setMuteAudio] = React.useState(true);
+    const [playAudio, setPlayAudio] = React.useState(false);
+    const [displayVideo, setDisplayVideo] = React.useState(false);
+
+    const trackSubscribed = () => {
+      const elements = document.getElementsByClassName('user-video')[0]
+      elements.style.visibility = "visible";
+      };
+  
+      const trackUnsubscribed = () => {
+        const elements = document.getElementsByClassName('user-video')[0]
+        elements.style.visibility = "hidden";
+      };
+
+    React.useEffect(() => {
+
+        props?.room?.participants.forEach(participant => {
+          participant.on('trackSubscribed', trackSubscribed);
+          participant.on('trackUnsubscribed', trackUnsubscribed);
+          });
+
+    });
+  
+    function toggleDisplayVideo () {
+      if (displayVideo === true) {
+        setDisplayVideo(false)
+      } else if (displayVideo === false) {
+        setDisplayVideo(true)
+      }
+      
+
+        if (displayVideo === true) {
+            Video.createLocalVideoTrack().then(localVideoTrack => {
+                return props.room.localParticipant.publishTrack(localVideoTrack);
+              }).then(publication => {
+                const elements = document.getElementsByClassName('user-video')[1]
+                elements.appendChild(publication.track.attach());
+              });
+        } else if (displayVideo === false) {
+            props.room.localParticipant.videoTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
+        }
+    }
 
     function toggleMuteAudio () {
-        setMuteAudio(!muteAudio)
+      if (playAudio === true) {
+        setPlayAudio(false)
+      } else if (playAudio === false) {
+        setPlayAudio(true)
       }
+
+
+      if (displayVideo === true) {
+          Video.createLocalVideoTrack().then(localVideoTrack => {
+              return props.room.localParticipant.publishTrack(localVideoTrack);
+            }).then(publication => {
+              const elements = document.getElementsByClassName('user-video')[1]
+              elements.appendChild(publication.track.attach());
+            });
+      } else if (displayVideo === false) {
+          props.room.localParticipant.videoTracks.forEach(publication => {
+              const attachedElements = publication.track.detach();
+              publication.track.stop();
+              publication.unpublish();
+              attachedElements.forEach(element => element.remove());
+            });
+      }
+
+    }
 
     return (
         <>
@@ -109,18 +176,18 @@ export function Room(props) {
             <>
             <div className="user-views">
                 <div className="participant-video">
-                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} muteAudio={muteAudio}/>: 
+                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} />: 
                     <div className="user-view">
                         <h3> Your Match is Coming! </h3>
                         <div className="user-video"></div>
                 </div>}
-                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} muteAudio={muteAudio}/>
+                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} />
                 </div>
             </div>
             <div className="bottom-row">
                         <div className="button-container">
-                            <button className="mute" onClick={toggleMuteAudio}>Mute</button>
-                            <button className="video">Video</button>
+                            <button className="mute">Mute</button>
+                            <button className="video" onClick={toggleDisplayVideo}>Video</button>
                         </div>
                         <div className="">
                             <button className="">Chat</button>
@@ -205,6 +272,6 @@ return (
             <div className="user-video">
                 <video ref={videoRef} autoPlay={true} />
             </div>
-            <audio ref={audioRef} autoPlay={true} muted={props.muteAudio} />
+            <audio ref={audioRef} autoPlay={true} muted={true} />
         </div>
 )}

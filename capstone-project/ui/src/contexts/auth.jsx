@@ -4,7 +4,6 @@ import apiClient from "../services/apiClient"
 
 const AuthContext = createContext(null)
 
-
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState({})
     const [initialized, setInitialized] = useState(false)

@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS users (
     timezone TEXT,
     job_title TEXT,
     company TEXT,
-    years_of_experience TEXT,
     college TEXT,
     major TEXT,
     profile_image_url   TEXT,
