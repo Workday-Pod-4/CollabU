@@ -37,25 +37,29 @@ export default function MatchModal({ matches, Match, toggleMatchModal }) {
           </div>
 
         <div className = "work-information">
-          {UserInfo.job_title=="undefined" && UserInfo.company == "undefined"? <><p className = "independent">Independent</p></> :null}
-          {UserInfo.job_title!="undefined"? <><p className = "job-title"> {UserInfo.job_title}</p> </>: null}
-          <br></br>
+          {UserInfo.job_title=="undefined" && UserInfo.company == "undefined"? <><div className = "independent">Independent</div></> :null}
+          {UserInfo.job_title!="undefined"? <><div className = "job-title"> {UserInfo.job_title}</div> </>: null}
+
           {UserInfo.job_title!="undefined"? <>at </>: null}
-          <br></br>
-          {UserInfo.company!="undefined" && UserInfo.job_title!="undefined"? <> <p className = "job-company">{UserInfo.company} </p></>:(UserInfo.job_title=="undefined" && UserInfo.company!="undefined"? <> <b>Works at</b> <p className = "job-company">{UserInfo.company}</p></>:null)}
+    
+          {UserInfo.company!="undefined" && UserInfo.job_title!="undefined"? <div className = "job-company">{UserInfo.company} </div>:(UserInfo.job_title=="undefined" && UserInfo.company!="undefined"? <> <b>Works at</b> <div className = "job-company">{UserInfo.company}</div></>:null)}
         </div>
 
         <div className = "education-information">
          
-        {UserInfo.major=="undefined" && UserInfo.college == "undefined" ? <><p className = "self-taught"> Self Taught </p></> :null}
-        {UserInfo.major!="undefined"? <><p className = "student-major"> {UserInfo.major}</p> student </>: null}
-          <br></br>
-          {UserInfo.major!="undefined"? <>at </>: null}
-          <br></br>
-          {UserInfo.college!="undefined" && UserInfo.major!="undefined"? <> <p className = "student-college">{UserInfo.college} </p></>:(UserInfo.major=="undefined" && UserInfo.college!="undefined"? <> <b>Attends</b> <p className = "student-college">{UserInfo.college}</p></>:null)}
+        {UserInfo.major=="undefined" && UserInfo.college == "undefined" ? <><div className = "self-taught"> Self Taught </div></> :null}
+        {UserInfo.major!="undefined"? <><div className = "student-major"> {UserInfo.major}</div> student </>: null}
+
+          {UserInfo.major!="undefined"? <div> at </div>: null}
+          {UserInfo.college!="undefined" && UserInfo.major!="undefined"? <> <div className = "student-college">{UserInfo.college} </div></>:(UserInfo.major=="undefined" && UserInfo.college!="undefined"? <> <b>Attends</b> <div className = "student-college">{UserInfo.college}</div></>:null)}
         </div>
-
-
+        <div className = "match-social-media-links">
+          <ul>
+            <li><span className = "match-social-media-link1">{UserInfo.social_media_link_1}</span></li>
+            <li><span className = "match-social-media-link2">{UserInfo.social_media_link_2}</span></li>
+            <li><span className = "match-social-media-link3">{UserInfo.social_media_link_3}</span></li>
+          </ul>
+        </div>
         </div>
       </div>
     </div>
