@@ -5,33 +5,34 @@ import { io } from "socket.io-client";
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";
-import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
+
+import MatchModal from "../MatchModal/MatchModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
-import "./Loading.css";
+import "./Loading.css"
+import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
+
+
 
 export default function ProfilePage() {
+//  state variable that contains previously matched user's info
+  const [match, setMatch]=React.useState()
 
-  const { user, 
-          firstTime, 
-          isUpdating, 
-          setIsUpdating, 
-          isLoading, 
-          setIsLoading, 
-          settingsModal, 
-          toggleSettingsModal, 
-          reportModal, 
-          setReportModal, 
-          toggleReportModal,
-          prefModal, 
-          setPrefModal, 
-          togglePrefModal } = useAuthContext();
 
+  const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
+  const { settingsModal, toggleSettingsModal } = useAuthContext();
+  const {matchModal, setMatchModal} = useAuthContext();
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
-  const [isWorking, setIsWorking] = React.useState(false);
+  const [isWorking, setIsWorking] = React.useState(false)
+  const [confirmUsername, setConfirmUsername] = React.useState()
+
+  const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
+
+  const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
 
   const [matches, setMatches] = React.useState([])
+
 
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
@@ -50,6 +51,16 @@ export default function ProfilePage() {
     setIsStudying(false)
     setIsWorking(true)
   }
+ 
+
+
+  //if user toggles match modal
+  function toggleMatchModal(e){
+    setMatch((e.target.innerHTML).split(" |")[0])
+    setMatchModal(!matchModal)
+  }
+
+
 
   // set topic property based on user input
   function handleOnChangeTopic (event) {
@@ -119,11 +130,20 @@ export default function ProfilePage() {
       fetchMatches();
     }, [user.id]);
 
+  //function for capitilizing first letter of strings (names)
+  function CapitalizeName(str){
+    const newStr = str.charAt(0).toUpperCase() + str.slice(1);
+    return newStr
+  }
+
+
   return (
     <div className="profile-page">
-      { reportModal ? <ReportIssueModal/> : null }
-      { firstTime ? <AdditionalInfo /> : null }
-      { settingsModal ? <SettingsModal/> : null }
+      {matchModal ? <MatchModal toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
+      {reportModal?
+      <ReportIssueModal/>:null}
+      { firstTime ? <AdditionalInfo /> : null}
+      {settingsModal? <SettingsModal/>: null}
       <div className="sections">
         <div className="left-section">
           <div className="profile-pic">
@@ -220,6 +240,18 @@ export default function ProfilePage() {
                 <li><img src = "" alt = "profile-pic" width = "70px" height= "70px"/><span>Person 3</span></li>
               </ul>
             </div>
+            
+        <div className="right-section">
+          <div className="match-history">
+          <ul>
+          {matches.map((match, idx)=> {
+              return(
+              <>
+              <li key = {idx} onClick= {toggleMatchModal}><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span></li>
+              
+              </>
+            )})}
+            </ul>
 
           </div>
           }
