@@ -117,6 +117,9 @@ margin-bottom: 2vh;
     list-style: none;
 }
 
+.report-issue li{
+    cursor: pointer;
+}
 
 .profile-page .middle-section{
     display:flex;
