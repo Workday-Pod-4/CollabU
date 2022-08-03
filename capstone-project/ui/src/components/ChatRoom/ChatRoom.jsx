@@ -3,12 +3,18 @@ import { useAuthContext } from "../../contexts/auth";
 import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 export default function ChatRoom() {
 
-    const { user, chatOpen, setChatOpen, inRoom, setInRoom, setExiting, exiting} = useAuthContext()
+    const { user, 
+            chatOpen, 
+            setChatOpen, 
+            inRoom, 
+            setInRoom, 
+            setExiting, 
+            exiting } = useAuthContext()
 
     const [room, setRoom] = React.useState(null);
     const [showRoom, setShowRoom] = React.useState(false);
@@ -21,7 +27,7 @@ export default function ChatRoom() {
     var cName="";
     var bName="";
     
-    let roomID = 'test'
+    let roomID = useParams().id
 
     if (chatOpen == false) {
         cName="chat-container closed";
@@ -176,7 +182,6 @@ export function Room(props) {
               attachedElements.forEach(element => element.remove());
             });
       }
-
     }
 
     return (
@@ -282,6 +287,6 @@ return (
             <div className="user-video">
                 <video ref={videoRef} autoPlay={true} />
             </div>
-            <audio ref={audioRef} autoPlay={true} muted={true} />
+            <audio ref={audioRef} autoPlay={true} />
         </div>
 )}
