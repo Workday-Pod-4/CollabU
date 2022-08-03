@@ -231,21 +231,21 @@ export default function ProfilePage() {
         </div>
           {isUpdating ?
           null
-          : 
-            <div className="right-section">
-              <div className="match-history">
-                <ul>
-                  {matches.map((match, idx)=> {
-                  return(
-                  <>
-                  <li key = {idx} onClick= {toggleMatchModal}><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span></li>
+          :
+            
+        <div className="right-section">
+          <div className="match-history">
+          <ul>
+          {matches.map((match, idx)=> {
+              return(
+              <>
+              <li key = {idx} onClick= {toggleMatchModal}><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span></li>
               
-                  </>
-                  )})}
-                </ul>
-
-              </div>
-            </div>
+              </>
+            )})}
+            </ul>
+          </div>
+          </div>
           }
       </div>
       {/* Preference Modal */}
@@ -344,5 +344,5 @@ export default function ProfilePage() {
         </div>
     </div> : null)}
     </div>
-  );
+);
 }

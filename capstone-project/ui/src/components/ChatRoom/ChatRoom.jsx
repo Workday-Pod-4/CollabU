@@ -2,9 +2,10 @@ import * as React from "react";
 import { useAuthContext } from "../../contexts/auth";
 import Video from 'twilio-video';
 import axios from "axios";
-import muteIcon from "../../assets/muted-svgrepo-com.svg"
 import "./ChatRoom.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 export default function ChatRoom() {
@@ -28,7 +29,9 @@ export default function ChatRoom() {
     var cName="";
     var bName="";
     
-    let roomID = useParams().id
+
+    let roomID = useParams().id;
+
 
     if (chatOpen == false) {
         cName="chat-container closed";
@@ -57,7 +60,7 @@ export default function ChatRoom() {
       // fetch an Access Token from the join-room route
       const response = await axios({
           method: 'post',
-          url: 'http://localhost:3001/join-room',
+          url: 'https://collabutest.herokuapp.com/join-room',
           data: {
               identity: user.username,
               roomName: roomID
@@ -89,7 +92,7 @@ export default function ChatRoom() {
             <div className="modal-container">
                 <div className="modal-content">
                     <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
-                    <button className="exit-fr" onClick={exitRoom()}>Get me outta here!</button>
+                    <button className="exit-fr" onClick={exitRoom}>Get me outta here!</button>
                 </div>
             </div>
             :
@@ -192,12 +195,12 @@ export function Room(props) {
             <>
             <div className="user-views">
                 <div className="participant-video">
-                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} playAudio={playAudio} displayVideo={displayVideo} participant={props.remoteParticipant} />: 
+                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} />: 
                     <div className="user-view">
                         <h3> Your Match is Coming! </h3>
                         <div className="user-video"></div>
                 </div>}
-                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room}  playAudio={playAudio} displayVideo={displayVideo}/>
+                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} />
                 </div>
             </div>
             <div className="bottom-row">
@@ -284,12 +287,9 @@ React.useEffect(() => {
 
 return (
         <div className="user-view">
-            <div className="header">
-                <h3>{props.participant.identity}</h3>
-                { props.playAudio ? null : <img src={muteIcon} alt="Muted"></img>}
-            </div>
+            <h3>{props.participant.identity}</h3>
             <div className="user-video">
-                { props.displayVideo ? <video ref={videoRef} autoPlay={true} /> : <div>placeholder</div> }
+                <video ref={videoRef} autoPlay={true} />
             </div>
             <audio ref={audioRef} autoPlay={true} />
         </div>
