@@ -164,3 +164,13 @@ background-color: grey;
 
 }
 
+.match-social-media-links ul li{
+font-size: 3vh;
+
+}
+
+@media only screen and (max-width: 800px){
+    .match-social-media-links ul li{
+        font-size: 3vw;
+        }
+}
