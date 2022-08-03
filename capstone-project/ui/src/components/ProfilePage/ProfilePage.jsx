@@ -9,7 +9,6 @@ import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
 import "./Loading.css";
-import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 
 export default function ProfilePage() {
 
@@ -91,7 +90,7 @@ export default function ProfilePage() {
 
   React.useEffect(() => {
 
-    const socket = io("http://localhost:3001")
+    const socket = io("https://collabutest.herokuapp.com")
 
     socket.on('redirectToRoom', (roomURL) => {
         setIsLoading(false);
@@ -114,7 +113,7 @@ export default function ProfilePage() {
       
       const fetchMatches = async () => {
         const res = await axios.get(
-          `http://localhost:3001/matches?user_id=${user.id}`);
+          `https://collabutest.herokuapp.com/matches?user_id=${user.id}`);
           setMatches(res.data)
       };
       fetchMatches();
