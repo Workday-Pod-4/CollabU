@@ -18,6 +18,7 @@ export const AuthContextProvider = ({ children }) => {
     const [reportModal, setReportModal] = React.useState(false)
     const [inRoom, setInRoom] = useState(false);
     const [exiting, setExiting] = useState(false);
+    const [colleges, setColleges] = useState([]);
 
     //function for toggling report issue modal
     function toggleReportModal(){
@@ -69,6 +70,19 @@ export const AuthContextProvider = ({ children }) => {
         }
       }, [setUser])
 
+      useEffect(()=> {
+        const getColleges = async () => {
+          const response = await fetch(
+            "http://universities.hipolabs.com/search?"
+          ).then((response) => response.json());
+        
+          // update the collegeList
+          setColleges(response);
+        };
+        getColleges();
+      }, [])
+     
+
     const logoutUser = async () => {
         await apiClient.logoutUser()
         setUser({})
@@ -104,7 +118,9 @@ export const AuthContextProvider = ({ children }) => {
       setInRoom,
       inRoom,
       exiting,
-      setExiting
+      setExiting,
+      colleges,
+      setColleges
     }
 
     return (

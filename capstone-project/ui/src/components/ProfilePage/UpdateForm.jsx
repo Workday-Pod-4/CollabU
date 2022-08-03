@@ -5,7 +5,7 @@ import "./UpdateForm.css"
 
 export default function UpdateForm() {
 
-  const { user, setUser, setIsUpdating} = useAuthContext()
+  const { user, setUser, setIsUpdating, colleges } = useAuthContext()
 
   const [isProcessing, setIsProcessing] = React.useState(false)
   const [error, setError] = React.useState("")
@@ -96,9 +96,7 @@ export default function UpdateForm() {
                         <div className="input-field">
                             <label>College</label>
                             <select className="form-input" name="college" placeholder="College" onChange={handleOnChange} defaultValue={form.college}>
-                                <option value={"College 1"}>College 1</option>
-                                <option value={"College 2"}>College 2</option>
-                                <option value={"College 3"}>College 3</option>
+                                {colleges? colleges.map((college, index) => (<option value={college.name}>{college.name}</option>)) : null}
                             </select>
                         </div>
                         <div className="input-field">
