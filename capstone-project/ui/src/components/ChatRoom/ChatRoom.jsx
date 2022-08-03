@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useAuthContext } from "../../contexts/auth";
-import Video, { TrackPublication } from 'twilio-video';
+import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
 
@@ -74,12 +74,8 @@ export default function ChatRoom() {
 
 export function Room(props) {
 
-    const [muteAudio, setMuteAudio] = React.useState(true);
+    const [playAudio, setPlayAudio] = React.useState(false);
     const [displayVideo, setDisplayVideo] = React.useState(false);
-
-    function toggleMuteAudio () {
-        setMuteAudio(!muteAudio)
-      }
 
     const trackSubscribed = () => {
       const elements = document.getElementsByClassName('user-video')[0]
@@ -127,6 +123,34 @@ export function Room(props) {
         }
     }
 
+    function toggleMuteAudio () {
+      if (playAudio === true) {
+        setPlayAudio(false)
+      } else if (playAudio === false) {
+        setPlayAudio(true)
+      }
+
+      console.log("Display Video", displayVideo)
+
+      if (displayVideo === true) {
+          Video.createLocalVideoTrack().then(localVideoTrack => {
+              return props.room.localParticipant.publishTrack(localVideoTrack);
+            }).then(publication => {
+              const elements = document.getElementsByClassName('user-video')[1]
+              elements.appendChild(publication.track.attach());
+              console.log('Successfully unmuted your video:', publication);
+            });
+      } else if (displayVideo === false) {
+          props.room.localParticipant.videoTracks.forEach(publication => {
+              const attachedElements = publication.track.detach();
+              publication.track.stop();
+              publication.unpublish();
+              attachedElements.forEach(element => element.remove());
+            });
+      }
+
+    }
+
     return (
         <>
         <div className="content">
@@ -134,17 +158,17 @@ export function Room(props) {
             <>
             <div className="user-views">
                 <div className="participant-video">
-                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} muteAudio={muteAudio}/>: 
+                {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} />: 
                     <div className="user-view">
                         <h3> Your Match is Coming! </h3>
                         <div className="user-video"></div>
                 </div>}
-                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} muteAudio={muteAudio}/>
+                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} />
                 </div>
             </div>
             <div className="bottom-row">
                         <div className="button-container">
-                            <button className="mute" onClick={toggleMuteAudio}>Mute</button>
+                            <button className="mute">Mute</button>
                             <button className="video" onClick={toggleDisplayVideo}>Video</button>
                         </div>
                         <div className="">
@@ -230,6 +254,6 @@ return (
             <div className="user-video">
                 <video ref={videoRef} autoPlay={true} />
             </div>
-            <audio ref={audioRef} autoPlay={true} muted={props.muteAudio} />
+            <audio ref={audioRef} autoPlay={true} muted={true} />
         </div>
 )}
