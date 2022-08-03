@@ -232,14 +232,6 @@ export default function ProfilePage() {
           {isUpdating ?
           null
           :
-          <div className="right-section">
-            <div className="match-history">
-              <ul>
-                <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>Person 1</span></li>
-                <li><img src = "https://pbs.twimg.com/profile_images/536210858809249792/UgauTnaG_400x400.jpeg" alt = "img" width = "70px" height= "70px"/><span>Person 2</span></li>
-                <li><img src = "" alt = "profile-pic" width = "70px" height= "70px"/><span>Person 3</span></li>
-              </ul>
-            </div>
             
         <div className="right-section">
           <div className="match-history">
@@ -252,7 +244,7 @@ export default function ProfilePage() {
               </>
             )})}
             </ul>
-
+          </div>
           </div>
           }
       </div>
@@ -352,5 +344,5 @@ export default function ProfilePage() {
         </div>
     </div> : null)}
     </div>
-  );
+);
 }
