@@ -235,6 +235,7 @@ width: 75%;
 background-color:white;
 padding: 2vh 3vw;
 font-size: 3vh;
+cursor: pointer;
 }
 
 .profile-page .right-section .match-history ul li img{
