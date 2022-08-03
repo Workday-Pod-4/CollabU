@@ -3,7 +3,6 @@ import { useAuthContext } from "../../contexts/auth";
 import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -99,14 +98,26 @@ export function Room(props) {
     const [playAudio, setPlayAudio] = React.useState(false);
     const [displayVideo, setDisplayVideo] = React.useState(false);
 
-    const trackSubscribed = () => {
-      const elements = document.getElementsByClassName('user-video')[0]
-      elements.style.visibility = "visible";
+    const trackSubscribed = (track) => {
+
+        const elements = document.getElementsByClassName('user-video')[0]
+        if (track.kind == 'video') {
+            elements.style.visibility = "visible";
+        } else if (track.kind == 'audio') {
+            elements.appendChild(track.attach());
+        }
       };
   
-      const trackUnsubscribed = () => {
+      const trackUnsubscribed = (track) => {
+
         const elements = document.getElementsByClassName('user-video')[0]
-        elements.style.visibility = "hidden";
+        if (track.kind == 'video') {
+            elements.style.visibility = "hidden";
+        } else if (track.kind == 'audio') {
+            track.detach().forEach(element => {
+                element.remove();
+              });
+        }
       };
 
     React.useEffect(() => {
@@ -125,7 +136,6 @@ export function Room(props) {
         setDisplayVideo(true)
       }
       
-
         if (displayVideo === true) {
             Video.createLocalVideoTrack().then(localVideoTrack => {
                 return props.room.localParticipant.publishTrack(localVideoTrack);
@@ -144,22 +154,22 @@ export function Room(props) {
     }
 
     function toggleMuteAudio () {
+
       if (playAudio === true) {
         setPlayAudio(false)
       } else if (playAudio === false) {
         setPlayAudio(true)
       }
 
-
-      if (displayVideo === true) {
-          Video.createLocalVideoTrack().then(localVideoTrack => {
-              return props.room.localParticipant.publishTrack(localVideoTrack);
+      if (playAudio === true) {
+          Video.createLocalAudioTrack().then(localAudioTrack => {
+              return props.room.localParticipant.publishTrack(localAudioTrack);
             }).then(publication => {
               const elements = document.getElementsByClassName('user-video')[1]
               elements.appendChild(publication.track.attach());
             });
-      } else if (displayVideo === false) {
-          props.room.localParticipant.videoTracks.forEach(publication => {
+      } else if (playAudio === false) {
+          props.room.localParticipant.audioTracks.forEach(publication => {
               const attachedElements = publication.track.detach();
               publication.track.stop();
               publication.unpublish();
@@ -186,7 +196,7 @@ export function Room(props) {
             </div>
             <div className="bottom-row">
                         <div className="button-container">
-                            <button className="mute">Mute</button>
+                            <button className="mute" onClick={toggleMuteAudio}>Mute</button>
                             <button className="video" onClick={toggleDisplayVideo}>Video</button>
                         </div>
                         <div className="">
