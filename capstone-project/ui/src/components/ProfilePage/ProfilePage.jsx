@@ -19,7 +19,7 @@ export default function ProfilePage() {
   const [match, setMatch]=React.useState()
 
 
-  const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
+  const { user , firstTime, setFirstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
   const { settingsModal, toggleSettingsModal } = useAuthContext();
   const {matchModal, setMatchModal} = useAuthContext();
   // if user selects studying in preference modal it will display study preference form
@@ -33,7 +33,7 @@ export default function ProfilePage() {
 
   const [matches, setMatches] = React.useState([])
 
-
+setFirstTime(true)
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
       user.activity = 'studying'
