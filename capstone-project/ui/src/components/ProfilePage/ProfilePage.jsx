@@ -18,7 +18,7 @@ export default function ProfilePage() {
 
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
-  const [isWorking, setIsWorking] = React.useState(false)
+  const [isWorking, setIsWorking] = React.useState(false);
 
 
   const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
@@ -123,7 +123,13 @@ export default function ProfilePage() {
           <div className="profile-pic">
             {user.image}
             <img
-              src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
+              src={user?.profile_image_url ? user.profile_image_url : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"}
+              onError={(event) => {
+                event.target.onError = "";
+                event.target.src= "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
+                return true;
+              }}
+              alt="Profile Picture"
               height="150px"
               width="150px"
             />
@@ -186,7 +192,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        <div className="middle-section">
+        <div className={isUpdating? "middle-section-open" : "middle-section"}>
           { isUpdating ? <UpdateForm />
           :
           <div className="info-cards">
@@ -226,16 +232,19 @@ export default function ProfilePage() {
           </div>
           }
         </div>
-
-        <div className="right-section">
-          <div className="match-history">
-            <ul>
-              <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>Person 1</span></li>
-              <li><img src = "https://pbs.twimg.com/profile_images/536210858809249792/UgauTnaG_400x400.jpeg" alt = "img" width = "70px" height= "70px"/><span>Person 2</span></li>
-              <li><img src = "" alt = "profile-pic" width = "70px" height= "70px"/><span>Person 3</span></li>
-            </ul>
+          {isUpdating ?
+          null
+          :
+          <div className="right-section">
+            <div className="match-history">
+              <ul>
+                <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>Person 1</span></li>
+                <li><img src = "https://pbs.twimg.com/profile_images/536210858809249792/UgauTnaG_400x400.jpeg" alt = "img" width = "70px" height= "70px"/><span>Person 2</span></li>
+                <li><img src = "" alt = "profile-pic" width = "70px" height= "70px"/><span>Person 3</span></li>
+              </ul>
+            </div>
           </div>
-        </div>
+          }
       </div>
       {/* Preference Modal */}
       {prefModal && (isLoading == false) ? (
