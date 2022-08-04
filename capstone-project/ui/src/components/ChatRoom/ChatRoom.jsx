@@ -60,7 +60,7 @@ export default function ChatRoom() {
       // fetch an Access Token from the join-room route
       const response = await axios({
           method: 'post',
-          url: 'https://collabutest.herokuapp.com/join-room',
+          url: 'http://localhost:3001/join-room',
           data: {
               identity: user.username,
               roomName: roomID
