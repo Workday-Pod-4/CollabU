@@ -240,19 +240,19 @@ export default function ProfilePage() {
           {matches.map((match, idx)=> {
               return(
               <>
-              <li key = {idx} onClick= {toggleMatchModal}>
+              <li>
               <img src={match?.profile_image_url ? match.profile_image_url : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"}
               onError={(event) => {
                 event.target.onError = "";
                 event.target.src= "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
                 return true;
               }} 
+              
               alt = "img" 
               width = "70px" 
               height= "70px"/>
-              <span>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span>
+              <span onClick= {toggleMatchModal}>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span>
               </li>
-              
               </>
             )})}
             </ul>
