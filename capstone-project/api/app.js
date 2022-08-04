@@ -130,6 +130,25 @@ app.post("/join-room", async (req, res) => {
     });
 });
 
+app.post('/disconnect/:roomID', async (req, res) => {
+    const { roomID } = req.params
+    const { status } = req.query
+
+    const roomSidResponse = await twilioClient.video.rooms(roomID).fetch();
+    const roomSid = roomSidResponse.sid;
+
+    if (status !== 'completed') {
+      res.status(400).end()
+    }
+    try {
+      await twilioClient.video.rooms(roomSid).update({ status })
+      res.status(200).end()
+    } catch (error) {
+      console.error(error.stack)
+      res.status(500).send(error)
+    }
+  });
+
 // Handle 404 errors
 app.use((req, res, next) => {
     next(new NotFoundError())

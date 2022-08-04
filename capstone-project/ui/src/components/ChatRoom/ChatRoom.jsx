@@ -1,12 +1,9 @@
 import * as React from "react";
 import { useAuthContext } from "../../contexts/auth";
+import { useNavigate, useParams } from "react-router-dom";
 import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-
 
 export default function ChatRoom() {
 
@@ -28,10 +25,8 @@ export default function ChatRoom() {
     setInRoom(true);
     var cName="";
     var bName="";
-    
 
-    let roomID = useParams().id;
-
+    let roomID = 'test';
 
     if (chatOpen == false) {
         cName="chat-container closed";
@@ -42,16 +37,24 @@ export default function ChatRoom() {
         bName="chat open";
     }
 
-    // disconnects the user from the room
-    function exitRoom(){
-        setInRoom(false);
-        navigate("/profile")
-    }
-
     // set the remote participant when they join the room
     const participantConnected = participant => {
-      setRemoteParticipant(participant)
-    };
+        setRemoteParticipant(participant)
+        };
+
+    // disconnects the user from the room
+    const exitRoom = () => {
+        async function disconnectFromRoom() {
+
+        // Disconnect the LocalParticipant.
+        room.disconnect()
+
+      }
+    
+      disconnectFromRoom()
+      setInRoom(false);
+      navigate('/profile')
+      }
 
     // Allows a user to a Twilio Room when they click on the Enter Room button
     const handleOnClick = () => {
@@ -198,7 +201,12 @@ export function Room(props) {
                 {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} />: 
                     <div className="user-view">
                         <h3> Your Match is Coming! </h3>
-                        <div className="user-video"></div>
+                        <div className="user-video">
+                            <p> If it takes a while for your match to enter the room, it's possible that
+                                they left before entering the room. If that's the case, please exit the room 
+                                and try to find another match.
+                            </p>
+                        </div>
                 </div>}
                     <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} />
                 </div>
