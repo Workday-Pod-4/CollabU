@@ -325,7 +325,7 @@ export default function ProfilePage() {
          <button className="work-btn" onClick = {handleToggleWork}> Working</button>
             </div>)}
             </div>
-            {isStudying || isWorking?<button id="back-btn" onClick={() => { setIsStudying(false); setIsWorking(false)}}> Back</button>: null}
+            {isStudying || isWorking?<button id="back-btn" onClick={() => {setIsStudying(false); setIsWorking(false)}}> Back</button>: null}
             <button className="find" onClick={handleOnSubmit}> Find a buddy</button>
           </div>
         </div>

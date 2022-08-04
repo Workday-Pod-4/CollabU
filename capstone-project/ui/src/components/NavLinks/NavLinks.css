@@ -32,9 +32,9 @@
 }
 
 .content .links a{
-    color:white;
-    background: #4846BD;
-    border: 1px solid transparent;
+    color: black;
+    background: transparent;
+    border: 1.5px solid black;
     border-radius: 10px;
     text-decoration: none;
     height: 100%;
@@ -44,6 +44,17 @@
     align-items: center;
 }
 
+.content .links a:hover{
+  background-color:#4846BD;
+  color:white;
+  transition:.3s;
+  border:0px;
+  box-shadow:2px 2px #86999e;
+
+}
+/* span:hover {
+    color: white
+  } */
 
 .logout-button{
     border: 1px solid transparent;
