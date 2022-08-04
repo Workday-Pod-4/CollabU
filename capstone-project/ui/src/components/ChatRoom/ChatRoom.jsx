@@ -42,18 +42,42 @@ export default function ChatRoom() {
         setRemoteParticipant(participant)
         };
 
+    
+    const participantDisconnected = participant => {
+        console.log("Room ", room)
+        window.location = `/profile`;
+        };
+
     // disconnects the user from the room
+
     const exitRoom = () => {
         async function disconnectFromRoom() {
 
         // Disconnect the LocalParticipant.
-        room.disconnect()
+        if (room) {
+            room.disconnect()
+            navigate('/profile')
+        } else {
+            navigate('/profile')
+        }
+          
 
+        // Complete the Room, disconnecting all RemoteParticipants.
+        // try {
+        //     await axios({
+        //         method: 'post',
+        //         url: `http://localhost:3001/disconnect/${roomID}?status=completed`
+        //     });
+        // } catch (error) {
+        //     console.error(error)
+        // }
+        
       }
     
       disconnectFromRoom()
       setInRoom(false);
-      navigate('/profile')
+      room.on('participantDisconnected', participantDisconnected);
+    //   room.participants.forEach(participantDisconnected);
       }
 
     // Allows a user to a Twilio Room when they click on the Enter Room button
@@ -95,6 +119,7 @@ export default function ChatRoom() {
             <div className="modal-container">
                 <div className="modal-content">
                     <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
+<p> Are you sure you wanna exit? </p>
                     <button className="exit-fr" onClick={exitRoom}>Get me outta here!</button>
                 </div>
             </div>
