@@ -28,7 +28,8 @@ export default function ProfilePage() {
           toggleReportModal,
           prefModal,
           setPrefModal,
-          togglePrefModal } = useAuthContext();
+          togglePrefModal, 
+          setInRoom } = useAuthContext();
 
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
@@ -102,6 +103,8 @@ export default function ProfilePage() {
     const socket = io("http://localhost:3001")
 
     client.current = socket;
+
+    setInRoom(false)
 
     socket.on('redirectToRoom', (roomURL) => {
         setIsLoading(false);
