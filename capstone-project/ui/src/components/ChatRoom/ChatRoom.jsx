@@ -283,7 +283,6 @@ React.useEffect(() => {
 
 React.useEffect(() => {
     const videoTrack = videoTracks[0];
-    console.log(videoTracks);
     if (videoTrack) {
     videoTrack.attach(videoRef.current);
     return () => {
