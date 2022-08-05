@@ -44,6 +44,25 @@
     width: 100%;
 }
 
+.chat-room .content .user-views .user-view .user-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 100%;
+}
+
+.chat-room .content .user-views .user-view .user-header h3{
+    position:absolute;
+}
+
+.chat-room .content .user-views .user-view .user-header img {
+   height: 4vh;
+   margin-left: 5vw;
+   visibility: hidden;
+}
+
 .chat-room .content .user-views .user-view .user-video{
    background: black;
    display: flex;
@@ -52,8 +71,26 @@
    align-items: center;
    color: white;
    height: 75%;
+   width: 98%;
    border: 1px;
    border-radius: 20px;
+}
+
+.chat-room .content .user-views .user-view .user-video .no-video{
+   background: black;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   color: white;
+   height: 30vh;
+   width: 30vh;
+   object-fit: cover;
+   border: 1px;
+   border-radius: 50%;
+   position: absolute;
+   z-index: 1;
+   visibility: hidden;
 }
 
 .chat-room .content .bottom-row {
@@ -98,14 +135,56 @@
 }
 
 .chat-room .content .chat-container.open{
-    width: 26%;
-    height: 67%;
+    width: 50%;
+    height: 350%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     background: lightgray;
-    margin-top: 8vh;
+    margin-top: -62vh;
     border: 1px;
     border-radius: 20px;
+    z-index: 5;
+}
+.chat-room .content .chat-container.open form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.chat-room .content .chat-container.open input {
+    border: none;
+    padding: 0 1rem;
+    font-size: 20px;
+    flex-grow: 1;
+    border-radius: 2rem;
+    margin: 0.25rem;
+}
+
+.chat-room .content .chat-container.open #messages {
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0;
+}
+
+.chat-room .content .chat-container.open #messages > li {
+    padding: 0.5rem 1rem;
+}
+
+.chat-room .content .chat-container.open #messages > li:nth-child(odd) {
+    background: #efefef; 
+}
+
+.chat-room .content .chat-container.open .close-chat {
+    background: transparent;
+    border: 0vh;
+    border-radius: 5px;
+    color: black;
+    padding: 0vh 0vw;
+    font-size: 4vh;
+    cursor: pointer;
+    top: 32%;
+    right: 15%;
+    position: absolute;
 }
 
 
@@ -168,6 +247,7 @@ video {
     object-fit: contain;
     border: 1px;
     border-radius: 20px;
+    z-index: 2;
 }
 
 .participant-video {
@@ -194,4 +274,5 @@ video {
     top: 0;
     left: 0;
     opacity: 1;
+    z-index: 3;
 }

@@ -30,6 +30,16 @@ io.on("connection", (socket) => {
       queue.splice(index, 1);
     })
 
+    socket.on('joinRoom', (data) => {
+      socket.join(data?.roomID);
+    })
+
+    socket.on('chat message', msg => {
+      data = { "chatMsg": msg.chatMsg,
+              "peerUsername": msg.peerUsername}
+      io.sockets.in(msg.roomID).emit('chat message', data);
+    });
+
     socket.on('submit', (data) => {
 
       let user = {
