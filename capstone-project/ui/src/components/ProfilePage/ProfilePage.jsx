@@ -35,8 +35,130 @@ export default function ProfilePage() {
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false)
   const [confirmUsername, setConfirmUsername] = React.useState()
+
+  // updates and stores the previously matched section of the ProfilePage.jsx
   const [matches, setMatches] = React.useState([])
-  const [match, setMatch] = React.useState()
+  
+  const [selected,setSelected] = React.useState("");
+
+  const mathCourses = [
+    "Calculus I",
+    "Calculus II",
+    "Calculus III",
+    "College Algebra",
+    "Differential Equations",
+    "Discrete Math",
+    "Linear Algebra",
+    "Pre-calculus",
+    "Statistics",
+    "Other"
+  ];
+
+  const csCourses = [
+    "Data Structures",
+    "Intro to Programming",
+    "Java",
+    "Programming I",
+    "Programming II",
+    "Programming III",
+    "Other"
+  ];
+
+  const artCourses = [
+    "2-D Design",
+    "3-D Design",
+    "Art History",
+    "Beginning Drawing",
+    "Contemporary Art",
+    "Graphic Design",
+    "Modern Art",
+    "Other"
+  ];
+
+  const businessCourses = [
+    "Business Analytics",
+    "Business Intelligence",
+    "Business Statistics",
+    "Database Applications",
+    "Database Systems",
+    "Project Management",
+    "Other"
+  ]
+
+  const dsCourses = [
+    "Big Data",
+    "Foundations of Data Science",
+    "Intro to Data Mining",
+    "Intro to Deep Learning",
+    "Other"
+  ];
+
+  const litCourses = [
+    "American Literature",
+    "Introduction to Linguistics",
+    "Introduction to Writing Studies",
+    "Narrative Techniques",
+    "Writing and Rethoric",
+    "Other"
+  ]
+
+  const scienceCourses = [
+    "Anatomy",
+    "Cell Biology",
+    "General Biochemistry",
+    "General Biology",
+    "General Chemistry",
+    "General Physics",
+    "Genetics",
+    "Organic Chemistry",
+    "Physics with Calculus",
+    "Quantum Mechanics",
+    "Statics",
+    "Thermodynamics",
+    "Other"
+  ];
+
+  const techWork = [
+    "Software Development",
+    "Software Application",
+    "Web Design",
+    "Web Development",
+    "Other"
+  ];
+
+  const entertainmentWork = [
+    "Entertaining",
+    "Other"
+  ]
+
+  const healthWork = [
+    "Data Entry",
+    "Saving People",
+    "Paperwork",
+    "Other"
+  ]
+
+  const artsWork = [
+    "Editing Photographies",
+    "Other"
+  ]
+
+  const businessWork = [
+    "Paperwork",
+    "Other"
+  ]
+
+  const lawWork = [
+    "Arresting Someone",
+    "Other"
+  ]
+
+  const edWork = [
+    "Grading",
+    "Syllabus Planning",
+    "Other"
+  ]
+
 
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
@@ -64,7 +186,8 @@ export default function ProfilePage() {
 
   // set topic property based on user input
   function handleOnChangeTopic (event) {
-    user.topic = event.target.value
+    user.topic = event.target.value;
+    setSelected(event.target.value);
   }
 
   // set subject property based on user input
@@ -74,7 +197,8 @@ export default function ProfilePage() {
 
   // set industry property based on user input
   function handleOnChangeIndustry (event) {
-    user.industry = event.target.value
+    user.industry = event.target.value;
+    setSelected(event.target.value);
   }
 
   // set workType property based on user input
@@ -131,6 +255,54 @@ export default function ProfilePage() {
       fetchMatches();
     }, [user.id]);
 
+  let workType = null;
+
+  let workOptions = null;
+
+  let studyType = null;
+
+  let studyOptions = null;
+
+  if(selected === "Mathematics"){
+    studyType = mathCourses;
+  } else if( selected === "Computer Science"){
+    studyType = csCourses
+  } else if ( selected === "Art"){
+    studyType = artCourses;
+  } else if ( selected === "Business"){
+    studyType = businessCourses;
+  } else if ( selected === "Data Science"){
+    studyType = dsCourses;
+  } else if ( selected === "Literature"){
+    studyType = litCourses;
+  } else if ( selected === "Science"){
+    studyType = scienceCourses;
+  }
+
+  if(studyType) {
+    studyOptions = studyType.map((opt) => <option value={opt}>{opt}</option> )
+  }
+  
+  if(selected === "Technology"){
+    workType = techWork;
+  } else if (selected === "Entertainment") {
+    workType = entertainmentWork;
+  } else if (selected === "Health"){
+    workType = healthWork;
+  } else if (selected === "Arts"){
+    workType = artsWork;
+  } else if (selected === "Business") {
+    workType = businessWork;
+  } else if (selected === "Law Enforcement") {
+    workType = lawWork;
+  } else if (selected === "Education") {
+    workType = edWork;
+  }
+
+  if(workType) {
+    workOptions = workType.map((opt) => <option value={opt}>{opt}</option> )
+  }
+  
   //function for capitilizing first letter of strings (names)
   function CapitalizeName(str){
     const newStr = str.charAt(0).toUpperCase() + str.slice(1);
@@ -285,10 +457,13 @@ export default function ProfilePage() {
                     <label> What are you studying? </label>
                     <select className="form-input" name="topic" placeholder="Select topic" onChange={handleOnChangeTopic}>
                         <option value={""} selected>Select Topic of Study</option>
+                        <option value={"Art"}>Art</option>
+                        <option value={"Business"}>Business</option>
+                        <option value={"Computer Science"}>Computer Science</option>
+                        <option value={"Data Science"}>Data Science</option>
+                        <option value={"Literature"}>Literature</option>
                         <option value={"Mathematics"}>Mathematics</option>
-                        <option value={"Computer Science"}>Electrical Engineering</option>
-                        <option value={"Biology"}>Biology</option>
-                        <option value={"Chemistry"}>Chemistry</option>
+                        <option value={"Science"}>Science</option>
                     </select>
                     </span>
                   </li>
@@ -297,10 +472,7 @@ export default function ProfilePage() {
                     <label>Subject/Course</label>
                     <select className="form-input" name="subject" placeholder="Select Subject" onChange={handleOnChangeSubject}>
                         <option value={""} selected>Select a Subject</option>
-                        <option value={"Intro to programmings"}>Intro to programming</option>
-                        <option value={"Calculus 1"}>Calculus 1</option>
-                        <option value={"Intro to Biology"}>Intro to biology</option>
-                        <option value={"Organic Chemistry"}>Organic chemistry</option>
+                        {studyOptions}
                     </select>
                     </span>
                   </li>
@@ -313,9 +485,13 @@ export default function ProfilePage() {
                     <label>Industry</label>
                     <select className="form-input" name="industry" placeholder="Select industry" onChange={handleOnChangeIndustry}>
                         <option value={""} selected>Select an Industry</option>
+                        <option value={"Arts"}>Arts</option>
+                        <option value={"Business"}>Business</option>
+                        <option value={"Education"}>Education</option>
+                        <option value={"Law Enforcement"}>Law Enforcement</option>
+                        <option value={"Entertainment"}>Entertainment</option>
+                        <option value={"Health"}>Health</option>
                         <option value={"Technology"}>Technology</option>
-                        <option value={"Medicine"}>Medicine</option>
-                        <option value={"Consulting"}>Consulting</option>
                     </select>
                     </span>
                   </li>
@@ -324,9 +500,7 @@ export default function ProfilePage() {
                     <label>What are you working on?</label>
                     <select className="form-input" name="type-of-work" placeholder="Select type of work" onChange={handleOnChangeWork}>
                         <option value={""} selected>Type of Work</option>
-                        <option value={"Software-Developement"}>Software Development</option>
-                        <option value={"Electrical-Engineering"}>Electrical Engineering</option>
-                        <option value={"Consulting"}>Financial Consulting</option>
+                        {workOptions}
                     </select>
                     </span>
                   </li>
