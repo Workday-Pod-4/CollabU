@@ -2,7 +2,11 @@
     box-sizing: border-box;
 }
 
-.container {
+div{
+    padding:0;
+}
+
+.additional-info-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +20,7 @@
     opacity: 1;
 }
 
-.container .form-wrapper {
+.additional-info-container .additional-info-form-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,31 +33,37 @@
     padding-top: 2vh;
 }
 
-.container .form-wrapper .header {
-    height: 6%;
-    width: 90%;
+.additional-info-container .additional-info-form-wrapper .header {
+    height: 3vh;
+    width: 25vw;
     background: gray;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size:2vh;
 }
 
-.container .form-wrapper .additional-form {
-    width: 100%;
-    height: 90%;
+.additional-form label{
+    font-size: 2vh;
+}
+.additional-info-container .additional-info-form-wrapper .additional-form {
+    width: 40vw;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap:1vh;
+
 }
 
 .additional-form .input-field {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 25vw;
     height: 6.5vh;
     margin: .5vh 0;
     flex: 1 1;
@@ -63,15 +73,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    height: 1px;
-    margin: .5vh 0;
-    flex: 1 1;
+    width: 25vw;
+    height: 6.5vh;
+    justify-content: center;
 }
 
 .additional-form .input-field.no-label input{
-    height: 1000px;
-    width: 50%;
+    height: 4vh;
+    width: 12.5vw;
     padding: 0 .5vw;
     font-size: 1.5vh;
     border: 1px solid black;
@@ -87,8 +96,8 @@
 }
 
 .additional-form .input-field input {
-    height: 100%;
-    width: 50%;
+    height: 4vh;
+    width: 12.5vw;
     padding: 0 .5vw;
     font-size: 1.5vh;
     border: 1px solid black;
@@ -131,6 +140,11 @@
 }
 
 @media only screen and (max-width: 800px){
+
+    .additional-info-container .additional-info-form-wrapper .header {
+
+    font-size: 1vw;
+    }
     .container .form-wrapper {
         display: flex;
         flex-direction: column;
@@ -145,8 +159,7 @@
     }   
 
     .additional-form .input-field input {
-        height: 100%;
-        max-height: 6vh;
+        height: 90%;
         width: 50%;
         padding: 0 1.6vw;
         font-size: 2vh;
@@ -177,7 +190,9 @@
         color: #000;
         border-radius: 25px;
     }
-
+    .additional-form label{
+        font-size: 2vw;
+    }
     .additional-form .btn {
         height: 10%;
         width: 70%;
