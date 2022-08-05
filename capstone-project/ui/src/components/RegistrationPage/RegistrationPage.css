@@ -7,7 +7,7 @@
     height: 100vh;
     width: 100vw;
     padding-top: 3vh;
-    background: #D9F7FF;
+    background: #F7F6E9;
     justify-content: center;
     align-items: center;
 }
@@ -83,6 +83,16 @@
     height: 7.5vh;
     color: white;
     background: #4846BD;
+    font-size: 1.8vh;
+    border: none;
+    cursor: pointer;
+    margin-top: 3vh;
+}
+
+.registration-page .card .registration-form .btn:hover {
+    height: 7.5vh;
+    color: white;
+    background: #3c3aa7;
     font-size: 1.8vh;
     border: none;
     cursor: pointer;
