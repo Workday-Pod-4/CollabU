@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useAuthContext } from "../../contexts/auth";
 import { useNavigate, useParams } from "react-router-dom";
+import { io } from "socket.io-client";
 import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
@@ -26,19 +27,8 @@ export default function ChatRoom() {
     const navigate = useNavigate();
 
     setInRoom(true);
-    // var cName="";
-    // var bName="";
 
     let roomID = 'test';
-
-    // if (chatOpen == false) {
-    //     cName="chat-container closed";
-    //     bName="chat closed";
-    // }
-    // else {
-    //     cName="chat-container open";
-    //     bName="chat open";
-    // }
 
     const participantDisconnected = () => {
 
@@ -47,7 +37,6 @@ export default function ChatRoom() {
         participantIdentity.textContent = 'Your match left and the room has ended. Please use the buttons above to leave the room.'
 
         if (room?.participants.size === 0) {
-            console.log("Room ", room.participants.size)
     
             const disconnectEveryoneFromRoom = async () => {
     
@@ -94,6 +83,7 @@ export default function ChatRoom() {
               }
             disconnectFromRoomToFindBuddy()
           }
+
     // disconnects the user from the room
     const exitRoom = () => {
         async function disconnectFromRoom() {
@@ -139,7 +129,6 @@ export default function ChatRoom() {
       setLocalParticipant(room.localParticipant)
     }
     
-
     joinRoom()
     setShowRoom(true)
     }
@@ -169,12 +158,24 @@ export default function ChatRoom() {
             :
             null
             }
-            <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant}/>
+            <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant} chatOpen={chatOpen} setChatOpen={setChatOpen} user={user} roomID={roomID}/>
         </div>
     </div>     
     )}
 
 export function Room(props) {
+
+    let cName="";
+    let bName="";
+
+    if (props.chatOpen == false) {
+        cName="chat-container closed";
+        bName="chat closed";
+    }
+    else if (props.chatOpen == true) {
+        cName="chat-container open";
+        bName="chat open";
+    }
 
     const [playAudio, setPlayAudio] = React.useState(false);
     const [displayVideo, setDisplayVideo] = React.useState(false);
@@ -234,6 +235,47 @@ export function Room(props) {
         }
     }
 
+    const client = React.useRef();
+
+    React.useEffect(() => {
+
+        const socket = io("http://localhost:3001")
+
+        client.current = socket;
+
+        socket.on("connect", () => {
+            client.current.emit('joinRoom', props.roomID);
+          });
+    
+        socket.on('chat message', function(msg) {
+            let messages = document.getElementById('messages');
+            let item = document.createElement('li');
+            item.textContent = `${msg.peerUsername}: ${msg.chatMsg}`;
+
+            messages.appendChild(item);
+          });
+    
+        socket.on('disconnect', () => {
+            socket.removeAllListeners();
+         });
+    
+        return () => socket.disconnect();
+    
+      }, []);
+
+      const handleOnSubmit = (event) => {
+        event.preventDefault();
+        let input = document.getElementById('input');
+        
+        if (input.value) {
+            let info = {'chatMsg': input.value,
+                    'peerUsername': props.user.username }
+            client.current.emit('chat message', info);
+            info = '';
+            input.value = ''
+          }
+    }
+
     function toggleMuteAudio () {
 
       if (playAudio === true) {
@@ -284,9 +326,17 @@ export function Room(props) {
                             <button className="mute" onClick={toggleMuteAudio}>Mute</button>
                             <button className="video" onClick={toggleDisplayVideo}>Video</button>
                         </div>
-                        <div className="">
-                            <button className="">Chat</button>
-                        </div>
+                        { props.chatOpen ? 
+                        <div className={cName}>
+                            <form id="form" action="">
+                                <input id="input" autoComplete="off" placeholder="Type something..."/><button onClick={handleOnSubmit}>Send</button>
+                            </form>
+                            <ul id="messages"></ul>
+                            <button className="close-chat" onClick={() => (props.setChatOpen(!props.chatOpen))}>X</button>           
+                        </div> : 
+                        <div className={cName}>
+                            <button className={bName} onClick={() => (props.setChatOpen(!props.chatOpen))}>Chat</button>
+                        </div> }
             </div>
             </>
         : <div className="enter-room"><button onClick={props.handleOnClick}> Enter Room </button>

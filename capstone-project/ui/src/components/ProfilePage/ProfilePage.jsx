@@ -5,34 +5,37 @@ import { io } from "socket.io-client";
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";
-
+import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 import MatchModal from "../MatchModal/MatchModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
 import "./Loading.css"
-import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
-
-
 
 export default function ProfilePage() {
-//  state variable that contains previously matched user's info
-  const [match, setMatch]=React.useState()
 
+  const { user, 
+          firstTime, 
+          isUpdating, 
+          setIsUpdating, 
+          isLoading, 
+          setIsLoading,
+          settingsModal,
+          toggleSettingsModal,
+          matchModal,
+          setMatchModal,
+          reportModal,
+          setReportModal,
+          toggleReportModal,
+          prefModal,
+          setPrefModal,
+          togglePrefModal } = useAuthContext();
 
-  const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
-  const { settingsModal, toggleSettingsModal } = useAuthContext();
-  const {matchModal, setMatchModal} = useAuthContext();
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false)
   const [confirmUsername, setConfirmUsername] = React.useState()
-
-  const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
-
-  const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
-
   const [matches, setMatches] = React.useState([])
-
+  const [match, setMatch] = React.useState()
 
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
@@ -52,15 +55,11 @@ export default function ProfilePage() {
     setIsWorking(true)
   }
  
-
-
   //if user toggles match modal
-  function toggleMatchModal(e){
+  function toggleMatchModal(e) {
     setMatch((e.target.innerHTML).split(" |")[0])
     setMatchModal(!matchModal)
   }
-
-
 
   // set topic property based on user input
   function handleOnChangeTopic (event) {
@@ -82,8 +81,6 @@ export default function ProfilePage() {
     user.workType = event.target.value
   }
 
-  const client = React.useRef();
-
   // sends user info back to server for matching
   function handleOnSubmit (event) {
     event.preventDefault()
@@ -96,20 +93,21 @@ export default function ProfilePage() {
     client.current.emit('remove', {user});
     setIsLoading(false);
     togglePrefModal();
-    
   }
+
+  const client = React.useRef();
 
   React.useEffect(() => {
 
     const socket = io("http://localhost:3001")
+
+    client.current = socket;
 
     socket.on('redirectToRoom', (roomURL) => {
         setIsLoading(false);
         // redirect to new URL
         window.location = roomURL;
     });
-
-    client.current = socket;
 
     socket.on('disconnect', () => {
         socket.removeAllListeners();
@@ -135,7 +133,6 @@ export default function ProfilePage() {
     const newStr = str.charAt(0).toUpperCase() + str.slice(1);
     return newStr
   }
-
 
   return (
     <div className="profile-page">
@@ -252,7 +249,6 @@ export default function ProfilePage() {
               height= "70px"/>
               <span>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span>
               </li>
-              
               </>
             )})}
             </ul>
