@@ -57,9 +57,10 @@
     position:absolute;
 }
 
-.chat-room .content .user-views .user-view .user-header img{
+.chat-room .content .user-views .user-view .user-header img {
    height: 4vh;
    margin-left: 5vw;
+   visibility: hidden;
 }
 
 .chat-room .content .user-views .user-view .user-video{

@@ -37,6 +37,10 @@ export default function ChatRoom() {
 
         const elements = document.getElementsByClassName('user-view')[0]
         const participantIdentity = elements.getElementsByTagName('h3')[0]
+        const remoteMuteImg= document.getElementsByClassName('mute-icon')[0]
+        remoteMuteImg.style.visibility = "hidden";
+        const localMuteImg= document.getElementsByClassName('mute-icon')[1]
+        localMuteImg.style.visibility = "hidden";
         participantIdentity.textContent = 'Your match left and the room has ended. Please use the buttons above to leave the room.'
 
         if (room?.participants.size === 0) {
