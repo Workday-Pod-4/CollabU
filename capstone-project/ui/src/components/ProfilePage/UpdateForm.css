@@ -18,6 +18,7 @@
     background: lightgray;
     border: 1px;
     border-radius: 25px;
+    box-shadow: 10px 10px #86999E;
 }
 
 .update-form .input-fields {

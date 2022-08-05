@@ -40,7 +40,7 @@ export default function MatchModal({ matches, Match, toggleMatchModal, Capitaliz
           {UserInfo.job_title=="undefined" && UserInfo.company == "undefined"? <><p className = "independent">Independent</p></> :null}
           {UserInfo.job_title!="undefined"? <><p className = "job-title"> {UserInfo.job_title}</p> </>: null}
 
-          {UserInfo.job_title!="undefined" && UserInfo.job_title!=""? <>at<br></br></>: null}
+          {UserInfo.job_title!="undefined" && UserInfo.job_title!=""? <>at</>: null}
   
           {UserInfo.company!="undefined" && UserInfo.job_title!="undefined"? <> <p className = "job-company">{UserInfo.company} </p> <br></br></>:(UserInfo.job_title=="undefined" && UserInfo.company!="undefined"? <> <b>Works at</b> <p className = "job-company">{UserInfo.company}</p></>:null)}
         </div>
@@ -49,9 +49,7 @@ export default function MatchModal({ matches, Match, toggleMatchModal, Capitaliz
          
         {UserInfo.major=="undefined" && UserInfo.college == "undefined" ? <><p className = "self-taught"> Self Taught </p></> :null}
         {UserInfo.major!="undefined"? <><p className = "student-major"> {UserInfo.major}</p> student </>: null}
-          <br></br>
           {UserInfo.major!="undefined"? <>at </>: null}
-          <br></br>
           {UserInfo.college!="undefined" && UserInfo.major!="undefined"? <> <p className = "student-college">{UserInfo.college} </p></>:(UserInfo.major=="undefined" && UserInfo.college!="undefined"? <> <b>Attends</b> <p className = "student-college">{UserInfo.college}</p></>:null)}
         </div>
 

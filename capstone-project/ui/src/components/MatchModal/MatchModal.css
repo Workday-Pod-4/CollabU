@@ -61,7 +61,7 @@ margin-top:1vh;
     flex-direction: column;
     align-items: center;
     height:80vh;
-    gap:4vh;
+    gap:2vh;
 }
 .match-modal-img{
 border-radius: 50%;
