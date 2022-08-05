@@ -2,7 +2,7 @@ import * as React from "react";
 import { useAuthContext } from "../../contexts/auth";
 import "./MatchModal.css";
 
-export default function MatchModal({ matches, Match, toggleMatchModal }) {
+export default function MatchModal({ matches, Match, toggleMatchModal, CapitalizeName}) {
   const { matchModal, setMatchModal } = useAuthContext();
 
   // filtering matches array to include only object where username is equal to username in onClick event
@@ -28,8 +28,8 @@ export default function MatchModal({ matches, Match, toggleMatchModal }) {
             alt="img"
           ></img>
           <div className="match-name">
-            <div className="match-first-name">{UserInfo.first_name}</div>
-            <div className="match-last-name">{UserInfo.last_name}</div>
+            <div className="match-first-name">{CapitalizeName(UserInfo.first_name)}</div>
+            <div className="match-last-name">{CapitalizeName(UserInfo.last_name)}</div>
           </div>
           <div className = "match-location-timezone">
           <div className="match-location">{UserInfo.location}</div> |

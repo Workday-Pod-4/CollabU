@@ -177,6 +177,7 @@ background-color: lightgrey;
     background-color: lightgrey;
 }
 
+
 .update-btn-container {
     height: 10%;
     width: 60%;
@@ -218,15 +219,17 @@ border: 1px solid #4846BD;
 border-radius: 20px;
 margin-top: 0;
 box-shadow: 10px 10px #86999E;
+align-items: center;
 }
 
 
 
 .profile-page .right-section .match-history ul li{
 display:flex;
-width:90%;
+width:23vw;
 flex-direction: row;
 justify-content: space-between;
+align-items: center;
 }
 
 .profile-page .right-section .match-history ul li span{
@@ -235,11 +238,15 @@ justify-content: center;
 align-items: center;
 border-radius: 25px;
 border: 1px solid #4846BD;
-width: 75%;
+    max-width: 19vw;
+    width: 18vw;
+    max-height: 12vh;
+    height: 8vh;
 background-color:white;
 padding: 2vh 3vw;
 font-size: 3vh;
 cursor: pointer;
+font-weight: 500;
 }
 
 .profile-page .right-section .match-history ul li img{
@@ -248,7 +255,7 @@ cursor: pointer;
     border-radius: 50%;
     height: 100%;
     width: 18%;
-    font-size: 3vh;
+   
 }
 
 @media only screen and (max-width: 800px){
@@ -337,5 +344,8 @@ cursor: pointer;
         width:80%;
     }
 
+    .profile-page .right-section .match-history ul li span{
+    font-size: 3vw;
+    }
 }
 

@@ -56,7 +56,7 @@ export default function ProfilePage() {
 
   //if user toggles match modal
   function toggleMatchModal(e){
-    setMatch((e.target.innerHTML).split(" |")[0])
+    setMatch((e.target.innerHTML))
     setMatchModal(!matchModal)
   }
 
@@ -139,7 +139,7 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-      {matchModal ? <MatchModal toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
+      {matchModal ? <MatchModal CapitalizeName={CapitalizeName}toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
       {reportModal?
       <ReportIssueModal/>:null}
       { firstTime ? <AdditionalInfo /> : null}
@@ -236,17 +236,19 @@ export default function ProfilePage() {
         <div className="right-section">
           <h1>Match History</h1>
           <div className="match-history">
+    
           <ul>
           {matches.map((match, idx)=> {
               return(
               <>
-              <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span onClick= {toggleMatchModal}>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span></li>
+              <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span onClick= {toggleMatchModal}>{match.username}</span></li>
               
               </>
             )})}
             </ul>
           </div>
           </div>
+
           }
       </div>
       {/* Preference Modal */}
