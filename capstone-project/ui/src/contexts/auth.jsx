@@ -17,8 +17,13 @@ export const AuthContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [reportModal, setReportModal] = React.useState(false)
     const [inRoom, setInRoom] = useState(false);
+
+    const [matchModal, setMatchModal] = useState(false)
+
+
     const [exiting, setExiting] = useState(false);
     const [colleges, setColleges] = useState([]);
+
 
     //function for toggling report issue modal
     function toggleReportModal(){
@@ -116,11 +121,18 @@ export const AuthContextProvider = ({ children }) => {
       setReportModal,
       toggleReportModal,
       setInRoom,
-      inRoom,
+      inRoom, 
+      setMatchModal, 
+      matchModal,
       exiting,
+<<<<<<< HEAD
       setExiting,
       colleges,
       setColleges
+=======
+      setExiting
+
+>>>>>>> 5ee918974679fb252bb85ebcc3dc5bd0fb6890ea
     }
 
     return (

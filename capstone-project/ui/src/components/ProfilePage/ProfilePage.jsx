@@ -5,31 +5,31 @@ import { io } from "socket.io-client";
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";
-import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
+
+import MatchModal from "../MatchModal/MatchModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
-import "./Loading.css";
+import "./Loading.css"
+import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
+
+
 
 export default function ProfilePage() {
+//  state variable that contains previously matched user's info
+  const [match, setMatch]=React.useState()
 
-  const { user, 
-          firstTime, 
-          isUpdating, 
-          setIsUpdating, 
-          isLoading, 
-          setIsLoading, 
-          settingsModal, 
-          toggleSettingsModal, 
-          reportModal, 
-          setReportModal, 
-          toggleReportModal,
-          prefModal, 
-          setPrefModal, 
-          togglePrefModal } = useAuthContext();
 
+  const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
+  const { settingsModal, toggleSettingsModal } = useAuthContext();
+  const {matchModal, setMatchModal} = useAuthContext();
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
-  const [isWorking, setIsWorking] = React.useState(false);
+  const [isWorking, setIsWorking] = React.useState(false)
+  const [confirmUsername, setConfirmUsername] = React.useState()
+
+  const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
+
+  const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
 
   // updates and stores the previously matched section of the ProfilePage.jsx
   const [matches, setMatches] = React.useState([])
@@ -64,6 +64,7 @@ export default function ProfilePage() {
     "Web Development"
   ]
 
+
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
       user.activity = 'studying'
@@ -81,6 +82,16 @@ export default function ProfilePage() {
     setIsStudying(false)
     setIsWorking(true)
   }
+ 
+
+
+  //if user toggles match modal
+  function toggleMatchModal(e){
+    setMatch((e.target.innerHTML).split(" |")[0])
+    setMatchModal(!matchModal)
+  }
+
+
 
   // set topic property based on user input
   function handleOnChangeTopic (event) {
@@ -178,11 +189,19 @@ export default function ProfilePage() {
     workOptions = workType.map((opt) => <option value={opt}>{opt}</option> )
   }
   
+  //function for capitilizing first letter of strings (names)
+  function CapitalizeName(str){
+    const newStr = str.charAt(0).toUpperCase() + str.slice(1);
+    return newStr
+  }
+
   return (
     <div className="profile-page">
-      { reportModal ? <ReportIssueModal/> : null }
-      { firstTime ? <AdditionalInfo /> : null }
-      { settingsModal ? <SettingsModal/> : null }
+      {matchModal ? <MatchModal toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
+      {reportModal?
+      <ReportIssueModal/>:null}
+      { firstTime ? <AdditionalInfo /> : null}
+      {settingsModal? <SettingsModal/>: null}
       <div className="sections">
         <div className="left-section">
           <div className="profile-pic">
@@ -212,21 +231,21 @@ export default function ProfilePage() {
             <ul>
             {user?.social_media_link_1 ?
                 <li className="link-1">
-                  <a href={user.social_media_link_1}>
+                  <a href={`https://${user.social_media_link_1}`} target="_blank">
                     <span>{user.social_media_link_1}</span>
                   </a>
                 </li>
               : null }
               {user?.social_media_link_2 ?
                 <li className="link-2">
-                  <a href={user.social_media_link_2}>
+                  <a href={`https://${user.social_media_link_2}`} target="_blank">
                     <span>{user.social_media_link_2}</span>
                   </a>
                 </li>
               : null }
               {user?.social_media_link_3 ?
                 <li className="link-3">
-                  <a href={user.social_media_link_3}>
+                  <a href={`https://${user.social_media_link_3}`} target="_blank">
                     <span>{user.social_media_link_3}</span>
                   </a>
                 </li>
@@ -271,15 +290,31 @@ export default function ProfilePage() {
           {isUpdating ?
           null
           :
-          <div className="right-section">
-            <div className="match-history">
-              <ul>
-                <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span>Person 1</span></li>
-                <li><img src = "https://pbs.twimg.com/profile_images/536210858809249792/UgauTnaG_400x400.jpeg" alt = "img" width = "70px" height= "70px"/><span>Person 2</span></li>
-                <li><img src = "" alt = "profile-pic" width = "70px" height= "70px"/><span>Person 3</span></li>
-              </ul>
-            </div>
-
+            
+        <div className="right-section">
+          <h1>Match History</h1>
+          <div className="match-history">
+          <ul>
+          {matches.map((match, idx)=> {
+              return(
+              <>
+              <li>
+              <img src={match?.profile_image_url ? match.profile_image_url : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"}
+              onError={(event) => {
+                event.target.onError = "";
+                event.target.src= "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
+                return true;
+              }} 
+              
+              alt = "img" 
+              width = "70px" 
+              height= "70px"/>
+              <span onClick= {toggleMatchModal}>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span>
+              </li>
+              </>
+            )})}
+            </ul>
+          </div>
           </div>
           }
       </div>
@@ -382,5 +417,5 @@ export default function ProfilePage() {
         </div>
     </div> : null)}
     </div>
-  );
+);
 }

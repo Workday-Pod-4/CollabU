@@ -47,8 +47,8 @@ export default function AdditionalInfo() {
   }
 
     return (
-        <div className="container" id="container">
-            <div className="form-wrapper">
+        <div className="additional-info-container">
+            <div className="additional-info-form-wrapper">
                 <div className="header">
                     <h2>Additional Information</h2>
                 </div>
