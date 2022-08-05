@@ -41,14 +41,36 @@ export default function ChatRoom() {
     // }
 
     const participantDisconnected = () => {
+
         const elements = document.getElementsByClassName('user-view')[0]
         const participantIdentity = elements.getElementsByTagName('h3')[0]
-        participantIdentity.textContent = 'Your match left and the room has ended. Please use the buttons above to leave the room. '
-        };
+        participantIdentity.textContent = 'Your match left and the room has ended. Please use the buttons above to leave the room.'
 
-        if (room) {
-            room.on('participantDisconnected', participantDisconnected);
-        }
+        if (room?.participants.size === 0) {
+            console.log("Room ", room.participants.size)
+    
+            const disconnectEveryoneFromRoom = async () => {
+    
+                // Complete the Room, disconnecting all RemoteParticipants
+                try {
+                    await axios({
+                        method: 'post',
+                        url: `http://localhost:3001/disconnect/${roomID}?status=completed`
+                    });
+                } catch (error) {
+                    console.error(error)
+                }
+            }
+    
+            disconnectEveryoneFromRoom()
+        }};
+
+
+
+    if (room) {
+        room.on('participantDisconnected', participantDisconnected);
+    }
+
     // set the remote participant when they join the room
     const participantConnected = participant => {
         setRemoteParticipant(participant)
@@ -86,15 +108,7 @@ export default function ChatRoom() {
         
           
 
-        // Complete the Room, disconnecting all RemoteParticipants.
-        // try {
-        //     await axios({
-        //         method: 'post',
-        //         url: `http://localhost:3001/disconnect/${roomID}?status=completed`
-        //     });
-        // } catch (error) {
-        //     console.error(error)
-        // }
+
         
       }
     
