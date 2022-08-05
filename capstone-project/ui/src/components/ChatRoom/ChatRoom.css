@@ -75,15 +75,6 @@
    border-radius: 20px;
 }
 
-.chat-room .content .user-views .user-view .user-video img{
-    height: 30vh;
-    width: 30vh;
-    object-fit: cover;
-    border: 1px;
-    border-radius: 50%;
-    position: absolute;
- }
-
 .chat-room .content .user-views .user-view .user-video .no-video{
    background: black;
    display: flex;
@@ -91,10 +82,14 @@
    justify-content: center;
    align-items: center;
    color: white;
-   height: 75%;
+   height: 30vh;
+   width: 30vh;
+   object-fit: cover;
    border: 1px;
-   border-radius: 20px;
+   border-radius: 50%;
+   position: absolute;
    z-index: 1;
+   visibility: hidden;
 }
 
 .chat-room .content .bottom-row {

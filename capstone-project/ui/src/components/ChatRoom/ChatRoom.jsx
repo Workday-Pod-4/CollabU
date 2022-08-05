@@ -111,8 +111,10 @@ export function Room(props) {
 
         const elements = document.getElementsByClassName('actual-user-video')[0]
         const muteimg= document.getElementsByClassName('mute-icon')[0]
+        const noVideo = document.getElementsByClassName('no-video')[0]
         if (track.kind == 'video') {
             elements.style.visibility = "visible";
+            noVideo.style.visibility = "hidden";
             
         } else if (track.kind == 'audio') {
             muteimg.style.visibility = "hidden";
@@ -124,9 +126,10 @@ export function Room(props) {
 
         const elements = document.getElementsByClassName('actual-user-video')[0]
         const muteimg= document.getElementsByClassName('mute-icon')[0]
+        const noVideo = document.getElementsByClassName('no-video')[0]
         if (track.kind == 'video') {
             elements.style.visibility = "hidden";
-            
+            noVideo.style.visibility = "visible";
         } else if (track.kind == 'audio') {
             muteimg.style.visibility = "visible";
             track.detach().forEach(element => {
@@ -156,9 +159,13 @@ export function Room(props) {
                 return props.room.localParticipant.publishTrack(localVideoTrack);
               }).then(publication => {
                 const elements = document.getElementsByClassName('user-video')[1]
+                const noVideo = document.getElementsByClassName('no-video')[1]
                 elements.appendChild(publication.track.attach());
+                noVideo.style.visibility = "hidden";
               });
         } else if (displayVideo === false) {
+            const noVideo = document.getElementsByClassName('no-video')[1]
+            noVideo.style.visibility = "visible";
             props.room.localParticipant.videoTracks.forEach(publication => {
                 const attachedElements = publication.track.detach();
                 publication.track.stop();
@@ -303,7 +310,7 @@ return (
             </div>
             <div className="user-video">
               <video class="actual-user-video" ref={videoRef} autoPlay={true} />  
-              <img 
+              <img className="no-video" 
               src=
               "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" alt="no-video" /> 
             </div>
