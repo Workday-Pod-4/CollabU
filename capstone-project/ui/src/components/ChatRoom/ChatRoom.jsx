@@ -6,7 +6,7 @@ import "./ChatRoom.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
+import muteIcon from "../../assets/muted-svgrepo-com.svg"
 
 export default function ChatRoom() {
 
@@ -22,7 +22,6 @@ export default function ChatRoom() {
     const [showRoom, setShowRoom] = React.useState(false);
     const [localParticipant, setLocalParticipant] = React.useState(null);
     const [remoteParticipant, setRemoteParticipant] = React.useState(null);
-
     const navigate = useNavigate();
 
     setInRoom(true);
@@ -98,7 +97,7 @@ export default function ChatRoom() {
             :
             null
             }
-            <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant}/>
+            <Room handleOnClick={handleOnClick} user={user} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant}/>
         </div>
     </div>     
     )}
@@ -110,20 +109,26 @@ export function Room(props) {
 
     const trackSubscribed = (track) => {
 
-        const elements = document.getElementsByClassName('user-video')[0]
+        const elements = document.getElementsByClassName('actual-user-video')[0]
+        const muteimg= document.getElementsByClassName('mute-icon')[0]
         if (track.kind == 'video') {
             elements.style.visibility = "visible";
+            
         } else if (track.kind == 'audio') {
+            muteimg.style.visibility = "hidden";
             elements.appendChild(track.attach());
         }
       };
   
       const trackUnsubscribed = (track) => {
 
-        const elements = document.getElementsByClassName('user-video')[0]
+        const elements = document.getElementsByClassName('actual-user-video')[0]
+        const muteimg= document.getElementsByClassName('mute-icon')[0]
         if (track.kind == 'video') {
             elements.style.visibility = "hidden";
+            
         } else if (track.kind == 'audio') {
+            muteimg.style.visibility = "visible";
             track.detach().forEach(element => {
                 element.remove();
               });
@@ -176,9 +181,13 @@ export function Room(props) {
               return props.room.localParticipant.publishTrack(localAudioTrack);
             }).then(publication => {
               const elements = document.getElementsByClassName('user-video')[1]
+              const muteimg= document.getElementsByClassName('mute-icon')[1]
+              muteimg.style.visibility = "hidden";
               elements.appendChild(publication.track.attach());
             });
       } else if (playAudio === false) {
+              const muteimg= document.getElementsByClassName('mute-icon')[1]
+              muteimg.style.visibility = "visible";
           props.room.localParticipant.audioTracks.forEach(publication => {
               const attachedElements = publication.track.detach();
               publication.track.stop();
@@ -200,7 +209,7 @@ export function Room(props) {
                         <h3> Your Match is Coming! </h3>
                         <div className="user-video"></div>
                 </div>}
-                    <Participant key={props.localParticipant.sid} participant={props.localParticipant} room={props.room} />
+                    <Participant key={props.localParticipant.sid} playAudio={playAudio} displayVideo={displayVideo} user={props.user} participant={props.localParticipant} room={props.room} />
                 </div>
             </div>
             <div className="bottom-row">
@@ -267,6 +276,7 @@ React.useEffect(() => {
 
 React.useEffect(() => {
     const videoTrack = videoTracks[0];
+    console.log(videoTracks);
     if (videoTrack) {
     videoTrack.attach(videoRef.current);
     return () => {
@@ -287,9 +297,15 @@ React.useEffect(() => {
 
 return (
         <div className="user-view">
+            <div className="user-header">
             <h3>{props.participant.identity}</h3>
+            <img className="mute-icon" src={muteIcon} alt="Muted"></img>
+            </div>
             <div className="user-video">
-                <video ref={videoRef} autoPlay={true} />
+              <video class="actual-user-video" ref={videoRef} autoPlay={true} />  
+              <img 
+              src=
+              "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" alt="no-video" /> 
             </div>
             <audio ref={audioRef} autoPlay={true} />
         </div>
