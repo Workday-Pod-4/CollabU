@@ -1,6 +1,7 @@
 .chat-room {
     height: 100vh;
     width: 100vw;
+    background-color: #F7F6E9;
 }
 
 .chat-room .content{
@@ -26,6 +27,10 @@
     width: 70vw;
 }
 
+.user-view h3{
+    color:#4846BD;
+    font-weight: 600;
+}
 .chat-room .content .user-views.open{
     display: flex;
     flex-direction: column;

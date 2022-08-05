@@ -179,10 +179,11 @@ export default function ProfilePage() {
   }
  
   //if user toggles match modal
-  function toggleMatchModal(e) {
-    setMatch((e.target.innerHTML).split(" |")[0])
-    setMatchModal(!matchModal)
-  }
+
+  function toggleMatchModal(e){
+    setMatch((e.target.innerHTML))
+
+
 
   // set topic property based on user input
   function handleOnChangeTopic (event) {
@@ -311,7 +312,7 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-      {matchModal ? <MatchModal toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
+      {matchModal ? <MatchModal CapitalizeName={CapitalizeName}toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
       {reportModal?
       <ReportIssueModal/>:null}
       { firstTime ? <AdditionalInfo /> : null}
@@ -408,10 +409,12 @@ export default function ProfilePage() {
         <div className="right-section">
           <h1>Match History</h1>
           <div className="match-history">
+    
           <ul>
           {matches.map((match, idx)=> {
               return(
               <>
+
               <li>
               <img src={match?.profile_image_url ? match.profile_image_url : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"}
               onError={(event) => {
@@ -430,6 +433,7 @@ export default function ProfilePage() {
             </ul>
           </div>
           </div>
+
           }
       </div>
       {/* Preference Modal */}
@@ -510,7 +514,7 @@ export default function ProfilePage() {
          <button className="work-btn" onClick = {handleToggleWork}> Working</button>
             </div>)}
             </div>
-            {isStudying || isWorking?<button id="back-btn" onClick={() => { setIsStudying(false); setIsWorking(false)}}> Back</button>: null}
+            {isStudying || isWorking?<button id="back-btn" onClick={() => {setIsStudying(false); setIsWorking(false)}}> Back</button>: null}
             <button className="find" onClick={handleOnSubmit}> Find a buddy</button>
           </div>
         </div>

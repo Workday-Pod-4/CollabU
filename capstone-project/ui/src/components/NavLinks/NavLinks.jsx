@@ -18,7 +18,7 @@ export default function NavLinks() {
           user?.email && inRoom ? <li className="btn" onClick={() =>{setExiting(true)}}> <a>Exit Room</a> </li>
           :
           <Link to="/login">
-          Login
+          <span>Login</span>
           </Link>}
         </li>
           { user?.email && inRoom==false ?
@@ -27,7 +27,7 @@ export default function NavLinks() {
           user?.email && inRoom ?
           <li className="btn" onClick={() =>{setFindingAnotherBuddy(true)}}> <a>Find another buddy</a> </li>
           :  
-          <li className="btn"><Link to="/register">Register</Link></li>
+          <li className="btn"><Link to="/register"><span>Register</span></Link></li>
           }
       </ul>
     </div>

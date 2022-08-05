@@ -8,7 +8,8 @@ export default function Hero() {
     <div className="hero">
       <div className="content">
         <div className="hero-img">
-          <img src="" alt="placeholder" height = "800" width="800"></img>
+        <img src = "../src/assets/hero-img.webp" width="25px" height="25px"></img>
+        <div className = "color-box"></div>
         </div>
         <div className="intro">
           <h1>Boost your Productivity and Success through new Connections</h1>
