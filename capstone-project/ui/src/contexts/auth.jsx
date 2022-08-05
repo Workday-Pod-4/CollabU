@@ -73,7 +73,7 @@ export const AuthContextProvider = ({ children }) => {
       useEffect(()=> {
         const getColleges = async () => {
           const response = await fetch(
-            "http://universities.hipolabs.com/search?"
+            "http://universities.hipolabs.com/search?country=united states"
           ).then((response) => response.json());
         
           // update the collegeList
