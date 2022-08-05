@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
     })
 
     socket.on('joinRoom', (data) => {
-      socket.join(data.roomID);
+      socket.join(data?.roomID);
     })
 
     socket.on('chat message', msg => {

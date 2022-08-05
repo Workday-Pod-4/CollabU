@@ -4,11 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import Video from 'twilio-video';
 import axios from "axios";
-import "./ChatRoom.css";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import muteIcon from "../../assets/muted-svgrepo-com.svg"
+import "./ChatRoom.css";
 
 export default function ChatRoom() {
 
@@ -27,12 +24,15 @@ export default function ChatRoom() {
     const [showRoom, setShowRoom] = React.useState(false);
     const [localParticipant, setLocalParticipant] = React.useState(null);
     const [remoteParticipant, setRemoteParticipant] = React.useState(null);
+
     const navigate = useNavigate();
 
     setInRoom(true);
 
-    let roomID = 'test';
-
+    let roomID = useParams().id;
+    
+    /* Lets the local participant know that the remote participants has ended the session 
+       and they have been kicked from the room */
     const participantDisconnected = () => {
 
         const elements = document.getElementsByClassName('user-view')[0]
@@ -53,39 +53,37 @@ export default function ChatRoom() {
                     console.error(error)
                 }
             }
-    
             disconnectEveryoneFromRoom()
         }};
-
-
-
-    if (room) {
-        room.on('participantDisconnected', participantDisconnected);
-    }
 
     // set the remote participant when they join the room
     const participantConnected = participant => {
         setRemoteParticipant(participant)
         };
 
-        const findAnotherBuddy = () => {
-            async function disconnectFromRoomToFindBuddy() {
+    if (room) {
+        room.on('participantDisconnected', participantDisconnected);
+    }
 
-                // Disconnect the LocalParticipant.
-                if (room) {
-                    room.disconnect()
-                    setInRoom(false);
-                    togglePrefModal();
-                    navigate('/profile')
-                } else {
-                    setInRoom(false);
-                    togglePrefModal();
-                    navigate('/profile')
-                }
-                
-              }
-            disconnectFromRoomToFindBuddy()
-          }
+    /* Allows user to disconnect from the room and be shown a match modal as soon 
+       they're redirected */
+    const findAnotherBuddy = () => {
+        async function disconnectFromRoomToFindBuddy() {
+
+            // Disconnect the LocalParticipant.
+            if (room) {
+                room.disconnect()
+                setInRoom(false);
+                togglePrefModal();
+                navigate('/profile')
+            } else {
+                setInRoom(false);
+                togglePrefModal();
+                navigate('/profile')
+            } 
+            }
+        disconnectFromRoomToFindBuddy()
+        }
 
     // disconnects the user from the room
     const exitRoom = () => {
@@ -98,7 +96,6 @@ export default function ChatRoom() {
         } else {
             navigate('/profile')
         }
-        
       }
     
       disconnectFromRoom()
@@ -220,9 +217,9 @@ export function Room(props) {
           participant.on('trackSubscribed', trackSubscribed);
           participant.on('trackUnsubscribed', trackUnsubscribed);
           });
-
     });
   
+    // Adds and Removes Video tracks from DOM if user press the toggle
     function toggleDisplayVideo () {
       if (displayVideo === true) {
         setDisplayVideo(false)
@@ -250,6 +247,36 @@ export function Room(props) {
               });
         }
     }
+
+    // Adds and Removes Audio tracks from DOM if user press the toggle
+    function toggleMuteAudio () {
+
+        if (playAudio === true) {
+          setPlayAudio(false)
+        } else if (playAudio === false) {
+          setPlayAudio(true)
+        }
+  
+        if (playAudio === true) {
+            Video.createLocalAudioTrack().then(localAudioTrack => {
+                return props.room.localParticipant.publishTrack(localAudioTrack);
+              }).then(publication => {
+                const elements = document.getElementsByClassName('user-video')[1]
+                const muteimg= document.getElementsByClassName('mute-icon')[1]
+                muteimg.style.visibility = "hidden";
+                elements.appendChild(publication.track.attach());
+              });
+        } else if (playAudio === false) {
+                const muteimg= document.getElementsByClassName('mute-icon')[1]
+                muteimg.style.visibility = "visible";
+            props.room.localParticipant.audioTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
+        }
+      }
 
     const client = React.useRef();
 
@@ -290,35 +317,6 @@ export function Room(props) {
             info = '';
             input.value = ''
           }
-    }
-
-    function toggleMuteAudio () {
-
-      if (playAudio === true) {
-        setPlayAudio(false)
-      } else if (playAudio === false) {
-        setPlayAudio(true)
-      }
-
-      if (playAudio === true) {
-          Video.createLocalAudioTrack().then(localAudioTrack => {
-              return props.room.localParticipant.publishTrack(localAudioTrack);
-            }).then(publication => {
-              const elements = document.getElementsByClassName('user-video')[1]
-              const muteimg= document.getElementsByClassName('mute-icon')[1]
-              muteimg.style.visibility = "hidden";
-              elements.appendChild(publication.track.attach());
-            });
-      } else if (playAudio === false) {
-              const muteimg= document.getElementsByClassName('mute-icon')[1]
-              muteimg.style.visibility = "visible";
-          props.room.localParticipant.audioTracks.forEach(publication => {
-              const attachedElements = publication.track.detach();
-              publication.track.stop();
-              publication.unpublish();
-              attachedElements.forEach(element => element.remove());
-            });
-      }
     }
 
     return (
