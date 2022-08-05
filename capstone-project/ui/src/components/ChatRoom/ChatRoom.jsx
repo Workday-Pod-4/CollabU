@@ -106,10 +106,6 @@ export default function ChatRoom() {
             navigate('/profile')
         }
         
-          
-
-
-        
       }
     
       disconnectFromRoom()
