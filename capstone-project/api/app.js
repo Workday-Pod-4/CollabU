@@ -104,7 +104,7 @@ app.get('/matches', async (req, res) => {
          FROM users
          JOIN previously_matched ON users.id = previously_matched.user_2_id
          WHERE user_1_id = $1
-         ORDER BY users.id, previously_matched.match_timestamp`, [id]
+         ORDER BY users.id, previously_matched.match_timestamp DESC;`, [id]
         )
 
     res.send(rows)
@@ -129,6 +129,22 @@ app.post("/join-room", async (req, res) => {
       token: token,
     });
 });
+
+app.post('/disconnect/:roomID', async (req, res) => {
+
+    const { roomID } = req.params
+
+    const roomSidResponse = await twilioClient.video.rooms(roomID).fetch();
+    const roomSid = roomSidResponse.sid;
+
+    try {
+      await twilioClient.video.rooms(roomSid).update({status: 'completed'})
+      res.status(200).end()
+    } catch (error) {
+      console.error(error.stack)
+      res.status(500).send(error)
+    }
+  });
 
 // Handle 404 errors
 app.use((req, res, next) => {

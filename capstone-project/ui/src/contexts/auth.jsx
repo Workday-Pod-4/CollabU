@@ -15,14 +15,12 @@ export const AuthContextProvider = ({ children }) => {
     const [prefModal, setPrefModal] = useState(false);
     const [settingsModal, setSettingsModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
-    const [reportModal, setReportModal] = React.useState(false)
+    const [reportModal, setReportModal] = useState(false);
     const [inRoom, setInRoom] = useState(false);
-
-    const [matchModal, setMatchModal] = useState(false)
-
-
+    const [matchModal, setMatchModal] = useState(false);
     const [exiting, setExiting] = useState(false);
-
+    const [colleges, setColleges] = useState([]);
+    const [findingAnotherBuddy, setFindingAnotherBuddy] = useState(false);
 
     //function for toggling report issue modal
     function toggleReportModal(){
@@ -74,6 +72,19 @@ export const AuthContextProvider = ({ children }) => {
         }
       }, [setUser])
 
+      useEffect(()=> {
+        const getColleges = async () => {
+          const response = await fetch(
+            "http://universities.hipolabs.com/search?country=united states"
+          ).then((response) => response.json());
+        
+          // update the collegeList
+          setColleges(response);
+        };
+        getColleges();
+      }, [])
+     
+
     const logoutUser = async () => {
         await apiClient.logoutUser()
         setUser({})
@@ -111,8 +122,11 @@ export const AuthContextProvider = ({ children }) => {
       setMatchModal, 
       matchModal,
       exiting,
-      setExiting
-
+      setExiting,
+      colleges,
+      setColleges,
+      findingAnotherBuddy, 
+      setFindingAnotherBuddy
     }
 
     return (

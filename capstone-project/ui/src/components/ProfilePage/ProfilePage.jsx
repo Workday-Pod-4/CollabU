@@ -5,33 +5,159 @@ import { io } from "socket.io-client";
 import UpdateForm from "./UpdateForm";
 import AdditionalInfo from "./AdditionalInfo";
 import SettingsModal from "../SettingsModal/SettingsModal";
-
+import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
 import MatchModal from "../MatchModal/MatchModal";
 import "./ProfilePage.css";
 import "./PreferenceModal.css";
 import "./Loading.css"
-import ReportIssueModal from "../ReportIssueModal/ReportIssueModal";
-
-
 
 export default function ProfilePage() {
-//  state variable that contains previously matched user's info
-  const [match, setMatch]=React.useState()
 
+  const { user, 
+          firstTime, 
+          isUpdating, 
+          setIsUpdating, 
+          isLoading, 
+          setIsLoading,
+          settingsModal,
+          toggleSettingsModal,
+          matchModal,
+          setMatchModal,
+          reportModal,
+          setReportModal,
+          toggleReportModal,
+          prefModal,
+          setPrefModal,
+          togglePrefModal, 
+          setInRoom } = useAuthContext();
 
-  const { user , firstTime, isUpdating, setIsUpdating, isLoading, setIsLoading } = useAuthContext();
-  const { settingsModal, toggleSettingsModal } = useAuthContext();
-  const {matchModal, setMatchModal} = useAuthContext();
   // if user selects studying in preference modal it will display study preference form
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false)
   const [confirmUsername, setConfirmUsername] = React.useState()
 
-  const {reportModal,setReportModal,toggleReportModal}= useAuthContext();
-
-  const { prefModal, setPrefModal, togglePrefModal } = useAuthContext();
-
+  // updates and stores the previously matched section of the ProfilePage.jsx
   const [matches, setMatches] = React.useState([])
+  
+  const [selected,setSelected] = React.useState("");
+
+  const mathCourses = [
+    "Calculus I",
+    "Calculus II",
+    "Calculus III",
+    "College Algebra",
+    "Differential Equations",
+    "Discrete Math",
+    "Linear Algebra",
+    "Pre-calculus",
+    "Statistics",
+    "Other"
+  ];
+
+  const csCourses = [
+    "Data Structures",
+    "Intro to Programming",
+    "Java",
+    "Programming I",
+    "Programming II",
+    "Programming III",
+    "Other"
+  ];
+
+  const artCourses = [
+    "2-D Design",
+    "3-D Design",
+    "Art History",
+    "Beginning Drawing",
+    "Contemporary Art",
+    "Graphic Design",
+    "Modern Art",
+    "Other"
+  ];
+
+  const businessCourses = [
+    "Business Analytics",
+    "Business Intelligence",
+    "Business Statistics",
+    "Database Applications",
+    "Database Systems",
+    "Project Management",
+    "Other"
+  ]
+
+  const dsCourses = [
+    "Big Data",
+    "Foundations of Data Science",
+    "Intro to Data Mining",
+    "Intro to Deep Learning",
+    "Other"
+  ];
+
+  const litCourses = [
+    "American Literature",
+    "Introduction to Linguistics",
+    "Introduction to Writing Studies",
+    "Narrative Techniques",
+    "Writing and Rethoric",
+    "Other"
+  ]
+
+  const scienceCourses = [
+    "Anatomy",
+    "Cell Biology",
+    "General Biochemistry",
+    "General Biology",
+    "General Chemistry",
+    "General Physics",
+    "Genetics",
+    "Organic Chemistry",
+    "Physics with Calculus",
+    "Quantum Mechanics",
+    "Statics",
+    "Thermodynamics",
+    "Other"
+  ];
+
+  const techWork = [
+    "Software Development",
+    "Software Application",
+    "Web Design",
+    "Web Development",
+    "Other"
+  ];
+
+  const entertainmentWork = [
+    "Entertaining",
+    "Other"
+  ]
+
+  const healthWork = [
+    "Data Entry",
+    "Saving People",
+    "Paperwork",
+    "Other"
+  ]
+
+  const artsWork = [
+    "Editing Photographies",
+    "Other"
+  ]
+
+  const businessWork = [
+    "Paperwork",
+    "Other"
+  ]
+
+  const lawWork = [
+    "Arresting Someone",
+    "Other"
+  ]
+
+  const edWork = [
+    "Grading",
+    "Syllabus Planning",
+    "Other"
+  ]
 
 
   // if user clicks study, set isStudying = true and isWorking = false
@@ -52,19 +178,17 @@ export default function ProfilePage() {
     setIsWorking(true)
   }
  
-
-
   //if user toggles match modal
+
   function toggleMatchModal(e){
     setMatch((e.target.innerHTML))
-    setMatchModal(!matchModal)
-  }
 
 
 
   // set topic property based on user input
   function handleOnChangeTopic (event) {
-    user.topic = event.target.value
+    user.topic = event.target.value;
+    setSelected(event.target.value);
   }
 
   // set subject property based on user input
@@ -74,15 +198,14 @@ export default function ProfilePage() {
 
   // set industry property based on user input
   function handleOnChangeIndustry (event) {
-    user.industry = event.target.value
+    user.industry = event.target.value;
+    setSelected(event.target.value);
   }
 
   // set workType property based on user input
   function handleOnChangeWork (event) {
     user.workType = event.target.value
   }
-
-  const client = React.useRef();
 
   // sends user info back to server for matching
   function handleOnSubmit (event) {
@@ -96,20 +219,23 @@ export default function ProfilePage() {
     client.current.emit('remove', {user});
     setIsLoading(false);
     togglePrefModal();
-    
   }
+
+  const client = React.useRef();
 
   React.useEffect(() => {
 
-    const socket = io("https://collabutest.herokuapp.com")
+    const socket = io("http://localhost:3001")
+
+    client.current = socket;
+
+    setInRoom(false)
 
     socket.on('redirectToRoom', (roomURL) => {
         setIsLoading(false);
         // redirect to new URL
         window.location = roomURL;
     });
-
-    client.current = socket;
 
     socket.on('disconnect', () => {
         socket.removeAllListeners();
@@ -124,18 +250,65 @@ export default function ProfilePage() {
       
       const fetchMatches = async () => {
         const res = await axios.get(
-          `https://collabutest.herokuapp.com/matches?user_id=${user.id}`);
+          `http://localhost:3001/matches?user_id=${user.id}`);
           setMatches(res.data)
       };
       fetchMatches();
     }, [user.id]);
 
+  let workType = null;
+
+  let workOptions = null;
+
+  let studyType = null;
+
+  let studyOptions = null;
+
+  if(selected === "Mathematics"){
+    studyType = mathCourses;
+  } else if( selected === "Computer Science"){
+    studyType = csCourses
+  } else if ( selected === "Art"){
+    studyType = artCourses;
+  } else if ( selected === "Business"){
+    studyType = businessCourses;
+  } else if ( selected === "Data Science"){
+    studyType = dsCourses;
+  } else if ( selected === "Literature"){
+    studyType = litCourses;
+  } else if ( selected === "Science"){
+    studyType = scienceCourses;
+  }
+
+  if(studyType) {
+    studyOptions = studyType.map((opt) => <option value={opt}>{opt}</option> )
+  }
+  
+  if(selected === "Technology"){
+    workType = techWork;
+  } else if (selected === "Entertainment") {
+    workType = entertainmentWork;
+  } else if (selected === "Health"){
+    workType = healthWork;
+  } else if (selected === "Arts"){
+    workType = artsWork;
+  } else if (selected === "Business") {
+    workType = businessWork;
+  } else if (selected === "Law Enforcement") {
+    workType = lawWork;
+  } else if (selected === "Education") {
+    workType = edWork;
+  }
+
+  if(workType) {
+    workOptions = workType.map((opt) => <option value={opt}>{opt}</option> )
+  }
+  
   //function for capitilizing first letter of strings (names)
   function CapitalizeName(str){
     const newStr = str.charAt(0).toUpperCase() + str.slice(1);
     return newStr
   }
-
 
   return (
     <div className="profile-page">
@@ -173,21 +346,21 @@ export default function ProfilePage() {
             <ul>
             {user?.social_media_link_1 ?
                 <li className="link-1">
-                  <a href={user.social_media_link_1}>
+                  <a href={`https://${user.social_media_link_1}`} target="_blank">
                     <span>{user.social_media_link_1}</span>
                   </a>
                 </li>
               : null }
               {user?.social_media_link_2 ?
                 <li className="link-2">
-                  <a href={user.social_media_link_2}>
+                  <a href={`https://${user.social_media_link_2}`} target="_blank">
                     <span>{user.social_media_link_2}</span>
                   </a>
                 </li>
               : null }
               {user?.social_media_link_3 ?
                 <li className="link-3">
-                  <a href={user.social_media_link_3}>
+                  <a href={`https://${user.social_media_link_3}`} target="_blank">
                     <span>{user.social_media_link_3}</span>
                   </a>
                 </li>
@@ -241,8 +414,20 @@ export default function ProfilePage() {
           {matches.map((match, idx)=> {
               return(
               <>
-              <li><img src = "https://s-media-cache-ak0.pinimg.com/736x/f0/d3/5f/f0d35ff9618e0ac7c0ec929c8129a39d.jpg" alt = "img" width = "70px" height= "70px"/><span onClick= {toggleMatchModal}>{match.username}</span></li>
+
+              <li>
+              <img src={match?.profile_image_url ? match.profile_image_url : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"}
+              onError={(event) => {
+                event.target.onError = "";
+                event.target.src= "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
+                return true;
+              }} 
               
+              alt = "img" 
+              width = "70px" 
+              height= "70px"/>
+              <span onClick= {toggleMatchModal}>{match.username} | {CapitalizeName(match.first_name)} {CapitalizeName(match.last_name)}</span>
+              </li>
               </>
             )})}
             </ul>
@@ -276,10 +461,13 @@ export default function ProfilePage() {
                     <label> What are you studying? </label>
                     <select className="form-input" name="topic" placeholder="Select topic" onChange={handleOnChangeTopic}>
                         <option value={""} selected>Select Topic of Study</option>
+                        <option value={"Art"}>Art</option>
+                        <option value={"Business"}>Business</option>
+                        <option value={"Computer Science"}>Computer Science</option>
+                        <option value={"Data Science"}>Data Science</option>
+                        <option value={"Literature"}>Literature</option>
                         <option value={"Mathematics"}>Mathematics</option>
-                        <option value={"Computer Science"}>Electrical Engineering</option>
-                        <option value={"Biology"}>Biology</option>
-                        <option value={"Chemistry"}>Chemistry</option>
+                        <option value={"Science"}>Science</option>
                     </select>
                     </span>
                   </li>
@@ -288,10 +476,7 @@ export default function ProfilePage() {
                     <label>Subject/Course</label>
                     <select className="form-input" name="subject" placeholder="Select Subject" onChange={handleOnChangeSubject}>
                         <option value={""} selected>Select a Subject</option>
-                        <option value={"Intro to programmings"}>Intro to programming</option>
-                        <option value={"Calculus 1"}>Calculus 1</option>
-                        <option value={"Intro to Biology"}>Intro to biology</option>
-                        <option value={"Organic Chemistry"}>Organic chemistry</option>
+                        {studyOptions}
                     </select>
                     </span>
                   </li>
@@ -304,9 +489,13 @@ export default function ProfilePage() {
                     <label>Industry</label>
                     <select className="form-input" name="industry" placeholder="Select industry" onChange={handleOnChangeIndustry}>
                         <option value={""} selected>Select an Industry</option>
+                        <option value={"Arts"}>Arts</option>
+                        <option value={"Business"}>Business</option>
+                        <option value={"Education"}>Education</option>
+                        <option value={"Law Enforcement"}>Law Enforcement</option>
+                        <option value={"Entertainment"}>Entertainment</option>
+                        <option value={"Health"}>Health</option>
                         <option value={"Technology"}>Technology</option>
-                        <option value={"Medicine"}>Medicine</option>
-                        <option value={"Consulting"}>Consulting</option>
                     </select>
                     </span>
                   </li>
@@ -315,9 +504,7 @@ export default function ProfilePage() {
                     <label>What are you working on?</label>
                     <select className="form-input" name="type-of-work" placeholder="Select type of work" onChange={handleOnChangeWork}>
                         <option value={""} selected>Type of Work</option>
-                        <option value={"Software-Developement"}>Software Development</option>
-                        <option value={"Electrical-Engineering"}>Electrical Engineering</option>
-                        <option value={"Consulting"}>Financial Consulting</option>
+                        {workOptions}
                     </select>
                     </span>
                   </li>
