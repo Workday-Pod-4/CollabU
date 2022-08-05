@@ -31,7 +31,38 @@ export default function ProfilePage() {
   const [isStudying, setIsStudying] = React.useState(false);
   const [isWorking, setIsWorking] = React.useState(false);
 
+  // updates and stores the previously matched section of the ProfilePage.jsx
   const [matches, setMatches] = React.useState([])
+  
+  const [selected,setSelected] = React.useState("");
+
+  const mathCourses = [
+    "Calculus I",
+    "Calculus II",
+    "Calculus III",
+    "College Algebra",
+    "Differential Equations",
+    "Discrete Math",
+    "Linear Algebra",
+    "Pre-calculus",
+    "Statistics"
+  ];
+
+  const csCourses = [
+    "Data Structures",
+    "Intro to Programming",
+    "Java",
+    "Programming I",
+    "Programming II",
+    "Programming III"
+  ];
+
+  const techWork = [
+    "Software Development",
+    "Software Application",
+    "Web Design",
+    "Web Development"
+  ]
 
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
@@ -53,7 +84,8 @@ export default function ProfilePage() {
 
   // set topic property based on user input
   function handleOnChangeTopic (event) {
-    user.topic = event.target.value
+    user.topic = event.target.value;
+    setSelected(event.target.value);
   }
 
   // set subject property based on user input
@@ -63,7 +95,8 @@ export default function ProfilePage() {
 
   // set industry property based on user input
   function handleOnChangeIndustry (event) {
-    user.industry = event.target.value
+    user.industry = event.target.value;
+    setSelected(event.target.value);
   }
 
   // set workType property based on user input
@@ -119,6 +152,32 @@ export default function ProfilePage() {
       fetchMatches();
     }, [user.id]);
 
+  let workType = null;
+
+  let workOptions = null;
+
+  let studyType = null;
+
+  let studyOptions = null;
+
+  if(selected === "Mathematics"){
+    studyType = mathCourses;
+  } else if( selected === "Computer Science"){
+    studyType = csCourses
+  }
+
+  if(studyType) {
+    studyOptions = studyType.map((opt) => <option value={opt}>{opt}</option> )
+  }
+  
+  if(selected === "Technology"){
+    workType = techWork;
+  }
+
+  if(workType) {
+    workOptions = workType.map((opt) => <option value={opt}>{opt}</option> )
+  }
+  
   return (
     <div className="profile-page">
       { reportModal ? <ReportIssueModal/> : null }
@@ -249,10 +308,13 @@ export default function ProfilePage() {
                     <label> What are you studying? </label>
                     <select className="form-input" name="topic" placeholder="Select topic" onChange={handleOnChangeTopic}>
                         <option value={""} selected>Select Topic of Study</option>
+                        <option value={"Arts"}>Arts</option>
+                        <option value={"Business"}>Business</option>
+                        <option value={"Computer Science"}>Computer Science</option>
+                        <option value={"Data Science"}>Data Science</option>
+                        <option value={"Literature"}>Literature</option>
                         <option value={"Mathematics"}>Mathematics</option>
-                        <option value={"Computer Science"}>Electrical Engineering</option>
-                        <option value={"Biology"}>Biology</option>
-                        <option value={"Chemistry"}>Chemistry</option>
+                        <option value={"Science"}>Science</option>
                     </select>
                     </span>
                   </li>
@@ -261,10 +323,7 @@ export default function ProfilePage() {
                     <label>Subject/Course</label>
                     <select className="form-input" name="subject" placeholder="Select Subject" onChange={handleOnChangeSubject}>
                         <option value={""} selected>Select a Subject</option>
-                        <option value={"Intro to programmings"}>Intro to programming</option>
-                        <option value={"Calculus 1"}>Calculus 1</option>
-                        <option value={"Intro to Biology"}>Intro to biology</option>
-                        <option value={"Organic Chemistry"}>Organic chemistry</option>
+                        {studyOptions}
                     </select>
                     </span>
                   </li>
@@ -277,9 +336,14 @@ export default function ProfilePage() {
                     <label>Industry</label>
                     <select className="form-input" name="industry" placeholder="Select industry" onChange={handleOnChangeIndustry}>
                         <option value={""} selected>Select an Industry</option>
+                        <option value={"Aviation"}>Aviation</option>
+                        <option value={"Arts"}>Arts</option>
+                        <option value={"Business"}>Business</option>
+                        <option value={"Education"}>Education</option>
+                        <option value={"Law Enforcement"}>Law Enforcement</option>
+                        <option value={"Media"}>Media</option>
+                        <option value={"Health"}>Health</option>
                         <option value={"Technology"}>Technology</option>
-                        <option value={"Medicine"}>Medicine</option>
-                        <option value={"Consulting"}>Consulting</option>
                     </select>
                     </span>
                   </li>
@@ -288,9 +352,7 @@ export default function ProfilePage() {
                     <label>What are you working on?</label>
                     <select className="form-input" name="type-of-work" placeholder="Select type of work" onChange={handleOnChangeWork}>
                         <option value={""} selected>Type of Work</option>
-                        <option value={"Software-Developement"}>Software Development</option>
-                        <option value={"Electrical-Engineering"}>Electrical Engineering</option>
-                        <option value={"Consulting"}>Financial Consulting</option>
+                        {workOptions}
                     </select>
                     </span>
                   </li>
