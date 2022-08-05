@@ -45,7 +45,8 @@ export default function ProfilePage() {
     "Discrete Math",
     "Linear Algebra",
     "Pre-calculus",
-    "Statistics"
+    "Statistics",
+    "Other"
   ];
 
   const csCourses = [
@@ -54,16 +55,104 @@ export default function ProfilePage() {
     "Java",
     "Programming I",
     "Programming II",
-    "Programming III"
+    "Programming III",
+    "Other"
+  ];
+
+  const artCourses = [
+    "2-D Design",
+    "3-D Design",
+    "Art History",
+    "Beginning Drawing",
+    "Contemporary Art",
+    "Graphic Design",
+    "Modern Art",
+    "Other"
+  ];
+
+  const businessCourses = [
+    "Business Analytics",
+    "Business Intelligence",
+    "Business Statistics",
+    "Database Applications",
+    "Database Systems",
+    "Project Management",
+    "Other"
+  ]
+
+  const dsCourses = [
+    "Big Data",
+    "Foundations of Data Science",
+    "Intro to Data Mining",
+    "Intro to Deep Learning",
+    "Other"
+  ];
+
+  const litCourses = [
+    "American Literature",
+    "Introduction to Linguistics",
+    "Introduction to Writing Studies",
+    "Narrative Techniques",
+    "Writing and Rethoric",
+    "Other"
+  ]
+
+  const scienceCourses = [
+    "Anatomy",
+    "Cell Biology",
+    "General Biochemistry",
+    "General Biology",
+    "General Chemistry",
+    "General Physics",
+    "Genetics",
+    "Organic Chemistry",
+    "Physics with Calculus",
+    "Quantum Mechanics",
+    "Statics",
+    "Thermodynamics",
+    "Other"
   ];
 
   const techWork = [
     "Software Development",
     "Software Application",
     "Web Design",
-    "Web Development"
+    "Web Development",
+    "Other"
+  ];
+
+  const entertainmentWork = [
+    "Entertaining",
+    "Other"
   ]
 
+  const healthWork = [
+    "Data Entry",
+    "Saving People",
+    "Paperwork",
+    "Other"
+  ]
+
+  const artsWork = [
+    "Editing Photographies",
+    "Other"
+  ]
+
+  const businessWork = [
+    "Paperwork",
+    "Other"
+  ]
+
+  const lawWork = [
+    "Arresting Someone",
+    "Other"
+  ]
+
+  const edWork = [
+    "Grading",
+    "Syllabus Planning",
+    "Other"
+  ]
 
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
@@ -175,6 +264,16 @@ export default function ProfilePage() {
     studyType = mathCourses;
   } else if( selected === "Computer Science"){
     studyType = csCourses
+  } else if ( selected === "Art"){
+    studyType = artCourses;
+  } else if ( selected === "Business"){
+    studyType = businessCourses;
+  } else if ( selected === "Data Science"){
+    studyType = dsCourses;
+  } else if ( selected === "Literature"){
+    studyType = litCourses;
+  } else if ( selected === "Science"){
+    studyType = scienceCourses;
   }
 
   if(studyType) {
@@ -183,6 +282,18 @@ export default function ProfilePage() {
   
   if(selected === "Technology"){
     workType = techWork;
+  } else if (selected === "Entertainment") {
+    workType = entertainmentWork;
+  } else if (selected === "Health"){
+    workType = healthWork;
+  } else if (selected === "Arts"){
+    workType = artsWork;
+  } else if (selected === "Business") {
+    workType = businessWork;
+  } else if (selected === "Law Enforcement") {
+    workType = lawWork;
+  } else if (selected === "Education") {
+    workType = edWork;
   }
 
   if(workType) {
@@ -343,7 +454,7 @@ export default function ProfilePage() {
                     <label> What are you studying? </label>
                     <select className="form-input" name="topic" placeholder="Select topic" onChange={handleOnChangeTopic}>
                         <option value={""} selected>Select Topic of Study</option>
-                        <option value={"Arts"}>Arts</option>
+                        <option value={"Art"}>Art</option>
                         <option value={"Business"}>Business</option>
                         <option value={"Computer Science"}>Computer Science</option>
                         <option value={"Data Science"}>Data Science</option>
@@ -371,12 +482,11 @@ export default function ProfilePage() {
                     <label>Industry</label>
                     <select className="form-input" name="industry" placeholder="Select industry" onChange={handleOnChangeIndustry}>
                         <option value={""} selected>Select an Industry</option>
-                        <option value={"Aviation"}>Aviation</option>
                         <option value={"Arts"}>Arts</option>
                         <option value={"Business"}>Business</option>
                         <option value={"Education"}>Education</option>
                         <option value={"Law Enforcement"}>Law Enforcement</option>
-                        <option value={"Media"}>Media</option>
+                        <option value={"Entertainment"}>Entertainment</option>
                         <option value={"Health"}>Health</option>
                         <option value={"Technology"}>Technology</option>
                     </select>

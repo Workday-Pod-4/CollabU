@@ -125,14 +125,9 @@ export const AuthContextProvider = ({ children }) => {
       setMatchModal, 
       matchModal,
       exiting,
-<<<<<<< HEAD
       setExiting,
       colleges,
       setColleges
-=======
-      setExiting
-
->>>>>>> 5ee918974679fb252bb85ebcc3dc5bd0fb6890ea
     }
 
     return (
