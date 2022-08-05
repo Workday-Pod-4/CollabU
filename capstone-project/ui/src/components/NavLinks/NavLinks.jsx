@@ -7,12 +7,7 @@ import "./NavLinks.css";
 export default function NavLinks() {
   
   const {user, logoutUser} = useAuthContext() 
-  const {togglePrefModal, inRoom, setInRoom, setExiting} = useAuthContext() 
-
-  function exitRoom(){
-    setInRoom(false);
-    togglePrefModal();
-  }
+  const {togglePrefModal, inRoom, setInRoom, setExiting, setFindingAnotherBuddy} = useAuthContext() 
 
   return (
     <div className="nav-links">
@@ -30,7 +25,7 @@ export default function NavLinks() {
           <li onClick={togglePrefModal} className = "btn" id= "open-modal"><Link to="/profile"> Find a buddy</Link></li>
           :
           user?.email && inRoom ?
-          <li className="btn" onClick={exitRoom}> <Link to="/profile">Find another buddy</Link> </li>
+          <li className="btn" onClick={() =>{setFindingAnotherBuddy(true)}}> <a>Find another buddy</a> </li>
           :  
           <li className="btn"><Link to="/register">Register</Link></li>
           }

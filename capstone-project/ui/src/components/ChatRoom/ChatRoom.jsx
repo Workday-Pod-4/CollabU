@@ -13,7 +13,10 @@ export default function ChatRoom() {
             inRoom, 
             setInRoom, 
             setExiting, 
-            exiting } = useAuthContext()
+            exiting,
+            togglePrefModal,
+            findingAnotherBuddy, 
+            setFindingAnotherBuddy } = useAuthContext()
 
     const [room, setRoom] = React.useState(null);
     const [showRoom, setShowRoom] = React.useState(false);
@@ -23,33 +26,53 @@ export default function ChatRoom() {
     const navigate = useNavigate();
 
     setInRoom(true);
-    var cName="";
-    var bName="";
+    // var cName="";
+    // var bName="";
 
     let roomID = 'test';
 
-    if (chatOpen == false) {
-        cName="chat-container closed";
-        bName="chat closed";
-    }
-    else {
-        cName="chat-container open";
-        bName="chat open";
-    }
+    // if (chatOpen == false) {
+    //     cName="chat-container closed";
+    //     bName="chat closed";
+    // }
+    // else {
+    //     cName="chat-container open";
+    //     bName="chat open";
+    // }
 
+    const participantDisconnected = () => {
+        const elements = document.getElementsByClassName('user-view')[0]
+        const participantIdentity = elements.getElementsByTagName('h3')[0]
+        participantIdentity.textContent = 'Your match left and the room has ended. Please use the buttons above to leave the room. '
+        };
+
+        if (room) {
+            room.on('participantDisconnected', participantDisconnected);
+        }
     // set the remote participant when they join the room
     const participantConnected = participant => {
         setRemoteParticipant(participant)
         };
 
-    
-    const participantDisconnected = participant => {
-        console.log("Room ", room)
-        window.location = `/profile`;
-        };
+        const findAnotherBuddy = () => {
+            async function disconnectFromRoomToFindBuddy() {
 
+                // Disconnect the LocalParticipant.
+                if (room) {
+                    room.disconnect()
+                    setInRoom(false);
+                    togglePrefModal();
+                    navigate('/profile')
+                } else {
+                    setInRoom(false);
+                    togglePrefModal();
+                    navigate('/profile')
+                }
+                
+              }
+            disconnectFromRoomToFindBuddy()
+          }
     // disconnects the user from the room
-
     const exitRoom = () => {
         async function disconnectFromRoom() {
 
@@ -60,6 +83,7 @@ export default function ChatRoom() {
         } else {
             navigate('/profile')
         }
+        
           
 
         // Complete the Room, disconnecting all RemoteParticipants.
@@ -76,8 +100,6 @@ export default function ChatRoom() {
     
       disconnectFromRoom()
       setInRoom(false);
-      room.on('participantDisconnected', participantDisconnected);
-    //   room.participants.forEach(participantDisconnected);
       }
 
     // Allows a user to a Twilio Room when they click on the Enter Room button
@@ -119,8 +141,19 @@ export default function ChatRoom() {
             <div className="modal-container">
                 <div className="modal-content">
                     <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
-<p> Are you sure you wanna exit? </p>
+                        <p> Are you sure you wanna exit? </p>
                     <button className="exit-fr" onClick={exitRoom}>Get me outta here!</button>
+                </div>
+            </div>
+            :
+            null
+            }
+            {findingAnotherBuddy ?
+            <div className="modal-container">
+                <div className="modal-content">
+                    <button className="close-modal" onClick={() => {setFindingAnotherBuddy(false)}}> x </button>
+                        <p> Are you sure you wanna find another buddy </p>
+                    <button className="exit-fr" onClick={findAnotherBuddy}>Yes this person sucks!</button>
                 </div>
             </div>
             :
@@ -323,7 +356,7 @@ return (
             <h3>{props.participant.identity}</h3>
             <div className="user-video">
                 <video ref={videoRef} autoPlay={true} />
+                <audio ref={audioRef} autoPlay={true} />
             </div>
-            <audio ref={audioRef} autoPlay={true} />
         </div>
 )}

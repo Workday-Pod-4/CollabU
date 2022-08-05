@@ -135,7 +135,9 @@ app.post('/disconnect/:roomID', async (req, res) => {
     const { status } = req.query
 
     const roomSidResponse = await twilioClient.video.rooms(roomID).fetch();
+    console.log("Response ", roomSidResponse)
     const roomSid = roomSidResponse.sid;
+    console.log("RoomSid ", roomSid)
 
     if (status !== 'completed') {
       res.status(400).end()
