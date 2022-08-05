@@ -1,5 +1,7 @@
 import * as React from "react";
 import { useAuthContext } from "../../contexts/auth";
+import { useNavigate, useParams } from "react-router-dom";
+import { io } from "socket.io-client";
 import Video from 'twilio-video';
 import axios from "axios";
 import "./ChatRoom.css";
@@ -16,7 +18,10 @@ export default function ChatRoom() {
             inRoom, 
             setInRoom, 
             setExiting, 
-            exiting } = useAuthContext()
+            exiting,
+            togglePrefModal,
+            findingAnotherBuddy, 
+            setFindingAnotherBuddy } = useAuthContext()
 
     const [room, setRoom] = React.useState(null);
     const [showRoom, setShowRoom] = React.useState(false);
@@ -25,32 +30,80 @@ export default function ChatRoom() {
     const navigate = useNavigate();
 
     setInRoom(true);
-    var cName="";
-    var bName="";
+
+    let roomID = 'test';
+
+    const participantDisconnected = () => {
+
+        const elements = document.getElementsByClassName('user-view')[0]
+        const participantIdentity = elements.getElementsByTagName('h3')[0]
+        participantIdentity.textContent = 'Your match left and the room has ended. Please use the buttons above to leave the room.'
+
+        if (room?.participants.size === 0) {
     
+            const disconnectEveryoneFromRoom = async () => {
+    
+                // Complete the Room, disconnecting all RemoteParticipants
+                try {
+                    await axios({
+                        method: 'post',
+                        url: `http://localhost:3001/disconnect/${roomID}`
+                    });
+                } catch (error) {
+                    console.error(error)
+                }
+            }
+    
+            disconnectEveryoneFromRoom()
+        }};
 
-    let roomID = useParams().id;
 
 
-    if (chatOpen == false) {
-        cName="chat-container closed";
-        bName="chat closed";
-    }
-    else {
-        cName="chat-container open";
-        bName="chat open";
-    }
-
-    // disconnects the user from the room
-    function exitRoom(){
-        setInRoom(false);
-        navigate("/profile")
+    if (room) {
+        room.on('participantDisconnected', participantDisconnected);
     }
 
     // set the remote participant when they join the room
     const participantConnected = participant => {
-      setRemoteParticipant(participant)
-    };
+        setRemoteParticipant(participant)
+        };
+
+        const findAnotherBuddy = () => {
+            async function disconnectFromRoomToFindBuddy() {
+
+                // Disconnect the LocalParticipant.
+                if (room) {
+                    room.disconnect()
+                    setInRoom(false);
+                    togglePrefModal();
+                    navigate('/profile')
+                } else {
+                    setInRoom(false);
+                    togglePrefModal();
+                    navigate('/profile')
+                }
+                
+              }
+            disconnectFromRoomToFindBuddy()
+          }
+
+    // disconnects the user from the room
+    const exitRoom = () => {
+        async function disconnectFromRoom() {
+
+        // Disconnect the LocalParticipant.
+        if (room) {
+            room.disconnect()
+            navigate('/profile')
+        } else {
+            navigate('/profile')
+        }
+        
+      }
+    
+      disconnectFromRoom()
+      setInRoom(false);
+      }
 
     // Allows a user to a Twilio Room when they click on the Enter Room button
     const handleOnClick = () => {
@@ -79,7 +132,6 @@ export default function ChatRoom() {
       setLocalParticipant(room.localParticipant)
     }
     
-
     joinRoom()
     setShowRoom(true)
     }
@@ -91,18 +143,42 @@ export default function ChatRoom() {
             <div className="modal-container">
                 <div className="modal-content">
                     <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
+                        <p> Are you sure you wanna exit? </p>
                     <button className="exit-fr" onClick={exitRoom}>Get me outta here!</button>
                 </div>
             </div>
             :
             null
             }
-            <Room handleOnClick={handleOnClick} user={user} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant}/>
+            {findingAnotherBuddy ?
+            <div className="modal-container">
+                <div className="modal-content">
+                    <button className="close-modal" onClick={() => {setFindingAnotherBuddy(false)}}> x </button>
+                        <p> Are you sure you wanna find another buddy </p>
+                    <button className="exit-fr" onClick={findAnotherBuddy}>Yes this person sucks!</button>
+                </div>
+            </div>
+            :
+            null
+            }
+            <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant} chatOpen={chatOpen} setChatOpen={setChatOpen} user={user} roomID={roomID}/>
         </div>
     </div>     
     )}
 
 export function Room(props) {
+
+    let cName="";
+    let bName="";
+
+    if (props.chatOpen == false) {
+        cName="chat-container closed";
+        bName="chat closed";
+    }
+    else if (props.chatOpen == true) {
+        cName="chat-container open";
+        bName="chat open";
+    }
 
     const [playAudio, setPlayAudio] = React.useState(false);
     const [displayVideo, setDisplayVideo] = React.useState(false);
@@ -175,6 +251,47 @@ export function Room(props) {
         }
     }
 
+    const client = React.useRef();
+
+    React.useEffect(() => {
+
+        const socket = io("http://localhost:3001")
+
+        client.current = socket;
+
+        socket.on("connect", () => {
+            client.current.emit('joinRoom', props.roomID);
+          });
+    
+        socket.on('chat message', function(msg) {
+            let messages = document.getElementById('messages');
+            let item = document.createElement('li');
+            item.textContent = `${msg.peerUsername}: ${msg.chatMsg}`;
+
+            messages.appendChild(item);
+          });
+    
+        socket.on('disconnect', () => {
+            socket.removeAllListeners();
+         });
+    
+        return () => socket.disconnect();
+    
+      }, []);
+
+      const handleOnSubmit = (event) => {
+        event.preventDefault();
+        let input = document.getElementById('input');
+        
+        if (input.value) {
+            let info = {'chatMsg': input.value,
+                    'peerUsername': props.user.username }
+            client.current.emit('chat message', info);
+            info = '';
+            input.value = ''
+          }
+    }
+
     function toggleMuteAudio () {
 
       if (playAudio === true) {
@@ -214,7 +331,12 @@ export function Room(props) {
                 {props.remoteParticipant !== null ? <Participant key={props.remoteParticipant.sid} participant={props.remoteParticipant} />: 
                     <div className="user-view">
                         <h3> Your Match is Coming! </h3>
-                        <div className="user-video"></div>
+                        <div className="user-video">
+                            <p> If it takes a while for your match to enter the room, it's possible that
+                                they left before entering the room. If that's the case, please exit the room 
+                                and try to find another match.
+                            </p>
+                        </div>
                 </div>}
                     <Participant key={props.localParticipant.sid} playAudio={playAudio} displayVideo={displayVideo} user={props.user} participant={props.localParticipant} room={props.room} />
                 </div>
@@ -224,9 +346,17 @@ export function Room(props) {
                             <button className="mute" onClick={toggleMuteAudio}>Mute</button>
                             <button className="video" onClick={toggleDisplayVideo}>Video</button>
                         </div>
-                        <div className="">
-                            <button className="">Chat</button>
-                        </div>
+                        { props.chatOpen ? 
+                        <div className={cName}>
+                            <form id="form" action="">
+                                <input id="input" autoComplete="off" placeholder="Type something..."/><button onClick={handleOnSubmit}>Send</button>
+                            </form>
+                            <ul id="messages"></ul>
+                            <button className="close-chat" onClick={() => (props.setChatOpen(!props.chatOpen))}>X</button>           
+                        </div> : 
+                        <div className={cName}>
+                            <button className={bName} onClick={() => (props.setChatOpen(!props.chatOpen))}>Chat</button>
+                        </div> }
             </div>
             </>
         : <div className="enter-room"><button onClick={props.handleOnClick}> Enter Room </button>
@@ -309,10 +439,10 @@ return (
             </div>
             <div className="user-video">
               <video class="actual-user-video" ref={videoRef} autoPlay={true} />  
+              <audio ref={audioRef} autoPlay={true} />
               <img className="no-video" 
               src=
               "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" alt="no-video" /> 
             </div>
-            <audio ref={audioRef} autoPlay={true} />
         </div>
 )}

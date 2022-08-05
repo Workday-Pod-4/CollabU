@@ -15,13 +15,14 @@ export const AuthContextProvider = ({ children }) => {
     const [prefModal, setPrefModal] = useState(false);
     const [settingsModal, setSettingsModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
-    const [reportModal, setReportModal] = React.useState(false)
+    const [reportModal, setReportModal] = useState(false)
     const [inRoom, setInRoom] = useState(false);
 
     const [matchModal, setMatchModal] = useState(false)
 
 
     const [exiting, setExiting] = useState(false);
+    const [findingAnotherBuddy, setFindingAnotherBuddy] = useState(false);
 
 
     //function for toggling report issue modal
@@ -111,8 +112,10 @@ export const AuthContextProvider = ({ children }) => {
       setMatchModal, 
       matchModal,
       exiting,
-      setExiting
-
+      setExiting,
+      findingAnotherBuddy, 
+      setFindingAnotherBuddy
+      
     }
 
     return (
