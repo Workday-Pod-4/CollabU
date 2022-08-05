@@ -29,7 +29,7 @@ export default function ChatRoom() {
 
     setInRoom(true);
 
-    let roomID = useParams.id;
+    let roomID = useParams().id;
     
     /* Lets the local participant know that the remote participants has ended the session 
        and they have been kicked from the room */

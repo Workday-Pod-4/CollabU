@@ -142,6 +142,7 @@
     margin-top: -62vh;
     border: 1px;
     border-radius: 20px;
+    z-index: 5;
 }
 .chat-room .content .chat-container.open form{
     display: flex;
