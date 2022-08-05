@@ -55,7 +55,7 @@ export default function ChatRoom() {
                 try {
                     await axios({
                         method: 'post',
-                        url: `http://localhost:3001/disconnect/${roomID}?status=completed`
+                        url: `http://localhost:3001/disconnect/${roomID}`
                     });
                 } catch (error) {
                     console.error(error)
