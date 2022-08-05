@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+p{
+    padding:0;
+    margin:0;
+}
 .match-modal-container{
     display: flex;
     flex-direction: column;
@@ -21,11 +25,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: grey;
+    background-color:#4846BD;
     height:90%;
     width:60%;
     border-radius:5px ;
     justify-content:flex-start;
+    color: rgb(255, 255, 255);
+    border: 2px solid  #4846BD;
     }
 
 
@@ -55,7 +61,7 @@ margin-top:1vh;
     flex-direction: column;
     align-items: center;
     height:80vh;
-    gap:2vh;
+    gap:4vh;
 }
 .match-modal-img{
 border-radius: 50%;

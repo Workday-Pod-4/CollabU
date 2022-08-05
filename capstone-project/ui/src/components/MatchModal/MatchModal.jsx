@@ -39,10 +39,10 @@ export default function MatchModal({ matches, Match, toggleMatchModal, Capitaliz
         <div className = "work-information">
           {UserInfo.job_title=="undefined" && UserInfo.company == "undefined"? <><p className = "independent">Independent</p></> :null}
           {UserInfo.job_title!="undefined"? <><p className = "job-title"> {UserInfo.job_title}</p> </>: null}
-          <br></br>
-          {UserInfo.job_title!="undefined"? <>at </>: null}
-          <br></br>
-          {UserInfo.company!="undefined" && UserInfo.job_title!="undefined"? <> <p className = "job-company">{UserInfo.company} </p></>:(UserInfo.job_title=="undefined" && UserInfo.company!="undefined"? <> <b>Works at</b> <p className = "job-company">{UserInfo.company}</p></>:null)}
+
+          {UserInfo.job_title!="undefined" && UserInfo.job_title!=""? <>at<br></br></>: null}
+  
+          {UserInfo.company!="undefined" && UserInfo.job_title!="undefined"? <> <p className = "job-company">{UserInfo.company} </p> <br></br></>:(UserInfo.job_title=="undefined" && UserInfo.company!="undefined"? <> <b>Works at</b> <p className = "job-company">{UserInfo.company}</p></>:null)}
         </div>
 
         <div className = "education-information">
