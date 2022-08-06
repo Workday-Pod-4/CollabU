@@ -23,6 +23,7 @@ return (
 function App() {
 
 const { user } = useAuthContext()
+// TO DO: use isLoading, setIsLoading from auth context
 const [isLoading, setIsLoading] = React.useState(true);
 const [accessDenied, setAccessDenied] = React.useState(true);
 

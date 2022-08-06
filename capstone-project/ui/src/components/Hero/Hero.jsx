@@ -1,5 +1,4 @@
 import * as React from "react";
-import heroimg from "../../assets/heroimg.jpg"
 import "./Hero.css";
 
 export default function Hero() {

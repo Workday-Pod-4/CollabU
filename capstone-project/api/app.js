@@ -132,17 +132,22 @@ app.post("/join-room", async (req, res) => {
 
 app.post('/disconnect/:roomID', async (req, res) => {
 
+    // Gets room id from request
     const { roomID } = req.params
 
-    const roomSidResponse = await twilioClient.video.rooms(roomID).fetch();
-    const roomSid = roomSidResponse.sid;
+    // Gets Room SID from Twilio API
+    const roomResponse = await twilioClient.video.rooms(roomID).fetch();
+    const roomSID = roomResponse.sid;
 
-    try {
-      await twilioClient.video.rooms(roomSid).update({status: 'completed'})
-      res.status(200).end()
-    } catch (error) {
-      console.error(error.stack)
-      res.status(500).send(error)
+    // If there is a roomSID, destroys the room , throws error if room cant be destory
+    if (roomSID && roomSID !== null && roomSID !== undefined) {
+        try {
+            await twilioClient.video.rooms(roomSID).update({status: 'completed'})
+            res.status(200).end()
+          } catch (error) {
+            console.error(error.stack)
+            res.status(500).send(error)
+          }
     }
   });
 
