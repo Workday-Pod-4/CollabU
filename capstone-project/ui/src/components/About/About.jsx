@@ -5,8 +5,13 @@ export default function About() {
   return (
     <div className="about">
       <div className="content">
-        <h1>About</h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam corporis cumque, error consequatur beatae sequi pariatur nesciunt officiis voluptates doloribus asperiores sit praesentium ipsam non.</p>
+        <div className="about-img">
+          <img src = "../src/assets/about-img.jpg" width="400px" height="266px"></img>
+        </div>
+          <div className="about-text">
+            <h1>About CollabU</h1>
+            <p>Taking the first step is always the hardest, especially when you're taking that step alone. CollabU provides access to a community of like-minded individuals who wish to form healthy habits and accomplish self-defined goals. No matter the time or place,  we make finding an accountability partner easy and accessible for you.</p>
+          </div>
       </div>
     </div>
   );

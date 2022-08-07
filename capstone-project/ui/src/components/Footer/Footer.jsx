@@ -6,9 +6,8 @@ export default function Footer() {
   return (
     <div className="footer">
       <div className="content">
-        <h1>Footer</h1>
         <div className="links">
-          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam corporis quas dicta eaque aliquam magnam nobis id porro voluptas, tenetur deserunt soluta earum, ex illum quod, officiis repellat unde. Debitis neque accusantium cupiditate architecto quos.</p>
+          <p> Made By: <a href="https://www.linkedin.com/in/lccovington/">Lacie Covington</a>, <a href="https://www.linkedin.com/in/miles-baffour-1688131b2/">Miles Baffour</a>, and <a href="https://www.linkedin.com/in/gabriel-bremo-83a928204/">Gabriel Bremo</a></p>
         </div>
       </div>
     </div>

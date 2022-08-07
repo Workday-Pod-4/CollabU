@@ -3,11 +3,13 @@
 }
 
 .landing-page {
-
     background: #F7F6E9;
 }
 
 .landing-page .hero-banner{
-    height:50vh;
+    height: 55vh;
+}
 
+.landing-page .about-section{
+    height: 55vh;
 }

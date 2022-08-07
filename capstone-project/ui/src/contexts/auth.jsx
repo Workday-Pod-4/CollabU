@@ -79,18 +79,6 @@ export const AuthContextProvider = ({ children }) => {
         setUser({})
         setError(null)
     }
-
-    // useEffect(()=> {
-    //   const getColleges = async () => {
-    //     const response = await fetch(
-    //       "http://universities.hipolabs.com/search?country=united states"
-    //     ).then((response) => response.json());
-      
-    //     // update the collegeList
-    //     setColleges(response);
-    //   };
-    //   getColleges();
-    // }, [])
      
     const authValue = { user, 
       setUser,

@@ -181,8 +181,8 @@ export default function ProfilePage() {
   //if user toggles match modal
 
   function toggleMatchModal(e){
-    setMatch((e.target.innerHTML))
-
+    setMatches((e.target.innerHTML))
+  }
 
 
   // set topic property based on user input
@@ -535,5 +535,4 @@ export default function ProfilePage() {
     </div> : null)}
     </div>
 );
-}
 }

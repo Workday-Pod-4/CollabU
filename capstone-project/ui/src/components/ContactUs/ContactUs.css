@@ -1,9 +1,24 @@
+.contact-us {
+    background: rgb(255, 255, 255);
+    padding-top: 1%;
+    padding-left: 11.25%;
+    padding-right: 10.50%;
+}
+
+.contact-us h1 {
+    padding: 2%;
+    margin: 0;
+}
+
 .contact-us .content {
     width: 100%;
-    margin: 0px 0px 0px 0px;
+    margin: 0;
+    padding-bottom: 4%;
+    padding-right: 5.5%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: row;
     min-height: 350px;
+
 }

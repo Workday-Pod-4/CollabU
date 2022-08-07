@@ -35,7 +35,6 @@ React.useEffect(() => {
   }
 }, [user]);
 
-
   return (
     <div className="App">
       <React.Fragment>
@@ -47,8 +46,8 @@ React.useEffect(() => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegistrationPage />} />
-                <Route path ="/profile" element={isLoading === true && accessDenied === false ? <Loading /> : accessDenied === true && isLoading === false ? <AccessForbidden /> : <ProfilePage />}/>
-                <Route path="/room/:id" element={isLoading === true && accessDenied === false ? <Loading /> : accessDenied === true && isLoading === false ? <AccessForbidden /> : <ChatRoom />} />
+                <Route path ="/profile" element={<ProfilePage />}/>
+                <Route path="/room/:id" element={<ChatRoom />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
