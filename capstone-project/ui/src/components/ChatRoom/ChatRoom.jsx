@@ -46,7 +46,7 @@ export default function ChatRoom() {
         if (room?.participants.size === 0) {
     
             const disconnectEveryoneFromRoom = async () => {
-    
+
                 // Complete the Room, disconnecting all RemoteParticipants
                 try {
                     await axios({
@@ -57,6 +57,18 @@ export default function ChatRoom() {
                     console.error(error)
                 }
             }
+            room.localParticipant.videoTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
+              room.localParticipant.audioTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
             disconnectEveryoneFromRoom()
         }};
 
@@ -76,6 +88,18 @@ export default function ChatRoom() {
 
             // Disconnect the LocalParticipant.
             if (room) {
+                room.localParticipant.videoTracks.forEach(publication => {
+                    const attachedElements = publication.track.detach();
+                    publication.track.stop();
+                    publication.unpublish();
+                    attachedElements.forEach(element => element.remove());
+                  });
+                  room.localParticipant.audioTracks.forEach(publication => {
+                    const attachedElements = publication.track.detach();
+                    publication.track.stop();
+                    publication.unpublish();
+                    attachedElements.forEach(element => element.remove());
+                  });
                 room.disconnect()
                 setInRoom(false);
                 togglePrefModal();
@@ -95,6 +119,18 @@ export default function ChatRoom() {
 
         // Disconnect the LocalParticipant.
         if (room) {
+            room.localParticipant.videoTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
+              room.localParticipant.audioTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
             room.disconnect()
             navigate('/profile')
         } else {
