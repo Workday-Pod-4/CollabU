@@ -57,19 +57,23 @@ export default function ChatRoom() {
                     console.error(error)
                 }
             }
+
             room.localParticipant.videoTracks.forEach(publication => {
                 const attachedElements = publication.track.detach();
                 publication.track.stop();
                 publication.unpublish();
                 attachedElements.forEach(element => element.remove());
               });
+              
               room.localParticipant.audioTracks.forEach(publication => {
                 const attachedElements = publication.track.detach();
                 publication.track.stop();
                 publication.unpublish();
                 attachedElements.forEach(element => element.remove());
               });
+
             disconnectEveryoneFromRoom()
+            
         }};
 
     // set the remote participant when they join the room
