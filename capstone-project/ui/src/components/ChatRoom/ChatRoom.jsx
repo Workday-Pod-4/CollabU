@@ -74,6 +74,7 @@ export default function ChatRoom() {
               });
 
             disconnectEveryoneFromRoom()
+            setRoom(null)
 
         }};
 
@@ -109,12 +110,14 @@ export default function ChatRoom() {
                     attachedElements.forEach(element => element.remove());
                   });
 
-                room.disconnect()
+                room.disconnect();
                 setInRoom(false);
+                setRoom(null)
                 togglePrefModal();
                 navigate('/profile')
             } else {
                 setInRoom(false);
+                setRoom(null)
                 togglePrefModal();
                 navigate('/profile')
             } 
@@ -151,8 +154,9 @@ export default function ChatRoom() {
         }
     }
     
-        disconnectFromRoom()
+        disconnectFromRoom();
         setInRoom(false);
+        setRoom(null)
     }
 
     // Allows a user to a Twilio Room when they click on the Enter Room button
@@ -511,7 +515,7 @@ return (
             <img className="mute-icon" src={muteIcon} alt="Muted"></img>
             </div>
             <div className="user-video">
-              <video class="actual-user-video" ref={videoRef} autoPlay={true} />  
+              <video className="actual-user-video" ref={videoRef} autoPlay={true} />  
               <audio ref={audioRef} autoPlay={true} />
               <img className="no-video" 
               src=
