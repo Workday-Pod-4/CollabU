@@ -313,7 +313,7 @@ export default function ProfilePage() {
       { matchModal ? <MatchModal CapitalizeName={CapitalizeName} toggleMatchModal={toggleMatchModal} Match={match} matches={matches} /> : null}
       { reportModal ? <ReportIssueModal/> : null}
       { firstTime ? <AdditionalInfo /> : null}
-      {settingsModal ? <SettingsModal/> : null}
+      { settingsModal ? <SettingsModal/> : null}
       <div className="sections">
         <div className="left-section">
           <div className="profile-pic">
@@ -401,17 +401,14 @@ export default function ProfilePage() {
         </div>
           {isUpdating ?
           null
-          :
-            
+          :  
         <div className="right-section">
           <h1>Match History</h1>
           <div className="match-history">
-    
           <ul>
           {matches.map((match, idx)=> {
               return(
               <>
-
               <li>
               <img src={match?.profile_image_url ? match.profile_image_url : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"}
               onError={(event) => {
@@ -419,7 +416,6 @@ export default function ProfilePage() {
                 event.target.src= "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
                 return true;
               }} 
-              
               alt = "img" 
               width = "70px" 
               height= "70px"/>
@@ -430,7 +426,6 @@ export default function ProfilePage() {
             </ul>
           </div>
           </div>
-
           }
       </div>
       {/* Preference Modal */}
@@ -450,7 +445,7 @@ export default function ProfilePage() {
               </div>
             </div>
             <div className="preference-form-wrapper">
-              {isStudying?<div className="preference-study-form">
+              {isStudying? <div className="preference-study-form">
               <div className ="sub-header"> Study </div>
                 <ul>
                 <li>
@@ -511,7 +506,7 @@ export default function ProfilePage() {
          <button className="work-btn" onClick = {handleToggleWork}> Working</button>
             </div>)}
             </div>
-            {isStudying || isWorking?<button id="back-btn" onClick={() => {setIsStudying(false); setIsWorking(false)}}> Back</button>: null}
+            {isStudying || isWorking? <button id="back-btn" onClick={() => {setIsStudying(false); setIsWorking(false)}}> Back</button>: null}
             <button className="find" onClick={handleOnSubmit}> Find a buddy</button>
           </div>
         </div>
