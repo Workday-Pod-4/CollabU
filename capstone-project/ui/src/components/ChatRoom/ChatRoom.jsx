@@ -248,27 +248,26 @@ export function Room(props) {
 
     const trackSubscribed = (track) => {
 
-        const elements = document.getElementsByClassName(' user-video')[0]
+        const elements = document.getElementsByClassName('user-video')[0]
+        const videoTag = document.getElementsByClassName('actual-user-video')[0]
         const audioElementInDiv = elements.getElementsByTagName('audio')
         const muteimg = document.getElementsByClassName('mute-icon')[0]
         const noVideo = document.getElementsByClassName('no-video')[0]
 
-        console.log("audioElementInDiv 1 ", audioElementInDiv)
-
         if (track.kind == 'video') {
 
-            elements.style.visibility = "visible";
+            videoTag.style.visibility = "visible";
             noVideo.style.visibility = "hidden";
 
         } else if (track.kind == 'audio') {
-            console.log("audioElementInDiv 2 ", audioElementInDiv)
+
             muteimg.style.visibility = "hidden";
             if (audioElementInDiv === undefined || audioElementInDiv === null || audioElementInDiv.length === 0) {
                 elements.appendChild(track.attach());
             }
         }
       };
-  
+
       const trackUnsubscribed = (track) => {
 
         const elements = document.getElementsByClassName('actual-user-video')[0]
@@ -279,6 +278,7 @@ export function Room(props) {
 
             elements.style.visibility = "hidden";
             noVideo.style.visibility = "visible";
+
 
         } else if (track.kind == 'audio') {
 
