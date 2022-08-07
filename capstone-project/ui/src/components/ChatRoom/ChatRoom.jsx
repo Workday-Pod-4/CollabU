@@ -248,9 +248,12 @@ export function Room(props) {
 
     const trackSubscribed = (track) => {
 
-        const elements = document.getElementsByClassName('actual-user-video')[0]
+        const elements = document.getElementsByClassName(' user-video')[0]
+        const audioElementInDiv = elements.getElementsByTagName('audio')
         const muteimg = document.getElementsByClassName('mute-icon')[0]
         const noVideo = document.getElementsByClassName('no-video')[0]
+
+        console.log("audioElementInDiv 1 ", audioElementInDiv)
 
         if (track.kind == 'video') {
 
@@ -258,10 +261,11 @@ export function Room(props) {
             noVideo.style.visibility = "hidden";
 
         } else if (track.kind == 'audio') {
-
+            console.log("audioElementInDiv 2 ", audioElementInDiv)
             muteimg.style.visibility = "hidden";
-            elements.appendChild(track.attach());
-
+            if (audioElementInDiv === undefined || audioElementInDiv === null || audioElementInDiv.length === 0) {
+                elements.appendChild(track.attach());
+            }
         }
       };
   
@@ -339,12 +343,12 @@ export function Room(props) {
                 return props.room.localParticipant.publishTrack(localAudioTrack);
               }).then(publication => {
                 const elements = document.getElementsByClassName('user-video')[1]
-                const muteimg= document.getElementsByClassName('mute-icon')[1]
+                const muteimg = document.getElementsByClassName('mute-icon')[1]
                 muteimg.style.visibility = "hidden";
                 elements.appendChild(publication.track.attach());
               });
         } else if (playAudio === false) {
-                const muteimg= document.getElementsByClassName('mute-icon')[1]
+                const muteimg = document.getElementsByClassName('mute-icon')[1]
                 muteimg.style.visibility = "visible";
             props.room.localParticipant.audioTracks.forEach(publication => {
                 const attachedElements = publication.track.detach();
@@ -512,7 +516,7 @@ return (
         <div className="user-view">
             <div className="user-header">
             <h3>{props.participant.identity}</h3>
-            <img className="mute-icon" src={muteIcon} alt="Muted"></img>
+                <img className="mute-icon" src={muteIcon} alt="Muted"></img>
             </div>
             <div className="user-video">
               <video className="actual-user-video" ref={videoRef} autoPlay={true} />  
