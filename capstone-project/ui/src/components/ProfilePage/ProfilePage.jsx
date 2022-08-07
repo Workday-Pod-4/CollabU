@@ -159,7 +159,6 @@ export default function ProfilePage() {
     "Other"
   ]
 
-
   // if user clicks study, set isStudying = true and isWorking = false
     function handleToggleStudy() {
       user.activity = 'studying'
@@ -183,7 +182,6 @@ export default function ProfilePage() {
   function toggleMatchModal(e){
     setMatches((e.target.innerHTML))
   }
-
 
   // set topic property based on user input
   function handleOnChangeTopic (event) {
@@ -312,11 +310,10 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-      {matchModal ? <MatchModal CapitalizeName={CapitalizeName}toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
-      {reportModal?
-      <ReportIssueModal/>:null}
+      { matchModal ? <MatchModal CapitalizeName={CapitalizeName} toggleMatchModal={toggleMatchModal} Match={match} matches={matches} /> : null}
+      { reportModal ? <ReportIssueModal/> : null}
       { firstTime ? <AdditionalInfo /> : null}
-      {settingsModal? <SettingsModal/>: null}
+      {settingsModal ? <SettingsModal/> : null}
       <div className="sections">
         <div className="left-section">
           <div className="profile-pic">
@@ -324,8 +321,8 @@ export default function ProfilePage() {
             <img
               src={user?.profile_image_url ? user.profile_image_url : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"}
               onError={(event) => {
-                event.target.onError = "";
-                event.target.src= "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
+                event.target.onError="";
+                event.target.src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
                 return true;
               }}
               alt="Profile Picture"
@@ -339,7 +336,7 @@ export default function ProfilePage() {
             </h2>
           </div>
           <div className="location">
-            { user?.location ? <b>{user.location}</b> : null }
+            { user?.location ? <b> {user.location}</b> : null }
             { user?.timezone ? <b> | {user.timezone}</b> : null }     
           </div>
           <div className="social-media-links">
