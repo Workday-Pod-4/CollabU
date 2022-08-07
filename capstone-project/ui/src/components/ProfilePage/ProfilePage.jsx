@@ -37,8 +37,8 @@ export default function ProfilePage() {
   const [confirmUsername, setConfirmUsername] = React.useState()
 
   // updates and stores the previously matched section of the ProfilePage.jsx
-  const [matches, setMatches] = React.useState([])
-  
+  const [matches, setMatches] = React.useState([]);
+  const [match, setMatch] = React.useState();
   const [selected,setSelected] = React.useState("");
 
   const mathCourses = [
@@ -180,9 +180,10 @@ export default function ProfilePage() {
  
   //if user toggles match modal
 
-  function toggleMatchModal(e){
-    setMatch((e.target.innerHTML))
-
+  function toggleMatchModal(e) {
+    setMatch((e.target.innerHTML).split(" |")[0])
+    setMatchModal(!matchModal)
+  }
 
 
   // set topic property based on user input
@@ -312,7 +313,7 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-      {matchModal ? <MatchModal CapitalizeName={CapitalizeName}toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
+      {matchModal ? <MatchModal CapitalizeName={CapitalizeName} toggleMatchModal={toggleMatchModal} Match= {match} matches = {matches} />:null}
       {reportModal?
       <ReportIssueModal/>:null}
       { firstTime ? <AdditionalInfo /> : null}
@@ -536,4 +537,4 @@ export default function ProfilePage() {
     </div>
 );
 }
-}
+

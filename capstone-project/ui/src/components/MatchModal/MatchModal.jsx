@@ -10,7 +10,6 @@ export default function MatchModal({ matches, Match, toggleMatchModal, Capitaliz
   UserInfo = UserInfo[0];
   // console.log("matchModal:", matchModal)
   // console.log("confirmUsername:", Match)
-  console.log("userInfo:", UserInfo);
   // console.log("matches:", matches)
 
   return (

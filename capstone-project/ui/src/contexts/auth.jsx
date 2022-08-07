@@ -19,7 +19,6 @@ export const AuthContextProvider = ({ children }) => {
     const [inRoom, setInRoom] = useState(false);
     const [matchModal, setMatchModal] = useState(false);
     const [exiting, setExiting] = useState(false);
-    const [colleges, setColleges] = useState([]);
     const [findingAnotherBuddy, setFindingAnotherBuddy] = useState(false);
 
     //function for toggling report issue modal
@@ -71,20 +70,7 @@ export const AuthContextProvider = ({ children }) => {
             setInitialized(true)
         }
       }, [setUser])
-
-      useEffect(()=> {
-        const getColleges = async () => {
-          const response = await fetch(
-            "http://universities.hipolabs.com/search?country=united states"
-          ).then((response) => response.json());
-        
-          // update the collegeList
-          setColleges(response);
-        };
-        getColleges();
-      }, [])
      
-
     const logoutUser = async () => {
         await apiClient.logoutUser()
         setUser({})
@@ -123,8 +109,6 @@ export const AuthContextProvider = ({ children }) => {
       matchModal,
       exiting,
       setExiting,
-      colleges,
-      setColleges,
       findingAnotherBuddy, 
       setFindingAnotherBuddy
     }
