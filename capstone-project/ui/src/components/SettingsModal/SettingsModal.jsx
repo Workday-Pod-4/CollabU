@@ -258,7 +258,7 @@ export default function SettingsModal() {
                   </span>
                 </li>
             </ul>
-            <button className="settings-update-btn" onClick={deleteAccount}>
+            <button className="delete-account-button" onClick={deleteAccount}>
               Delete My Account
             </button>
           </div>

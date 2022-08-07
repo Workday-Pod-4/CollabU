@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-right: 13%;
 }
 
 .update-form {
@@ -94,14 +95,21 @@
     align-items: center;
     justify-content: center;
     height: 6%;
-    color: white;
-    background: black;
+    color: black;
+    background: transparent;
     font-size: 20px;
-    border: none;
+    border: 1.5px solid black;
     cursor: pointer;
     margin-top: 15px;
-    border: 1px;
-    border-radius: 20px;
+    border-radius: 25px;
+}
+
+.update-form .btn:hover {
+    background-color:#4846BD;
+    color:white;
+    transition:.3s;
+    border:0px;
+    box-shadow:2px 2px #86999e;
 }
 
 @media only screen and (max-width: 800px){
