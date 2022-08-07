@@ -33,6 +33,7 @@ export default function ChatRoom() {
     
     /* Lets the local participant know that the remote participants has ended the session 
        and they have been kicked from the room */
+
     const participantDisconnected = () => {
 
         const elements = document.getElementsByClassName('user-view')[0]
@@ -73,7 +74,7 @@ export default function ChatRoom() {
               });
 
             disconnectEveryoneFromRoom()
-            
+
         }};
 
     // set the remote participant when they join the room
@@ -88,22 +89,26 @@ export default function ChatRoom() {
     /* Allows user to disconnect from the room and be shown a match modal as soon 
        they're redirected */
     const findAnotherBuddy = () => {
+
         async function disconnectFromRoomToFindBuddy() {
 
             // Disconnect the LocalParticipant.
             if (room) {
+
                 room.localParticipant.videoTracks.forEach(publication => {
                     const attachedElements = publication.track.detach();
                     publication.track.stop();
                     publication.unpublish();
                     attachedElements.forEach(element => element.remove());
                   });
+
                   room.localParticipant.audioTracks.forEach(publication => {
                     const attachedElements = publication.track.detach();
                     publication.track.stop();
                     publication.unpublish();
                     attachedElements.forEach(element => element.remove());
                   });
+
                 room.disconnect()
                 setInRoom(false);
                 togglePrefModal();
@@ -113,41 +118,46 @@ export default function ChatRoom() {
                 togglePrefModal();
                 navigate('/profile')
             } 
-            }
-        disconnectFromRoomToFindBuddy()
         }
+            disconnectFromRoomToFindBuddy()
+    }
 
     // disconnects the user from the room
     const exitRoom = () => {
+
         async function disconnectFromRoom() {
 
         // Disconnect the LocalParticipant.
         if (room) {
+
             room.localParticipant.videoTracks.forEach(publication => {
                 const attachedElements = publication.track.detach();
                 publication.track.stop();
                 publication.unpublish();
                 attachedElements.forEach(element => element.remove());
               });
+
               room.localParticipant.audioTracks.forEach(publication => {
                 const attachedElements = publication.track.detach();
                 publication.track.stop();
                 publication.unpublish();
                 attachedElements.forEach(element => element.remove());
               });
+
             room.disconnect()
             navigate('/profile')
         } else {
             navigate('/profile')
         }
-      }
+    }
     
-      disconnectFromRoom()
-      setInRoom(false);
-      }
+        disconnectFromRoom()
+        setInRoom(false);
+    }
 
     // Allows a user to a Twilio Room when they click on the Enter Room button
     const handleOnClick = () => {
+
       async function joinRoom() {
 
       // fetch an Access Token from the join-room route
@@ -173,8 +183,8 @@ export default function ChatRoom() {
       setLocalParticipant(room.localParticipant)
     }
     
-    joinRoom()
-    setShowRoom(true)
+        joinRoom()
+        setShowRoom(true)
     }
   
     return (
@@ -227,15 +237,19 @@ export function Room(props) {
     const trackSubscribed = (track) => {
 
         const elements = document.getElementsByClassName('actual-user-video')[0]
-        const muteimg= document.getElementsByClassName('mute-icon')[0]
+        const muteimg = document.getElementsByClassName('mute-icon')[0]
         const noVideo = document.getElementsByClassName('no-video')[0]
+
         if (track.kind == 'video') {
+
             elements.style.visibility = "visible";
             noVideo.style.visibility = "hidden";
-            
+
         } else if (track.kind == 'audio') {
+
             muteimg.style.visibility = "hidden";
             elements.appendChild(track.attach());
+
         }
       };
   
@@ -244,14 +258,19 @@ export function Room(props) {
         const elements = document.getElementsByClassName('actual-user-video')[0]
         const muteimg= document.getElementsByClassName('mute-icon')[0]
         const noVideo = document.getElementsByClassName('no-video')[0]
+
         if (track.kind == 'video') {
+
             elements.style.visibility = "hidden";
             noVideo.style.visibility = "visible";
+
         } else if (track.kind == 'audio') {
+
             muteimg.style.visibility = "visible";
             track.detach().forEach(element => {
                 element.remove();
               });
+
         }
       };
 
@@ -261,10 +280,12 @@ export function Room(props) {
           participant.on('trackSubscribed', trackSubscribed);
           participant.on('trackUnsubscribed', trackUnsubscribed);
           });
+
     });
   
     // Adds and Removes Video tracks from DOM if user press the toggle
     function toggleDisplayVideo () {
+
       if (displayVideo === true) {
         setDisplayVideo(false)
       } else if (displayVideo === false) {
@@ -319,7 +340,7 @@ export function Room(props) {
                 publication.unpublish();
                 attachedElements.forEach(element => element.remove());
               });
-        }
+            }
       }
 
     const client = React.useRef();
@@ -351,6 +372,7 @@ export function Room(props) {
       }, []);
 
       const handleOnSubmit = (event) => {
+
         event.preventDefault();
         let input = document.getElementById('input');
         
@@ -401,9 +423,10 @@ export function Room(props) {
                         </div> }
             </div>
             </>
-        : <div className="enter-room"><button onClick={props.handleOnClick}> Enter Room </button>
-        <p>Please make sure no other application is using your camera or microphone</p>
-        <p>When ready, press the Enter Room button to meet your match</p>
+        : <div className="enter-room">
+            <button onClick={props.handleOnClick}> Enter Room </button>
+            <p>Please make sure no other application is using your camera or microphone</p>
+            <p>When ready, press the Enter Room button to meet your match</p>
       </div>
       }
       </div>

@@ -116,9 +116,9 @@ margin-bottom: 2vh;
 .settings .settings-btn:hover {
     background-color:#4846BD;
     color:white;
-    transition:.3s;
-    border:0px;
-    box-shadow:2px 2px #86999e;
+    transition: .3s;
+    border: 0px;
+    box-shadow: 2px 2px #86999e;
 }
 
 .report-issue {
@@ -251,6 +251,8 @@ width: 23vw;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
+padding: 2%;
+margin-right: 15%;
 }
 
 .profile-page .right-section .match-history ul li span {
