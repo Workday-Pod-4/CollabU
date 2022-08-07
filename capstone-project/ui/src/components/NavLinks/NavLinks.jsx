@@ -21,7 +21,7 @@ export default function NavLinks() {
           <span>Login</span>
           </Link>}
         </li>
-          { user?.email && inRoom==false ?
+          { user?.email && inRoom == false ?
           <li onClick={togglePrefModal} className = "btn" id= "open-modal"><Link to="/profile"> Find a buddy</Link></li>
           :
           user?.email && inRoom ?

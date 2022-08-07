@@ -21,7 +21,7 @@
     gap: 3.5vw;
 }
 
-.links li{
+.links li {
     font-size: 1.8vh;
     display: flex;
     justify-content: center;
@@ -31,7 +31,7 @@
     height: 5vh;
 }
 
-.content .links a{
+.content .links a {
     color: black;
     background: transparent;
     border: 1.5px solid black;
@@ -44,17 +44,16 @@
     align-items: center;
 }
 
-.content .links a:hover{
+.content .links a:hover {
   background-color:#4846BD;
   color:white;
   transition:.3s;
   border:0px;
   box-shadow:2px 2px #86999e;
-
 }
 
 
-.logout-button{
+.logout-button {
     border: 1px solid transparent;
     border-radius: 10px;
     background: none;
@@ -64,7 +63,7 @@
     text-decoration: none;
 }
 
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 800px) {
     .content .links {
         display: flex;
         flex-direction: row;

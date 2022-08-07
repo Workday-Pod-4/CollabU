@@ -25,21 +25,27 @@ io.on("connection", (socket) => {
     console.log("The number of connected sockets: " + socket.adapter.sids.size);
     console.log('User '+ socket.id + 'is online');
 
+    // Removes user from queue
     socket.on('remove', (data) => {
       const index = queue.findIndex(removedPerson => removedPerson.user_id === data.user.id);
       queue.splice(index, 1);
     })
 
+    // Joins user to a room on connect
     socket.on('joinRoom', (data) => {
       socket.join(data?.roomID);
     })
 
-    socket.on('chat message', msg => {
-      data = { "chatMsg": msg.chatMsg,
-              "peerUsername": msg.peerUsername}
-      io.sockets.in(msg.roomID).emit('chat message', data);
+    // Sends chat info to everyone in the same room
+    socket.on('chat message', (data) => {
+
+      chatData = { "chatMsg": data.chatMsg,
+              "peerUsername": data.peerUsername }
+
+      io.sockets.in(data.roomID).emit('chat message', chatData);
     });
 
+    // Find a peer for a user and then rediect thems to a chatroom together
     socket.on('submit', (data) => {
 
       let user = {

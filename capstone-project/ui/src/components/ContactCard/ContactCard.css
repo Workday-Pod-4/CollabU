@@ -1,16 +1,20 @@
+.contact-card .content {
+    padding-right: 5.5%;
+}
+
 .contact-card .content .form-wrapper {
     display: flex;
     flex-direction: column;
-    height: 320px;
-    background: lightgray;
+    height: 380px;
+    background: #F7F6E9;
     color:black;
-    border: solid 1px #e0e0e0;
+    border: solid 1px black;
     border-radius: 15px;
     overflow: visible;
 }
 
 .contact-card .content .form-wrapper .info {
-    padding: 3px 20px;
+    padding: 2%;
     list-style-type: none;
     flex: 1;
     width: 100%;
@@ -29,7 +33,7 @@
 }
 
 .contact-card .content .form-wrapper .info li span {
-    width: 200px;
+    width: 30%;
     margin-right: 50px;
     justify-content: flex-start;
     display: flex;
@@ -37,4 +41,31 @@
 
 .contact-card .content .form-wrapper .info li .label {
     margin-right: 0px;
+}
+
+.contact-card .content .form-wrapper .info .email {
+    margin: 0;
+}
+
+.contact-card .content .form-wrapper .info .phone {
+    margin: 0;
+    width: 100%;
+    padding-left: 8%;
+}
+
+.contact-card .content .form-wrapper .info .address {
+    padding-top: 6%;
+    width: 100%;
+}
+
+.contact-card .content .form-wrapper .info .social-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 8%;
+    padding-right: 20%;
+}
+
+.contact-card .content .form-wrapper .info .social-icons a {
+    color: black;
+    font-size: 48px;
 }

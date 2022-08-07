@@ -2,20 +2,7 @@
     box-sizing: border-box;
 }
     
-.settings-header{
-        width: 40%; height: 9%; font-size: 18px; text-align: center; padding: 0px;
-        position:fixed;
-        top:6%;
-
-}
-    
-.settings-header h1{
-    background-color: grey;
-    color:white;
-}
-
-
-.settings-modal-container{
+.settings-modal-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,62 +16,147 @@
     opacity: 1;
 }
 
-.settings-modal{
+.settings-modal {
     display:flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #fff;
+    background-color: #F7F6E9;
     height:90%;
     width:60%;
     border-radius:5px ;
-    }
+}
 
-.settings-header{
-        width: 40%; height: 9%; font-size: 18px; text-align: center; padding: 0px;
+.settings-header {
+        width: 40%; 
+        height: 9%; 
+        font-size: 18px; 
+        text-align: center; 
+        padding: 0px;
         position:fixed;
-        top:6%;
+        top: 6%;
+}
+
+.settings-header h1 {
+    background-color: #bdbdbd;
+    color:black;
+    padding: 1%;
 }
     
-.settings-header h1{
-    background-color: grey;
-    color:white;
-}
-    
-.settings-form-wrapper{
+.settings-form-wrapper {
         display:flex;
-        height: 65%;
-        width: 35%;
+        height: 70%;
+        width: 40%;
         justify-content: center;
         background-color: #bdbdbd;
         position: fixed;
         border-radius: 5px;
+        top: 23%;
 }
 
-.password-reset-form{
-height: 400px;
-
-}
-
-.password-reset-form ul li{
-list-style: none;
-display:flex;
-height:125px;
-justify-content: center;
-width:560px;
-
-}
-
-.password-reset-form ul{
+.settings-form-wrapper .main-options-container {
     display: flex;
     flex-direction: column;
-    width:630px;
-    height:350px;
-    justify-content: space-between;
-    
-
+    height: 65%;
+    width: 40%;
+    justify-content: space-around;
+    background-color: #bdbdbd;
+    position: fixed;
+    border-radius: 5px;
+    top: 23%;
 }
-.password-reset-form ul li span{
+
+.settings-form-wrapper .main-options-container .change-password-container .change-password-button button {
+    height: 8vh;
+    color: white;
+    background: #4846BD;
+    font-size: 4.2vh;
+    border: none;
+    cursor: pointer;
+    margin-top: 3vh;
+    border-radius: 25px;
+}
+
+.settings-form-wrapper .main-options-container .change-password-container .change-password-button button:hover {
+    height: 8vh;
+    color: white;
+    background: #3c3aa7;
+    font-size: 4.2vh;
+    border: none;
+    cursor: pointer;
+    margin-top: 3vh;
+    border-radius: 25px;
+}
+
+.settings-form-wrapper .main-options-container .change-email-container .change-email-button button {
+    height: 8vh;
+    width: 50%;
+    color: white;
+    background: #4846BD;
+    font-size: 4.2vh;
+    border: none;
+    cursor: pointer;
+    margin-top: 3vh;
+    border-radius: 25px;
+}
+
+.settings-form-wrapper .main-options-container .change-email-container .change-email-button button:hover {
+    height: 8vh;
+    color: white;
+    background: #3c3aa7;
+    width: 50%;
+    font-size: 4.2vh;
+    border: none;
+    cursor: pointer;
+    margin-top: 3vh;
+    border-radius: 25px;
+}
+
+.settings-form-wrapper .main-options-container .delete-acc-container .delete-acc-button button {
+    height: 8vh;
+    width: 50%;
+    color: white;
+    background: #4846BD;
+    font-size: 4.2vh;
+    border: none;
+    cursor: pointer;
+    margin-top: 3vh;
+    border-radius: 25px;
+}
+
+.settings-form-wrapper .main-options-container .delete-acc-container .delete-acc-button button:hover {
+    height: 8vh;
+    color: white;
+    background: #3c3aa7;
+    width: 50%;
+    font-size: 4.2vh;
+    border: none;
+    cursor: pointer;
+    margin-top: 3vh;
+    border-radius: 25px;
+}
+
+.password-reset-form {
+height: 400px;
+}
+
+.password-reset-form ul li {
+list-style: none;
+display: flex;
+height: 100px;
+justify-content: center;
+width: 560px;
+}
+
+.password-reset-form ul {
+    display: flex;
+    flex-direction: column;
+    width: 630px;
+    height: 325px;
+    justify-content: space-between;
+}
+
+.password-reset-form ul li span {
     display: flex;
     flex-direction: column;
     width:250px;
@@ -95,6 +167,8 @@ width:560px;
     margin-bottom: 5px;
     color: black;
     width: auto;
+    font-size: 2.9vh;
+    font-weight: 700;
 }
 
 .password-reset-form ul li span input{
@@ -109,37 +183,182 @@ width:560px;
     text-align: center;
 }
 
-.settings-update-btn{
+.settings-update-btn {
     width: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 40px;
     color: white;
-    background: black;
+    background: #4846BD;
     font-size: 20px;
-
+    border: none;
     cursor: pointer;
     margin-top: 15px;
-
-    border-radius: 20px;
-    position:fixed;
-    left:46%;
-    top:70%;
+    border-radius: 25px;
+    position: fixed;
+    left: 46%;
+    bottom: 8%;
 }
 
-.close-settings-modal{
+.settings-update-btn:hover {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    color: white;
+    background: #3c3aa7;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 25px;
     position: fixed;
-    right: 0%;
+    left: 46%;
+    bottom: 10%;
+}
+
+.email-reset-form {
+    height: 400px;
+}
+
+.email-reset-form ul {
+    display: flex;
+    flex-direction: column;
+    width: 630px;
+    height: 325px;
+    justify-content: space-between;
+}
+
+.email-reset-form ul li {
+    list-style: none;
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    width: 560px;
+}
+
+.email-reset-form ul li span {
+    display: flex;
+    flex-direction: column;
+    width:250px;
+    height:150px;
+}
+
+.email-reset-form ul li span label {
+    margin-bottom: 5px;
+    color: black;
+    width: auto;
+    font-size: 2.9vh;
+    font-weight: 700;
+}
+
+.email-reset-form ul li span input{
+    height: 40px;
+    width: auto;
+    padding: 0 15px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 25px;
+    background: transparent;
+    color: black;
+    text-align: center;
+}
+
+.delete-form {
+    height: 400px;
+}
+
+.delete-form ul {
+    display: flex;
+    flex-direction: column;
+    width: 630px;
+    height: 325px;
+    justify-content: space-between;
+}
+
+.delete-form ul li {
+    list-style: none;
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    width: 560px;
+}
+
+.delete-form ul li span {
+    display: flex;
+    flex-direction: column;
+    width:250px;
+    height:150px;
+}
+
+.delete-form ul li span label {
+    margin-bottom: 5px;
+    color: black;
+    width: auto;
+    font-size: 4vh;
+    font-weight: 600;
+}
+
+.delete-form ul li span input{
+    height: 40px;
+    width: auto;
+    padding: 0 15px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 25px;
+    background: transparent;
+    color: black;
+    text-align: center;
+}
+
+.delete-form .delete-account-button {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    color: white;
+    background: #4846BD;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 25px;
+    position: fixed;
+    left: 43.75%;
+    bottom: 8%;
+}
+
+.delete-form .delete-account-button:hover {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    color: white;
+    background: #3c3aa7;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 25px;
+    position: fixed;
+    left: 43.75%;
+    bottom: 10%;
+}
+
+.close-settings-modal {
+    position: fixed;
+    right: 2.5%;
     top: 32px;
     font-size: 30px;
     list-style: none;
-    display:flex;
-    height:100px;
+    display: flex;
+    height: 100px;
     justify-content: center;
-    width:560px;
-
-  
+    width: 560px;
 }
 
 .error {

@@ -5,10 +5,12 @@ import "./ReportIssueModal.css";
 
 
 export default function ReportIssueModal() {
+  
   const { user } = useAuthContext();
   const [state, handleSubmit] = useForm("xyyorrjy");
   const [form, setForm] = React.useState({ "email": `${user.email}`, "message": ""})
   const {toggleReportModal } = useAuthContext();
+
   function handleOnChange(evt){
     setForm((f) => ({...f, [evt.target.name]: evt.target.value}))
   }
@@ -30,7 +32,7 @@ export default function ReportIssueModal() {
               <textarea id ="message" name="message" className="form-input" type="text" placeholder="Leave your message here..." onChange={handleOnChange} value={form.message} />
               <ValidationError prefix="Message" field="message"errors={state.errors}/>
             </div>
-            <button type="submit" disabled={state.submitting}>Submit</button>
+            <button className="report-issue-button" type="submit" disabled={state.submitting}>Submit</button>
             </form>
             {state.succeeded?<p className = "report-issue-review">Thanks for letting us know, we will review this and get back to you shortly!</p>:null}
         </div>

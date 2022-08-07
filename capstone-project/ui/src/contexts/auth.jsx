@@ -22,10 +22,10 @@ export const AuthContextProvider = ({ children }) => {
     const [findingAnotherBuddy, setFindingAnotherBuddy] = useState(false);
 
     //function for toggling report issue modal
-    function toggleReportModal(){
+    function toggleReportModal() {
       setReportModal(!reportModal)
-  
     }
+
     // function for toggling settings modal, 
     // should be set to true if user clicks settings  
     // and false if user presses close button on modal
@@ -40,6 +40,7 @@ export const AuthContextProvider = ({ children }) => {
       setPrefModal(!prefModal)
     }
 
+    // Fetchs user from database and sets token
     useEffect(() => {
 
         const fetchUser = async () => {
@@ -70,15 +71,16 @@ export const AuthContextProvider = ({ children }) => {
             setInitialized(true)
         }
       }, [setUser])
-     
+
+    // Log users out
     const logoutUser = async () => {
         await apiClient.logoutUser()
         setUser({})
         setError(null)
     }
-
+    
     const authValue = { user, 
-      setUser ,
+      setUser,
       error,
       setError,
       initialized,

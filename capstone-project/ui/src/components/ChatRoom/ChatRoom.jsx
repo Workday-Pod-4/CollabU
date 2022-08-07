@@ -33,6 +33,7 @@ export default function ChatRoom() {
     
     /* Lets the local participant know that the remote participants has ended the session 
        and they have been kicked from the room */
+
     const participantDisconnected = () => {
 
         const elements = document.getElementsByClassName('user-view')[0]
@@ -43,10 +44,10 @@ export default function ChatRoom() {
         localMuteImg.style.visibility = "hidden";
         participantIdentity.textContent = 'Your match left and the room has ended. Please use the buttons above to leave the room.'
 
-        if (room?.participants.size === 0) {
+        if (room && room?.participants.size === 0) {
     
             const disconnectEveryoneFromRoom = async () => {
-    
+
                 // Complete the Room, disconnecting all RemoteParticipants
                 try {
                     await axios({
@@ -57,7 +58,24 @@ export default function ChatRoom() {
                     console.error(error)
                 }
             }
+
+            room.localParticipant.videoTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
+              
+              room.localParticipant.audioTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
+
             disconnectEveryoneFromRoom()
+            setRoom(null)
+
         }};
 
     // set the remote participant when they join the room
@@ -72,42 +90,78 @@ export default function ChatRoom() {
     /* Allows user to disconnect from the room and be shown a match modal as soon 
        they're redirected */
     const findAnotherBuddy = () => {
+
         async function disconnectFromRoomToFindBuddy() {
 
             // Disconnect the LocalParticipant.
             if (room) {
-                room.disconnect()
+
+                room.localParticipant.videoTracks.forEach(publication => {
+                    const attachedElements = publication.track.detach();
+                    publication.track.stop();
+                    publication.unpublish();
+                    attachedElements.forEach(element => element.remove());
+                  });
+
+                  room.localParticipant.audioTracks.forEach(publication => {
+                    const attachedElements = publication.track.detach();
+                    publication.track.stop();
+                    publication.unpublish();
+                    attachedElements.forEach(element => element.remove());
+                  });
+
+                room.disconnect();
                 setInRoom(false);
+                setRoom(null)
                 togglePrefModal();
                 navigate('/profile')
             } else {
                 setInRoom(false);
+                setRoom(null)
                 togglePrefModal();
                 navigate('/profile')
             } 
-            }
-        disconnectFromRoomToFindBuddy()
         }
+            disconnectFromRoomToFindBuddy()
+    }
 
     // disconnects the user from the room
     const exitRoom = () => {
+
         async function disconnectFromRoom() {
 
         // Disconnect the LocalParticipant.
         if (room) {
+
+            room.localParticipant.videoTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
+
+              room.localParticipant.audioTracks.forEach(publication => {
+                const attachedElements = publication.track.detach();
+                publication.track.stop();
+                publication.unpublish();
+                attachedElements.forEach(element => element.remove());
+              });
+
             room.disconnect()
             navigate('/profile')
         } else {
             navigate('/profile')
         }
-      }
+    }
     
-      disconnectFromRoom()
-      setInRoom(false);
-      }
+        disconnectFromRoom();
+        setInRoom(false);
+        setRoom(null)
+    }
 
     // Allows a user to a Twilio Room when they click on the Enter Room button
     const handleOnClick = () => {
+
       async function joinRoom() {
 
       // fetch an Access Token from the join-room route
@@ -133,8 +187,8 @@ export default function ChatRoom() {
       setLocalParticipant(room.localParticipant)
     }
     
-    joinRoom()
-    setShowRoom(true)
+        joinRoom()
+        setShowRoom(true)
     }
   
     return (
@@ -142,9 +196,13 @@ export default function ChatRoom() {
         <div className="content">
             {exiting ?
             <div className="modal-container">
-                <div className="modal-content">
-                    <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
-                        <p> Are you sure you wanna exit? </p>
+                <div className="exit-modal-content">
+                    <div className="header">
+                        <div className="button-container">
+                            <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
+                        </div>
+                    </div>
+                    <h1> Are you sure you wanna exit? </h1>
                     <button className="exit-fr" onClick={exitRoom}>Get me outta here!</button>
                 </div>
             </div>
@@ -153,10 +211,14 @@ export default function ChatRoom() {
             }
             {findingAnotherBuddy ?
             <div className="modal-container">
-                <div className="modal-content">
-                    <button className="close-modal" onClick={() => {setFindingAnotherBuddy(false)}}> x </button>
-                        <p> Are you sure you wanna find another buddy </p>
-                    <button className="exit-fr" onClick={findAnotherBuddy}>Yes this person sucks!</button>
+                <div className="find-another-buddy-modal-content">
+                <div className="header">
+                        <div className="button-container">
+                        <button className="close-modal" onClick={() => {setFindingAnotherBuddy(false)}}> x </button>
+                        </div>
+                    </div>
+                        <h1> Are you sure you wanna find another buddy? </h1>
+                    <button className="exit-fr" onClick={findAnotherBuddy}>Yes, please!</button>
                 </div>
             </div>
             :
@@ -186,32 +248,45 @@ export function Room(props) {
 
     const trackSubscribed = (track) => {
 
-        const elements = document.getElementsByClassName('actual-user-video')[0]
-        const muteimg= document.getElementsByClassName('mute-icon')[0]
+        const elements = document.getElementsByClassName('user-video')[0]
+        const videoTag = document.getElementsByClassName('actual-user-video')[0]
+        const audioElementInDiv = elements.getElementsByTagName('audio')
+        const muteimg = document.getElementsByClassName('mute-icon')[0]
         const noVideo = document.getElementsByClassName('no-video')[0]
+
         if (track.kind == 'video') {
-            elements.style.visibility = "visible";
+
+            videoTag.style.visibility = "visible";
             noVideo.style.visibility = "hidden";
-            
+
         } else if (track.kind == 'audio') {
+
             muteimg.style.visibility = "hidden";
-            elements.appendChild(track.attach());
+            if (audioElementInDiv === undefined || audioElementInDiv === null || audioElementInDiv.length === 0) {
+                elements.appendChild(track.attach());
+            }
         }
       };
-  
+
       const trackUnsubscribed = (track) => {
 
         const elements = document.getElementsByClassName('actual-user-video')[0]
         const muteimg= document.getElementsByClassName('mute-icon')[0]
         const noVideo = document.getElementsByClassName('no-video')[0]
+
         if (track.kind == 'video') {
+
             elements.style.visibility = "hidden";
             noVideo.style.visibility = "visible";
+
+
         } else if (track.kind == 'audio') {
+
             muteimg.style.visibility = "visible";
             track.detach().forEach(element => {
                 element.remove();
               });
+
         }
       };
 
@@ -221,10 +296,12 @@ export function Room(props) {
           participant.on('trackSubscribed', trackSubscribed);
           participant.on('trackUnsubscribed', trackUnsubscribed);
           });
+
     });
   
     // Adds and Removes Video tracks from DOM if user press the toggle
     function toggleDisplayVideo () {
+
       if (displayVideo === true) {
         setDisplayVideo(false)
       } else if (displayVideo === false) {
@@ -266,12 +343,12 @@ export function Room(props) {
                 return props.room.localParticipant.publishTrack(localAudioTrack);
               }).then(publication => {
                 const elements = document.getElementsByClassName('user-video')[1]
-                const muteimg= document.getElementsByClassName('mute-icon')[1]
+                const muteimg = document.getElementsByClassName('mute-icon')[1]
                 muteimg.style.visibility = "hidden";
                 elements.appendChild(publication.track.attach());
               });
         } else if (playAudio === false) {
-                const muteimg= document.getElementsByClassName('mute-icon')[1]
+                const muteimg = document.getElementsByClassName('mute-icon')[1]
                 muteimg.style.visibility = "visible";
             props.room.localParticipant.audioTracks.forEach(publication => {
                 const attachedElements = publication.track.detach();
@@ -279,7 +356,7 @@ export function Room(props) {
                 publication.unpublish();
                 attachedElements.forEach(element => element.remove());
               });
-        }
+            }
       }
 
     const client = React.useRef();
@@ -311,6 +388,7 @@ export function Room(props) {
       }, []);
 
       const handleOnSubmit = (event) => {
+
         event.preventDefault();
         let input = document.getElementById('input');
         
@@ -361,9 +439,10 @@ export function Room(props) {
                         </div> }
             </div>
             </>
-        : <div className="enter-room"><button onClick={props.handleOnClick}> Enter Room </button>
-        <p>Please make sure no other application is using your camera or microphone</p>
-        <p>When ready, press the Enter Room button to meet your match</p>
+        : <div className="enter-room">
+            <button onClick={props.handleOnClick}> Enter Room </button>
+            <p>Please make sure no other application is using your camera or microphone</p>
+            <p>When ready, press the Enter Room button to meet your match</p>
       </div>
       }
       </div>
@@ -437,10 +516,10 @@ return (
         <div className="user-view">
             <div className="user-header">
             <h3>{props.participant.identity}</h3>
-            <img className="mute-icon" src={muteIcon} alt="Muted"></img>
+                <img className="mute-icon" src={muteIcon} alt="Muted"></img>
             </div>
             <div className="user-video">
-              <video class="actual-user-video" ref={videoRef} autoPlay={true} />  
+              <video className="actual-user-video" ref={videoRef} autoPlay={true} />  
               <audio ref={audioRef} autoPlay={true} />
               <img className="no-video" 
               src=

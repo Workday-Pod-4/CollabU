@@ -1,16 +1,26 @@
-
-
 .footer .content {
     max-width: 800px;
     width: 100%;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    height: 1%;
 }
 
 .footer .content .links {
     display: flex;
     width: 100%;
+}
+
+.footer .content a {
+    all: unset;
+    
+}
+
+.footer .content a:hover {
+    all: unset;
+    color: blue;
+    cursor: pointer;
 }
 

@@ -267,14 +267,36 @@
         font-size: 2vh;
     }
     
-    #back-btn{
-        position:fixed;
-        top:70%;
+    #back-btn {
+        position: fixed;
+        top: 70%;
+        background: #4846BD;
+        border: none;
+        border-radius: 25px;
+    }
+
+    #back-btn:hover {
+        position: fixed;
+        top: 70%;
+        background: #3c3aa7;
+        border: none;
+        border-radius: 25px;
     }
     
-    .find{
+    .find { 
         position: fixed;
-        top:83%
+        top:83%;
+        background: #4846BD;
+        border: none;
+        border-radius: 25px;
+    }
+
+    .find:hover { 
+        position: fixed;
+        top:83%;
+        background: #3c3aa7;
+        border: none;
+        border-radius: 25px;
     }
     
     select.form-input{
