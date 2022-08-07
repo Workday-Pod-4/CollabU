@@ -282,7 +282,7 @@ video {
     font-weight: 500;
 }
 
-.modal-container{
+.modal-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -295,4 +295,121 @@ video {
     left: 0;
     opacity: 1;
     z-index: 3;
+}
+
+.modal-container .exit-modal-content {
+    width: 50%;
+    height: 50%;
+    background: #F7F6E9;
+    border: 1px solid black;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-container .exit-modal-content .header {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.modal-container .exit-modal-content .header .button-container {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    margin-right: .3vw;
+    margin-top: 1vh;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border: 1px;
+    border-radius: 20px;
+}
+
+.modal-container .exit-modal-content .header .button-container .close-modal {
+    background: transparent;
+    width: 75%;
+    height: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border: 0vh;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 4vh;
+    font-weight: 600;
+    padding: 0vh 0vw;
+}
+
+.modal-container .exit-modal-content h1 {
+    font-size: 7vh;
+    font-weight: 500;
+    margin-top: 2vh;
+    padding-top: 5%;
+}
+
+/* Start here */
+
+.modal-container .find-another-buddy-modal-content {
+    width: 50%;
+    height: 50%;
+    background: #F7F6E9;
+    border: 1px solid black;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-container .find-another-buddy-modal-content .header {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.modal-container .find-another-buddy-modal-content .header .button-container {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    margin-right: .3vw;
+    margin-top: 1vh;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border: 1px;
+    border-radius: 20px;
+}
+
+.modal-container .find-another-buddy-modal-content .header .button-container .close-modal {
+    background: transparent;
+    width: 75%;
+    height: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border: 0vh;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 4vh;
+    font-weight: 600;
+    padding: 0vh 0vw;
+}
+
+.modal-container .find-another-buddy-modal-content h1 {
+    font-size: 7vh;
+    font-weight: 500;
+    margin-top: 2vh;
 }

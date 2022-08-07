@@ -44,7 +44,7 @@ export default function ChatRoom() {
         localMuteImg.style.visibility = "hidden";
         participantIdentity.textContent = 'Your match left and the room has ended. Please use the buttons above to leave the room.'
 
-        if (room?.participants.size === 0) {
+        if (room && room?.participants.size === 0) {
     
             const disconnectEveryoneFromRoom = async () => {
 
@@ -192,9 +192,13 @@ export default function ChatRoom() {
         <div className="content">
             {exiting ?
             <div className="modal-container">
-                <div className="modal-content">
-                    <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
-                        <p> Are you sure you wanna exit? </p>
+                <div className="exit-modal-content">
+                    <div className="header">
+                        <div className="button-container">
+                            <button className="close-modal" onClick={() => {setExiting(false)}}> x </button>
+                        </div>
+                    </div>
+                    <h1> Are you sure you wanna exit? </h1>
                     <button className="exit-fr" onClick={exitRoom}>Get me outta here!</button>
                 </div>
             </div>
@@ -203,10 +207,14 @@ export default function ChatRoom() {
             }
             {findingAnotherBuddy ?
             <div className="modal-container">
-                <div className="modal-content">
-                    <button className="close-modal" onClick={() => {setFindingAnotherBuddy(false)}}> x </button>
-                        <p> Are you sure you wanna find another buddy </p>
-                    <button className="exit-fr" onClick={findAnotherBuddy}>Yes this person sucks!</button>
+                <div className="find-another-buddy-modal-content">
+                <div className="header">
+                        <div className="button-container">
+                        <button className="close-modal" onClick={() => {setFindingAnotherBuddy(false)}}> x </button>
+                        </div>
+                    </div>
+                        <h1> Are you sure you wanna find another buddy? </h1>
+                    <button className="exit-fr" onClick={findAnotherBuddy}>Yes, please!</button>
                 </div>
             </div>
             :
