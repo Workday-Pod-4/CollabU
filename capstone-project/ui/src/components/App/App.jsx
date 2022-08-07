@@ -23,7 +23,6 @@ return (
 function App() {
 
 const { user } = useAuthContext()
-// TO DO: use isLoading, setIsLoading from auth context
 const [isLoading, setIsLoading] = React.useState(true);
 const [accessDenied, setAccessDenied] = React.useState(true);
 
@@ -46,8 +45,8 @@ React.useEffect(() => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegistrationPage />} />
-                <Route path ="/profile" element={<ProfilePage />}/>
-                <Route path="/room/:id" element={<ChatRoom />} />
+                <Route path ="/profile" element={isLoading === true && accessDenied === false ? <Loading /> : accessDenied === true && isLoading === false ? <AccessForbidden /> : <ProfilePage />}/>
+                <Route path="/room/:id" element={isLoading === true && accessDenied === false ? <Loading /> : accessDenied === true && isLoading === false ? <AccessForbidden /> : <ChatRoom />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>

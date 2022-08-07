@@ -19,7 +19,6 @@ export const AuthContextProvider = ({ children }) => {
     const [inRoom, setInRoom] = useState(false);
     const [matchModal, setMatchModal] = useState(false);
     const [exiting, setExiting] = useState(false);
-    const [colleges, setColleges] = useState([]);
     const [findingAnotherBuddy, setFindingAnotherBuddy] = useState(false);
 
     //function for toggling report issue modal
@@ -79,7 +78,7 @@ export const AuthContextProvider = ({ children }) => {
         setUser({})
         setError(null)
     }
-     
+    
     const authValue = { user, 
       setUser,
       error,
@@ -112,8 +111,6 @@ export const AuthContextProvider = ({ children }) => {
       matchModal,
       exiting,
       setExiting,
-      colleges,
-      setColleges,
       findingAnotherBuddy, 
       setFindingAnotherBuddy
     }

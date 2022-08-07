@@ -1,3 +1,8 @@
+ul.match-history{
+    padding:0;
+    margin:0;
+}
+
 .profile-page {
     height: 100vh;
     width: 100%;
@@ -233,7 +238,9 @@ display: flex;
 justify-content: space-around;
 flex-direction: column;
 list-style: none;
-width: 80%;
+width: 30vw;
+padding: 0;
+margin: 0;
 justify-items: center;
 background: lightgrey;
 border: 1px solid #4846BD;
@@ -267,7 +274,7 @@ border: 1px solid #4846BD;
     height: 8vh;
 background-color:white;
 padding: 2vh 3vw;
-font-size: 3vh;
+font-size: auto;
 cursor: pointer;
 font-weight: 500;
 }
@@ -372,8 +379,8 @@ font-weight: 500;
         width:80%;
     }
 
-    .profile-page .right-section .match-history ul li span{
-    font-size: 3vw;
-    }
+    .profile-page .right-section .match-history ul li span {
+        font-size: auto;
 }
 
+}

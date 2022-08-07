@@ -6,7 +6,7 @@ import "./UpdateForm.css"
 
 export default function UpdateForm() {
 
-  const { user, setUser, setIsUpdating, colleges } = useAuthContext()
+  const { user, setUser, setIsUpdating } = useAuthContext()
 
   const [isProcessing, setIsProcessing] = React.useState(false)
   const [error, setError] = React.useState("");
@@ -97,10 +97,6 @@ export default function UpdateForm() {
                         <div className="input-field">
                             <label>College</label>
                             <input type="text" autoComplete="on" list="colleges" className="form-input" name="college" placeholder="College" onChange={handleOnChange} defaultValue={form.college} />
-                            <datalist id="colleges">
-                                {colleges ? colleges.map((college, index) => (<option value={college.name}>{college.name}</option>)) : null}
-                                <option value={"Other"}>Other</option>
-                            </datalist> 
                         </div>
                         <div className="input-field">
                             <label>Major</label>
