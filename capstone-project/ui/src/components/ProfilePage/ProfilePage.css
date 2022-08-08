@@ -254,12 +254,12 @@ align-items: center;
 
 .profile-page .right-section .match-history ul li {
 display: flex;
-width: 23vw;
+width: 25vw;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
 padding: 2%;
-margin-right: 15%;
+
 }
 
 .profile-page .right-section .match-history ul li span {
