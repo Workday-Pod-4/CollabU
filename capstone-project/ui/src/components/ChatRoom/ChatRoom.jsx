@@ -24,6 +24,7 @@ export default function ChatRoom() {
     const [showRoom, setShowRoom] = React.useState(false);
     const [localParticipant, setLocalParticipant] = React.useState(null);
     const [remoteParticipant, setRemoteParticipant] = React.useState(null);
+    const [chatMessages, setChatMessages] = React.useState([]);
 
     const navigate = useNavigate();
 
