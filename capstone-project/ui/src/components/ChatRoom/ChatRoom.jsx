@@ -26,7 +26,6 @@ export default function ChatRoom() {
     const [showRoom, setShowRoom] = React.useState(false);
     const [localParticipant, setLocalParticipant] = React.useState(null);
     const [remoteParticipant, setRemoteParticipant] = React.useState(null);
-    const [message, setMessage] = React.useState(null);
     
     const navigate = useNavigate();
 
@@ -376,33 +375,7 @@ export function Room(props) {
           });
     
         socket.on('chat logs', function(msg) {
-            props.setChatMessages(msg);
-            // console.log("chat logs 1", msg)
-            // props.setChatMessages(msg)
-            // console.log("chatMessages ", props.chatMessages)
-
-
-            // let messages = document.getElementById('messages');
-            
-
-            // props.chatMessages.map((chatobject) => {
-            //     messages.appendChild(chatobject);
-            //     //console.log("chatobject", chatobject)
-            // })
-            // console.log("chat logs ", props.chatMessages)
-
-            // let message = `${msg.peerUsername}: ${msg.chatMsg}`
-
-            // props.setChatMessages(chatMessages => [...chatMessages, message]);
-
-            // console.log("chat logs ", msg)
-
-            
-            
-            // let item = document.createElement('li');
-            // item.textContent = `${msg.peerUsername}: ${msg.chatMsg}`;
-
-            
+            props.setChatMessages(msg); 
           });
     
         socket.on('disconnect', () => {
