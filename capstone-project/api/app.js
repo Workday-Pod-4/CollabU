@@ -16,12 +16,20 @@ const findOrCreateRoom = async (roomName) => {
         
     } catch (error) {
         // the room was not found, so create it
-        if (error.code == 20404) {
-        await twilioClient.video.rooms.create({
-            uniqueName: roomName,
-            type: "go",
-        });
+        if (error.code == 20404 ) {
+            try {
+                await twilioClient.video.rooms.create({
+                    uniqueName: roomName,
+                    type: "go",
+                });
+            } catch (error) {
+                // if room already exists, return roomName
+                if (error.code == 53113) {
+                    return roomName
+                }
+            }
         } else {
+
         // let other errors bubble up
         throw error;
         }
@@ -135,20 +143,15 @@ app.post('/disconnect/:roomID', async (req, res) => {
     // Gets room id from request
     const { roomID } = req.params
 
-    // Gets Room SID from Twilio API
-    const roomResponse = await twilioClient.video.rooms(roomID).fetch();
-    const roomSID = roomResponse.sid;
-
-    // If there is a roomSID, destroys the room , throws error if room cant be destory
-    if (roomSID && roomSID !== null && roomSID !== undefined) {
+    // Destroys the room after a user disconnects, throws error if room can't be destoryed
         try {
-            await twilioClient.video.rooms(roomSID).update({status: 'completed'})
+            await twilioClient.video.rooms(roomID).update({status: 'completed'})
             res.status(200).end()
           } catch (error) {
             console.error(error.stack)
             res.status(500).send(error)
           }
-    }
+    // }
   });
 
 // Handle 404 errors

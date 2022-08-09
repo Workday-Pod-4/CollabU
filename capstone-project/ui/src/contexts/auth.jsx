@@ -20,6 +20,7 @@ export const AuthContextProvider = ({ children }) => {
     const [matchModal, setMatchModal] = useState(false);
     const [exiting, setExiting] = useState(false);
     const [findingAnotherBuddy, setFindingAnotherBuddy] = useState(false);
+    const [chatMessages, setChatMessages] = React.useState([]);
 
     //function for toggling report issue modal
     function toggleReportModal() {
@@ -112,7 +113,9 @@ export const AuthContextProvider = ({ children }) => {
       exiting,
       setExiting,
       findingAnotherBuddy, 
-      setFindingAnotherBuddy
+      setFindingAnotherBuddy,
+      chatMessages,
+      setChatMessages
     }
 
     return (
