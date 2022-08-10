@@ -440,9 +440,18 @@ export function Room(props) {
             </div>
             </>
         : <div className="enter-room">
+            <div className="tips">
+                <p className="tips-header">Some Tips for Your Session: </p>
+                <ul>
+                    <li><span className="square">▪</span><span>Please make sure no other application is using your camera or microphone</span> </li>
+                    <li><span className="square">▪</span><span>Start off by introducing yourself</span> </li>
+                    <li><span className="square">▪</span><span>Discuss what are your goals for the session</span> </li>
+                    <li><span className="square">▪</span><span>Come up with a set of guidelines on how you will conduct yourself during the session</span> </li>
+                    <li><span className="square">▪</span><span>After session, discuss whether or not you want to continue to be accountability buddies</span></li>
+                    <li><span className="square">▪</span><span>When ready, press the Enter Room button to meet your match</span></li>
+                </ul>
+            </div>
             <button onClick={props.handleOnClick}> Enter Room </button>
-            <p>Please make sure no other application is using your camera or microphone</p>
-            <p>When ready, press the Enter Room button to meet your match</p>
       </div>
       }
       </div>
