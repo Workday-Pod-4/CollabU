@@ -12,6 +12,7 @@ import "./PreferenceModal.css";
 import "./Loading.css";
 
 export default function ProfilePage() {
+
   const {
     user,
     firstTime,
@@ -288,6 +289,33 @@ export default function ProfilePage() {
       return newStr;
     }
 
+    function parseLink(str){
+      if(!str.includes("https://")){
+        return " "
+      }
+      else if (str && str.includes("www")){
+        const newLink = str.split(".")
+        console.log(" 1 link www:", newLink)
+        return newLink[1]
+      }else if(str && !str.includes("www")){
+        console.log("2")
+        console.log("important:",str.split("/")[2] )
+        const newLink = str.split("/")[2]
+        if(newLink.includes(".com")){
+          console.log("newLink.com:", newLink.split(".")[0])
+          return newLink.split(".")[0]
+          
+          }else{
+            console.log("3")
+            return newLink[0];
+          }
+        }else if (!str){
+          console.log("4")
+        return str
+      }
+    }
+
+  
     return (
       <div className="profile-page">
         {matchModal ? (
@@ -336,30 +364,30 @@ export default function ProfilePage() {
                 {user?.social_media_link_1 ? (
                   <li className="link-1">
                     <a
-                      href={`https://${user.social_media_link_1}`}
+                      href={`${user.social_media_link_1}`}
                       target="_blank"
                     >
-                      <span>{user.social_media_link_1}</span>
+                      {parseLink(user.social_media_link_1)?(parseLink(user.social_media_link_1)): null}
                     </a>
                   </li>
                 ) : null}
                 {user?.social_media_link_2 ? (
                   <li className="link-2">
                     <a
-                      href={`https://${user.social_media_link_2}`}
+                      href={`${user.social_media_link_2}`}
                       target="_blank"
                     >
-                      <span>{user.social_media_link_2}</span>
+                      {parseLink(user.social_media_link_2)?(parseLink(user.social_media_link_2)): null}
                     </a>
                   </li>
                 ) : null}
-                {user?.social_media_link_3 ? (
+                {user?.social_media_link_3? (
                   <li className="link-3">
                     <a
-                      href={`https://${user.social_media_link_3}`}
+                      href={`${user.social_media_link_3}`}
                       target="_blank"
                     >
-                      <span>{user.social_media_link_3}</span>
+                  {parseLink(user.social_media_link_3)?(parseLink(user.social_media_link_3)): null}
                     </a>
                   </li>
                 ) : null}
