@@ -1,4 +1,5 @@
 import * as React from "react";
+import aboutImg from "../../assets/about-img.jpg"
 import "./About.css";
 
 export default function About() {
@@ -6,7 +7,7 @@ export default function About() {
     <div className="about">
       <div className="content">
         <div className="about-img">
-          <img src = "../src/assets/about-img.jpg" width="400px" height="266px"></img>
+          <img src = {aboutImg} width="400px" height="266px"></img>
         </div>
           <div className="about-text">
             <h1>About CollabU</h1>

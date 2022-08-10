@@ -1,4 +1,5 @@
 import * as React from "react";
+import heroimg from "../../assets/hero-img.webp"
 import "./Hero.css";
 
 export default function Hero() {
@@ -7,7 +8,7 @@ export default function Hero() {
     <div className="hero">
       <div className="content">
         <div className="hero-img">
-        <img src = "../src/assets/hero-img.webp" width="25px" height="25px"></img>
+        <img src = {heroimg} width="25px" height="25px"></img>
         <div className = "color-box"></div>
         </div>
         <div className="intro">

@@ -2,6 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/auth";
 import NavLinks from "../NavLinks/NavLinks";
+import logo from "../../assets/CollabU-1.png"
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -12,7 +13,7 @@ export default function Navbar() {
         <div className="content">
           <div className="logo">
             <Link to={ user?.email ? "/profile" : "/"}>
-              <img src="../src/assets/CollabU-1.png" ></img>
+              <img src={logo} ></img>
             </Link>
           </div>
           <NavLinks />
