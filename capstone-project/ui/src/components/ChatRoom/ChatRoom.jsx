@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import Video from 'twilio-video';
 import axios from "axios";
 import muteIcon from "../../assets/muted-svgrepo-com.svg"
+import videoIcon from "../../assets/no-video-icon.png"
 import "./ChatRoom.css";
 
 export default function ChatRoom() {
@@ -524,8 +525,8 @@ return (
               <video className="actual-user-video" ref={videoRef} autoPlay={true} />  
               <audio ref={audioRef} autoPlay={true} />
               <img className="no-video" 
-              src=
-              "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" alt="no-video" /> 
+              src={videoIcon}
+              alt="no-video" /> 
             </div>
         </div>
 )}
