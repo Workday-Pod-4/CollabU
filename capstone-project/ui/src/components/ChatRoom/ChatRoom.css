@@ -64,7 +64,7 @@
     color: black;
 }
 
-.chat-room .content .user-views .user-view .user-video img {
+.chat-room .content .user-views .user-view .user-video .mute-icon{
    height: 4vh;
    margin-left: 5vw;
    visibility: hidden;

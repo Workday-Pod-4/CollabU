@@ -557,6 +557,7 @@ return (
 
               src={videoIcon}
               alt="no-video" /> 
+              <img className="mute-icon" src={muteIcon} alt="Muted"></img>
             </div>
         </div>
 )}
