@@ -286,14 +286,14 @@
     cursor:pointer;
 }
 
-.chat-room .content .chat-container .chat-logs{
+.chat-room .content .chat-container .chat-logs {
     display:flex;
     flex-direction: column-reverse;
     height: 100%;
     margin-bottom: 1vh;
 }
 
-.chat-room .content .chat-container .chat-logs .input-field{
+.chat-room .content .chat-container .chat-logs .input-field {
     height: 10%;
     width: 100%;
 }

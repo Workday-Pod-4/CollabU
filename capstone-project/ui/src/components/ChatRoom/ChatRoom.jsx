@@ -228,7 +228,7 @@ export default function ChatRoom() {
             :
             null
             }
-            <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant} chatOpen={chatOpen} setChatOpen={setChatOpen} user={user} roomID={roomID} chatMessages={chatMessages} setChatMessages={setChatMessages} message={message} setMessage={setMessage}/>
+            <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant} chatOpen={chatOpen} setChatOpen={setChatOpen} user={user} roomID={roomID} chatMessages={chatMessages} setChatMessages={setChatMessages} />
         </div>
     </div>     
     )}
