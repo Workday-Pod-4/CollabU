@@ -20,7 +20,9 @@ export default function ChatRoom() {
             findingAnotherBuddy, 
             setFindingAnotherBuddy,
             chatMessages,
-            setChatMessages } = useAuthContext()
+            setChatMessages,
+            disconnected,
+            setDisconnected } = useAuthContext()
 
     const [room, setRoom] = React.useState(null);
     const [showRoom, setShowRoom] = React.useState(false);
@@ -44,7 +46,7 @@ export default function ChatRoom() {
         remoteMuteImg.style.visibility = "hidden";
         const localMuteImg= document.getElementsByClassName('mute-icon')[1]
         localMuteImg.style.visibility = "hidden";
-        participantIdentity.textContent = 'Your match left and the room has ended. Please use the buttons above to leave the room.'
+        setDisconnected(true);
 
         if (room && room?.participants.size === 0) {
     
@@ -213,6 +215,24 @@ export default function ChatRoom() {
             :
             null
             }
+            {disconnected ?
+            <div className="modal-container">
+                <div className="disconnect-modal-container">
+                    <div className="header">
+                        <h1>Your match left and the room has ended. Please use the buttons below to leave the room.</h1>
+                    </div>
+                    <div className="button-row">
+                        <div className="button-container">
+                            <button className="exit-fr" onClick={findAnotherBuddy}>Find another buddy</button>
+                        </div>
+                        <div className="button-container">
+                            <button className="exit-fr" onClick={exitRoom}>Exit room</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            :
+            null}
             {findingAnotherBuddy ?
             <div className="modal-container">
                 <div className="find-another-buddy-modal-content">
