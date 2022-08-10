@@ -7,6 +7,7 @@ ul.match-history{
     height: 100vh;
     width: 100%;
     background-color: #F7F6E9;
+    margin-top: 10vh;
 }
 
 .sections {
@@ -235,7 +236,6 @@ background-color: lightgrey;
 
 .profile-page .right-section .match-history ul {
 display: flex;
-justify-content: space-around;
 flex-direction: column;
 list-style: none;
 width: 30vw;
@@ -248,18 +248,27 @@ border-radius: 20px;
 margin-top: 0;
 box-shadow: 10px 10px #86999E;
 align-items: center;
+overflow-y: auto;
 }
 
 
 
 .profile-page .right-section .match-history ul li {
 display: flex;
+<<<<<<< HEAD
+width: 100%;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 5% 10%;
+=======
 width: 25vw;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
 padding: 2%;
 
+>>>>>>> 8e4c98a1cdc33a394b375de6264c435829f5e438
 }
 
 .profile-page .right-section .match-history ul li span {

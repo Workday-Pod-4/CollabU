@@ -18,6 +18,7 @@ p{
     top: 0;
     left: 0;
     opacity: 1;
+    z-index: 100;
 }
 
 .match-modal{
@@ -25,13 +26,14 @@ p{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color:#4846BD;
+    background-color:#F7F6E9;
     height:90%;
     width:60%;
     border-radius:5px ;
     justify-content:flex-start;
-    color: rgb(255, 255, 255);
-    border: 2px solid  #4846BD;
+    color:black;
+    border: 1px;
+    border-radius: 25px;
     }
 
 
@@ -71,7 +73,7 @@ width:17vw;
 
 .match-name{
 display:flex;
-color:white;
+color:#4846BD;
 width:300px;
 height:7vh;
 flex-direction: row;

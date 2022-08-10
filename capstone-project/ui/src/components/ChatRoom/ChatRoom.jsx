@@ -426,13 +426,15 @@ export function Room(props) {
                         </div>
                         { props.chatOpen ? 
                         <div className={cName}>
+                            <div className="chat-header" onClick={() => (props.setChatOpen(!props.chatOpen))}>
+                                Chat
+                            </div>
+                            <ul id="messages">
+                            {props.chatMessages.map((chat) => <li><span>{chat.peerUsername}:</span> <span>{chat.chatMsg}</span></li>)}
+                            </ul>
                             <form id="form" action="">
                                 <input id="input" autoComplete="off" placeholder="Type something..."/><button onClick={handleOnSubmit}>Send</button>
                             </form>
-                            <ul id="messages">
-                            {props.chatMessages.map((chat) => <li>{chat.peerUsername}: {chat.chatMsg}</li>)}
-                            </ul>
-                            <button className="close-chat" onClick={() => (props.setChatOpen(!props.chatOpen))}>X</button>           
                         </div> : 
                         <div className={cName}>
                             <button className={bName} onClick={() => (props.setChatOpen(!props.chatOpen))}>Chat</button>

@@ -2,6 +2,7 @@
     height: 100vh;
     width: 100vw;
     background-color: #F7F6E9;
+    margin-top: 10vh;
 }
 
 .chat-room .content{
@@ -60,6 +61,7 @@
 
 .chat-room .content .user-views .user-view .user-header h3{
     position:absolute;
+    color: black;
 }
 
 .chat-room .content .user-views .user-view .user-header img {
@@ -193,17 +195,15 @@
 }
 
 .chat-room .content .chat-container.open{
-    width: 71%;
+    width: 60%;
     height: 375%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     background: lightgray;
     margin-top: -62vh;
     border: 1px;
     border-radius: 20px;
     z-index: 5;
-    overflow-y: auto;
-    overflow-wrap: break-word;
 }
 .chat-room .content .chat-container.open form{
     display: flex;
@@ -224,10 +224,18 @@
     list-style-type: none; 
     margin: 0; 
     padding: 0;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
 }
 
 .chat-room .content .chat-container.open #messages > li {
     padding: 0.5rem 1rem;
+    display: flex;
+    grid-gap: 20vw;
+    gap: 1.5vw;
+    font-size: 1.9vh;
 }
 
 .chat-room .content .chat-container.open #messages > li:nth-child(odd) {
@@ -247,6 +255,19 @@
     position: absolute;
 }
 
+.chat-room .content .chat-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    height: 7vh;
+    color: white;
+    border: 1px;
+    border-radius: 25px;
+    font-size: 3vh;
+    padding: .5vh 0vw;
+    cursor: pointer;
+}
 
 .chat-room .content .chat-container .chat.closed {
     width: 100%;
@@ -288,7 +309,7 @@
 
 .chat-room .content .chat-container .chat-logs {
     display:flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     height: 100%;
     margin-bottom: 1vh;
 }
@@ -367,7 +388,7 @@ video {
     top: 0;
     left: 0;
     opacity: 1;
-    z-index: 3;
+    z-index: 100;
 }
 
 .modal-container .exit-modal-content {
