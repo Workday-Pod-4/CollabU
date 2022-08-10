@@ -290,6 +290,7 @@ export default function ProfilePage() {
     }
 
     function parseLink(str){
+      if(str){
       if(!str.includes("https://")){
         return " "
       }
@@ -309,7 +310,8 @@ export default function ProfilePage() {
             console.log("3")
             return newLink[0];
           }
-        }else if (!str){
+        }
+      }else{
           console.log("4")
         return str
       }
@@ -321,6 +323,7 @@ export default function ProfilePage() {
         {matchModal ? (
           <MatchModal
             CapitalizeName={CapitalizeName}
+            parseLink = {parseLink}
             toggleMatchModal={toggleMatchModal}
             Match={match}
             matches={matches}
