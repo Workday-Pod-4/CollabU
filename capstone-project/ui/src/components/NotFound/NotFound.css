@@ -1,24 +1,24 @@
-#container {
-    margin: 100px;
-    display: align-self;
-    flex-flow: row wrap;  
+.NotFound {
+    height: 100vh;
+    width: 100vw;
+    margin-top: 10vh;
+    display:flex; 
+    flex-direction: column;
     align-items: center;
 }
   
-#top {
-    font-size: 30px;
-    margin: 5%;
+.top {
+    font-size: 30vh;
     color: #4846BD;
 }
   
-#middle {
-    margin-top: -90px;
-    font-size: 250px;
+.middle {
+    font-size: 10vh;
     font-weight: bold;
     color: #4846BD;
 }
   
-#bottom {
-    font-size: 30px;
+.bottom {
+    font-size: 10vh;
     color: #4846BD;
 }
