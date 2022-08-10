@@ -293,15 +293,15 @@ export default function UpdateForm() {
                             <input className="form-input" type="text" name="company" placeholder="Company" onChange={handleOnChange} defaultValue={form.company} minLength="1"></input>
                         </div>
                         <div className="input-field">
-                            <label>Social Link 1</label>
+                            <label>Insert social media URL </label>
                             <input className="form-input" type="text" name="socialMedia1" placeholder="External profile or portfolio" onChange={handleOnChange} defaultValue={form.socialMedia1} ></input>
                         </div>
                         <div className="input-field">
-                            <label>Social Link 2</label>
+                            <label>Insert social media URL </label>
                             <input className="form-input" type="text" name="socialMedia2" placeholder="External profile or portfolio" onChange={handleOnChange} defaultValue={form.socialMedia2}></input>
                         </div>
                         <div className="input-field">
-                            <label>Social Link 3</label>
+                            <label>Insert social media URL </label>
                             <input className="form-input" type="text" name="socialMedia3" placeholder="External profile or portfolio" onChange={handleOnChange} defaultValue={form.socialMedia3}></input>
                         </div>
                     </div> 
