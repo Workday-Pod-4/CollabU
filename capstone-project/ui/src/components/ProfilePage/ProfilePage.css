@@ -271,10 +271,10 @@ border: 1px solid #4846BD;
     max-width: 19vw;
     width: 18vw;
     max-height: 12vh;
-    height: 8vh;
+    height: 7vh;
 background-color:white;
 padding: 2vh 3vw;
-font-size: auto;
+font-size: 2vh;
 cursor: pointer;
 font-weight: 500;
 }
