@@ -92,9 +92,6 @@
    color: white;
    height: 30vh;
    width: 30vh;
-   object-fit: cover;
-   border: 1px;
-   border-radius: 50%;
    position: absolute;
    z-index: 1;
    visibility: hidden;
@@ -206,9 +203,13 @@
     z-index: 5;
 }
 .chat-room .content .chat-container.open form{
+    width: 30%;
+    margin-left: 1vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    position:absolute;
+    bottom: -3%;
 }
 
 .chat-room .content .chat-container.open input {
@@ -218,6 +219,12 @@
     flex-grow: 1;
     border-radius: 2rem;
     margin: 0.25rem;
+}
+
+.chat-room .content .chat-container.open .send-btn{
+    border: 1px;
+    border-radius: 25px;
+    margin-left: 1vw;
 }
 
 .chat-room .content .chat-container.open #messages {

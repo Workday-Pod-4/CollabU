@@ -434,7 +434,7 @@ export function Room(props) {
                             {props.chatMessages.map((chat) => <li><span>{chat.peerUsername}:</span> <span>{chat.chatMsg}</span></li>)}
                             </ul>
                             <form id="form" action="">
-                                <input id="input" autoComplete="off" placeholder="Type something..."/><button onClick={handleOnSubmit}>Send</button>
+                                <input id="input" autoComplete="off" placeholder="Type something..."/><button onClick={handleOnSubmit} className="send-btn">Send</button>
                             </form>
                         </div> : 
                         <div className={cName}>
