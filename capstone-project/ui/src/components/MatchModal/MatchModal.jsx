@@ -14,7 +14,6 @@ export default function MatchModal({
   // filtering matches array to include only object where username is equal to username in onClick event
   let UserInfo = matches.filter((match) => match.username == Match);
   UserInfo = UserInfo[0];
-  console.log("ui:", UserInfo.social_media_link_1);
 
   return (
     <div className="match-modal-container">
