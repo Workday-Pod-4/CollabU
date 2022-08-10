@@ -290,27 +290,23 @@ export default function ProfilePage() {
     }
 
     function parseLink(str){
+      if(str){
       if(!str.includes("https://")){
         return " "
       }
       else if (str && str.includes("www")){
         const newLink = str.split(".")
-        console.log(" 1 link www:", newLink)
         return newLink[1]
       }else if(str && !str.includes("www")){
-        console.log("2")
-        console.log("important:",str.split("/")[2] )
         const newLink = str.split("/")[2]
         if(newLink.includes(".com")){
-          console.log("newLink.com:", newLink.split(".")[0])
           return newLink.split(".")[0]
           
           }else{
-            console.log("3")
             return newLink[0];
           }
-        }else if (!str){
-          console.log("4")
+        }
+      }else{
         return str
       }
     }
@@ -321,6 +317,7 @@ export default function ProfilePage() {
         {matchModal ? (
           <MatchModal
             CapitalizeName={CapitalizeName}
+            parseLink = {parseLink}
             toggleMatchModal={toggleMatchModal}
             Match={match}
             matches={matches}
