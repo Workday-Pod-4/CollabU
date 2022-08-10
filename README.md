@@ -18,8 +18,8 @@ Mentors Names:
 
 Project Code Repository Links
 
-* [Frontend Repo Link]()
-* [Backend Repo Link]()
+* [Frontend Repo Link](https://github.com/Workday-Pod-4/CollabU/tree/main/capstone-project/ui)
+* [Backend Repo Link](https://github.com/Workday-Pod-4/CollabU/tree/main/capstone-project/api)
 
 ## Project Overview
 
