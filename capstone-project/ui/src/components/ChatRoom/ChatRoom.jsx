@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import Video from 'twilio-video';
 import axios from "axios";
 import muteIcon from "../../assets/muted-svgrepo-com.svg"
+import videoIcon from "../../assets/no-video-icon.png"
 import "./ChatRoom.css";
 
 export default function ChatRoom() {
@@ -454,7 +455,7 @@ export function Room(props) {
                             {props.chatMessages.map((chat) => <li><span>{chat.peerUsername}:</span> <span>{chat.chatMsg}</span></li>)}
                             </ul>
                             <form id="form" action="">
-                                <input id="input" autoComplete="off" placeholder="Type something..."/><button onClick={handleOnSubmit}>Send</button>
+                                <input id="input" autoComplete="off" placeholder="Type something..."/><button onClick={handleOnSubmit} className="send-btn">Send</button>
                             </form>
                         </div> : 
                         <div className={cName}>
@@ -553,9 +554,9 @@ return (
               <video className="actual-user-video" ref={videoRef} autoPlay={true} />  
               <audio ref={audioRef} autoPlay={true} />
               <img className="no-video" 
-              src=
-              "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" alt="no-video" /> 
-              <img className="mute-icon" src={muteIcon} alt="Muted"></img> 
+
+              src={videoIcon}
+              alt="no-video" /> 
             </div>
         </div>
 )}
