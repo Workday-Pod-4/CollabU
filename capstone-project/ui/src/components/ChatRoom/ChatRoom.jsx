@@ -18,13 +18,15 @@ export default function ChatRoom() {
             exiting,
             togglePrefModal,
             findingAnotherBuddy, 
-            setFindingAnotherBuddy } = useAuthContext()
+            setFindingAnotherBuddy,
+            chatMessages,
+            setChatMessages } = useAuthContext()
 
     const [room, setRoom] = React.useState(null);
     const [showRoom, setShowRoom] = React.useState(false);
     const [localParticipant, setLocalParticipant] = React.useState(null);
     const [remoteParticipant, setRemoteParticipant] = React.useState(null);
-
+    
     const navigate = useNavigate();
 
     setInRoom(true);
@@ -55,7 +57,9 @@ export default function ChatRoom() {
                         url: `http://localhost:3001/disconnect/${roomID}`
                     });
                 } catch (error) {
-                    console.error(error)
+                    if (error.code == 53112) {
+                        navigate('/profile')
+                    }
                 }
             }
 
@@ -224,23 +228,23 @@ export default function ChatRoom() {
             :
             null
             }
-            <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant} chatOpen={chatOpen} setChatOpen={setChatOpen} user={user} roomID={roomID}/>
+            <Room handleOnClick={handleOnClick} showRoom={showRoom} room={room} localParticipant={localParticipant} remoteParticipant={remoteParticipant} chatOpen={chatOpen} setChatOpen={setChatOpen} user={user} roomID={roomID} chatMessages={chatMessages} setChatMessages={setChatMessages} />
         </div>
     </div>     
     )}
 
 export function Room(props) {
 
-    let cName="";
-    let bName="";
+    let cName = "";
+    let bName = "";
 
     if (props.chatOpen == false) {
-        cName="chat-container closed";
-        bName="chat closed";
+        cName = "chat-container closed";
+        bName = "chat closed";
     }
     else if (props.chatOpen == true) {
-        cName="chat-container open";
-        bName="chat open";
+        cName = "chat-container open";
+        bName = "chat open";
     }
 
     const [playAudio, setPlayAudio] = React.useState(false);
@@ -286,7 +290,6 @@ export function Room(props) {
             track.detach().forEach(element => {
                 element.remove();
               });
-
         }
       };
 
@@ -371,12 +374,8 @@ export function Room(props) {
             client.current.emit('joinRoom', props.roomID);
           });
     
-        socket.on('chat message', function(msg) {
-            let messages = document.getElementById('messages');
-            let item = document.createElement('li');
-            item.textContent = `${msg.peerUsername}: ${msg.chatMsg}`;
-
-            messages.appendChild(item);
+        socket.on('chat logs', function(msg) {
+            props.setChatMessages(msg); 
           });
     
         socket.on('disconnect', () => {
@@ -393,8 +392,7 @@ export function Room(props) {
         let input = document.getElementById('input');
         
         if (input.value) {
-            let info = {'chatMsg': input.value,
-                    'peerUsername': props.user.username }
+            let info = { 'chatMsg': input.value, 'peerUsername': props.user.username, 'roomID': props.roomID }
             client.current.emit('chat message', info);
             info = '';
             input.value = ''
@@ -431,7 +429,9 @@ export function Room(props) {
                             <form id="form" action="">
                                 <input id="input" autoComplete="off" placeholder="Type something..."/><button onClick={handleOnSubmit}>Send</button>
                             </form>
-                            <ul id="messages"></ul>
+                            <ul id="messages">
+                            {props.chatMessages.map((chat) => <li>{chat.peerUsername}: {chat.chatMsg}</li>)}
+                            </ul>
                             <button className="close-chat" onClick={() => (props.setChatOpen(!props.chatOpen))}>X</button>           
                         </div> : 
                         <div className={cName}>

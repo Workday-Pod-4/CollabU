@@ -223,12 +223,12 @@ background-color: lightgrey;
     flex-direction: column;
     justify-content: center;
     width: 34%;
-    margin-right: 13%;
+    margin-right: 15%;
 }
     
 
 .profile-page .right-section .match-history {
-    display:flex;
+    display: flex;
     width: 100%;
     justify-content: center;
     height: 80%;
@@ -255,11 +255,20 @@ overflow-y: auto;
 
 .profile-page .right-section .match-history ul li {
 display: flex;
+<<<<<<< HEAD
 width: 100%;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
 padding: 5% 10%;
+=======
+width: 25vw;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 2%;
+
+>>>>>>> 8e4c98a1cdc33a394b375de6264c435829f5e438
 }
 
 .profile-page .right-section .match-history ul li span {
