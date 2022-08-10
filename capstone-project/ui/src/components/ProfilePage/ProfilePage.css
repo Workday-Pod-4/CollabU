@@ -222,12 +222,12 @@ background-color: lightgrey;
     flex-direction: column;
     justify-content: center;
     width: 34%;
-    margin-right: 13%;
+    margin-right: 15%;
 }
     
 
 .profile-page .right-section .match-history {
-    display:flex;
+    display: flex;
     width: 100%;
     justify-content: center;
     height: 80%;
