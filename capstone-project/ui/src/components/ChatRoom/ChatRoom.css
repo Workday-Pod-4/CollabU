@@ -62,10 +62,17 @@
     position:absolute;
 }
 
-.chat-room .content .user-views .user-view .user-header img {
+.chat-room .content .user-views .user-view .user-video img {
    height: 4vh;
    margin-left: 5vw;
    visibility: hidden;
+   border: 2px solid white;
+   border-radius: 50%;
+   background-color: white;
+    position: absolute;
+    z-index: 3;
+    top: 77%;
+    left: 47%;
 }
 
 .chat-room .content .user-views .user-view .user-video{

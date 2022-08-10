@@ -287,6 +287,7 @@ export function Room(props) {
         } else if (track.kind == 'audio') {
 
             muteimg.style.visibility = "visible";
+            muteimg.style.left = '11%'
             track.detach().forEach(element => {
                 element.remove();
               });
@@ -525,7 +526,6 @@ return (
         <div className="user-view">
             <div className="user-header">
             <h3>{props.participant.identity}</h3>
-                <img className="mute-icon" src={muteIcon} alt="Muted"></img>
             </div>
             <div className="user-video">
               <video className="actual-user-video" ref={videoRef} autoPlay={true} />  
@@ -533,6 +533,7 @@ return (
               <img className="no-video" 
               src=
               "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" alt="no-video" /> 
+              <img className="mute-icon" src={muteIcon} alt="Muted"></img> 
             </div>
         </div>
 )}
