@@ -404,6 +404,17 @@ video {
     border-radius: 20px;
 }
 
+.modal-container .exit-modal-content .exit-fr{
+    height: 8vh;
+    color: white;
+    background: #4846BD;
+    font-size: 4.2vh;
+    border: none;
+    cursor: pointer;
+    margin-top: 3vh;
+    border-radius: 25px;
+}
+
 .modal-container .exit-modal-content .header .button-container .close-modal {
     background: transparent;
     width: 75%;
