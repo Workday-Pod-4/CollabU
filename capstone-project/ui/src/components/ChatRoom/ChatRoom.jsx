@@ -528,7 +528,6 @@ return (
         <div className="user-view">
             <div className="user-header">
             <h3>{props.participant.identity}</h3>
-                <img className="mute-icon" src={muteIcon} alt="Muted"></img>
             </div>
             <div className="user-video">
               <video className="actual-user-video" ref={videoRef} autoPlay={true} />  

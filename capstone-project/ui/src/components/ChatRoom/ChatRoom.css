@@ -29,7 +29,7 @@
 }
 
 .user-view h3{
-    color:#4846BD;
+    color:black;
     font-weight: 600;
 }
 .chat-room .content .user-views.open{
@@ -202,6 +202,7 @@
     border-radius: 20px;
     z-index: 5;
 }
+
 .chat-room .content .chat-container.open form{
     width: 30%;
     margin-left: 1vw;
