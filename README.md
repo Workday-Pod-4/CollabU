@@ -25,7 +25,7 @@ Project Code Repository Links
 
 This project is a web app meant to connect people with each other in order to boost productivity and success in one's goals. Users will be able to specify what they want to work at that time and then get matched with someone with similar goals into a virtual room where they would sit down together and work towards their tasks in that session. Users will able to make a profile where they will have a list of people they previously matched so they can have the chance to connect with them outside of the website.
 
-Deployment Website: [CollabU](https://nowwerereadyhehe.surge.sh/)
+Deployment Website: [CollabU](https://collabu.surge.sh/)
 
 ### Open-source libraries used
 
